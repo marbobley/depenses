@@ -22,12 +22,13 @@ final class CategoryController extends AbstractController
     }
 
     #[Route('/new', name:'app_category_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager): Response
+    #[Route('/{id}/edit', name: 'app_category_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function new(?Category $category, Request $request, EntityManagerInterface $manager): Response
     {
-        $category = new Category();
+        $category ??= new Category();
         $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
 
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($category);
             $manager->flush();
