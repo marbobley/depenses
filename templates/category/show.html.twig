@@ -20,5 +20,6 @@
     {% endif %}
     <a href="{{ path('app_category_index') }}" class="btn btn-primary">Retour</a>
     <a href="{{ path('app_category_edit', {id: category.id}) }}" class="btn btn-warning">Éditer</a>
+    <a href="{{ path('app_category_delete', {id: category.id}) }}" class="btn btn-secondary">Supprimer</a>
 </section>
 {% endblock %}
