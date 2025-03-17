@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Repository\CategoryRepository;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +16,13 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CategoryController extends AbstractController
 {
     #[Route('', name: 'app_category_index', methods: ['GET'])]
-    public function index(): Response
+    public function index(CategoryRepository $repository): Response
     {
+        $categories = $repository->findAll();
+
         return $this->render('category/index.html.twig', [
             'controller_name' => 'CategoryController',
+            'categories' => $categories,
         ]);
     }
 
