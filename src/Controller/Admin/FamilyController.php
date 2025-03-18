@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Family;
 use App\Form\FamilyType;
@@ -12,14 +12,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/admin/family')]
 final class FamilyController extends AbstractController
 {
-    #[Route('/family', name: 'app_family_index')]
+    #[Route('/', name: 'app_family_index')]
     public function index(FamilyRepository $repository): Response
     {
         $families = $repository->findAll();
 
-        return $this->render('family/index.html.twig', [
+        return $this->render('admin/family/index.html.twig', [
             'controller_name' => 'FamilyController',
             'families' => $families,
         ]);
@@ -43,7 +44,7 @@ final class FamilyController extends AbstractController
             return $this->redirectToRoute('app_family_index');
         }
 
-        return $this->render('family/new.html.twig', [
+        return $this->render('admin/family/new.html.twig', [
             'form' => $form,
         ]);
     }
@@ -52,7 +53,7 @@ final class FamilyController extends AbstractController
     #[Route('/{id}', name: 'app_family_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(?Family $family): Response
     {
-        return $this->render('family/show.html.twig', [
+        return $this->render('admin/family/show.html.twig', [
             'family' => $family,
         ]);
     }
