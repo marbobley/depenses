@@ -41,6 +41,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'createdBy')]
     private Collection $categories;
 
+    #[ORM\ManyToOne(inversedBy: 'members')]
+    private ?Family $family = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -147,6 +150,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $category->setCreatedBy(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFamily(): ?Family
+    {
+        return $this->family;
+    }
+
+    public function setFamily(?Family $family): static
+    {
+        $this->family = $family;
 
         return $this;
     }
