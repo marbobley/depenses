@@ -71,4 +71,18 @@ final class FamilyController extends AbstractController
 
         return $this->redirectToRoute('app_family_index');
     }
+    #[Route('/{id}/join', name: 'app_family_join', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function join(?Family $family, EntityManagerInterface $manager): Response
+    {
+        if($family === null)
+        {
+            // managing error
+        }
+
+        $family->addMember($this->getUser());
+        $manager->persist($family);
+        $manager->flush();
+
+        return $this->redirectToRoute('app_family_index');
+    }
 }
