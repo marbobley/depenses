@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Depenses{% endblock %}
+
+{% block body %}
+<section class="container px-4">
+    <h1>Depense : </h1>
+
+    {% if depense is not null %}
+        <div class="card mb-1 m-auto">
+            <div class="card-body">
+                <div class="card-title d-flex justify-content-between">
+                    <h4 class="mb-1">{{ depense.name }}</h4>
+                    <small class="text-muted">Identifiant : {{ depense.id }}</small>
+                    <small class="text-muted">Crée par : {{ depense.createdBy.username }}</small>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div>depense non trouvé</div>
+    {% endif %}
+    <a href="{{ path('app_depense_index') }}" class="btn btn-primary">Retour</a>
+    <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-warning">Éditer</a>
+    <a href="{{ path('app_depense_delete', {id: depense.id}) }}" class="btn btn-secondary">Supprimer</a>
+</section>
+{% endblock %}
