@@ -12,6 +12,11 @@
                 <div class="card-title d-flex justify-content-between">
                     <h4 class="mb-1">{{ family.name }}</h4>
                     <small class="text-muted">Identifiant : {{ family.id }}</small>
+                    {% for member in family.Members %}
+                        <small class="text-muted">Membre de la famille : {{ member.username }}</small>                        
+                    {% else %}
+                        <li>Aucun enregistrement en base de données.</li>
+                    {% endfor %}
                 </div>
             </div>
         </div>
