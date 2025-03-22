@@ -12,11 +12,18 @@
                 <div class="card-title d-flex justify-content-between">
                     <h4 class="mb-1">{{ family.name }}</h4>
                     <small class="text-muted">Identifiant : {{ family.id }}</small>
-                    {% for member in family.Members %}
-                        <small class="text-muted">Membre de la famille : {{ member.username }}</small>                        
-                    {% else %}
-                        <li>Aucun enregistrement en base de données.</li>
-                    {% endfor %}
+                    <ul>
+                        {% for member in family.Members %}<div class="card mb-1">
+                            <div class="card-body">
+                                <div class="card-title d-flex justify-content-between">
+                                    <small class="text-muted">{{ member.username }}</small>
+                                    </div>
+                                </div>
+                            </div>                     
+                        {% else %}
+                            <li>Aucun enregistrement en base de données.</li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
         </div>
