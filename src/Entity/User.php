@@ -44,9 +44,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'members')]
     private ?Family $family = null;
 
+    /**
+     * @var Collection<int, Depense>
+     */
+    #[ORM\OneToMany(targetEntity: Depense::class, mappedBy: 'createdBy')]
+    private Collection $depenses;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->depenses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -162,6 +169,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFamily(?Family $family): static
     {
         $this->family = $family;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Depense>
+     */
+    public function getDepenses(): Collection
+    {
+        return $this->depenses;
+    }
+
+    public function addDepense(Depense $depense): static
+    {
+        if (!$this->depenses->contains($depense)) {
+            $this->depenses->add($depense);
+            $depense->setCreatedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepense(Depense $depense): static
+    {
+        if ($this->depenses->removeElement($depense)) {
+            // set the owning side to null (unless already changed)
+            if ($depense->getCreatedBy() === $this) {
+                $depense->setCreatedBy(null);
+            }
+        }
 
         return $this;
     }

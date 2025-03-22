@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -21,6 +23,17 @@ class Category
     #[ORM\ManyToOne(inversedBy: 'categories')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $createdBy = null;
+
+    /**
+     * @var Collection<int, Depense>
+     */
+    #[ORM\OneToMany(targetEntity: Depense::class, mappedBy: 'category')]
+    private Collection $depenses;
+
+    public function __construct()
+    {
+        $this->depenses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -47,6 +60,36 @@ class Category
     public function setCreatedBy(?User $createdBy): static
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Depense>
+     */
+    public function getDepenses(): Collection
+    {
+        return $this->depenses;
+    }
+
+    public function addDepense(Depense $depense): static
+    {
+        if (!$this->depenses->contains($depense)) {
+            $this->depenses->add($depense);
+            $depense->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDepense(Depense $depense): static
+    {
+        if ($this->depenses->removeElement($depense)) {
+            // set the owning side to null (unless already changed)
+            if ($depense->getCategory() === $this) {
+                $depense->setCategory(null);
+            }
+        }
 
         return $this;
     }
