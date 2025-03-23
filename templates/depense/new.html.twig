@@ -11,6 +11,11 @@
         <h1>{{ action }} de depenses</h1>
 
         {{ form_start(form) }}
+        {{ form_row(form.createdBy, {label: 'Crée par'}) }}
+        {{ form_row(form.name, {label: 'Nom'}) }}
+        {{ form_row(form.created, {label: 'Date de création'}) }}
+        {{ form_row(form.amount, {label: 'Valeur'}) }}
+        {{ form_row(form.category, {label: 'Categorie'}) }}
         <button type="submit" class="btn btn-primary">Envoyer</button>
         {{ form_end(form) }}
     </div>
