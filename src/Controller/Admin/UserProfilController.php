@@ -2,54 +2,61 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Family;
-use App\Form\FamilyType;
-use App\Repository\FamilyRepository;
+use App\Entity\User;
+use App\Form\UserProfilType;
+use App\Repository\UserRepository;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-#[Route('/admin/family')]
-final class FamilyController extends AbstractController
+#[Route('/admin/user/profil')]
+final class UserProfilController extends AbstractController
 {
-    #[Route('/', name: 'app_family_index', methods: ['GET'])]
-    public function index(FamilyRepository $repository): Response
+    #[Route('/', name: 'app_userprofil_index', methods: ['GET'])]
+    public function index(UserRepository $repository): Response
     {
-        $families = $repository->findAll();
+        $users = $repository->findAll();
 
-        return $this->render('admin/family/index.html.twig', [
-            'controller_name' => 'FamilyController',
-            'families' => $families,
+        return $this->render('admin/user_profil/index.html.twig', [
+            'controller_name' => 'UserProfilController',
+            'users' => $users,
         ]);
-
     }
 
-    #[Route('/new', name:'app_family_new', methods: ['GET', 'POST'])]
-    #[Route('/{id}/edit', name: 'app_family_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Family $family, Request $request, EntityManagerInterface $manager): Response
+
+    #[Route('/new', name:'app_userprofil_new', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_userprofil_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function new(?User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $manager): Response
     {
-        $family ??= new Family();
-        $form = $this->createForm(FamilyType::class, $family);
+        $user ??= new user();
+        $form = $this->createForm(UserProfilType::class, $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            // encode the plain password
+            $user->setPassword(
+                            $userPasswordHasher->hashPassword(
+                            $user,
+                            $form->get('plainPassword')->getData()
+                )
+            );
             
-            //$category->setCreatedBy($this->getUser());
-            $manager->persist($family);
+            $manager->persist($user);
             $manager->flush();
 
-            return $this->redirectToRoute('app_family_index');
+            return $this->redirectToRoute('app_userprofil_index');
         }
 
-        return $this->render('admin/family/new.html.twig', [
+        return $this->render('admin/user_profil/new.html.twig', [
             'form' => $form,
         ]);
     }
 
-
+/*
     #[Route('/{id}', name: 'app_family_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(?Family $family): Response
     {
@@ -84,5 +91,5 @@ final class FamilyController extends AbstractController
         $manager->flush();
 
         return $this->redirectToRoute('app_family_index');
-    }
+    }*/
 }
