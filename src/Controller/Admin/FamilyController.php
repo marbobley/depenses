@@ -5,12 +5,14 @@ namespace App\Controller\Admin;
 use App\Entity\Family;
 use App\Form\FamilyType;
 use App\Repository\FamilyRepository;
+use App\Service\CalculateAmount;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
+
 
 #[Route('/admin/family')]
 final class FamilyController extends AbstractController
@@ -23,6 +25,19 @@ final class FamilyController extends AbstractController
         return $this->render('admin/family/index.html.twig', [
             'controller_name' => 'FamilyController',
             'families' => $families,
+        ]);
+
+    }
+
+    #[Route('/test', name: 'app_family_index2', methods: ['GET'])]
+    public function index2(FamilyRepository $repository , CalculateAmount $calc): Response
+    {
+        $families = $repository->findAll();
+
+        return $this->render('admin/family/index2.html.twig', [
+            'controller_name' => 'FamilyController',
+            'families' => $families,
+            'calc' => $calc,
         ]);
 
     }
