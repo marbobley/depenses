@@ -33,6 +33,7 @@ final class FamilyFactory extends PersistentProxyObjectFactory
     {
         return [
             'name' => self::faker()->unique()->word(),
+            'members' => UserFactory::randomSet(self::faker()->numberBetween(1, 10)),
         ];
     }
 
