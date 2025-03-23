@@ -33,8 +33,8 @@ final class DepenseFactory extends PersistentProxyObjectFactory
     {
         return [
             'amount' => self::faker()->randomFloat(2,0,150),
-            'created' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'name' => self::faker()->text(255),
+            'created' => self::faker()->dateTimeBetween('-20 week', '+1 week'),
+            'name' => self::faker()->word(),
             'createdBy' => UserFactory::random(), 
             'category' => CategoryFactory::random(),
         ];

@@ -11,9 +11,14 @@
 <!-- Header-->
 <header class="bg-primary bg-gradient text-white">
     <div class="container px-4 text-center">
-        <h1 class="fw-bolder">Gérez vos dépenses en quelques clics !</h1>
-        <p class="lead">Créer votre famille, vos catégories et rentrez vos dépenses</p>
-        <a class="btn btn-lg btn-light" href="#about">Commencer</a>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            <h1 class="fw-bolder">Bonjour !!! </h1>
+            <a class="btn btn-lg btn-light" href="{{path('app_logout')}}">Partir</a>
+        {% else %}
+            <h1 class="fw-bolder">Gérez vos dépenses en quelques clics !</h1>
+            <p class="lead">Créer votre famille, vos catégories et rentrez vos dépenses</p>
+            <a class="btn btn-lg btn-light" href="{{path('app_login')}}">Commencer</a>
+        {% endif %}
     </div>
 </header>
 {% endblock %}
