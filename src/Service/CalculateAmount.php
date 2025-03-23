@@ -5,9 +5,9 @@ use App\Interface\ICalculateAmount;
 
 class CalculateAmount
 {
-    public function getVal(): float
+    public function getVal(): string
     {
-        return 10;
+        return 'dis bonjour';
     }
 
     public function GetSumAmount(ICalculateAmount $calc) : float
