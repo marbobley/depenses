@@ -13,6 +13,24 @@
                     <h4 class="mb-1">{{ user.username }}</h4>
                     <small class="text-muted">Identifiant : {{ user.id }}</small>
                     <small class="text-muted">Depense : {{ user.GetSumAmount() }}</small>
+                    <small class="text-muted">Depense du mois en cours : {{ calculateService.GetSumAmoutForMonth(user) }}</small>
+                    <ul class="list-group list-group-flush">
+                    {% for depense in user.depenses %}
+                            <div class="card mb-1">
+                                <div class="card-body">
+                                    <div class="card-title d-flex justify-content-between">
+                                        <h4 class="mb-1">{{ depense.category.name }}</h4>
+                                        <small class="text-muted">Valeur : {{ depense.amount }}</small>
+                                    </div>
+                                    <div class="card-title d-flex justify-content-between">
+                                        <h5 class="mb-1">{{ depense.created |date('d M Y')}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        {% else %}
+                            <li>Aucun enregistrement en base de données.</li>
+                        {% endfor %}                                                                    
+                    </ul>
                 </div>
             </div>
         </div>
