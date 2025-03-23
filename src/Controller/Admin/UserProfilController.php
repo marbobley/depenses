@@ -56,40 +56,27 @@ final class UserProfilController extends AbstractController
         ]);
     }
 
-/*
-    #[Route('/{id}', name: 'app_family_show', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function show(?Family $family): Response
+
+    #[Route('/{id}', name: 'app_user_profil_show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function show(?User $user): Response
     {
-        return $this->render('admin/family/show.html.twig', [
-            'family' => $family,
+        return $this->render('admin/user_profil/show.html.twig', [
+            'user' => $user,
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_family_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?Family $family, EntityManagerInterface $manager): Response
+    #[Route('/{id}/delete', name: 'app_user_profil_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function delete(?User $User, EntityManagerInterface $manager): Response
     {
-        if($family === null)
+        if($User === null)
         {
             // managing error
         }
 
-        $manager->remove($family);
+        $manager->remove($User);
         $manager->flush();
 
-        return $this->redirectToRoute('app_family_index');
+        return $this->redirectToRoute('app_user_profil_index');
     }
-    #[Route('/{id}/join', name: 'app_family_join', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function join(?Family $family, EntityManagerInterface $manager): Response
-    {
-        if($family === null)
-        {
-            // managing error
-        }
-
-        $family->addMember($this->getUser());
-        $manager->persist($family);
-        $manager->flush();
-
-        return $this->redirectToRoute('app_family_index');
-    }*/
+   
 }
