@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
+use App\Interface\ICalculateAmount;
 use App\Repository\FamilyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FamilyRepository::class)]
-class Family
+class Family implements ICalculateAmount
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -74,5 +75,18 @@ class Family
         }
 
         return $this;
+    }
+
+
+    public function GetSumAmount(): float
+    {
+        $res = 0;
+
+        foreach($this->members as $member)
+        {
+            $res += $member->GetSumAmount();
+        } 
+
+        return $res;
     }
 }

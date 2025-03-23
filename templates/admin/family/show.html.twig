@@ -12,6 +12,7 @@
                 <div class="card-title d-flex justify-content-between">
                     <h4 class="mb-1">{{ family.name }}</h4>
                     <small class="text-muted">Identifiant : {{ family.id }}</small>
+                    <small class="text-muted">Somme famille : {{ family.GetSumAmount() }}</small>
                     <ul>
                         {% for member in family.Members %}<div class="card mb-1">
                             <div class="card-body">
