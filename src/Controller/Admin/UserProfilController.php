@@ -16,7 +16,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 #[Route('/admin/user/profil')]
 final class UserProfilController extends AbstractController
 {
-    #[Route('/', name: 'app_userprofil_index', methods: ['GET'])]
+    #[Route('/', name: 'app_user_profil_index', methods: ['GET'])]
     public function index(UserRepository $repository): Response
     {
         $users = $repository->findAll();
@@ -28,8 +28,8 @@ final class UserProfilController extends AbstractController
     }
 
 
-    #[Route('/new', name:'app_userprofil_new', methods: ['GET', 'POST'])]
-    #[Route('/{id}/edit', name: 'app_userprofil_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/new', name:'app_user_profil_new', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_user_profil_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $manager): Response
     {
         $user ??= new user();
@@ -48,7 +48,7 @@ final class UserProfilController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            return $this->redirectToRoute('app_userprofil_index');
+            return $this->redirectToRoute('app_user_profil_index');
         }
 
         return $this->render('admin/user_profil/new.html.twig', [
