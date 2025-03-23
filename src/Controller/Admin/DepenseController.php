@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Depense;
 use App\Form\DepenseType;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('depense')]
+#[Route('/admin/depense')]
 final class DepenseController extends AbstractController
 {
     #[Route('', name: 'app_depense_index', methods: ['GET'])]
@@ -20,7 +20,7 @@ final class DepenseController extends AbstractController
     {
         $depenses = $repository->findAll();
 
-        return $this->render('depense/index.html.twig', [
+        return $this->render('admin/depense/index.html.twig', [
             'controller_name' => 'DepenseController',
             'depenses' => $depenses,
         ]);
@@ -43,7 +43,7 @@ final class DepenseController extends AbstractController
             return $this->redirectToRoute('app_depense_index');
         }
 
-        return $this->render('depense/new.html.twig', [
+        return $this->render('admin/depense/new.html.twig', [
             'form' => $form,
         ]);
     }
@@ -51,7 +51,7 @@ final class DepenseController extends AbstractController
     #[Route('/{id}', name: 'app_depense_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(?Depense $depense): Response
     {
-        return $this->render('depense/show.html.twig', [
+        return $this->render('admin/depense/show.html.twig', [
             'depense' => $depense,
         ]);
     }
