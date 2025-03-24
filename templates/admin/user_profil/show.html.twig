@@ -15,18 +15,8 @@
                     <small class="text-muted">Depense : {{ user.GetSumAmount() }}</small>
                     <small class="text-muted">Depense du mois en cours : {{ user.GetSumAmountMonth() }}</small>
                     <ul class="list-group list-group-flush">
-                    {% for depense in user.depenses %}
-                            <div class="card mb-1">
-                                <div class="card-body">
-                                    <div class="card-title d-flex justify-content-between">
-                                        <h4 class="mb-1">{{ depense.category.name }}</h4>
-                                        <small class="text-muted">Valeur : {{ depense.amount }}</small>
-                                    </div>
-                                    <div class="card-title d-flex justify-content-between">
-                                        <h5 class="mb-1">{{ depense.created |date('d M Y')}}</h5>
-                                    </div>
-                                </div>
-                            </div>
+                        {% for depense in user.depenses %}
+                            {{ include ('partials/_form-amount.hmtl.twig')}}                            
                         {% else %}
                             <li>Aucun enregistrement en base de données.</li>
                         {% endfor %}                                                                    
