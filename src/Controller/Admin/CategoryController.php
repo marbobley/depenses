@@ -5,11 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
-
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/admin/category')]
@@ -26,7 +25,7 @@ final class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name:'app_category_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_category_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Category $category, Request $request, EntityManagerInterface $manager): Response
     {
@@ -35,7 +34,6 @@ final class CategoryController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            
             $category->setCreatedBy($this->getUser());
             $manager->persist($category);
             $manager->flush();
@@ -59,8 +57,7 @@ final class CategoryController extends AbstractController
     #[Route('/{id}/delete', name: 'app_category_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function delete(?Category $category, EntityManagerInterface $manager): Response
     {
-        if($category === null)
-        {
+        if (null === $category) {
             // managing error
         }
 

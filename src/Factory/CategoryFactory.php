@@ -3,7 +3,6 @@
 namespace App\Factory;
 
 use App\Entity\Category;
-
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
@@ -33,9 +32,9 @@ final class CategoryFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'createdBy' => UserFactory::random(), 
+            'createdBy' => UserFactory::random(),
             'name' => self::faker()->unique()->randomElement(['TABAC', 'INTERMARCHE', 'ORDI', 'SITE', 'TATTOO']),
-            //'name' => self::faker()->unique()->word(),
+            // 'name' => self::faker()->unique()->word(),
         ];
     }
 

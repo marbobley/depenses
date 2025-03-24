@@ -32,10 +32,10 @@ final class DepenseFactory extends PersistentProxyObjectFactory
     protected function defaults(): array|callable
     {
         return [
-            'amount' => self::faker()->randomFloat(2,0,150),
+            'amount' => self::faker()->randomFloat(2, 0, 150),
             'created' => self::faker()->dateTimeBetween('-20 week', '+1 week'),
             'name' => self::faker()->word(),
-            'createdBy' => UserFactory::random(), 
+            'createdBy' => UserFactory::random(),
             'category' => CategoryFactory::random(),
         ];
     }

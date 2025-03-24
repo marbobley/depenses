@@ -2,11 +2,10 @@
 
 namespace App\DataFixtures;
 
-use App\Factory\FamilyFactory;
-use App\Factory\UserFactory;
 use App\Factory\CategoryFactory;
 use App\Factory\DepenseFactory;
-
+use App\Factory\FamilyFactory;
+use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

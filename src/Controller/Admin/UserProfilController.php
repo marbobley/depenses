@@ -5,13 +5,12 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Form\UserProfilType;
 use App\Repository\UserRepository;
-
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/admin/user/profil')]
 final class UserProfilController extends AbstractController
@@ -27,24 +26,23 @@ final class UserProfilController extends AbstractController
         ]);
     }
 
-
-    #[Route('/new', name:'app_user_profil_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_user_profil_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_user_profil_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $manager): Response
     {
-        $user ??= new user();
+        $user ??= new User();
         $form = $this->createForm(UserProfilType::class, $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
-                            $userPasswordHasher->hashPassword(
-                            $user,
-                            $form->get('plainPassword')->getData()
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
                 )
             );
-            
+
             $manager->persist($user);
             $manager->flush();
 
@@ -55,7 +53,6 @@ final class UserProfilController extends AbstractController
             'form' => $form,
         ]);
     }
-
 
     #[Route('/{id}', name: 'app_user_profil_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(?User $user): Response
@@ -68,8 +65,7 @@ final class UserProfilController extends AbstractController
     #[Route('/{id}/delete', name: 'app_user_profil_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function delete(?User $User, EntityManagerInterface $manager): Response
     {
-        if($User === null)
-        {
+        if (null === $User) {
             // managing error
         }
 
@@ -78,5 +74,4 @@ final class UserProfilController extends AbstractController
 
         return $this->redirectToRoute('app_user_profil_index');
     }
-   
 }

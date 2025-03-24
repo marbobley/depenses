@@ -99,10 +99,9 @@ class Category implements ICalculateAmount
     {
         $res = 0;
 
-        foreach($this->depenses as $depense)
-        {
+        foreach ($this->depenses as $depense) {
             $res += $depense->getAmount();
-        } 
+        }
 
         return $res;
     }
@@ -114,13 +113,13 @@ class Category implements ICalculateAmount
         $currentMonth = date('n');
         $currentYear = date('Y');
 
-        foreach($this->depenses as $depense)
-        {
-            $depenseMonth = date('n',$depense->getCreated()->getTimestamp());
-            $depenseYear = date('Y',$depense->getCreated()->getTimestamp());
-            if( $depenseMonth === $currentMonth &&  $depenseYear === $currentYear)
+        foreach ($this->depenses as $depense) {
+            $depenseMonth = date('n', $depense->getCreated()->getTimestamp());
+            $depenseYear = date('Y', $depense->getCreated()->getTimestamp());
+            if ($depenseMonth === $currentMonth && $depenseYear === $currentYear) {
                 $res += $depense->getAmount();
-        } 
+            }
+        }
 
         return $res;
     }

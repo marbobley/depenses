@@ -5,12 +5,11 @@ namespace App\Controller\Admin;
 use App\Entity\Family;
 use App\Form\FamilyType;
 use App\Repository\FamilyRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
 
 #[Route('/admin/family')]
 final class FamilyController extends AbstractController
@@ -24,10 +23,9 @@ final class FamilyController extends AbstractController
             'controller_name' => 'FamilyController',
             'families' => $families,
         ]);
-
     }
 
-    #[Route('/new', name:'app_family_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_family_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_family_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Family $family, Request $request, EntityManagerInterface $manager): Response
     {
@@ -36,8 +34,7 @@ final class FamilyController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            //$category->setCreatedBy($this->getUser());
+            // $category->setCreatedBy($this->getUser());
             $manager->persist($family);
             $manager->flush();
 
@@ -48,7 +45,6 @@ final class FamilyController extends AbstractController
             'form' => $form,
         ]);
     }
-
 
     #[Route('/{id}', name: 'app_family_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(?Family $family): Response
@@ -61,8 +57,7 @@ final class FamilyController extends AbstractController
     #[Route('/{id}/delete', name: 'app_family_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function delete(?Family $family, EntityManagerInterface $manager): Response
     {
-        if($family === null)
-        {
+        if (null === $family) {
             // managing error
         }
 
@@ -71,11 +66,11 @@ final class FamilyController extends AbstractController
 
         return $this->redirectToRoute('app_family_index');
     }
+
     #[Route('/{id}/join', name: 'app_family_join', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function join(?Family $family, EntityManagerInterface $manager): Response
     {
-        if($family === null)
-        {
+        if (null === $family) {
             // managing error
         }
 

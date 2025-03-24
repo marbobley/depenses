@@ -5,11 +5,10 @@ namespace App\Controller\Admin;
 use App\Entity\Depense;
 use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
-
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/admin/depense')]
@@ -26,7 +25,7 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name:'app_depense_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Depense $depense, Request $request, EntityManagerInterface $manager): Response
     {
@@ -35,8 +34,7 @@ final class DepenseController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            //category->setCreatedBy($this->getUser());
+            // category->setCreatedBy($this->getUser());
             $manager->persist($depense);
             $manager->flush();
 
@@ -59,8 +57,7 @@ final class DepenseController extends AbstractController
     #[Route('/{id}/delete', name: 'app_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function delete(?Depense $depense, EntityManagerInterface $manager): Response
     {
-        if($depense === null)
-        {
+        if (null === $depense) {
             // managing error
         }
 
