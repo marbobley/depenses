@@ -4,7 +4,7 @@ namespace App\Interface;
 
 interface ICalculateAmount
 {
-    public function GetSumAmount(): float;
+    public function getSumAmount(): float;
 
-    public function GetSumAmountMonth(): float;
+    public function getSumAmountMonth(): float;
 }

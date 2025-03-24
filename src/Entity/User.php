@@ -204,7 +204,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, ICalcul
         return $this;
     }
 
-    public function GetSumAmount(): float
+    public function getSumAmount(): float
     {
         $res = 0;
 
@@ -215,7 +215,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, ICalcul
         return $res;
     }
 
-    public function GetSumAmountMonth(): float
+    public function getSumAmountMonth(): float
     {
         $res = 0;
 

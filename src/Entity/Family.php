@@ -77,23 +77,23 @@ class Family implements ICalculateAmount
         return $this;
     }
 
-    public function GetSumAmount(): float
+    public function getSumAmount(): float
     {
         $res = 0;
 
         foreach ($this->members as $member) {
-            $res += $member->GetSumAmount();
+            $res += $member->getSumAmount();
         }
 
         return $res;
     }
 
-    public function GetSumAmountMonth(): float
+    public function getSumAmountMonth(): float
     {
         $res = 0;
 
         foreach ($this->members as $member) {
-            $res += $member->GetSumAmountMonth();
+            $res += $member->getSumAmountMonth();
         }
 
         return $res;
