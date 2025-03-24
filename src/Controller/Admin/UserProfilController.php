@@ -57,7 +57,7 @@ final class UserProfilController extends AbstractController
     #[Route('/{id}', name: 'app_user_profil_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(?User $user): Response
     {
-        if(!$user){
+        if (!$user) {
             throw $this->createNotFoundException('User not found');
         }
 
