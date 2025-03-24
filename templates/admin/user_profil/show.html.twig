@@ -13,7 +13,7 @@
                     <h4 class="mb-1">{{ user.username }}</h4>
                     <small class="text-muted">Identifiant : {{ user.id }}</small>
                     <small class="text-muted">Depense : {{ user.GetSumAmount() }}</small>
-                    <small class="text-muted">Depense du mois en cours : {{ calculateService.GetSumAmoutForMonth(user) }}</small>
+                    <small class="text-muted">Depense du mois en cours : {{ user.GetSumAmountMonth() }}</small>
                     <ul class="list-group list-group-flush">
                     {% for depense in user.depenses %}
                             <div class="card mb-1">

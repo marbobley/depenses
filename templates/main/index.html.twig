@@ -13,7 +13,7 @@
     <div class="container px-4 text-center">
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
             <h1 class="fw-bolder">Bonjour {{app.user.username}}!!! </h1>
-            <h1 class="fw-bolder">Tu as depensé {{ calculateService.GetSumAmoutForMonth(app.user)}} € ce mois-ci!!! </h1>
+            <h1 class="fw-bolder">Tu as depensé {{ app.user.GetSumAmountMonth() }} € ce mois-ci!!! </h1>
             <a class="btn btn-lg btn-light" href="{{path('app_logout')}}">Partir</a>
         {% else %}
             <h1 class="fw-bolder">Gérez vos dépenses en quelques clics !</h1>
