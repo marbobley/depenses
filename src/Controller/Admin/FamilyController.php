@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Family;
 use App\Form\FamilyType;
 use App\Repository\FamilyRepository;
+use App\Service\HasherService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,17 +28,18 @@ final class FamilyController extends AbstractController
 
     #[Route('/new', name: 'app_family_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_family_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Family $family, Request $request, EntityManagerInterface $manager): Response
+    public function new(?Family $family, Request $request, EntityManagerInterface $manager, HasherService $hasher): Response
     {
         $family ??= new Family();
         $form = $this->createForm(FamilyType::class, $family);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            // $category->setCreatedBy($this->getUser());
+            $passwordPlain = $family->getPassword();
+            $passwordHash = $hasher->hash($passwordPlain);
+            $family->setPassword($passwordHash);
             $manager->persist($family);
             $manager->flush();
-
             return $this->redirectToRoute('app_family_index');
         }
 

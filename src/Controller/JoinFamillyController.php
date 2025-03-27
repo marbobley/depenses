@@ -30,7 +30,7 @@ final class JoinFamillyController extends AbstractController
         ]);
     }*/
     #[Route('/join/familly', name: 'app_joinfamilly_index', methods: ['GET', 'POST'])]
-    public function index(Request $request, LoggerInterface $log, UserPasswordHasherInterface $userPasswordHasher, FamilyService $familyService, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, LoggerInterface $log, FamilyService $familyService, EntityManagerInterface $entityManager): Response
     {
         $log->info('hell');
 
