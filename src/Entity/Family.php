@@ -25,6 +25,9 @@ class Family implements ICalculateAmount
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'family')]
     private Collection $members;
 
+    #[ORM\Column(length: 255)]
+    private ?string $password = null;
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
@@ -102,5 +105,17 @@ class Family implements ICalculateAmount
     public function getPassword2(): string
     {
         return '$2y$13$.UPunezIFcxtdVV9FIC8.uoKqdUn0lEuDetcAgfzt858xj5uv4wG.';
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): static
+    {
+        $this->password = $password;
+
+        return $this;
     }
 }
