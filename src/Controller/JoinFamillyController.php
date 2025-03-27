@@ -4,19 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Family;
 use App\Repository\FamilyRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use App\Service\FamilyService;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Log\Logger;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactory;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class JoinFamillyController extends AbstractController
@@ -32,9 +30,9 @@ final class JoinFamillyController extends AbstractController
         ]);
     }*/
     #[Route('/join/familly', name: 'app_joinfamilly_index', methods: ['GET', 'POST'])]
-    public function index(Request $request, LoggerInterface $log, UserPasswordHasherInterface $userPasswordHasher,FamilyService $familyService, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, LoggerInterface $log, UserPasswordHasherInterface $userPasswordHasher, FamilyService $familyService, EntityManagerInterface $entityManager): Response
     {
-        $log->info("hell");
+        $log->info('hell');
 
         $defaultData = ['message' => 'Type your message here'];
         $form = $this->createFormBuilder($defaultData)
@@ -50,9 +48,9 @@ final class JoinFamillyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // data is an array with "name", "email", and "message" keys
-            $data = $form->getData(); 
-            
-            $family = $data["family"];
+            $data = $form->getData();
+
+            $family = $data['family'];
 
             // configure different hashers via the factory
             $factory = new PasswordHasherFactory(['common' => ['algorithm' => 'bcrypt']]);
@@ -69,23 +67,22 @@ final class JoinFamillyController extends AbstractController
                 //bad passwordfamily
                 $log->info($hasher->hash($data['plainPassword']));
             }*/
-            
         }
-   
+
         return $this->render('join_familly/joinFamily.html.twig', [
             'form' => $form,
         ]);
     }
 
     #[Route('/{id}/join', name: 'app_joinfamily_join', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function join(?Family $family , FamilyService $familyService, EntityManagerInterface $entityManager): Response
+    public function join(?Family $family, FamilyService $familyService, EntityManagerInterface $entityManager): Response
     {
         if (null === $family) {
             // managing error
         }
 
         $user = $this->getUser();
-        $familyService->JoinFamily($family, $user , $entityManager);
+        $familyService->JoinFamily($family, $user, $entityManager);
 
         return $this->redirectToRoute('app_joinfamilly_index');
     }
