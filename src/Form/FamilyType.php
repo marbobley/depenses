@@ -13,6 +13,7 @@ class FamilyType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('password')
         ;
     }
 
