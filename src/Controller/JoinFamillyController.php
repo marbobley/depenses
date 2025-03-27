@@ -51,16 +51,14 @@ final class JoinFamillyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // data is an array with "name", "email", and "message" keys
             $data = $form->getData(); 
-
             
             $family = $data["family"];
 
             // configure different hashers via the factory
             $factory = new PasswordHasherFactory(['common' => ['algorithm' => 'bcrypt']]);
             $hasher = $factory->getPasswordHasher('common');
-            $hash = $hasher->hash($data['plainPassword']);
 
-            if($hasher->verify($hash, $data['plainPassword']) )
+            /*if($hasher->verify($family->getPassword2(), $data['plainPassword']) )
             {
                 // good password family
                 $log->info("good password");
@@ -69,8 +67,8 @@ final class JoinFamillyController extends AbstractController
             }
             else {
                 //bad passwordfamily
-                $log->info("bad password");
-            }
+                $log->info($hasher->hash($data['plainPassword']));
+            }*/
             
         }
    

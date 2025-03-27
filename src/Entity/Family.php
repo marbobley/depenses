@@ -100,6 +100,6 @@ class Family implements ICalculateAmount
     }
 
     public function getPassword2() : string{
-        return "lalala";
+        return "$2y$13$.UPunezIFcxtdVV9FIC8.uoKqdUn0lEuDetcAgfzt858xj5uv4wG.";
     }
 }
