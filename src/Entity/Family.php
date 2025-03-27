@@ -98,4 +98,8 @@ class Family implements ICalculateAmount
 
         return $res;
     }
+
+    public function getPassword2() : string{
+        return "lalala";
+    }
 }
