@@ -35,13 +35,13 @@ final class FamilyController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $passwordPlain = $family->getPassword();
             $passwordHash = $hasher->hash($passwordPlain);
             $family->setPassword($passwordHash);
-            
+
             $manager->persist($family);
             $manager->flush();
+
             return $this->redirectToRoute('app_family_index');
         }
 
