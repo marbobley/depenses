@@ -36,6 +36,7 @@ final class PasswordController extends AbstractController
             $family->setPassword($hashPassword);
             $entityManager->persist($family);
             $entityManager->flush();
+            return $this->redirectToRoute('app_main');
         }
 
         return $this->render('family/password/update.html.twig', [
