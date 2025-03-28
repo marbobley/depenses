@@ -8,23 +8,36 @@
                     <ul class="navbar-nav ms-auto">
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             {% if is_granted('ROLE_ADMIN')%}
-                                <li class="nav-item"><a class="nav-link" href="{{path('app_family_index')}}">Familles</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{path('app_user_profil_index')}}">Users</a></li>  
-                                <li class="nav-item"><a class="nav-link" href="{{path('app_depense_index')}}">Depenses</a></li>
-                                <li class="nav-item"><a class="nav-link" href="{{path('app_category_index')}}">Categories</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Administration
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{path('app_family_index')}}">Gerer les familles</a>
+                                    <a class="dropdown-item" href="{{path('app_user_profil_index')}}">Gerer les membres</a>
+                                    <a class="dropdown-item" href="{{path('app_depense_index')}}">Gerer les dépenses</a>
+                                    <a class="dropdown-item" href="{{path('app_category_index')}}">Gerer les catégories</a>
+                                    </div>
+                                </li>  
                             {% endif %}
-
-                            {% if is_granted("ROLE_MAIN_USER_FAMILY")%}
-                                <li class="nav-item"><a class="nav-link" href="{{path('app_family_password_index')}}">Choisir family password</a></li>
-                            {% else %}
-                                <li class="nav-item"><a class="nav-link" href="{{path('app_family_join_index')}}">Rejoindre une famille</a></li>
-                            {% endif%}
+                          
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Famille
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{path('app_family_join_index')}}">Rejoindre une famille</a>
+                                    {% if is_granted("ROLE_MAIN_USER_FAMILY")%}  
+                                        <a class="dropdown-item" href="{{path('app_family_password_index')}}">Choisir le mot de passe</a>  
+                                    {% endif%}
+                                    </div>
+                                </li>
 
                             <li class="nav-item"><a class="nav-link" href="{{path('app_logout')}}">Deconnexion</a></li>                        
                         {% else %}
                             <li class="nav-item"><a class="nav-link" href="{{path('app_login')}}">Connexion</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{path('app_register')}}">Inscription</a></li>
-                        {% endif %}
+                        {% endif %}                      
                     </ul>
                 </div>
             </div>

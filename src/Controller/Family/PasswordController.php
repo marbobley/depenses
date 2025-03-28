@@ -19,7 +19,7 @@ final class PasswordController extends AbstractController
     {
         $defaultData = ['message' => 'Type your message here'];
         $form = $this->createFormBuilder($defaultData)
-            ->add('plainPassword', PasswordType::class)
+            ->add('plainPassword', PasswordType::class, ['label' => 'Mot de passe'])
             ->add('send', SubmitType::class)
             ->getForm();
 
