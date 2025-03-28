@@ -16,7 +16,7 @@
                     <small class="text-muted">Depense du mois en cours : {{ user.sumAmountMonth }}</small>
                     <ul class="list-group list-group-flush">
                         {% for depense in user.depenses %}
-                            {{ include ('partials/_form-amount.hmtl.twig')}}                            
+                            {% include 'partials/_form-amount.hmtl.twig' with {'depense': depense} only %}                            
                         {% else %}
                             <li>Aucun enregistrement en base de données.</li>
                         {% endfor %}                                                                    
