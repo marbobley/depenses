@@ -38,7 +38,7 @@ final class PasswordController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->render('family/join/join.html.twig', [
+        return $this->render('family/password/update.html.twig', [
             'form' => $form,
         ]);
     }
