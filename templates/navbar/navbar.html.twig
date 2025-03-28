@@ -9,19 +9,10 @@
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                             {% if is_granted('ROLE_ADMIN')%}
                                 {% include("navbar/_admin-navbar.html.twig") %} 
-                            {% endif %}
-                          
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Famille
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{path('app_family_join_index')}}">Rejoindre une famille</a>
-                                    {% if is_granted("ROLE_MAIN_USER_FAMILY")%}  
-                                        <a class="dropdown-item" href="{{path('app_family_password_index')}}">Choisir le mot de passe</a>  
-                                    {% endif%}
-                                    </div>
-                                </li>
+                            {% endif %}                          
+                            
+                            {% include("navbar/_family-navbar.html.twig") %} 
+                            {% include("navbar/_depense-navbar.html.twig") %} 
 
                             <li class="nav-item"><a class="nav-link" href="{{path('app_logout')}}">Deconnexion</a></li>                        
                         {% else %}
