@@ -8,6 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: DepenseRepository::class)]
 class Depense
 {
+    public function __construct()
+    {
+        $this->created = new \DateTimeImmutable();
+    }
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
