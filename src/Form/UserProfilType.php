@@ -23,6 +23,7 @@ class UserProfilType extends AbstractType
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Utilisateur-rice' => 'ROLE_USER',
+                    'Chef.fe de famille' => 'ROLE_MAIN_USER_FAMILY',
                     'Administrateur-rice' => 'ROLE_ADMIN',
                 ],
                 'multiple' => true,
