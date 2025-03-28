@@ -6,6 +6,7 @@ use App\Entity\Family;
 use App\Repository\FamilyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\FamilyService;
+use App\Service\HasherService;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -22,10 +23,8 @@ use Symfony\Component\Routing\Attribute\Route;
 final class JoinFamillyController extends AbstractController
 {
     #[Route('/join/familly', name: 'app_joinfamilly_index', methods: ['GET', 'POST'])]
-    public function index(Request $request, LoggerInterface $log, UserPasswordHasherInterface $userPasswordHasher,FamilyService $familyService, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, HasherService $hasher,FamilyService $familyService, EntityManagerInterface $entityManager): Response
     {
-        $log->info("hell");
-
         $defaultData = ['message' => 'Type your message here'];
         $form = $this->createFormBuilder($defaultData)
             ->add('family', EntityType::class, [
@@ -43,40 +42,18 @@ final class JoinFamillyController extends AbstractController
             $data = $form->getData(); 
             
             $family = $data["family"];
+            $plainPassword = $data['plainPassword'];
+            $hashPassword = $hasher->hash($plainPassword); 
 
-            // configure different hashers via the factory
-            $factory = new PasswordHasherFactory(['common' => ['algorithm' => 'bcrypt']]);
-            $hasher = $factory->getPasswordHasher('common');
-
-            if($hasher->verify($family->getPassword2(), $data['plainPassword']) )
+            if( $hashPassword === $family->getPassword())
             {
-                // good password family
-                $log->info("good password");
                 $user = $this->getUser();
                 $familyService->JoinFamily($family, $user , $entityManager);
-            }
-            else {
-                //bad passwordfamily
-                $log->info($hasher->hash($data['plainPassword']));
-            }
-            
-        }
-   
+                return $this->redirectToRoute('app_joinfamilly_index');
+            }            
+        }   
         return $this->render('join_familly/joinFamily.html.twig', [
             'form' => $form,
         ]);
-    }
-
-    #[Route('/{id}/join', name: 'app_joinfamily_join', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function join(?Family $family , FamilyService $familyService, EntityManagerInterface $entityManager): Response
-    {
-        if (null === $family) {
-            // managing error
-        }
-
-        $user = $this->getUser();
-        $familyService->JoinFamily($family, $user , $entityManager);
-
-        return $this->redirectToRoute('app_joinfamilly_index');
     }
 }
