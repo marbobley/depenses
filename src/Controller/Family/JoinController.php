@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Family;
 
 use App\Entity\Family;
 use App\Service\FamilyService;
@@ -14,9 +14,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-final class JoinFamillyController extends AbstractController
+final class JoinController extends AbstractController
 {
-    #[Route('/join/familly', name: 'app_joinfamilly_index', methods: ['GET', 'POST'])]
+    #[Route('/family/join', name: 'app_family_join_index', methods: ['GET', 'POST'])]
     public function index(Request $request, HasherService $hasher, FamilyService $familyService, EntityManagerInterface $entityManager): Response
     {
         $defaultData = ['message' => 'Type your message here'];
@@ -43,11 +43,11 @@ final class JoinFamillyController extends AbstractController
                 $user = $this->getUser();
                 $familyService->JoinFamily($family, $user, $entityManager);
 
-                return $this->redirectToRoute('app_joinfamilly_index');
+                return $this->redirectToRoute('app_family_join_index');
             }
         }
 
-        return $this->render('join_familly/joinFamily.html.twig', [
+        return $this->render('family/join/join.html.twig', [
             'form' => $form,
         ]);
     }
