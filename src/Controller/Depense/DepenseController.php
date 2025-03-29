@@ -3,7 +3,7 @@
 namespace App\Controller\Depense;
 
 use App\Entity\Depense;
-use App\Form\DepenseUserType;
+use App\Form\DepenseType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +16,7 @@ final class DepenseController extends AbstractController
     public function new(?Depense $depense, Request $request, EntityManagerInterface $manager): Response
     {
         $depense ??= new Depense();
-        $form = $this->createForm(DepenseUserType::class, $depense);
+        $form = $this->createForm(DepenseType::class, $depense);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -28,7 +28,7 @@ final class DepenseController extends AbstractController
             return $this->redirectToRoute('app_main');
         }
 
-        return $this->render('depense/depense/index.html.twig', [
+        return $this->render('depense/depense/new.html.twig', [
             'form' => $form,
         ]);
     }
