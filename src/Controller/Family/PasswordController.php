@@ -30,12 +30,13 @@ final class PasswordController extends AbstractController
             $data = $form->getData();
             $plainPassword = $data['plainPassword'];
             $hashPassword = $hasher->hash($plainPassword);
-            /** @var \App\Entity\User $user */
+            /** @var User $user */
             $user = $this->getUser();
             $family = $user->getFamily();
             $family->setPassword($hashPassword);
             $entityManager->persist($family);
             $entityManager->flush();
+
             return $this->redirectToRoute('app_main');
         }
 

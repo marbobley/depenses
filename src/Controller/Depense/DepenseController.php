@@ -20,7 +20,6 @@ final class DepenseController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
             $depense->setCreatedBy($this->getUser());
             $manager->persist($depense);
             $manager->flush();
