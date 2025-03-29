@@ -3,9 +3,9 @@
         Famille
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="{{path('app_family_join_index')}}">Rejoindre une famille</a>
-        {% if is_granted("ROLE_MAIN_USER_FAMILY")%}  
-           <a class="dropdown-item" href="{{path('app_family_password_index')}}">Choisir le mot de passe</a>  
-        {% endif%}
+        <a class="dropdown-item" href="{{ path('app_family_join_index') }}">Rejoindre une famille</a>
+        {% if is_granted('ROLE_MAIN_USER_FAMILY') %}
+           <a class="dropdown-item" href="{{ path('app_family_password_index') }}">Choisir le mot de passe</a>
+        {% endif %}
     </div>
 </li>
