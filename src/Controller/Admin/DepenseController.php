@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/depense')]
 final class DepenseController extends AbstractController
 {
-    #[Route('', name: 'app_depense_index', methods: ['GET'])]
+    #[Route('', name: 'app_admin_depense_index', methods: ['GET'])]
     public function index(DepenseRepository $repository): Response
     {
         $depenses = $repository->findAll();
@@ -25,8 +25,8 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
-    #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_admin_depense_new', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_admin_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Depense $depense, Request $request, EntityManagerInterface $manager): Response
     {
         $depense ??= new Depense();
@@ -38,7 +38,7 @@ final class DepenseController extends AbstractController
             $manager->persist($depense);
             $manager->flush();
 
-            return $this->redirectToRoute('app_depense_index');
+            return $this->redirectToRoute('app_admin_depense_index');
         }
 
         return $this->render('admin/depense/new.html.twig', [
@@ -46,7 +46,7 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_depense_show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    #[Route('/{id}', name: 'app_admin_depense_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(?Depense $depense): Response
     {
         return $this->render('admin/depense/show.html.twig', [
@@ -54,7 +54,7 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/{id}/delete', name: 'app_admin_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function delete(?Depense $depense, EntityManagerInterface $manager): Response
     {
         if (null === $depense) {
@@ -64,6 +64,6 @@ final class DepenseController extends AbstractController
         $manager->remove($depense);
         $manager->flush();
 
-        return $this->redirectToRoute('app_depense_index');
+        return $this->redirectToRoute('app_admin_depense_index');
     }
 }
