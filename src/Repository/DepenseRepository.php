@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Depense;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,6 +17,19 @@ class DepenseRepository extends ServiceEntityRepository
         parent::__construct($registry, Depense::class);
     }
 
+    /**
+     * @return Depense[] Returns an array of depense filtered on user
+     */
+    public function findByUser(User $user) : array
+    {
+        return $this->createQueryBuilder('d')
+        ->andWhere('d.createdBy = :val')
+        ->setParameter('val', $user->getId() )
+        ->orderBy('d.id', 'DESC')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
     //    /**
     //     * @return Depense[] Returns an array of Depense objects
     //     */

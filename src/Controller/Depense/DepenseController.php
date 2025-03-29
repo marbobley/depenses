@@ -17,9 +17,9 @@ final class DepenseController extends AbstractController
     #[Route('/', name: 'app_depense_index', methods: ['GET'])]
     public function index(DepenseRepository $repository): Response
     {
-        $depenses = $repository->findAll();
+        $depenses = $repository->findByUser($this->getUser());
 
-        return $this->render('admin/depense/index.html.twig', [
+        return $this->render('depense/depense/index.html.twig', [
             'controller_name' => 'DepenseController',
             'depenses' => $depenses,
         ]);
