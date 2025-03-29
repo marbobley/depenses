@@ -12,6 +12,7 @@
         {{ form_row(form.amount, {label: 'Valeur'}) }}
         {{ form_row(form.category, {label: 'Categorie'}) }}
         <button type="submit" class="btn btn-primary">Envoyer</button>
+        {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
     </div>
 </section>
