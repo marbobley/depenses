@@ -11,9 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/depense')]
 final class DepenseController extends AbstractController
 {
-    #[Route('/depense', name: 'app_depense_index', methods: ['GET'])]
+    #[Route('/', name: 'app_depense_index', methods: ['GET'])]
     public function index(DepenseRepository $repository): Response
     {
         $depenses = $repository->findAll();
@@ -24,7 +25,7 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-    #[Route('/depense/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
     public function new(?Depense $depense, Request $request, EntityManagerInterface $manager): Response
     {
         $depense ??= new Depense();

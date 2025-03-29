@@ -14,9 +14,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/family')]
 final class JoinController extends AbstractController
 {
-    #[Route('/family/join', name: 'app_family_join_index', methods: ['GET', 'POST'])]
+    #[Route('/join', name: 'app_family_join_index', methods: ['GET', 'POST'])]
     public function index(Request $request, HasherService $hasher, FamilyService $familyService, EntityManagerInterface $entityManager): Response
     {
         $defaultData = ['message' => 'Type your message here'];
