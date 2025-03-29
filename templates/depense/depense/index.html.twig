@@ -13,8 +13,14 @@
                         <div class="card-title d-flex justify-content-between">
                             <a href="{{ path('app_admin_depense_show', {id: depense.id}) }}" class="stretched-link link-dark">
                                 <h4 class="mb-1">{{ depense.name }}</h4>
+                                <small class="text-muted">{{ depense.category.name }}</small>
                             </a>
-                            <small class="text-muted">Identifiant : {{ depense.id }}</small>
+                            {% if (depense.amount >= 0) %}
+                                <small class="text-muted">Depense : {{ depense.amount }}</small>
+                            {% else %}
+                                <small class="text-muted">Crédit : {{ depense.amount }}</small>
+                            {% endif %}
+                            <small class="text-muted">Date : {{ depense.created |date("m/d/Y") }}</small>
                         </div>
                     </div>
                 </div>
