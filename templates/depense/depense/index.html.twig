@@ -5,23 +5,24 @@
 {% block body %}
     <section class="container px-4">
         <h1>Liste de dépenses</h1>
-        <a href="{{ path('app_depense_new') }}" class="btn btn-warning">Add</a>
+        <a href="{{ path('app_depense_new') }}" class="btn btn-warning">Ajouter</a>
         <ul class="list-group list-group-flush">
             {% for depense in depenses %}
                 <div class="card mb-1">
                     <div class="card-body">
                         <div class="card-title d-flex justify-content-between">
-                            <a href="{{ path('app_admin_depense_show', {id: depense.id}) }}" class="stretched-link link-dark">
                                 <h4 class="mb-1">{{ depense.name }}</h4>
                                 <small class="text-muted">{{ depense.category.name }}</small>
-                            </a>
                             {% if (depense.amount >= 0) %}
                                 <small class="text-muted">Depense : {{ depense.amount }}</small>
                             {% else %}
                                 <small class="text-muted">Crédit : {{ depense.amount }}</small>
                             {% endif %}
                             <small class="text-muted">Date : {{ depense.created |date("m/d/Y") }}</small>
+
                         </div>
+                        <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-primary">Editer</a>
+                        <a href="{{ path('app_depense_delete', {id: depense.id}) }}" class="btn btn-warning">Supprimer</a>
                     </div>
                 </div>
             {% else %}
@@ -30,3 +31,4 @@
         </ul>
     </section>
 {% endblock %}
+

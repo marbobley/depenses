@@ -26,8 +26,11 @@ final class DepenseController extends AbstractController
     }
 
     #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Depense $depense, Request $request, EntityManagerInterface $manager): Response
     {
+        // TODO : Manager user verification for update depense is linked to user ? 
+
         $depense ??= new Depense();
         $form = $this->createForm(DepenseType::class, $depense);
 
@@ -37,11 +40,28 @@ final class DepenseController extends AbstractController
             $manager->persist($depense);
             $manager->flush();
 
-            return $this->redirectToRoute('app_main');
+            return $this->redirectToRoute('app_depense_index');
         }
 
         return $this->render('depense/depense/new.html.twig', [
             'form' => $form,
         ]);
     }
+
+    #[Route('/{id}/delete', name: 'app_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    public function delete(?Depense $depense, EntityManagerInterface $manager): Response
+    {
+        // TODO : Manager user verification depense is linked to user ? 
+
+        if (null === $depense) {
+            // managing error
+            // managing user verification
+        }
+
+        $manager->remove($depense);
+        $manager->flush();
+
+        return $this->redirectToRoute('app_depense_index');
+    }
+
 }
