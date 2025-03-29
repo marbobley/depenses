@@ -53,15 +53,21 @@ final class DepenseController extends AbstractController
     {
         // TODO : Manager user verification depense is linked to user ? 
 
-        if (null === $depense) {
-            // managing error
-            // managing user verification
+        if($this->getUser() === $depense->getCreatedBy())
+        {
+            // We can delete 
+            if (null === $depense) {
+                // managing error
+                // managing user verification
+            }
+
+            $manager->remove($depense);
+            $manager->flush();
+
+            return $this->redirectToRoute('app_depense_index');
         }
 
-        $manager->remove($depense);
-        $manager->flush();
-
-        return $this->redirectToRoute('app_depense_index');
+        return $this->redirectToRoute('app_main');
     }
 
 }
