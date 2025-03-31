@@ -11,8 +11,6 @@
 <!-- Header-->
 <header class="bg-primary bg-gradient text-white" >
     <div class="container px-4 text-center">
-
-        <img src="{{ asset('images/billets.jpeg') }}" alt="Pleins de billets">
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             <h1 class="fw-bolder">Bonjour {{ app.user.username }}!!! </h1>
             <h1 class="fw-bolder">Tu as depensé {{ app.user.GetSumAmountMonth() }} € ce mois-ci!!! </h1>
