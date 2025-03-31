@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% set action = app.current_route == 'app_category_new' ? 'Ajout' : 'Édition' %}
+{% set action = app.current_route == 'app_admin_category_new' ? 'Ajout' : 'Édition' %}
 
 {% block title %}{{ action }} de categorie{% endblock %}
 

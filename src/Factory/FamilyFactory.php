@@ -3,6 +3,7 @@
 namespace App\Factory;
 
 use App\Entity\Family;
+use App\Service\HasherService;
 use Zenstruck\Foundry\Persistence\PersistentProxyObjectFactory;
 
 /**
@@ -31,8 +32,12 @@ final class FamilyFactory extends PersistentProxyObjectFactory
      */
     protected function defaults(): array|callable
     {
+        $hasher = new HasherService();
+        $hashPassword = $hasher->hash('123456');
+
         return [
             'name' => self::faker()->unique()->word(),
+            'password' => $hashPassword,
             'members' => UserFactory::randomSet(self::faker()->numberBetween(1, 10)),
         ];
     }

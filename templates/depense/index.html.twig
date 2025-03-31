@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des dépenses{% endblock %}
+
+{% block body %}
+    <section class="container px-4">
+        <h1>Liste de dépenses</h1>
+        <a href="{{ path('app_depense_new') }}" class="btn btn-warning">Ajouter</a>
+        <ul class="list-group list-group-flush">
+            {% for depense in depenses %}
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between">
+                                <h4 class="mb-1">{{ depense.name }}</h4>
+                                <small class="text-muted">{{ depense.category.name }}</small>
+                            {% if (depense.amount >= 0) %}
+                                <small class="text-muted">Depense : {{ depense.amount }}</small>
+                            {% else %}
+                                <small class="text-muted">Crédit : {{ depense.amount }}</small>
+                            {% endif %}
+                            <small class="text-muted">Date : {{ depense.created |date("m/d/Y") }}</small>
+
+                        </div>
+                        <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-primary">Editer</a>
+                        <a href="{{ path('app_depense_delete', {id: depense.id}) }}" class="btn btn-warning">Supprimer</a>
+                    </div>
+                </div>
+            {% else %}
+                <li>Aucun enregistrement en base de données.</li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}
+

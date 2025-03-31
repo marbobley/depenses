@@ -1,18 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% set action = app.current_route == 'app_family_new' ? 'Ajout' : 'Édition' %}
-
-{% block title %}{{ action }} de familles{% endblock %}
+{% block title %}Saisir une catégory{% endblock %}
 
 {% block body %}
 <!-- Header-->
 <section class="container px-4">
     <div class="w-50 m-auto">
-        <h1>{{ action }} de familles</h1>
+        <h1>Saisie de categorie</h1>
 
         {{ form_start(form) }}
         {{ form_row(form.name, {label: 'Nom'}) }}
-        {{ form_row(form.password, {label: 'Pass'}) }}
         <button type="submit" class="btn btn-primary">Envoyer</button>
         {{ form_end(form) }}
     </div>

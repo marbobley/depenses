@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mise a jour du mot de passe de la famille{% endblock %}
+
+{% block body %}
+    <section class="container px-4">
+        <h1>Vous êtes le.a chef.fe de la famille : {{ app.user.family.name }}</h1>
+        <h2>Vous pouvez définir un nouveau mot de passe :</h2>
+        {{ form_start(form) }}
+        {{ form_end(form) }}
+    </section>
+{% endblock %}

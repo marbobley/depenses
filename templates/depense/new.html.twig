@@ -1,23 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% set action = app.current_route == 'app_admin_depense_new' ? 'Ajout' : 'Édition' %}
-
-{% block title %}{{ action }} de depenseSSSSSSSSS{% endblock %}
+{% block title %}Saisir une dépense{% endblock %}
 
 {% block body %}
 <!-- Header-->
 <section class="container px-4">
     <div class="w-50 m-auto">
-        <h1>{{ action }} de depenses</h1>
-
         {{ form_start(form) }}
-        {{ form_row(form.createdBy, {label: 'Crée par'}) }}
         {{ form_row(form.name, {label: 'Nom'}) }}
         {{ form_row(form.created, {label: 'Date de création'}) }}
         {{ form_row(form.amount, {label: 'Valeur'}) }}
         {{ form_row(form.category, {label: 'Categorie'}) }}
         <button type="submit" class="btn btn-primary">Envoyer</button>
-        {{ form_end(form) }}
+        {{ form_row(form._token) }}
+        {{ form_end(form, {render_rest: false}) }}
     </div>
 </section>
 {% endblock %}

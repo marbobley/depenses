@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Category;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,6 +17,19 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
+    /**
+     * @return Category[] Returns an array of category filtered on user
+     */
+    public function findByUser(User $user) : array
+    {
+        return $this->createQueryBuilder('d')
+        ->andWhere('d.createdBy = :val')
+        ->setParameter('val', $user->getId() )
+        ->orderBy('d.id', 'DESC')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
     //    /**
     //     * @return Category[] Returns an array of Category objects
     //     */

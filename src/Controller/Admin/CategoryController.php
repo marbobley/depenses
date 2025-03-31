@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/category')]
 final class CategoryController extends AbstractController
 {
-    #[Route('', name: 'app_category_index', methods: ['GET'])]
+    #[Route('', name: 'app_admin_category_index', methods: ['GET'])]
     public function index(CategoryRepository $repository): Response
     {
         $categories = $repository->findAll();
@@ -25,8 +25,8 @@ final class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
-    #[Route('/{id}/edit', name: 'app_category_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_admin_category_new', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_admin_category_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Category $category, Request $request, EntityManagerInterface $manager): Response
     {
         $category ??= new Category();
@@ -46,7 +46,7 @@ final class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_category_show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    #[Route('/{id}', name: 'app_admin_category_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(?Category $category): Response
     {
         return $this->render('admin/category/show.html.twig', [
@@ -54,7 +54,7 @@ final class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_category_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/{id}/delete', name: 'app_admin_category_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function delete(?Category $category, EntityManagerInterface $manager): Response
     {
         if (null === $category) {
