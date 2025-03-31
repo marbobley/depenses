@@ -19,7 +19,7 @@ final class DepenseController extends AbstractController
     {
         $depenses = $repository->findByUser($this->getUser());
 
-        return $this->render('depense/depense/index.html.twig', [
+        return $this->render('depense/index.html.twig', [
             'controller_name' => 'DepenseController',
             'depenses' => $depenses,
         ]);
@@ -43,7 +43,7 @@ final class DepenseController extends AbstractController
             return $this->redirectToRoute('app_depense_index');
         }
 
-        return $this->render('depense/depense/new.html.twig', [
+        return $this->render('depense/new.html.twig', [
             'form' => $form,
         ]);
     }
