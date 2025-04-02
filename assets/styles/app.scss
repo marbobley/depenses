@@ -1,0 +1,14 @@
+$red: #fc030b;
+$green: #46cc11;
+$grey: #9c9494;
+
+body {
+  background: $red;
+}
+
+h1 {
+  background-color: $grey; 
+}
+
+
+@import '../../vendor/twbs/bootstrap/scss/bootstrap';
