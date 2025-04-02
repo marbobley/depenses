@@ -2,12 +2,22 @@ $red: #fc030b;
 $green: #46cc11;
 $grey: #9c9494;
 
+$colorLogoBackground : #090455;
+
 body {
-  background: $red;
+  padding-top: 65px; 
 }
 
 h1 {
   background-color: $grey; 
+}
+
+.logo {
+  background-color: $colorLogoBackground;
+  border-radius: 20px;
+  border-top-left-radius: 0px;
+  font-size: xx-large;
+  padding: 2px;
 }
 
 
