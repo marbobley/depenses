@@ -102,11 +102,6 @@ class Family implements ICalculateAmount
         return $res;
     }
 
-    public function getPassword2(): string
-    {
-        return '$2y$13$.UPunezIFcxtdVV9FIC8.uoKqdUn0lEuDetcAgfzt858xj5uv4wG.';
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
