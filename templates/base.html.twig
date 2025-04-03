@@ -22,11 +22,13 @@
         {% endblock %}
     </head>
     <body id="page-top" class="backcolor">
+
         {{ include(('navbar/navbar.html.twig')) }}
+
         {% block body %}{% endblock %}
+
         <!-- Footer-->
-        <footer class="py-5 fixed-bottom">
-            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; Wilfried Fournier</p></div>
-        </footer>
+        {{ include(('footer/footer.html.twig')) }}
+
     </body>
 </html>
