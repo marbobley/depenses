@@ -5,7 +5,7 @@
 {% block body %}
     <section class="container px-4">
         <h1>Liste de dépenses</h1>
-        <a href="{{ path('app_admin_depense_new') }}" class="btn btn-warning">Add</a>
+        <a href="{{ path('app_admin_depense_new') }}" class="btn btn-primary">Add</a>
         <ul class="list-group list-group-flush">
             {% for depense in depenses %}
                 <div class="card mb-1">

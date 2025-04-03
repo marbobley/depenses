@@ -6,7 +6,7 @@
 {% block body %}
     <section class="container px-4">
         <h1>Liste de users</h1>
-        <a href="{{ path('app_user_profil_new') }}" class="btn btn-warning">Add</a>
+        <a href="{{ path('app_user_profil_new') }}" class="btn btn-primary">Add</a>
         <ul class="list-group list-group-flush">
             {% for user in users %}
                 <div class="card mb-1">

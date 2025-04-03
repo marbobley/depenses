@@ -28,7 +28,7 @@
         <div>categorie non trouvé</div>
     {% endif %}
     <a href="{{ path('app_user_profil_index') }}" class="btn btn-primary">Retour</a>
-    <a href="{{ path('app_user_profil_edit', {id: user.id}) }}" class="btn btn-warning">Éditer</a>
-    <a href="{{ path('app_user_profil_delete', {id: user.id}) }}" class="btn btn-secondary">Supprimer</a>
+    <a href="{{ path('app_user_profil_edit', {id: user.id}) }}" class="btn btn-secondary">Éditer</a>
+    <a href="{{ path('app_user_profil_delete', {id: user.id}) }}" class="btn btn-warning">Supprimer</a>
 </section>
 {% endblock %}

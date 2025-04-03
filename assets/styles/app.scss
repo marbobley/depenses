@@ -1,24 +1,44 @@
 $red: #fc030b;
-$green: #46cc11;
+$green: #23610a;
 $grey: #9c9494;
 
-$colorLogoBackground : #090455;
+$colorLogoBackground : #3fb66c;
 
-body {
-  padding-top: 65px; 
+$theme-colors: (
+  "primary": #23610a,
+  "secondary": #3fb66c,
+  "danger": #ff0000,
+  "warning" : #ff000056,
+);
+
+nav {
+  background-color: $green;
 }
 
-h1 {
-  background-color: $grey; 
+body {
+  padding-top: 80px; 
 }
 
 .logo {
   background-color: $colorLogoBackground;
+  border: #ffffff;
+  border-style: solid;
   border-radius: 20px;
   border-top-left-radius: 0px;
+  border-bottom-right-radius: 0px;
   font-size: xx-large;
+  font-weight: bolder;
   padding: 2px;
 }
 
+.backcolor{
+  background-color: #b3c4ad;
+}
+
+
+footer
+{
+  background-color: $green;
+}
 
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';

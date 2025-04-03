@@ -5,7 +5,7 @@
 {% block body %}
     <section class="container px-4">
         <h1>Liste de dépenses</h1>
-        <a href="{{ path('app_depense_new') }}" class="btn btn-warning">Ajouter</a>
+        <a href="{{ path('app_depense_new') }}" class="btn btn-primary">Ajouter</a>
         <ul class="list-group list-group-flush">
             {% for depense in depenses %}
                 <div class="card mb-1">
@@ -21,7 +21,7 @@
                             <small class="text-muted">Date : {{ depense.created |date("m/d/Y") }}</small>
 
                         </div>
-                        <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-primary">Editer</a>
+                        <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-secondary">Editer</a>
                         <a href="{{ path('app_depense_delete', {id: depense.id}) }}" class="btn btn-warning">Supprimer</a>
                     </div>
                 </div>
