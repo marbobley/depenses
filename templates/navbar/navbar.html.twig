@@ -22,7 +22,7 @@
                             {{ include(('navbar/_depense-navbar.html.twig')) }}
                             {{ include(('navbar/_category-navbar.html.twig')) }}
 
-                            <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Deconnexion</a></li>
+                            <li class="nav-item"><a class="nav-link" id="decoBtn"href="{{ path('app_logout') }}">Deconnexion</a></li>
                         {% else %}
                             <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">Connexion</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ path('app_register') }}">Inscription</a></li>

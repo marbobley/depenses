@@ -2,11 +2,13 @@ $red: #fc030b;
 $green: #23610a;
 $grey: #9c9494;
 
+$primary:#23610a;
+
 $colorLogoBackground : #3fb66c;
 
 $theme-colors: (
-  "primary": #23610a,
-  "secondary": #3fb66c,
+  "primary": $primary,
+  "secondary": #3fb66c,  
   "danger": #ff0000,
   "warning" : #ff000056,
 );
@@ -31,10 +33,13 @@ body {
   padding: 2px;
 }
 
+#decoBtn{
+  font-weight: bolder;
+}
+
 .backcolor{
   background-color: #b3c4ad;
 }
-
 
 footer
 {
