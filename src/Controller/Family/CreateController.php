@@ -4,14 +4,9 @@ namespace App\Controller\Family;
 
 use App\Entity\Family;
 use App\Form\FamilyType;
-use App\Service\FamilyService;
-use App\Entity\User;
 use App\Service\HasherService;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -20,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CreateController extends AbstractController
 {
     #[Route('/new', name: 'app_family_new', methods: ['GET', 'POST'])]
-    public function new(?Family $family, Request $request, EntityManagerInterface $manager, HasherService $hasher): Response
+    public function new( ?Family $family, Request $request, EntityManagerInterface $manager, HasherService $hasher): Response
     {
         $family ??= new Family();
         $form = $this->createForm(FamilyType::class, $family);
@@ -30,6 +25,7 @@ final class CreateController extends AbstractController
             $passwordPlain = $family->getPassword();
             $passwordHash = $hasher->hash($passwordPlain);
             $family->setPassword($passwordHash);
+
             
             $manager->persist($family);
             $manager->flush();
