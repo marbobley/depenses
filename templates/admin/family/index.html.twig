@@ -5,7 +5,7 @@
 {% block body %}
     <section class="container px-4">
         <h1>Liste de Familles</h1>
-        <a href="{{ path('app_family_new') }}" class="btn btn-primary padpad">Add</a>
+        <a href="{{ path('app_admin_family_new') }}" class="btn btn-primary padpad">Add</a>
         <ul class="list-group list-group-flush">
             {% for family in families %}
                 <div class="card mb-1">

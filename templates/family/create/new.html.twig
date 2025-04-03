@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Création d'une famille{% endblock %}
+
+{% block body %}
+<!-- Header-->
+<section class="container px-4">
+    <div class="w-50 m-auto">
+        <h1>Création d'une familles</h1>
+
+        {{ form_start(form) }}
+        {{ form_row(form.name, {label: 'Nom'}) }}
+        {{ form_row(form.password, {label: 'Pass'}) }}
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+        {{ form_end(form) }}
+    </div>
+</section>
+{% endblock %}

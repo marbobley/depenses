@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/family')]
 final class FamilyController extends AbstractController
 {
-    #[Route('/', name: 'app_family_index', methods: ['GET'])]
+    #[Route('/', name: 'app_admin_family_index', methods: ['GET'])]
     public function index(FamilyRepository $repository): Response
     {
         $families = $repository->findAll();
@@ -26,8 +26,8 @@ final class FamilyController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_family_new', methods: ['GET', 'POST'])]
-    #[Route('/{id}/edit', name: 'app_family_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_admin_family_new', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'app_admin_family_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Family $family, Request $request, EntityManagerInterface $manager, HasherService $hasher): Response
     {
         $family ??= new Family();
@@ -42,7 +42,7 @@ final class FamilyController extends AbstractController
             $manager->persist($family);
             $manager->flush();
 
-            return $this->redirectToRoute('app_family_index');
+            return $this->redirectToRoute('app_admin_family_index');
         }
 
         return $this->render('admin/family/new.html.twig', [
@@ -50,7 +50,7 @@ final class FamilyController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_family_show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    #[Route('/{id}', name: 'app_admin_family_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(?Family $family): Response
     {
         return $this->render('admin/family/show.html.twig', [
@@ -58,7 +58,7 @@ final class FamilyController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_family_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/{id}/delete', name: 'app_admin_family_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function delete(?Family $family, EntityManagerInterface $manager): Response
     {
         if (null === $family) {
@@ -68,10 +68,10 @@ final class FamilyController extends AbstractController
         $manager->remove($family);
         $manager->flush();
 
-        return $this->redirectToRoute('app_family_index');
+        return $this->redirectToRoute('app_admin_family_index');
     }
 
-    #[Route('/{id}/join', name: 'app_family_join', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/{id}/join', name: 'app_admin_family_join', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function join(?Family $family, EntityManagerInterface $manager): Response
     {
         if (null === $family) {
@@ -82,6 +82,6 @@ final class FamilyController extends AbstractController
         $manager->persist($family);
         $manager->flush();
 
-        return $this->redirectToRoute('app_family_index');
+        return $this->redirectToRoute('app_admin_family_index');
     }
 }

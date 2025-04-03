@@ -58,6 +58,18 @@ class Family implements ICalculateAmount
         return $this->members;
     }
 
+    public function getMember(User $member): User
+    {
+        if ($this->members->contains($member)) {
+            return $this->members->get($member->getId());
+        }
+        else
+        {
+            throw("User doesn't exist in family");
+        }
+
+    }
+
     public function addMember(User $member): static
     {
         if (!$this->members->contains($member)) {
