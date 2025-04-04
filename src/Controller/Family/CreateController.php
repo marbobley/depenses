@@ -28,7 +28,7 @@ final class CreateController extends AbstractController
             $passwordPlain = $family->getPassword();
             $passwordHash = $hasher->hash($passwordPlain);
             $family->setPassword($passwordHash);
-
+            $family->addMember($this->getUser());
             $manager->persist($family);
             $manager->flush();
 
