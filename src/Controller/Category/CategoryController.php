@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/category')]
 final class CategoryController extends AbstractController
 {
-    #[Route('/', name: 'app_category_index', methods:['GET'])]
+    #[Route('/', name: 'app_category_index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepository): Response
     {
         $categories = $categoryRepository->findByUser($this->getUser());
@@ -25,12 +25,11 @@ final class CategoryController extends AbstractController
         ]);
     }
 
-
     #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_category_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Category $category, Request $request, EntityManagerInterface $manager): Response
     {
-        // TODO : Manager user verification for update depense is linked to user ? 
+        // TODO : Manager user verification for update depense is linked to user ?
 
         $category ??= new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -52,11 +51,10 @@ final class CategoryController extends AbstractController
     #[Route('/{id}/delete', name: 'app_category_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function delete(?Category $category, EntityManagerInterface $manager): Response
     {
-        // TODO : Manager user verification depense is linked to user ? 
+        // TODO : Manager user verification depense is linked to user ?
 
-        if($this->getUser() === $category->getCreatedBy())
-        {
-            // We can delete 
+        if ($this->getUser() === $category->getCreatedBy()) {
+            // We can delete
             if (null === $category) {
                 // managing error
                 // managing user verification

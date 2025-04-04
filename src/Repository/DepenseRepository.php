@@ -20,11 +20,11 @@ class DepenseRepository extends ServiceEntityRepository
     /**
      * @return Depense[] Returns an array of depense filtered on user
      */
-    public function findByUser(User $user) : array
+    public function findByUser(User $user): array
     {
         return $this->createQueryBuilder('d')
         ->andWhere('d.createdBy = :val')
-        ->setParameter('val', $user->getId() )
+        ->setParameter('val', $user->getId())
         ->orderBy('d.id', 'DESC')
         ->getQuery()
         ->getResult()

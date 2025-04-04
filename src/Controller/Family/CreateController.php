@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CreateController extends AbstractController
 {
     #[Route('/new', name: 'app_family_new', methods: ['GET', 'POST'])]
-    public function new( ?Family $family, Request $request, EntityManagerInterface $manager, HasherService $hasher): Response
+    public function new(?Family $family, Request $request, EntityManagerInterface $manager, HasherService $hasher): Response
     {
         $family ??= new Family();
         $form = $this->createForm(FamilyType::class, $family);
@@ -26,7 +26,6 @@ final class CreateController extends AbstractController
             $passwordHash = $hasher->hash($passwordPlain);
             $family->setPassword($passwordHash);
 
-            
             $manager->persist($family);
             $manager->flush();
 
