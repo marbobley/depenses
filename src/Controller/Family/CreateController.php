@@ -4,6 +4,7 @@ namespace App\Controller\Family;
 
 use App\Entity\Family;
 use App\Form\FamilyType;
+use App\Service\FamilyService;
 use App\Service\HasherService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +19,7 @@ final class CreateController extends AbstractController
     #[Route('/new', name: 'app_family_new', methods: ['GET', 'POST'])]
 
     #[IsGranted('hasNoFamily')]
-    public function new(?Family $family, Request $request, EntityManagerInterface $manager, HasherService $hasher): Response
+    public function new(?Family $family, Request $request, EntityManagerInterface $manager, HasherService $hasher, FamilyService $familyService): Response
     {
         $family ??= new Family();
         $form = $this->createForm(FamilyType::class, $family);
@@ -28,9 +29,12 @@ final class CreateController extends AbstractController
             $passwordPlain = $family->getPassword();
             $passwordHash = $hasher->hash($passwordPlain);
             $family->setPassword($passwordHash);
-            $family->addMember($this->getUser());
             $manager->persist($family);
             $manager->flush();
+
+            $user = $this->getUser();
+            $familyService->JoinFamily($family,$user, $manager);
+            $familyService->SetMainMemberFamily($user, $manager);
 
             return $this->redirectToRoute('app_main');
         }

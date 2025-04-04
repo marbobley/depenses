@@ -14,4 +14,14 @@ class FamilyService
         $entityManager->persist($family);
         $entityManager->flush();
     }
+
+    public function SetMainMemberFamily(User $user , EntityManagerInterface $entityManager)
+    {
+        $user->addRoles('ROLE_MAIN_USER_FAMILY');
+
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+    }
 }
