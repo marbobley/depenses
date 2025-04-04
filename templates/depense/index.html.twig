@@ -18,7 +18,7 @@
                             {% else %}
                                 <small class="text-muted">Crédit : {{ depense.amount }}</small>
                             {% endif %}
-                            <small class="text-muted">Date : {{ depense.created |date("m/d/Y") }}</small>
+                            <small class="text-muted">Date : {{ depense.created|date('m/d/Y') }}</small>
 
                         </div>
                         <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-secondary">Editer</a>
@@ -31,4 +31,3 @@
         </ul>
     </section>
 {% endblock %}
-

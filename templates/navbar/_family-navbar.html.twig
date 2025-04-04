@@ -5,10 +5,9 @@
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         <a class="dropdown-item" href="{{ path('app_family_join_index') }}">Rejoindre une famille</a>
         <a class="dropdown-item" href="{{ path('app_family_new') }}">Creer une famille</a>
-        <a class="dropdown-item" href="{{ path('app_family_new') }}">Quitter la famille {#{{ app.user.family.name}}#}</a>
+        <a class="dropdown-item" href="{{ path('app_family_new') }}">Quitter la famille {# {{ app.user.family.name}} #}</a>
         {% if is_granted('ROLE_MAIN_USER_FAMILY') %}
            <a class="dropdown-item" href="{{ path('app_family_password_index') }}">Choisir le mot de passe</a>
         {% endif %}
     </div>
 </li>
-
