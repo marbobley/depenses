@@ -10,11 +10,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/family')]
 final class CreateController extends AbstractController
 {
     #[Route('/new', name: 'app_family_new', methods: ['GET', 'POST'])]
+
+    #[IsGranted('hasNoFamily')]
     public function new(?Family $family, Request $request, EntityManagerInterface $manager, HasherService $hasher): Response
     {
         $family ??= new Family();
