@@ -2,19 +2,22 @@ $red: #fc030b;
 $green: #23610a;
 $grey: #9c9494;
 
-$primary:#23610a;
+$primary:#c2ecb26b;
+$secondary: #3fb66d71;
+$danger:#ff0000;
 
 $colorLogoBackground : #3fb66c;
 
 $theme-colors: (
   "primary": $primary,
-  "secondary": #3fb66c,  
-  "danger": #ff0000,
+  "secondary": $secondary,  
+  "danger": $danger,
   "warning" : #ff000056,
 );
 
 nav {
-  background-color: $green;
+  background-color: $primary;
+  border-radius: 20px;
 }
 
 body {
@@ -43,7 +46,7 @@ body {
 
 footer
 {
-  background-color: $green;
+  background-color: $primary;
 }
 
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';
