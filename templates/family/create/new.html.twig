@@ -1,12 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Création d'une famille{% endblock %}
+{% block title %}Création de votre famille{% endblock %}
 
 {% block body %}
 <!-- Header-->
+<div class="alert alert-warning" role="alert">
+  Attention ! Créer une famille vous déconnectera pour permettre une mise à jour de votre profil.
+</div>
 <section class="container px-4">
     <div class="w-50 m-auto">
-        <h1>Création d'une familles</h1>
+        <h1>Création de votre famille</h1>
 
         {{ form_start(form) }}
         {{ form_row(form.name, {label: 'Nom'}) }}

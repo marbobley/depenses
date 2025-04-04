@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class JoinController extends AbstractController
 {
     #[Route('/join', name: 'app_family_join_index', methods: ['GET', 'POST'])]
-    public function index(Request $request, HasherService $hasher, FamilyService $familyService, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, HasherService $hasher, FamilyService $familyService): Response
     {
         $defaultData = ['message' => 'Type your message here'];
         $form = $this->createFormBuilder($defaultData)
@@ -42,7 +42,7 @@ final class JoinController extends AbstractController
 
             if ($hashPassword === $family->getPassword()) {
                 $user = $this->getUser();
-                $familyService->JoinFamily($family, $user, $entityManager);
+                $familyService->JoinFamily($family, $user);
 
                 return $this->redirectToRoute('app_family_join_index');
             }

@@ -8,20 +8,33 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class FamilyService
 {
-    public function JoinFamily(Family $family, User $user, EntityManagerInterface $entityManager)
+
+    public function __construct(private EntityManagerInterface $entityManager)
     {
-        $family->addMember($user);
-        $entityManager->persist($family);
-        $entityManager->flush();
+        
     }
 
-    public function SetMainMemberFamily(User $user , EntityManagerInterface $entityManager)
+    public function CreateFamily(Family $family)
+    {
+        $this->entityManager->persist($family);
+        $this->entityManager->flush();
+    }
+
+    public function JoinFamily(Family $family, User $user)
+    {
+        $family->addMember($user);
+        $this->entityManager->persist($family);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * Normal but bot force logout
+     * 
+     */
+    public function SetMainMemberFamily(User $user)
     {
         $user->addRoles('ROLE_MAIN_USER_FAMILY');
-
-
-        $entityManager->persist($user);
-        $entityManager->flush();
-
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
     }
 }

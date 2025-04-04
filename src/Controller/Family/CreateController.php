@@ -28,13 +28,13 @@ final class CreateController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $passwordPlain = $family->getPassword();
             $passwordHash = $hasher->hash($passwordPlain);
+            
             $family->setPassword($passwordHash);
-            $manager->persist($family);
-            $manager->flush();
-
             $user = $this->getUser();
-            $familyService->JoinFamily($family,$user, $manager);
-            $familyService->SetMainMemberFamily($user, $manager);
+
+            $familyService->CreateFamily($family);
+            $familyService->JoinFamily($family,$user);
+            $familyService->SetMainMemberFamily($user);
 
             return $this->redirectToRoute('app_main');
         }
