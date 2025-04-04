@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class FamilyService
 {
-
     public function __construct(private EntityManagerInterface $entityManager)
     {
         
@@ -22,6 +21,12 @@ class FamilyService
         $this->entityManager->flush();
     }
 
+    public function RemoveFamily(Family $family)
+    {
+        $this->entityManager->remove($family);
+        $this->entityManager->flush();
+    }
+
     public function CreateFamily(Family $family)
     {
         $this->entityManager->persist($family);
@@ -32,7 +37,7 @@ class FamilyService
     {
         $family->addMember($user);
         $this->entityManager->persist($family);
-        $this->entityManager->flush();
+        $this->entityManager->flush();        
     }
 
     /**

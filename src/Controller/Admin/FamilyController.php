@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Family;
 use App\Form\FamilyType;
 use App\Repository\FamilyRepository;
+use App\Service\FamilyService;
 use App\Service\HasherService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +29,7 @@ final class FamilyController extends AbstractController
 
     #[Route('/new', name: 'app_admin_family_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_admin_family_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Family $family, Request $request, EntityManagerInterface $manager, HasherService $hasher): Response
+    public function new(?Family $family, Request $request , HasherService $hasher, FamilyService $familyService): Response
     {
         $family ??= new Family();
         $form = $this->createForm(FamilyType::class, $family);
@@ -38,9 +39,7 @@ final class FamilyController extends AbstractController
             $passwordPlain = $family->getPassword();
             $passwordHash = $hasher->hash($passwordPlain);
             $family->setPassword($passwordHash);
-
-            $manager->persist($family);
-            $manager->flush();
+            $familyService->CreateFamily($family);
 
             return $this->redirectToRoute('app_admin_family_index');
         }
@@ -59,28 +58,25 @@ final class FamilyController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_admin_family_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?Family $family, EntityManagerInterface $manager): Response
+    public function delete(?Family $family, FamilyService $familyService): Response
     {
         if (null === $family) {
             // managing error
         }
 
-        $manager->remove($family);
-        $manager->flush();
+        $familyService->RemoveFamily($family);
 
         return $this->redirectToRoute('app_admin_family_index');
     }
 
     #[Route('/{id}/join', name: 'app_admin_family_join', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function join(?Family $family, EntityManagerInterface $manager): Response
+    public function join(?Family $family, FamilyService $familyService): Response
     {
         if (null === $family) {
             // managing error
         }
 
-        $family->addMember($this->getUser());
-        $manager->persist($family);
-        $manager->flush();
+        $familyService->JoinFamily($family, $this->getUser());
 
         return $this->redirectToRoute('app_admin_family_index');
     }
