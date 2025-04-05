@@ -28,6 +28,9 @@ class Family implements ICalculateAmount
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?User $mainMember = null;
+
     public function __construct()
     {
         $this->members = new ArrayCollection();
@@ -110,6 +113,18 @@ class Family implements ICalculateAmount
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getMainMember(): ?User
+    {
+        return $this->mainMember;
+    }
+
+    public function setMainMember(?User $mainMember): static
+    {
+        $this->mainMember = $mainMember;
 
         return $this;
     }
