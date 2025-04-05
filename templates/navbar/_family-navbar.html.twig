@@ -3,12 +3,17 @@
         Famille
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        {% if is_granted('IsMainMemberFamily') %}
            <a class="dropdown-item" href="{{ path('app_family_password_index') }}">Choisir le mot de passe</a>
+        {% endif %}
+
         {% if is_granted('hasNoFamily') %}
             <a class="dropdown-item" href="{{ path('app_family_join_index') }}">Rejoindre une famille</a>
             <a class="dropdown-item" href="{{ path('app_family_new') }}">Creer une famille</a>
         {% else %}
-            <a class="dropdown-item" href="{{ path('app_family_leave') }}">Quitter la famille {# {{ app.user.family.name}} #}</a>
+                {% if is_granted('IsMainMemberFamily') == false %}
+                    <a class="dropdown-item" href="{{ path('app_family_leave') }}">Quitter la famille {# {{ app.user.family.name}} #}</a>
+                {% endif %}
         {% endif %}
 
 

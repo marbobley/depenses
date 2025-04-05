@@ -19,7 +19,7 @@ final class CreateController extends AbstractController
     #[Route('/new', name: 'app_family_new', methods: ['GET', 'POST'])]
 
     #[IsGranted('hasNoFamily')]
-    public function new(?Family $family, Request $request, EntityManagerInterface $manager, HasherService $hasher, FamilyService $familyService): Response
+    public function new(?Family $family, Request $request, HasherService $hasher, FamilyService $familyService): Response
     {
         $family ??= new Family();
         $form = $this->createForm(FamilyType::class, $family);
