@@ -12,6 +12,7 @@
 
         {{ form_start(form) }}
         {{ form_row(form.name, {label: 'Nom'}) }}
+        {{ form_row(form.mainMember, {label: 'Main'}) }}
         {{ form_row(form.password, {label: 'Pass'}) }}
         <button type="submit" class="btn btn-primary">Envoyer</button>
         {{ form_end(form) }}

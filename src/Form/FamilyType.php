@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Family;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,6 +16,10 @@ class FamilyType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('mainMember', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'username',
+            ])
             ->add('password', PasswordType::class)
         ;
     }
