@@ -7,7 +7,6 @@ use App\Form\FamilyType;
 use App\Repository\FamilyRepository;
 use App\Service\FamilyService;
 use App\Service\HasherService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
