@@ -34,7 +34,7 @@ final class CreateController extends AbstractController
 
             $familyService->CreateFamily($family);
             $familyService->JoinFamily($family,$user);
-            $familyService->SetMainMemberFamily($user);
+            $familyService->SetMainMemberFamily($family, $user);
 
             return $this->redirectToRoute('app_main');
         }

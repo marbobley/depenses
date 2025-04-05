@@ -40,14 +40,10 @@ class FamilyService
         $this->entityManager->flush();        
     }
 
-    /**
-     * Normal but bot force logout
-     * 
-     */
-    public function SetMainMemberFamily(User $user)
+    public function SetMainMemberFamily(Family $family, User $user)
     {
-        $user->addRoles('ROLE_MAIN_USER_FAMILY');
-        $this->entityManager->persist($user);
+        $family->setMainMember($user);
+        $this->entityManager->persist($family);
         $this->entityManager->flush();
     }
 }
