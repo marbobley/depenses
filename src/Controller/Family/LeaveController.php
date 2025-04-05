@@ -15,6 +15,6 @@ final class LeaveController extends AbstractController
     {
         $familyService->LeaveFamily($this->getUser());
 
-        return $this->redirectToRoute('app_depense_index');
+        return $this->redirectToRoute('app_main');
     }
 }
