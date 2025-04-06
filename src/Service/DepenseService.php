@@ -22,4 +22,16 @@ class DepenseService
 
         return $depense;
     }
+
+    public function GetMonthDepenseGroupByCategory(?User $user)
+    {
+        // not connected
+        if($user === null)
+            return [];
+
+        $depenses = $user->getDepenses();     
+
+
+        return $depenses;
+    }
 }
