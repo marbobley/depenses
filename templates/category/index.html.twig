@@ -21,5 +21,19 @@
                 <li>Aucun enregistrement en base de données.</li>
             {% endfor %}
         </ul>
+
+        <ul class="list-group list-group-flush">
+            {% for categoriesByUser in categoriesFamily %}
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between">
+                                <h4 class="mb-1">{{ categoriesByUser.name }}</h4>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <li>Aucun enregistrement en base de données.</li>
+            {% endfor %}
+        </ul>
     </section>
 {% endblock %}

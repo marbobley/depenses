@@ -43,7 +43,7 @@ class DepenseType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
-                'choices' => $this->categoryRepository->findByUser($this->security->getToken()->getUser()),
+                'choices' => $this->categoryRepository->findByFamily($this->security->getToken()->getUser()),
             ])
         ;
     }

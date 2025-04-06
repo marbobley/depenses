@@ -32,22 +32,21 @@
 
         <ul class="list-group list-group-flush">
             {% for depenseFamilyByMember in depensesFamily %}
-                {% for depenseFamily in depenseFamilyByMember %}
-                    <div class="card mb-1">
-                        <div class="card-body">
-                            <div class="card-title d-flex justify-content-between">
-                                    <h4 class="mb-1">{{ depenseFamily.name }}</h4>
-                                    <small class="text-muted">{{ depenseFamily.category.name }}</small>
-                                {% if (depenseFamily.amount >= 0) %}
-                                    <small class="text-muted">Depense : {{ depenseFamily.amount }}</small>
-                                {% else %}
-                                    <small class="text-muted">Crédit : {{ depenseFamily.amount }}</small>
-                                {% endif %}
-                                <small class="text-muted">Date : {{ depenseFamily.created|date('m/d/Y') }}</small>
-                            </div>
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between">
+                                <h4 class="mb-1">{{ depenseFamilyByMember.name }}</h4>
+                                <small class="text-muted">{{ depenseFamilyByMember.category.name }}</small>
+                            {% if (depenseFamilyByMember.amount >= 0) %}
+                                <small class="text-muted">Depense : {{ depenseFamilyByMember.amount }}</small>
+                            {% else %}
+                                <small class="text-muted">Crédit : {{ depenseFamilyByMember.amount }}</small>
+                            {% endif %}
+                            <small class="text-muted">Date : {{ depenseFamilyByMember.created|date('m/d/Y') }}</small>
+                            <small class="text-muted">Edité : {{ depenseFamilyByMember.createdBy.username }}</small>
                         </div>
                     </div>
-                {% endfor %}
+                </div>
             {% else %}
                 <li>Aucun enregistrement en base de données.</li>
             {% endfor %}

@@ -18,10 +18,12 @@ final class CategoryController extends AbstractController
     public function index(CategoryRepository $categoryRepository): Response
     {
         $categories = $categoryRepository->findByUser($this->getUser());
+        $categoriesFamily = $categoryRepository->findByFamily($this->getUser());
 
         return $this->render('category/index.html.twig', [
             'controller_name' => 'CategoryController',
             'categories' => $categories,
+            'categoriesFamily' => $categoriesFamily,
         ]);
     }
 

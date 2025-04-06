@@ -42,7 +42,10 @@ class DepenseRepository extends ServiceEntityRepository
 
         foreach($members as $member )
         {
-            $output[] = $this->findByUser($member);
+            foreach($this->findByUser($member) as $depense)
+            {
+                $output[] = $depense;
+            }
         }
 
         return $output;
