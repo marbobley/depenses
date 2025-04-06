@@ -3,11 +3,10 @@
 namespace App\Service;
 
 use App\Entity\User;
-use Doctrine\ORM\EntityManagerInterface;
 
 class DepenseService
 {
-    public function __construct(private EntityManagerInterface $entityManager)
+    public function __construct()
     {
 
     }

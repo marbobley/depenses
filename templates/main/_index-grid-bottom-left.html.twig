@@ -1,6 +1,4 @@
 <div >
-    {{ dump(depenses) }}
-    {{ total }}
     <ul>
     {% for depense in depenses %}
         <li>{{depense.category.name }} : {{ depense.amount}}</li>
