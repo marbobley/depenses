@@ -3,20 +3,20 @@
 {% block title %}Dépenses{% endblock %}
 
 {% block body %}
-    <div class="container test">
-            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <h1 class="fw-bolder">Bonjour {{ app.user.username }}!!! </h1>
-                <h1 class="fw-bolder">Tu as depensé {{ app.user.GetSumAmountMonth() }} € ce mois-ci!!! </h1>
-                {% if is_granted('hasNoFamily') == false %}
-                    <h1 class="fw-bolder">Tu appartiens à la famille {{ app.user.family.name }}!!! </h1>
-                {% endif %}
-                {% if is_granted('IsMainMemberFamily') %}
-                    <h1 class="fw-bolder">Tu es à lea chef.fe de {{ app.user.family.name }}!!! </h1>
-                {% endif %}
-            {% else %}
-                <h1 class="fw-bolder">Gérez vos dépenses en quelques clics !</h1>
-                <p class="lead">Créer votre famille, vos catégories et rentrez vos dépenses</p>
-                <a class="btn btn-primary" href="{{ path('app_login') }}">Commencer</a>
-            {% endif %}
+    <div  class="container-fluid">
+        <div class="row">
+            <div class="col-xxl-8">
+                {{ include(('main/_index-grid-top-left.html.twig')) }}
+            </div>
+            <div class="col-xxl-4">col-sm-4</div>
+        </div>
+    <div class="row">
+        <div class="col-xxl">
+            {{ include(('main/_index-grid-bottom-left.html.twig')) }}
+        </div>
+        <div class="col-xxl">col-sm</div>
+        <div class="col-xxl">col-sm</div>
     </div>
+    </div>
+    
 {% endblock %}
