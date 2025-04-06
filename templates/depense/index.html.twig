@@ -29,5 +29,28 @@
                 <li>Aucun enregistrement en base de données.</li>
             {% endfor %}
         </ul>
+
+        <ul class="list-group list-group-flush">
+            {% for depenseFamilyByMember in depensesFamily %}
+                {% for depenseFamily in depenseFamilyByMember %}
+                    <div class="card mb-1">
+                        <div class="card-body">
+                            <div class="card-title d-flex justify-content-between">
+                                    <h4 class="mb-1">{{ depenseFamily.name }}</h4>
+                                    <small class="text-muted">{{ depenseFamily.category.name }}</small>
+                                {% if (depenseFamily.amount >= 0) %}
+                                    <small class="text-muted">Depense : {{ depenseFamily.amount }}</small>
+                                {% else %}
+                                    <small class="text-muted">Crédit : {{ depenseFamily.amount }}</small>
+                                {% endif %}
+                                <small class="text-muted">Date : {{ depenseFamily.created|date('m/d/Y') }}</small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <li>Aucun enregistrement en base de données.</li>
+            {% endfor %}
+        </ul>
     </section>
 {% endblock %}
