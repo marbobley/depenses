@@ -36,6 +36,7 @@ final class FamilyFactory extends PersistentProxyObjectFactory
         $hashPassword = $hasher->hash('123456');
 
         $randomMemberSet = UserFactory::randomSet(self::faker()->numberBetween(1, 10));
+
         return [
             'name' => self::faker()->unique()->word(),
             'password' => $hashPassword,

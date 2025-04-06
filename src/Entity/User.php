@@ -108,7 +108,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, ICalcul
         return $this;
     }
 
-    public function addRoles(string $role) : static{
+    public function addRoles(string $role): static
+    {
         $this->roles[] = $role;
 
         return $this;

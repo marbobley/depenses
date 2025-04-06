@@ -28,7 +28,7 @@ final class FamilyController extends AbstractController
 
     #[Route('/new', name: 'app_admin_family_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_admin_family_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Family $family, Request $request , HasherService $hasher, FamilyService $familyService): Response
+    public function new(?Family $family, Request $request, HasherService $hasher, FamilyService $familyService): Response
     {
         $family ??= new Family();
         $form = $this->createForm(FamilyType::class, $family);

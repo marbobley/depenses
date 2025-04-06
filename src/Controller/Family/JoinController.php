@@ -5,7 +5,6 @@ namespace App\Controller\Family;
 use App\Entity\Family;
 use App\Service\FamilyService;
 use App\Service\HasherService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

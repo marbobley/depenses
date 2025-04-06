@@ -17,6 +17,7 @@ final class HasNoFamilyVoter extends Voter
         if (!in_array($attribute, [self::HASNOFAMILY])) {
             return false;
         }
+
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
         return true;
@@ -30,7 +31,6 @@ final class HasNoFamilyVoter extends Voter
             return false;
         }
 
-
         return $this->hasNoFamily($user);
     }
 
@@ -38,8 +38,9 @@ final class HasNoFamilyVoter extends Voter
     {
         // this assumes that the Post object has a `getOwner()` method
         $family = $user->getFamily();
-        if($family === null)
+        if (null === $family) {
             return true;
+        }
 
         return false;
     }

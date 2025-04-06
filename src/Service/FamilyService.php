@@ -10,7 +10,6 @@ class FamilyService
 {
     public function __construct(private EntityManagerInterface $entityManager)
     {
-        
     }
 
     public function LeaveFamily(User $user)
@@ -18,8 +17,9 @@ class FamilyService
         $family = $user->getFamily();
         $family->removeMember($user);
 
-        if($family->getMainMember() === $user)
+        if ($family->getMainMember() === $user) {
             $family->setMainMember(null);
+        }
 
         $this->entityManager->persist($family);
         $this->entityManager->flush();
@@ -41,7 +41,7 @@ class FamilyService
     {
         $family->addMember($user);
         $this->entityManager->persist($family);
-        $this->entityManager->flush();        
+        $this->entityManager->flush();
     }
 
     public function SetMainMemberFamily(Family $family, User $user)

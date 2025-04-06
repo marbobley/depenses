@@ -17,6 +17,7 @@ final class IsMainMemberFamilyVoter extends Voter
         if (!in_array($attribute, [self::ISMAINMEMBERFAMILY])) {
             return false;
         }
+
         // replace with your own logic
         // https://symfony.com/doc/current/security/voters.html
         return true;
@@ -30,7 +31,6 @@ final class IsMainMemberFamilyVoter extends Voter
             return false;
         }
 
-
         return $this->IsMainMemberFamily($user);
     }
 
@@ -38,15 +38,16 @@ final class IsMainMemberFamilyVoter extends Voter
     {
         $family = $user->getFamily();
 
-        //If no family, user cannot be main member
-        if($family === null)
+        // If no family, user cannot be main member
+        if (null === $family) {
             return false;
+        }
 
         $mainMember = $family->getMainMember();
-        
-        if($user === $mainMember)
-            return true;
 
+        if ($user === $mainMember) {
+            return true;
+        }
 
         return false;
     }

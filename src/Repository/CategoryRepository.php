@@ -30,7 +30,7 @@ class CategoryRepository extends ServiceEntityRepository
         ->getResult()
         ;
     }
-    
+
     /**
      * @return Depense[] Returns an array of depense filtered on family's users
      */
@@ -40,10 +40,8 @@ class CategoryRepository extends ServiceEntityRepository
         $family = $user->getFamily();
         $members = $family->getMembers();
 
-        foreach($members as $member )
-        {
-            foreach($this->findByUser($member) as $category)
-            {
+        foreach ($members as $member) {
+            foreach ($this->findByUser($member) as $category) {
                 $output[] = $category;
             }
         }
