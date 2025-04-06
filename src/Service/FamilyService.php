@@ -17,6 +17,10 @@ class FamilyService
     {
         $family = $user->getFamily();
         $family->removeMember($user);
+
+        if($family->getMainMember() === $user)
+            $family->setMainMember(null);
+
         $this->entityManager->persist($family);
         $this->entityManager->flush();
     }

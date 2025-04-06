@@ -44,7 +44,7 @@ final class JoinController extends AbstractController
                 $user = $this->getUser();
                 $familyService->JoinFamily($family, $user);
 
-                return $this->redirectToRoute('app_family_join_index');
+                return $this->redirectToRoute('app_main');
             }
         }
 
