@@ -3,7 +3,7 @@
     {% for depense in depenses %}
         <li>{{depense.category.name }} : {{ depense.amount}}</li>
         <li>
-            {{ component('ProgressBarDepense', { percentage: 15 }) }}
+            {{ component('ProgressBarDepense', { percentage: depense.amount*100/total }) }}
         </li>
     {% endfor %}
     </ul>

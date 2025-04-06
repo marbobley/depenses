@@ -14,13 +14,16 @@ final class MainController extends AbstractController
     {
         //I want depense grouped by cat for the month 
         // Depense user then month then grou
-        $depense = $depenseService->GetMonthDepenseGroupByCategory($this->getUser());
-        $total = 400;
+        
+        $depenses = $depenseService->GetMonthDepenseGroupByCategory($this->getUser());      
+
+        $total = 400;//$depenseService->GetAmount($depenses);
+
 
 
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
-            'depenses' => $depense,
+            'depenses' => $depenses,
             'total' => $total,
         ]);
     }
