@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\User;
+use App\Interface\CalculateAmountInterface;
 
 class DepenseService
 {
@@ -11,26 +12,8 @@ class DepenseService
 
     }
 
-    public function GetDepense(?User $user) : float
+    public function GetSum(CalculateAmountInterface $calculateAmountInterface)
     {
-        // not connected
-        if($user === null)
-            return 0;
-
-        $depense = $user->getSumAmountMonth();
-
-        return $depense;
-    }
-
-    public function GetMonthDepenseGroupByCategory(?User $user)
-    {
-        // not connected
-        if($user === null)
-            return [];
-
-        $depenses = $user->getDepenses();     
-
-
-        return $depenses;
+        return $calculateAmountInterface->getSumAmount();
     }
 }

@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Interface\ICalculateAmount;
+use App\Interface\CalculateAmountInterface;
 use App\Repository\FamilyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FamilyRepository::class)]
-class Family implements ICalculateAmount
+class Family implements CalculateAmountInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

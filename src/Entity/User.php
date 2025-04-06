@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Interface\ICalculateAmount;
+use App\Interface\CalculateAmountInterface;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
 #[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, ICalculateAmount
+class User implements UserInterface, PasswordAuthenticatedUserInterface, CalculateAmountInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

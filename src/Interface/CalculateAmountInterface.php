@@ -2,7 +2,7 @@
 
 namespace App\Interface;
 
-interface ICalculateAmount
+interface CalculateAmountInterface
 {
     public function getSumAmount(): float;
 
