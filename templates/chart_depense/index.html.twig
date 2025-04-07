@@ -9,7 +9,7 @@
 </style>
 
 <div class="example-wrapper">
-    {% for depense in depensesByCategory %}
+    {% for depense in depensesByCategory|sort((a, b) => a.amount < b.amount) %}
 
         {{ component('ProgressBarDepense', { percentage: depense.amount * 100 / total }) }}
         <div class="card mb-1">
