@@ -7,9 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/depense')]
 final class ChartDepenseController extends AbstractController
 {
-    #[Route('/chart/depense', name: 'app_chart_depense')]
+    #[Route('/report', name: 'app_chart_depense', methods:['GET'])]
     public function index(DepenseService $depenseService): Response
     {
         
