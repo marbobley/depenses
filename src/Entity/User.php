@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Interface\CalculateAmountInterface;
+use App\Interface\DepenseInterface;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
 #[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, CalculateAmountInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, CalculateAmountInterface , DepenseInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -239,4 +240,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Calcula
 
         return $res;
     }
+
+
+    public function GetMonthDepense() : array
+    {
+        $res = array();
+
+        $currentMonth = date('n');
+        $currentYear = date('Y');
+
+        foreach ($this->depenses as $depense) {
+            $depenseMonth = date('n', $depense->getCreated()->getTimestamp());
+            $depenseYear = date('Y', $depense->getCreated()->getTimestamp());
+            if ($depenseMonth === $currentMonth && $depenseYear === $currentYear) {
+                $res[] = $depense;
+            }
+        }
+
+        return $res;
+
+    }
+
 }

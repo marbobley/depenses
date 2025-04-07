@@ -5,33 +5,21 @@ namespace App\Service;
 use App\Entity\Category;
 use App\Entity\Depense;
 use App\Entity\User;
+use App\Interface\DepenseInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Doctrine\Common\Collections\Collection;
 
 class DepenseService
 {
-    private User $user ;
-
-    public function __construct(private TokenStorageInterface $security )
-    {
-        $this->user = $this->security->getToken()->getUser();
-    }
-
-
-    public function GetDepense() : float
-    {
-        return $this->user->getSumAmount();
-    }
-
     /**
      * @return Collection<int, Depense>
      */
-    public function GetDepenseByCategory() 
+    public function GetDepenseByCategory(User $user) 
     {
         $currentMonth = date('n');
         $currentYear = date('Y');
 
-        $depenses = $this->user->getDepenses();
+        $depenses = $user->GetMonthDepense();
 
         $uniqueCategories = array();
 
