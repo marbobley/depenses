@@ -28,6 +28,9 @@ class DepenseService
      */
     public function GetDepenseByCategory() 
     {
+        $currentMonth = date('n');
+        $currentYear = date('Y');
+
         $depenses = $this->user->getDepenses();
 
         $uniqueCategories = array();
@@ -56,7 +59,12 @@ class DepenseService
 
             foreach($depenses as $depense)
             {
-                if($depense->getCategory()->getName() === $currentCategory->getName())
+                $depenseMonth = date('n', $depense->getCreated()->getTimestamp());
+                $depenseYear = date('Y', $depense->getCreated()->getTimestamp());
+
+                if($depense->getCategory()->getName() === $currentCategory->getName() && 
+                $depenseMonth === $currentMonth && 
+                $depenseYear === $currentYear )
                 {
                     $amount+= $depense->getAmount();
                 }
