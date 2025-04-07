@@ -9,12 +9,21 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% for depense in depensesByCategory %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/nora/Documents/Projects/depenses/src/Controller/ChartDepenseController.php</code></li>
-        <li>Your template at <code>/home/nora/Documents/Projects/depenses/templates/chart_depense/index.html.twig</code></li>
-    </ul>
+        {{ component('ProgressBarDepense', { percentage: depense.amount * 100 / total }) }}
+        <div class="card mb-1">
+            <div class="card-body">
+                <div class="card-title d-flex justify-content-between">
+                        <h4 class="mb-1">{{ depense.name }}</h4>
+                        <h4 class="mb-1">{{ depense.category.name }}</h4>
+                        <h4 class="mb-1">{{ depense.amount }}</h4>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <li>Aucun enregistrement en base de données.</li>
+    {% endfor %}
+
 </div>
 {% endblock %}

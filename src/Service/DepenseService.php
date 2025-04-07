@@ -1,17 +1,73 @@
 <?php
 
 namespace App\Service;
-use App\Interface\CalculateAmountInterface;
+
+use App\Entity\Category;
+use App\Entity\Depense;
+use App\Entity\User;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Doctrine\Common\Collections\Collection;
 
 class DepenseService
 {
-    public function __construct()
-    {
+    private User $user ;
 
+    public function __construct(private TokenStorageInterface $security )
+    {
+        $this->user = $this->security->getToken()->getUser();
     }
 
-    public function GetSum(CalculateAmountInterface $calculateAmountInterface)
+
+    public function GetDepense() : float
     {
-        return $calculateAmountInterface->getSumAmount();
+        return $this->user->getSumAmount();
+    }
+
+    /**
+     * @return Collection<int, Depense>
+     */
+    public function GetDepenseByCategory() 
+    {
+        $depenses = $this->user->getDepenses();
+
+        $uniqueCategories = array();
+
+        foreach ($depenses as $depense) 
+        {
+            if( !in_array($depense->getCategory(), $uniqueCategories))
+            {
+                $uniqueCategories[] = $depense->getCategory();
+            }
+        }
+
+        $res = array();
+
+        foreach($uniqueCategories as $uniqueCategory )
+        {
+
+            $currentDepense = new Depense();
+            $currentDepense->setName("Total " . $uniqueCategory->getName());
+
+            $currentCategory = new Category();
+            $currentCategory->setName($uniqueCategory->getName());
+            $currentDepense->setCategory($currentCategory);
+
+            $amount = 0; 
+
+            foreach($depenses as $depense)
+            {
+                if($depense->getCategory()->getName() === $currentCategory->getName())
+                {
+                    $amount+= $depense->getAmount();
+                }
+            }
+
+            $currentDepense->setAmount($amount);  
+            
+            $res[] = $currentDepense;
+        }
+        
+
+        return $res;
     }
 }

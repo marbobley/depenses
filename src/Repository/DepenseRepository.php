@@ -48,6 +48,7 @@ class DepenseRepository extends ServiceEntityRepository
 
         return $output;
     }
+
     //    /**
     //     * @return Depense[] Returns an array of Depense objects
     //     */
