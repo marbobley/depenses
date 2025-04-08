@@ -7,6 +7,7 @@ use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -31,7 +32,10 @@ final class DepenseController extends AbstractController
     #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Depense $depense, Request $request, EntityManagerInterface $manager): Response
     {
-        // TODO : Manager user verification for update depense is linked to user ?
+       /* if ($this->getUser() != $depense?->getCreatedBy())
+        {
+            throw new AccessDeniedException;
+        }*/
 
         $depense ??= new Depense();
         $form = $this->createForm(DepenseType::class, $depense);
