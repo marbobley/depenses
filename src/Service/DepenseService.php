@@ -59,10 +59,11 @@ class DepenseService
         $currentYear = date('Y');
 
         $depenses = $user->GetDepenses();
+        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses->toArray(), $currentMonth , $currentYear);
 
         $uniqueCategories = array();
 
-        foreach ($depenses as $depense) 
+        foreach ($depenseByMonthYear as $depense) 
         {
             if( !in_array($depense->getCategory(), $uniqueCategories))
             {
@@ -81,9 +82,8 @@ class DepenseService
             $currentDepense->setName("Total " . $uniqueCategory->getName());      
             $currentDepense->setCategory($currentCategory);     
 
-            $depenseForCategory= $this->GetDepenseByCategory($depenses->toArray(), $uniqueCategory);
-            $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenseForCategory, $currentMonth , $currentYear);
-            $amount = $this->CalculateAmount($depenseByMonthYear)   ;
+            $depenseForCategory= $this->GetDepenseByCategory($depenseByMonthYear, $uniqueCategory);
+            $amount = $this->CalculateAmount($depenseForCategory)   ;
 
             $currentDepense->setAmount($amount);  
             

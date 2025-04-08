@@ -6,6 +6,7 @@
 <div class="container-fluid">
     <h1>Liste des depenses par catégorie pour le mois en cours : </h1>
     <div class="container">
+    {% if (total > 0 )%}
         {% for depense in depensesByCategory|sort((a, b) => a.amount < b.amount) %}
 
             {{ component('ProgressBarDepense', { percentage: depense.amount * 100 / total }) }}
@@ -21,6 +22,7 @@
         {% else %}
             <li>Aucun enregistrement en base de données.</li>
         {% endfor %}
+    {% endif %}
 
     </div>
 </div>
