@@ -45,14 +45,15 @@ class DepenseService
 
             $amount = 0; 
 
-            $depenseForCategory= array_filter($depenses, function($elem) use ($currentCategory) {
-                if($elem->GetCategory() === $currentCategory)
+            $depenseForCategory= array_filter($depenses, function($elem) use ($uniqueCategory) {
+                if($elem->GetCategory() === $uniqueCategory)
                 {
                     return true;
                 }
                 return false;
 
             });
+
 
             foreach($depenseForCategory as $depense)
             {

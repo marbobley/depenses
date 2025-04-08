@@ -14,7 +14,7 @@ final class ChartDepenseController extends AbstractController
     public function index(DepenseService $depenseService): Response
     {
         
-        $total = 400;
+        $total = 100;
         $depensesByCategory = $depenseService->GetDepenseByCategory($this->getUser());
 
         return $this->render('chart_depense/index.html.twig', [
