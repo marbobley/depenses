@@ -45,13 +45,21 @@ class DepenseService
 
             $amount = 0; 
 
-            foreach($depenses as $depense)
+            $depenseForCategory= array_filter($depenses, function($elem) use ($currentCategory) {
+                if($elem->GetCategory() === $currentCategory)
+                {
+                    return true;
+                }
+                return false;
+
+            });
+
+            foreach($depenseForCategory as $depense)
             {
                 $depenseMonth = date('n', $depense->getCreated()->getTimestamp());
                 $depenseYear = date('Y', $depense->getCreated()->getTimestamp());
 
-                if($depense->getCategory()->getName() === $currentCategory->getName() && 
-                $depenseMonth === $currentMonth && 
+                if( $depenseMonth === $currentMonth && 
                 $depenseYear === $currentYear )
                 {
                     $amount+= $depense->getAmount();
