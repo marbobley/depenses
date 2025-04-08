@@ -4,7 +4,7 @@
 
 {% block body %}
     <section class="container px-4">
-        <h1>Liste de dépenses</h1>
+        <h1>Mes dépenses</h1>
         <a href="{{ path('app_depense_new') }}" class="btn btn-primary">Ajouter</a>
         <ul class="list-group list-group-flush">
             {% for depense in depenses %}
@@ -30,9 +30,11 @@
             {% endfor %}
         </ul>
 
+        <h1>Les dépenses de ma famille</h1>
         <ul class="list-group list-group-flush">
             {% for depenseFamilyByMember in depensesFamily %}
-                <div class="card mb-1">
+
+                {% if(depenseFamilyByMember.CreatedBy != app.user) %}<div class="card mb-1">
                     <div class="card-body">
                         <div class="card-title d-flex justify-content-between">
                                 <h4 class="mb-1">{{ depenseFamilyByMember.name }}</h4>
@@ -47,6 +49,8 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
+                
             {% else %}
                 <li>Aucun enregistrement en base de données.</li>
             {% endfor %}
