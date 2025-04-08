@@ -1,7 +1,6 @@
 <div class="container">
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                 <h1 class="fw-bolder">Bonjour {{ app.user.username }}!!! </h1>
-                <h1 class="fw-bolder">Tu as depensé {{ app.user.GetSumAmountMonth() }} € ce mois-ci!!! </h1>
                 {% if is_granted('hasNoFamily') == false %}
                     <h1 class="fw-bolder">Tu appartiens à la famille {{ app.user.family.name }}!!! </h1>
                 {% endif %}

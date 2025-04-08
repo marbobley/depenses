@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
 #[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, CalculateAmountInterface , DepenseInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface , DepenseInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -223,12 +223,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, Calcula
         return $res;
     }
 
-    public function getSumAmountMonth(): float
+    public function getSumAmountMonth(string $currentMonth , string $currentYear): float
     {
         $res = 0;
-
-        $currentMonth = date('n');
-        $currentYear = date('Y');
 
         foreach ($this->depenses as $depense) {
             $depenseMonth = date('n', $depense->getCreated()->getTimestamp());

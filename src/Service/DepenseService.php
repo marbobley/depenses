@@ -5,21 +5,60 @@ namespace App\Service;
 use App\Entity\Category;
 use App\Entity\Depense;
 use App\Entity\User;
-use App\Interface\DepenseInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Doctrine\Common\Collections\Collection;
 
 class DepenseService
 {
+    private function GetDepenseByCategory(array $depenses , Category $categoryFilter) : array
+    {
+        return array_filter($depenses, function($elem) use ($categoryFilter) {
+            if($elem->GetCategory() === $categoryFilter)
+            {
+                return true;
+            }
+            return false;
+
+        });
+    }
+
+    private function GetDepenseByMonthAndYear(array $depenses , string $month , string $year ) : array
+    {
+        $depenseMonthYear = [];
+
+        foreach($depenses as $depense)
+        {
+            $depenseMonth = date('n', $depense->getCreated()->getTimestamp());
+            $depenseYear = date('Y', $depense->getCreated()->getTimestamp());
+
+            if( $depenseMonth === $month && $depenseYear === $year )
+            {
+                $depenseMonthYear[] = $depense;
+            }
+        }
+
+        return $depenseMonthYear;
+    }
+
+    public function GetTotalMonth(User $user) : float
+    {  
+        $currentMonth = date('n');
+        $currentYear = date('Y');
+
+        $depenses = $user->getDepenses();
+        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses->toArray(), $currentMonth , $currentYear);
+
+        return $this->CalculateAmount($depenseByMonthYear);
+    }
+
     /**
      * @return Collection<int, Depense>
      */
-    public function GetDepenseByCategory(User $user) 
+    public function GetSumDepenseByCategory(User $user) 
     {
         $currentMonth = date('n');
         $currentYear = date('Y');
 
-        $depenses = $user->GetMonthDepense();
+        $depenses = $user->GetDepenses();
 
         $uniqueCategories = array();
 
@@ -35,37 +74,16 @@ class DepenseService
 
         foreach($uniqueCategories as $uniqueCategory )
         {
-
             $currentDepense = new Depense();
-            $currentDepense->setName("Total " . $uniqueCategory->getName());
-
             $currentCategory = new Category();
-            $currentCategory->setName($uniqueCategory->getName());
-            $currentDepense->setCategory($currentCategory);
+            $currentCategory->setName($uniqueCategory->getName()); 
 
-            $amount = 0; 
+            $currentDepense->setName("Total " . $uniqueCategory->getName());      
+            $currentDepense->setCategory($currentCategory);     
 
-            $depenseForCategory= array_filter($depenses, function($elem) use ($uniqueCategory) {
-                if($elem->GetCategory() === $uniqueCategory)
-                {
-                    return true;
-                }
-                return false;
-
-            });
-
-
-            foreach($depenseForCategory as $depense)
-            {
-                $depenseMonth = date('n', $depense->getCreated()->getTimestamp());
-                $depenseYear = date('Y', $depense->getCreated()->getTimestamp());
-
-                if( $depenseMonth === $currentMonth && 
-                $depenseYear === $currentYear )
-                {
-                    $amount+= $depense->getAmount();
-                }
-            }
+            $depenseForCategory= $this->GetDepenseByCategory($depenses->toArray(), $uniqueCategory);
+            $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenseForCategory, $currentMonth , $currentYear);
+            $amount = $this->CalculateAmount($depenseByMonthYear)   ;
 
             $currentDepense->setAmount($amount);  
             
@@ -74,5 +92,16 @@ class DepenseService
         
 
         return $res;
+    }
+
+    private function CalculateAmount(array $depenses) : float
+    {
+        $amount = 0;
+        foreach($depenses as $depense)
+        {
+            $amount+= $depense->getAmount();
+        }
+
+        return $amount;
     }
 }
