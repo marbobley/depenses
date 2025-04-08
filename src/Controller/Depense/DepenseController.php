@@ -32,10 +32,11 @@ final class DepenseController extends AbstractController
     #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Depense $depense, Request $request, EntityManagerInterface $manager): Response
     {
-       /* if ($this->getUser() != $depense?->getCreatedBy())
+        if( $depense && 
+            $this->getUser() != $depense?->getCreatedBy())
         {
             throw new AccessDeniedException;
-        }*/
+        }
 
         $depense ??= new Depense();
         $form = $this->createForm(DepenseType::class, $depense);
@@ -57,21 +58,21 @@ final class DepenseController extends AbstractController
     #[Route('/{id}/delete', name: 'app_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function delete(?Depense $depense, EntityManagerInterface $manager): Response
     {
-        // TODO : Manager user verification depense is linked to user ?
-
-        if ($this->getUser() === $depense->getCreatedBy()) {
-            // We can delete
-            if (null === $depense) {
-                // managing error
-                // managing user verification
-            }
-
-            $manager->remove($depense);
-            $manager->flush();
-
-            return $this->redirectToRoute('app_depense_index');
+        if( $depense && 
+            $this->getUser() != $depense?->getCreatedBy())
+        {
+            throw new AccessDeniedException;
         }
 
-        return $this->redirectToRoute('app_main');
+        // We can delete
+        if (null === $depense) {
+            // managing error
+            // managing user verification
+        }
+
+        $manager->remove($depense);
+        $manager->flush();
+
+        return $this->redirectToRoute('app_depense_index');
     }
 }
