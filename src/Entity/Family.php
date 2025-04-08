@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use App\Interface\CalculateAmountInterface;
 use App\Repository\FamilyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FamilyRepository::class)]
-class Family implements CalculateAmountInterface
+class Family
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -83,28 +82,7 @@ class Family implements CalculateAmountInterface
         return $this;
     }
 
-    public function getSumAmount(): float
-    {
-        $res = 0;
-
-        foreach ($this->members as $member) {
-            $res += $member->getSumAmount();
-        }
-
-        return $res;
-    }
-
-    public function getSumAmountMonth(): float
-    {
-        $res = 0;
-
-        foreach ($this->members as $member) {
-            $res += $member->getSumAmountMonth();
-        }
-
-        return $res;
-    }
-
+    
     public function getPassword(): ?string
     {
         return $this->password;

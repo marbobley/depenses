@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-class Category implements CalculateAmountInterface
+class Category 
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -91,34 +91,5 @@ class Category implements CalculateAmountInterface
         }
 
         return $this;
-    }
-
-    public function GetSumAmount(): float
-    {
-        $res = 0;
-
-        foreach ($this->depenses as $depense) {
-            $res += $depense->getAmount();
-        }
-
-        return $res;
-    }
-
-    public function GetSumAmountMonth(): float
-    {
-        $res = 0;
-
-        $currentMonth = date('n');
-        $currentYear = date('Y');
-
-        foreach ($this->depenses as $depense) {
-            $depenseMonth = date('n', $depense->getCreated()->getTimestamp());
-            $depenseYear = date('Y', $depense->getCreated()->getTimestamp());
-            if ($depenseMonth === $currentMonth && $depenseYear === $currentYear) {
-                $res += $depense->getAmount();
-            }
-        }
-
-        return $res;
     }
 }

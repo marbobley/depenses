@@ -12,16 +12,12 @@
                 <div class="card-title d-flex justify-content-between">
                     <h4 class="mb-1">{{ family.name }}</h4>
                     <small class="text-muted">Identifiant : {{ family.id }}</small>
-                    <small class="text-muted">Somme famille : {{ family.sumAmount }}</small>
-                    <small class="text-muted">Somme du mois : {{ family.sumAmountMonth }}</small>
                     <ul>
                         {% for member in family.Members %}<div class="card mb-1">
                             <div class="card-body">
                                 <div class="card-title d-flex justify-content-between">
                                     <small class="text-muted">{{ member.username }}</small>
                                     </div>
-                                    <small class="text-muted">{{ member.sumAmount }} € </small>
-                                    <small class="text-muted">Somme du mois : {{ member.sumAmountMonth }} € </small>
                                 </div>
                             </div>
                         {% else %}

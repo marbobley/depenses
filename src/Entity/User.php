@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use App\Interface\CalculateAmountInterface;
-use App\Interface\DepenseInterface;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

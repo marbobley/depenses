@@ -12,8 +12,6 @@
                 <div class="card-title d-flex justify-content-between">
                     <h4 class="mb-1">{{ user.username }}</h4>
                     <small class="text-muted">Identifiant : {{ user.id }}</small>
-                    <small class="text-muted">Depense : {{ user.sumAmount() }}</small>
-                    <small class="text-muted">Depense du mois en cours : {{ user.sumAmountMonth }}</small>
                     <ul class="list-group list-group-flush">
                         {% for depense in user.depenses %}
                             {{ include('partials/_form-amount.hmtl.twig', {depense: depense}, false) }}
