@@ -10,10 +10,9 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/depense')]
 final class ChartDepenseController extends AbstractController
 {
-    #[Route('/report', name: 'app_chart_depense', methods:['GET'])]
+    #[Route('/report', name: 'app_chart_depense', methods: ['GET'])]
     public function index(DepenseService $depenseService): Response
     {
-        
         $total = $depenseService->GetTotalMonth($this->getUser());
         $depensesByCategory = $depenseService->GetSumDepenseByCategory($this->getUser());
 

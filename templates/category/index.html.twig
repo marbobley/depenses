@@ -21,11 +21,11 @@
                 <li>Aucun enregistrement en base de données.</li>
             {% endfor %}
         </ul>
-        
+
         <h1>Liste des catégories de la famille</h1>
         <ul class="list-group list-group-flush">
             {% for categoriesByUser in categoriesFamily %}
-                {% if(categoriesByUser.CreatedBy != app.user) %}
+                {% if (categoriesByUser.CreatedBy != app.user) %}
                     <div class="card mb-1">
                         <div class="card-body">
                             <div class="card-title d-flex justify-content-between">

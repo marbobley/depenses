@@ -12,11 +12,8 @@ final class MainController extends AbstractController
     #[Route('/', name: 'app_main')]
     public function index(DepenseService $depenseService): Response
     {
-        //I want depense grouped by cat for the month 
+        // I want depense grouped by cat for the month
         // Depense user then month then grou
-        
-
-
 
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',

@@ -82,7 +82,6 @@ class Family
         return $this;
     }
 
-    
     public function getPassword(): ?string
     {
         return $this->password;
