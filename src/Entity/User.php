@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
 #[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface , DepenseInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -211,51 +211,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface , Depens
 
         return $this;
     }
-
-    public function getSumAmount(): float
-    {
-        $res = 0;
-
-        foreach ($this->depenses as $depense) {
-            $res += $depense->getAmount();
-        }
-
-        return $res;
-    }
-
-    public function getSumAmountMonth(string $currentMonth , string $currentYear): float
-    {
-        $res = 0;
-
-        foreach ($this->depenses as $depense) {
-            $depenseMonth = date('n', $depense->getCreated()->getTimestamp());
-            $depenseYear = date('Y', $depense->getCreated()->getTimestamp());
-            if ($depenseMonth === $currentMonth && $depenseYear === $currentYear) {
-                $res += $depense->getAmount();
-            }
-        }
-
-        return $res;
-    }
-
-
-    public function GetMonthDepense() : array
-    {
-        $res = array();
-
-        $currentMonth = date('n');
-        $currentYear = date('Y');
-
-        foreach ($this->depenses as $depense) {
-            $depenseMonth = date('n', $depense->getCreated()->getTimestamp());
-            $depenseYear = date('Y', $depense->getCreated()->getTimestamp());
-            if ($depenseMonth === $currentMonth && $depenseYear === $currentYear) {
-                $res[] = $depense;
-            }
-        }
-
-        return $res;
-
-    }
-
 }
