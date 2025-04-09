@@ -2,11 +2,11 @@ $red: #fc030b;
 $green: #23610a;
 $grey: #9c9494;
 
-$primary:#c2ecb26b;
+$primary:#88c5ff;
 $secondary: #3fb66d71;
 $danger:#ff0000;
 
-$colorLogoBackground : #3fb66c;
+$colorLogoBackground : #8d8cce;
 
 $theme-colors: (
   "primary": $primary,
@@ -16,8 +16,15 @@ $theme-colors: (
 );
 
 nav {
-  background-color: $primary;
-  border-radius: 20px;
+  border-bottom-style: solid;
+  background-color: #ffffff;
+}
+
+.coloredText{
+  color: $colorLogoBackground;
+  font-size: large;
+  font-weight: bolder;
+
 }
 
 body {
@@ -26,22 +33,28 @@ body {
 
 .logo {
   background-color: $colorLogoBackground;
-  border: #ffffff;
+  border: #000000;
   border-style: solid;
   border-radius: 20px;
   border-top-left-radius: 0px;
   border-bottom-right-radius: 0px;
   font-size: xx-large;
   font-weight: bolder;
+  color: #ffffff;
   padding: 2px;
 }
 
 #decoBtn{
   font-weight: bolder;
 }
-
+/*
 .backcolor{
-  background-color: #b3c4ad;
+}
+*/
+.color-logo{
+  color: $colorLogoBackground;
+  font-weight: bolder;
+  font-size: xx-large;
 }
 
 footer
