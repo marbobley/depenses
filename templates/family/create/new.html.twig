@@ -1,21 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% set action = app.current_route == 'app_family_new' ? 'Ajout' : 'Édition' %}
-
-{% block title %}{{ action }} de familles{% endblock %}
+{% block title %}Création de votre famille{% endblock %}
 
 {% block body %}
 <!-- Header-->
 <section class="container px-4">
     <div class="w-50 m-auto">
-        <h1>{{ action }} de familles</h1>
+        <h1>Création de votre famille</h1>
 
         {{ form_start(form) }}
         {{ form_row(form.name, {label: 'Nom'}) }}
-        {{ form_row(form.mainMember, {label: 'Main'}) }}
         {{ form_row(form.password, {label: 'Pass'}) }}
         <button type="submit" class="btn btn-primary">Envoyer</button>
-        {{ form_end(form) }}
+        {{ form_row(form._token) }}
+        {{ form_end(form, {render_rest: false}) }}
     </div>
 </section>
 {% endblock %}

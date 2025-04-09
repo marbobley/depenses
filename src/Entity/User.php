@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Interface\ICalculateAmount;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
 #[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
-class User implements UserInterface, PasswordAuthenticatedUserInterface, ICalculateAmount
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -104,6 +103,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, ICalcul
     public function setRoles(array $roles): static
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function addRoles(string $role): static
+    {
+        $this->roles[] = $role;
 
         return $this;
     }
@@ -202,34 +208,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, ICalcul
         }
 
         return $this;
-    }
-
-    public function getSumAmount(): float
-    {
-        $res = 0;
-
-        foreach ($this->depenses as $depense) {
-            $res += $depense->getAmount();
-        }
-
-        return $res;
-    }
-
-    public function getSumAmountMonth(): float
-    {
-        $res = 0;
-
-        $currentMonth = date('n');
-        $currentYear = date('Y');
-
-        foreach ($this->depenses as $depense) {
-            $depenseMonth = date('n', $depense->getCreated()->getTimestamp());
-            $depenseYear = date('Y', $depense->getCreated()->getTimestamp());
-            if ($depenseMonth === $currentMonth && $depenseYear === $currentYear) {
-                $res += $depense->getAmount();
-            }
-        }
-
-        return $res;
     }
 }

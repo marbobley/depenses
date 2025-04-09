@@ -2,23 +2,20 @@
 
 namespace App\Entity;
 
-use App\Interface\ICalculateAmount;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-#[UniqueEntity(['name'])]
-class Category implements ICalculateAmount
+class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, unique: true)]
+    #[ORM\Column(length: 255)]
     private ?string $name = null;
 
     #[ORM\ManyToOne(inversedBy: 'categories')]
@@ -93,34 +90,5 @@ class Category implements ICalculateAmount
         }
 
         return $this;
-    }
-
-    public function GetSumAmount(): float
-    {
-        $res = 0;
-
-        foreach ($this->depenses as $depense) {
-            $res += $depense->getAmount();
-        }
-
-        return $res;
-    }
-
-    public function GetSumAmountMonth(): float
-    {
-        $res = 0;
-
-        $currentMonth = date('n');
-        $currentYear = date('Y');
-
-        foreach ($this->depenses as $depense) {
-            $depenseMonth = date('n', $depense->getCreated()->getTimestamp());
-            $depenseYear = date('Y', $depense->getCreated()->getTimestamp());
-            if ($depenseMonth === $currentMonth && $depenseYear === $currentYear) {
-                $res += $depense->getAmount();
-            }
-        }
-
-        return $res;
     }
 }

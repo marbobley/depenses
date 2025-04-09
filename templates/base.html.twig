@@ -14,18 +14,21 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
         {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
         {% endblock %}
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body id="page-top">
+    <body id="page-top" class="backcolor">
+
         {{ include(('navbar/navbar.html.twig')) }}
+
         {% block body %}{% endblock %}
+
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container px-4"><p class="m-0 text-center text-white">Copyright &copy; Wilfried Fournier</p></div>
-        </footer>
+        {{ include(('footer/footer.html.twig')) }}
+
     </body>
 </html>

@@ -4,8 +4,8 @@
 
 {% block body %}
     <section class="container px-4">
-        <h1>Liste des catégories</h1>
-        <a href="{{ path('app_category_new') }}" class="btn btn-warning">Ajouter</a>
+        <h1>Mes catégories</h1>
+        <a href="{{ path('app_category_new') }}" class="btn btn-primary">Ajouter</a>
         <ul class="list-group list-group-flush">
             {% for category in categories %}
                 <div class="card mb-1">
@@ -13,7 +13,7 @@
                         <div class="card-title d-flex justify-content-between">
                                 <h4 class="mb-1">{{ category.name }}</h4>
                         </div>
-                        <a href="{{ path('app_category_edit', {id: category.id}) }}" class="btn btn-primary">Editer</a>
+                        <a href="{{ path('app_category_edit', {id: category.id}) }}" class="btn btn-secondary">Editer</a>
                         <a href="{{ path('app_category_delete', {id: category.id}) }}" class="btn btn-warning">Supprimer</a>
                     </div>
                 </div>
@@ -21,6 +21,22 @@
                 <li>Aucun enregistrement en base de données.</li>
             {% endfor %}
         </ul>
+
+        <h1>Liste des catégories de la famille</h1>
+        <ul class="list-group list-group-flush">
+            {% for categoriesByUser in categoriesFamily %}
+                {% if (categoriesByUser.CreatedBy != app.user) %}
+                    <div class="card mb-1">
+                        <div class="card-body">
+                            <div class="card-title d-flex justify-content-between">
+                                    <h4 class="mb-1">{{ categoriesByUser.name }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% else %}
+                <li>Aucun enregistrement en base de données.</li>
+            {% endfor %}
+        </ul>
     </section>
 {% endblock %}
-

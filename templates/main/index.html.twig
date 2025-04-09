@@ -1,25 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Hello MainController!{% endblock %}
+{% block title %}Dépenses{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<!-- Header-->
-<header class="bg-primary bg-gradient text-white" >
-    <div class="container px-4 text-center">
-        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-            <h1 class="fw-bolder">Bonjour {{ app.user.username }}!!! </h1>
-            <h1 class="fw-bolder">Tu as depensé {{ app.user.GetSumAmountMonth() }} € ce mois-ci!!! </h1>
-            <a class="btn btn-lg btn-light" href="{{ path('app_logout') }}">Partir</a>
-        {% else %}
-            <h1 class="fw-bolder">Gérez vos dépenses en quelques clics !</h1>
-            <p class="lead">Créer votre famille, vos catégories et rentrez vos dépenses</p>
-            <a class="btn btn-lg btn-light" href="{{ path('app_login') }}">Commencer</a>
-        {% endif %}
+    <div  class="container-fluid">
+        <div class="row">
+            <div class="col-xxl-8">
+                {{ include(('main/_index-grid-top-left.html.twig')) }}
+            </div>
+            <div class="col-xxl-4">col-sm-4</div>
+        </div>
+    <div class="row">
+        <div class="col-xxl">
+            {{ include(('main/_index-grid-bottom-left.html.twig')) }}
+        </div>
+        <div class="col-xxl">col-sm</div>
+        <div class="col-xxl">col-sm</div>
     </div>
-</header>
+    </div>
+
 {% endblock %}

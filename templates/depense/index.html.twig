@@ -4,8 +4,8 @@
 
 {% block body %}
     <section class="container px-4">
-        <h1>Liste de dépenses</h1>
-        <a href="{{ path('app_depense_new') }}" class="btn btn-warning">Ajouter</a>
+        <h1>Mes dépenses</h1>
+        <a href="{{ path('app_depense_new') }}" class="btn btn-primary">Ajouter</a>
         <ul class="list-group list-group-flush">
             {% for depense in depenses %}
                 <div class="card mb-1">
@@ -18,10 +18,10 @@
                             {% else %}
                                 <small class="text-muted">Crédit : {{ depense.amount }}</small>
                             {% endif %}
-                            <small class="text-muted">Date : {{ depense.created |date("m/d/Y") }}</small>
+                            <small class="text-muted">Date : {{ depense.created|date('m/d/Y') }}</small>
 
                         </div>
-                        <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-primary">Editer</a>
+                        <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-secondary">Editer</a>
                         <a href="{{ path('app_depense_delete', {id: depense.id}) }}" class="btn btn-warning">Supprimer</a>
                     </div>
                 </div>
@@ -29,6 +29,31 @@
                 <li>Aucun enregistrement en base de données.</li>
             {% endfor %}
         </ul>
+
+        <h1>Les dépenses de ma famille</h1>
+        <ul class="list-group list-group-flush">
+            {% for depenseFamilyByMember in depensesFamily %}
+
+                {% if (depenseFamilyByMember.CreatedBy != app.user) %}<div class="card mb-1">
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between">
+                                <h4 class="mb-1">{{ depenseFamilyByMember.name }}</h4>
+                                <small class="text-muted">{{ depenseFamilyByMember.category.name }}</small>
+                            {% if (depenseFamilyByMember.amount >= 0) %}
+                                <small class="text-muted">Depense : {{ depenseFamilyByMember.amount }}</small>
+                            {% else %}
+                                <small class="text-muted">Crédit : {{ depenseFamilyByMember.amount }}</small>
+                            {% endif %}
+                            <small class="text-muted">Date : {{ depenseFamilyByMember.created|date('m/d/Y') }}</small>
+                            <small class="text-muted">Edité : {{ depenseFamilyByMember.createdBy.username }}</small>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+
+            {% else %}
+                <li>Aucun enregistrement en base de données.</li>
+            {% endfor %}
+        </ul>
     </section>
 {% endblock %}
-

@@ -20,15 +20,33 @@ class CategoryRepository extends ServiceEntityRepository
     /**
      * @return Category[] Returns an array of category filtered on user
      */
-    public function findByUser(User $user) : array
+    public function findByUser(User $user): array
     {
         return $this->createQueryBuilder('d')
         ->andWhere('d.createdBy = :val')
-        ->setParameter('val', $user->getId() )
+        ->setParameter('val', $user->getId())
         ->orderBy('d.id', 'DESC')
         ->getQuery()
         ->getResult()
         ;
+    }
+
+    /**
+     * @return Depense[] Returns an array of depense filtered on family's users
+     */
+    public function findByFamily(User $user): array
+    {
+        $output = [];
+        $family = $user->getFamily();
+        $members = $family->getMembers();
+
+        foreach ($members as $member) {
+            foreach ($this->findByUser($member) as $category) {
+                $output[] = $category;
+            }
+        }
+
+        return $output;
     }
     //    /**
     //     * @return Category[] Returns an array of Category objects

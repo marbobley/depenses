@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use App\Interface\ICalculateAmount;
 use App\Repository\FamilyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FamilyRepository::class)]
-class Family implements ICalculateAmount
+class Family
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -27,6 +26,9 @@ class Family implements ICalculateAmount
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?User $mainMember = null;
 
     public function __construct()
     {
@@ -80,33 +82,6 @@ class Family implements ICalculateAmount
         return $this;
     }
 
-    public function getSumAmount(): float
-    {
-        $res = 0;
-
-        foreach ($this->members as $member) {
-            $res += $member->getSumAmount();
-        }
-
-        return $res;
-    }
-
-    public function getSumAmountMonth(): float
-    {
-        $res = 0;
-
-        foreach ($this->members as $member) {
-            $res += $member->getSumAmountMonth();
-        }
-
-        return $res;
-    }
-
-    public function getPassword2(): string
-    {
-        return '$2y$13$.UPunezIFcxtdVV9FIC8.uoKqdUn0lEuDetcAgfzt858xj5uv4wG.';
-    }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -115,6 +90,18 @@ class Family implements ICalculateAmount
     public function setPassword(string $password): static
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getMainMember(): ?User
+    {
+        return $this->mainMember;
+    }
+
+    public function setMainMember(?User $mainMember): static
+    {
+        $this->mainMember = $mainMember;
 
         return $this;
     }
