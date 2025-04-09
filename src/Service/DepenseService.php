@@ -5,24 +5,28 @@ namespace App\Service;
 use App\Entity\Category;
 use App\Entity\Depense;
 use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 class DepenseService
 {
-    private function GetDepenseByCategory(array $depenses, Category $categoryFilter): array
-    {
-        return array_filter($depenses, function ($elem) use ($categoryFilter) {
-            if ($elem->GetCategory() === $categoryFilter) {
-                return true;
-            }
+    private function GetDepenseByCategory(Collection $depenses, Category $categoryFilter): Collection
+    {        
+        $depenseByCategory = new ArrayCollection();
 
-            return false;
-        });
+        foreach ($depenses as $depense) {
+            if ($depense->GetCategory() === $categoryFilter) 
+            {
+                $depenseByCategory[] = $depense;
+            }
+        }
+
+        return $depenseByCategory;
     }
 
-    private function GetDepenseByMonthAndYear(array $depenses, string $month, string $year): array
+    private function GetDepenseByMonthAndYear(Collection $depenses, string $month, string $year): Collection
     {
-        $depenseMonthYear = [];
+        $depenseMonthYear = new ArrayCollection();
 
         foreach ($depenses as $depense) {
             $depenseMonth = date('n', $depense->getCreated()->getTimestamp());
@@ -42,9 +46,21 @@ class DepenseService
         $currentYear = date('Y');
 
         $depenses = $user->getDepenses();
-        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses->toArray(), $currentMonth, $currentYear);
+        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $currentMonth, $currentYear);
 
         return $this->CalculateAmount($depenseByMonthYear);
+    }
+
+    private  function GetUniqueCategories(Collection $depenseByMonthYear) : array
+    {
+        $uniqueCategories = [];
+
+        foreach ($depenseByMonthYear as $depense) {
+            if (!in_array($depense->getCategory(), $uniqueCategories)) {
+                $uniqueCategories[] = $depense->getCategory();
+            }
+        }
+        return $uniqueCategories;
     }
 
     /**
@@ -56,16 +72,8 @@ class DepenseService
         $currentYear = date('Y');
 
         $depenses = $user->GetDepenses();
-        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses->toArray(), $currentMonth, $currentYear);
-
-        $uniqueCategories = [];
-
-        foreach ($depenseByMonthYear as $depense) {
-            if (!in_array($depense->getCategory(), $uniqueCategories)) {
-                $uniqueCategories[] = $depense->getCategory();
-            }
-        }
-
+        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $currentMonth, $currentYear);
+        $uniqueCategories = $this->GetUniqueCategories($depenseByMonthYear);
         $res = [];
 
         foreach ($uniqueCategories as $uniqueCategory) {
@@ -87,7 +95,7 @@ class DepenseService
         return $res;
     }
 
-    private function CalculateAmount(array $depenses): float
+    private function CalculateAmount(Collection $depenses): float
     {
         $amount = 0;
         foreach ($depenses as $depense) {
