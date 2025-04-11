@@ -102,7 +102,6 @@ class Family
     public function setMainMember(?User $mainMember): static
     {
         $this->mainMember = $mainMember;
-
         return $this;
     }
 }
