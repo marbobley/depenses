@@ -3,8 +3,12 @@
 declare(strict_types=1);
 
 namespace App\Tests;
+
+use App\Entity\Category;
+use App\Entity\Depense;
 use App\Entity\Family;
 use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -18,7 +22,7 @@ class UserTest extends TestCase
         $user->setPassword('1234_abcd');
         return $user;
     }
-    
+
     public function testSetGetUserName(): User
     {
         $user = self::UserBob();
@@ -84,4 +88,59 @@ class UserTest extends TestCase
         $user->setFamily($family);
         $this->assertSame($family , $user->getFamily());
     }
+
+
+    /**
+     * @depends testSetGetUserName
+     */
+    public function testSetGetCategories(User $user) : void{
+        
+        $categories = new ArrayCollection();
+        $category = new Category();
+        $category->setName('cat_1');
+        $category->setCreatedBy($user);
+        $categories[] = $category;
+
+        $user->setCategories($categories);
+        
+
+        $this->assertSame($categories , $user->getCategories());
+    }
+
+    /**
+     * @depends testSetGetUserName
+     */
+    public function testSetGetDepenses(User $user) : void{
+        $depenses = new ArrayCollection();
+        $depense = new Depense();
+        $depense->setName('dep_1');
+        $depense->setAmount(15);
+        $depense->setCreatedBy($user);
+        $depenses[] = $depense;
+
+        $user->setDepenses($depenses);
+        
+
+        $this->assertSame($depenses , $user->getDepenses());
+    }
+    /**
+     * @depends testSetGetUserName
+     */
+    public function testSetGetId(User $user)
+    {
+        $user->setId(330);
+        
+        $this->assertSame(330 , $user->getId());
+    }
+
+
+    public function testEraseCredentials()
+    {
+
+        // Stop here and mark this test as incomplete.
+        $this->markTestIncomplete(
+            'This test has not been implemented yet.',
+        );
+    }
+
 }

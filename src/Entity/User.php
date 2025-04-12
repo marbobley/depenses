@@ -61,6 +61,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
+    public function setId(int $id):void{
+        $this->id=$id;
+    }
+
     public function getUsername(): ?string
     {
         return $this->username;
@@ -146,6 +150,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->categories;
     }    
 
+    public function setCategories(Collection $categories)
+    {
+        $this->categories = $categories;
+    }
+
     public function getFamily(): ?Family
     {
         return $this->family;
@@ -164,5 +173,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getDepenses(): Collection
     {
         return $this->depenses;
+    }
+
+    public function setDepenses(Collection $depenses)
+    {
+        $this->depenses = $depenses;
     }
 }
