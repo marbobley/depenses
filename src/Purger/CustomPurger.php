@@ -23,8 +23,8 @@ class CustomPurger implements ORMPurgerInterface
         $this->PurgeDepense();
         $this->PurgeCategory(); 
         $this->UpdateUserFamillyToNull(); 
+        $this->UpdateFamilyMainMemberToNull(); 
         $this->PurgeUser();
-        $this->UpdateUserFamillyToNull(); 
         $this->PurgeFamily();
     }
 
