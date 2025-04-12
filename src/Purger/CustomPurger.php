@@ -4,6 +4,7 @@ namespace App\Purger;
 
 use App\Entity\Category;
 use App\Entity\Depense;
+use App\Entity\Family;
 use App\Entity\User;
 use Doctrine\Common\DataFixtures\Purger\ORMPurgerInterface;
 use Doctrine\Common\DataFixtures\Purger\PurgerInterface;
@@ -21,6 +22,10 @@ class CustomPurger implements ORMPurgerInterface
     {       
         $this->PurgeDepense();
         $this->PurgeCategory(); 
+        $this->UpdateUserFamillyToNull(); 
+        $this->PurgeUser();
+        $this->UpdateUserFamillyToNull(); 
+        $this->PurgeFamily();
     }
 
     private function PurgeCategory()
@@ -54,11 +59,46 @@ class CustomPurger implements ORMPurgerInterface
 
         foreach($users as $user)
         {
+            $this->em->remove($user);     
+            $this->em->flush(); 
+        }
+    }
+
+    private function PurgeFamily()
+    {
+        $repoFamily = $this->em->getRepository(Family::class);
+        $families = $repoFamily->findAll();
+
+        foreach($families as $family)
+        {
+            $this->em->remove($family);     
+            $this->em->flush();
+        }
+    }
+
+    private function UpdateUserFamillyToNull()
+    {
+        $repoUser = $this->em->getRepository(User::class);
+        $users = $repoUser->findAll();
+
+        foreach($users as $user)
+        {
             $user->setFamily(null);
             $this->em->persist($user);
         }
         $this->em->flush();
+    }
 
-        
+    private function UpdateFamilyMainMemberToNull()
+    {
+        $repoFamily = $this->em->getRepository(Family::class);
+        $families = $repoFamily->findAll();
+
+        foreach($families as $family)
+        {
+            $family->setMainMember(null);
+            $this->em->persist($family);
+        }
+        $this->em->flush();
     }
 }
