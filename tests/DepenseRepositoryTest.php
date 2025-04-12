@@ -19,14 +19,25 @@ class DepenseRepositoryTest extends KernelTestCase
             ->getManager();
     }
 
-    public function testSomething(): void
+    /**
+     * Table depense should contains 100 rows
+     */
+    public function testDepenseRepositoryNumber(): void
     {
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
             ->findAll()
         ;
+        $numberOfDepense = count($depenses);
 
-        $this->assertTrue(true);
+        if($numberOfDepense === 100)
+        {
+            $this->assertTrue(true);
+        }
+        else
+        {
+            $this->assertTrue(false);
+        }
     }
 
     protected function tearDown(): void
