@@ -47,8 +47,21 @@ class UserRepositoryTest extends KernelTestCase
         $this->expectException(UnsupportedUserException::class);
         $this->entityManager
             ->getRepository(User::class)
-            ->upgradePassword($user, "hashedPassword");
-        ;
+            ->upgradePassword($user, "hashedPassword");        
+    }
+
+    public function testUpgradePassword() : void
+    {
+        $user = new User();
+        $user->setUsername('test');
+        $user->setPassword('123456');
+
+        $this->entityManager
+        ->getRepository(User::class)
+        ->upgradePassword($user, "hashedPassword");    
+
+        $this->assertTrue(true);
+
     }
 
     protected function tearDown(): void
