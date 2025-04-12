@@ -3,9 +3,11 @@
 namespace App\Tests;
 
 use App\DataFixtures\ConstantesFixtures;
+use App\Entity\BadUser as EntityBadUser;
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 class UserRepositoryTest extends KernelTestCase
 {
@@ -36,6 +38,17 @@ class UserRepositoryTest extends KernelTestCase
         {
             $this->assertTrue(false);
         }
+    }
+
+    public function testUnsupportedUserException(): void
+    {
+        $user = new EntityBadUser();
+
+        $this->expectException(UnsupportedUserException::class);
+        $this->entityManager
+            ->getRepository(User::class)
+            ->upgradePassword($user, "hashedPassword");
+        ;
     }
 
     protected function tearDown(): void
