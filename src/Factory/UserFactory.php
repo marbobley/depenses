@@ -26,7 +26,6 @@ final class UserFactory extends PersistentProxyObjectFactory
         return User::class;
     }
 
-
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
      *

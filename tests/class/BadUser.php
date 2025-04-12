@@ -11,7 +11,6 @@ class BadUser implements PasswordAuthenticatedUserInterface
      */
     public function getPassword(): ?string
     {
-        return "bad";
+        return 'bad';
     }
-
 }

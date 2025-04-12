@@ -32,12 +32,10 @@ final class CategoryController extends AbstractController
     #[Route('/{id}/edit', name: 'app_category_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Category $category, Request $request, EntityManagerInterface $manager): Response
     {
-        if( $category && 
-            $this->getUser() != $category?->getCreatedBy())
-        {
+        if ($category
+            && $this->getUser() != $category?->getCreatedBy()) {
             throw new AccessDeniedException();
         }
-
 
         $category ??= new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -59,10 +57,9 @@ final class CategoryController extends AbstractController
     #[Route('/{id}/delete', name: 'app_category_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function delete(?Category $category, EntityManagerInterface $manager): Response
     {
-        if( $category && 
-            $this->getUser() != $category?->getCreatedBy())
-        {
-            throw new AccessDeniedException;
+        if ($category
+            && $this->getUser() != $category?->getCreatedBy()) {
+            throw new AccessDeniedException();
         }
 
         if ($this->getUser() === $category->getCreatedBy()) {

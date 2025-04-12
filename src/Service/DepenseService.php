@@ -11,12 +11,11 @@ use Doctrine\Common\Collections\Collection;
 class DepenseService
 {
     private function GetDepenseByCategory(Collection $depenses, Category $categoryFilter): Collection
-    {        
+    {
         $depenseByCategory = new ArrayCollection();
 
         foreach ($depenses as $depense) {
-            if ($depense->GetCategory() === $categoryFilter) 
-            {
+            if ($depense->GetCategory() === $categoryFilter) {
                 $depenseByCategory[] = $depense;
             }
         }
@@ -51,7 +50,7 @@ class DepenseService
         return $this->CalculateAmount($depenseByMonthYear);
     }
 
-    private  function GetUniqueCategories(Collection $depenseByMonthYear) : array
+    private function GetUniqueCategories(Collection $depenseByMonthYear): array
     {
         $uniqueCategories = [];
 
@@ -60,6 +59,7 @@ class DepenseService
                 $uniqueCategories[] = $depense->getCategory();
             }
         }
+
         return $uniqueCategories;
     }
 

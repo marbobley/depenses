@@ -40,7 +40,7 @@ class Family
         return $this->id;
     }
 
-    public function setId(int $id) : void 
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -107,6 +107,7 @@ class Family
     public function setMainMember(?User $mainMember): static
     {
         $this->mainMember = $mainMember;
+
         return $this;
     }
 }

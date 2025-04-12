@@ -20,7 +20,7 @@ class DepenseRepositoryTest extends KernelTestCase
     }
 
     /**
-     * Table depense should contains 100 rows
+     * Table depense should contains 100 rows.
      */
     public function testDepenseRepositoryNumber(): void
     {
@@ -30,12 +30,9 @@ class DepenseRepositoryTest extends KernelTestCase
         ;
         $numberOfDepense = count($depenses);
 
-        if($numberOfDepense === 100)
-        {
+        if (100 === $numberOfDepense) {
             $this->assertTrue(true);
-        }
-        else
-        {
+        } else {
             $this->assertTrue(false);
         }
     }

@@ -32,10 +32,9 @@ final class DepenseController extends AbstractController
     #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Depense $depense, Request $request, EntityManagerInterface $manager): Response
     {
-        if( $depense && 
-            $this->getUser() != $depense?->getCreatedBy())
-        {
-            throw new AccessDeniedException;
+        if ($depense
+            && $this->getUser() != $depense?->getCreatedBy()) {
+            throw new AccessDeniedException();
         }
 
         $depense ??= new Depense();
@@ -58,10 +57,9 @@ final class DepenseController extends AbstractController
     #[Route('/{id}/delete', name: 'app_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function delete(?Depense $depense, EntityManagerInterface $manager): Response
     {
-        if( $depense && 
-            $this->getUser() != $depense?->getCreatedBy())
-        {
-            throw new AccessDeniedException;
+        if ($depense
+            && $this->getUser() != $depense?->getCreatedBy()) {
+            throw new AccessDeniedException();
         }
 
         // We can delete

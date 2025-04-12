@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
-class ConstantesFixtures{
+class ConstantesFixtures
+{
     public static int $numberOfUserToCreate = 10;
 }

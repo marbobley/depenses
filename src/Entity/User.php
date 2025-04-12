@@ -61,8 +61,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    public function setId(int $id):void{
-        $this->id=$id;
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 
     public function getUsername(): ?string
@@ -148,7 +149,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getCategories(): Collection
     {
         return $this->categories;
-    }    
+    }
 
     public function setCategories(Collection $categories)
     {

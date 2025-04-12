@@ -27,7 +27,7 @@ class CategoryTest extends TestCase
         $category = new Category();
         $id = $category->getId();
 
-        $this->assertTrue(($id instanceof int || $id === null));
+        $this->assertTrue($id instanceof int || null === $id);
     }
 
     public function testSetGetCreatedBy(): void
@@ -45,7 +45,7 @@ class CategoryTest extends TestCase
         }
     }
 
-    public function testSetGetDepenses() : void 
+    public function testSetGetDepenses(): void
     {
         $category = new Category();
 
@@ -58,7 +58,6 @@ class CategoryTest extends TestCase
         $category->setDepenses($depenses);
         $depense_res = $category->getDepenses();
 
-        $this->assertSame($depense_res[0]->getAmount() ,33.5);
-
+        $this->assertSame($depense_res[0]->getAmount(), 33.5);
     }
 }

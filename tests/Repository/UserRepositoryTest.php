@@ -30,12 +30,9 @@ class UserRepositoryTest extends KernelTestCase
         ;
         $numberOfUsers = count($users);
 
-        if($numberOfUsers === ConstantesFixtures::$numberOfUserToCreate)
-        {
+        if ($numberOfUsers === ConstantesFixtures::$numberOfUserToCreate) {
             $this->assertTrue(true);
-        }
-        else
-        {
+        } else {
             $this->assertTrue(false);
         }
     }
@@ -47,10 +44,10 @@ class UserRepositoryTest extends KernelTestCase
         $this->expectException(UnsupportedUserException::class);
         $this->entityManager
             ->getRepository(User::class)
-            ->upgradePassword($user, "hashedPassword");        
+            ->upgradePassword($user, 'hashedPassword');
     }
 
-    public function testUpgradePassword() : void
+    public function testUpgradePassword(): void
     {
         $user = new User();
         $user->setUsername('test');
@@ -58,10 +55,9 @@ class UserRepositoryTest extends KernelTestCase
 
         $this->entityManager
         ->getRepository(User::class)
-        ->upgradePassword($user, "hashedPassword");    
+        ->upgradePassword($user, 'hashedPassword');
 
         $this->assertTrue(true);
-
     }
 
     protected function tearDown(): void
