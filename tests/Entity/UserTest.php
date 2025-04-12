@@ -3,21 +3,27 @@
 declare(strict_types=1);
 
 namespace App\Tests;
-use App\Entity\Category;
+use App\Entity\Family;
 use App\Entity\User;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\Depends;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class UserTest extends TestCase
 {
-    public function testSetGetUserName(): User
+    public static function UserBob() : User
     {
         $user = new User();
         $user->setUsername('Bob');
         $user->setPassword('1234_abcd');
+        return $user;
+    }
+    
+    public function testSetGetUserName(): User
+    {
+        $user = self::UserBob();
 
         $this->AssertSame($user->getUsername(), 'Bob');
-
         return $user;
     }
     /**
@@ -64,7 +70,18 @@ class UserTest extends TestCase
      * @depends testSetGetUserName
      */
     public function testGetPassword(User $user) : void 
-    {
+    {        
         $this->assertSame('1234_abcd' , $user->getPassword());
+    }
+
+    /**
+     * @depends testSetGetUserName
+     */
+    public function testSetGetFamily(User $user) : void 
+    {        
+        $family = new Family();
+        $family->setName('Test_family');
+        $user->setFamily($family);
+        $this->assertSame($family , $user->getFamily());
     }
 }
