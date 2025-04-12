@@ -14,6 +14,8 @@ class AppFixturesGroup extends Fixture  implements FixtureGroupInterface
 {
     public function load(ObjectManager $manager): void
     {
+        //If empty, the load is trigger nothing
+        UserFactory::repository();
     }
 
     public static function getGroups(): array
