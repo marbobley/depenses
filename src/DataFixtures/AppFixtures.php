@@ -14,7 +14,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         UserFactory::createMany(ConstantesFixtures::$numberOfUserToCreate);
-        FamilyFactory::createMany(5);
+        FamilyFactory::createMany(ConstantesFixtures::$numberOfFamily);
         CategoryFactory::createMany(5);
         DepenseFactory::createMany(100);
     }
