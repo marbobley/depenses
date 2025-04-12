@@ -51,11 +51,11 @@ final class UserFactory extends PersistentProxyObjectFactory
     }
 
 
-    public static function GetOneUser(string $userName, string $password, array $roles): User
+    public  function GetOneUser(string $userName, string $password, array $roles): User
     {
         $user = new User();
         $user->setUsername($userName);
-        $user->setPassword($password);
+        $user->setPassword($this->hasher->hashPassword(new User(), '$password!'));
         $user->setRoles($roles);
 
         return $user;

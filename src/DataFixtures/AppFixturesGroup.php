@@ -2,9 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Factory\CategoryFactory;
-use App\Factory\DepenseFactory;
-use App\Factory\FamilyFactory;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
@@ -14,12 +11,14 @@ class AppFixturesGroup extends Fixture  implements FixtureGroupInterface
 {
     public function load(ObjectManager $manager): void
     {
-        //If empty, the load is trigger nothing
-        UserFactory::repository();
+        $user = UserFactory::GetOneUser('admin', '12345', ['ROLE_ADMIN']);
+        $manager->persist($user);
+        $manager->flush();
+        UserFactory::createMany(10);
     }
 
     public static function getGroups(): array
-     {
-         return ['user'];
-     }
+    {
+        return ['user'];
+    }
 }
