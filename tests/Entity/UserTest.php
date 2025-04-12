@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\Tests;
 
 use App\Entity\Category;
@@ -11,7 +9,6 @@ use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\Depends;
-use PHPUnit\Framework\Attributes\DataProvider;
 
 class UserTest extends TestCase
 {
@@ -133,14 +130,5 @@ class UserTest extends TestCase
         $this->assertSame(330 , $user->getId());
     }
 
-
-    public function testEraseCredentials()
-    {
-
-        // Stop here and mark this test as incomplete.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.',
-        );
-    }
 
 }
