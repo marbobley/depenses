@@ -3,7 +3,9 @@
 namespace App\Tests;
 
 use App\Entity\Category;
+use App\Entity\Depense;
 use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 
 class CategoryTest extends TestCase
@@ -41,5 +43,22 @@ class CategoryTest extends TestCase
         } else {
             $this->assertTrue(false);
         }
+    }
+
+    public function testSetGetDepenses() : void 
+    {
+        $category = new Category();
+
+        $depenses = new ArrayCollection();
+        $depense_1 = new Depense();
+        $depense_1->setAmount(33.5);
+
+        $depenses[] = $depense_1;
+
+        $category->setDepenses($depenses);
+        $depense_res = $category->getDepenses();
+
+        $this->assertSame($depense_res[0]->getAmount() ,33.5);
+
     }
 }

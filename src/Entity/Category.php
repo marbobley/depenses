@@ -70,4 +70,9 @@ class Category
         return $this->depenses;
     }
 
+    public function setDepenses(Collection $depenses)
+    {
+        $this->depenses = $depenses;
+    }
+
 }
