@@ -78,45 +78,7 @@ class AppFixturesTest extends Fixture  implements FixtureGroupInterface
         DepenseFactory::CreateOne(['name' => 'admin_dep'. '4', 'amount' => 17 , 'created' => new DateTimeImmutable("now"), 'category' => $cat1, 'createdBy' => $admin]);
 
         FamilyFactory::CreateOne(['name'=> 'family_admin','members' => [$admin]]);
-        FamilyFactory::CreateOne(['name'=> 'family_to_delete', 'members' => []]);
-
-        /*
-
-        $admin = UserFactory::createOne(['userName' => 'admin' , 'roles' => ['ROLE_ADMIN'] , 'password' => $password]);
-        //$user = UserFactory::createOne(['userName' => 'user' . '1' , 'roles' => ['ROLE_USER'] , 'password' => $password]);
-        //$user2 = UserFactory::createOne(['userName' => 'user' . '2' , 'roles' => ['ROLE_USER'] , 'password' => $password]);
-        $userServiceDepense = UserFactory::createOne(['userName' => 'userServiceDepense', 'roles' => ['ROLE_USER'] , 'password' => $password]);
-
-        $cats = new ArrayCollection();
-       $cats[] = CategoryFactory::CreateOne(['name' => 'admin_cat' . '0', 'createdBy' => $admin]);
-        $cats[] = CategoryFactory::CreateOne(['name' => 'admin_cat' . '1', 'createdBy' => $admin]);
-        $cats[] = CategoryFactory::CreateOne(['name' => 'admin_cat' . '2', 'createdBy' => $admin]);
-        $cats[] = CategoryFactory::CreateOne(['name' => 'admin_cat' . '3', 'createdBy' => $admin]);
-        $cats[] = CategoryFactory::CreateOne(['name' => 'admin_cat' . '4', 'createdBy' => $admin]);
-
-        CategoryFactory::createMany(3, ['name' => 'admin_cat', 'createdBy' => $admin]);
-        CategoryFactory::createMany(3, ['name' => 'serviceDepense_cat', 'createdBy' => $userServiceDepense]);*/
-        
-              /*  for($i = 0 ; $i < 10 ; $i++)
-        {
-            $cats[] = CategoryFactory::CreateOne(['name' => 'admin_cat' . $i, 'createdBy' => $admin]);
-            //$catsServiceDepense[] = CategoryFactory::CreateOne(['name' => 'serviceDepense_cat' . $i, 'createdBy' => $userServiceDepense]);
-        }
-
-        $catsServiceDepense = new ArrayCollection();
-        for($j = 0 ; $j < 3 ; $j++)
-        {
-            $catsServiceDepense[] = CategoryFactory::CreateOne(['name' => 'serviceDepense_cat' . $j, 'createdBy' => $userServiceDepense]);
-        }
-
-
-        DepenseFactory::CreateOne(['name' => 'serviceDepense_dep' . '1', 'amount' => 5.5 , 'created' => new DateTimeImmutable("now"), 'category' => $catsServiceDepense[0], 'createdBy' => $userServiceDepense]);
-        DepenseFactory::CreateOne(['name' => 'serviceDepense_dep'. '2', 'amount' => 205 , 'created' => new DateTimeImmutable("now"), 'category' => $catsServiceDepense[1], 'createdBy' => $userServiceDepense]);
-        DepenseFactory::CreateOne(['name' => 'serviceDepense_dep'. '3', 'amount' => 122.2 , 'created' => new DateTimeImmutable("now"), 'category' => $catsServiceDepense[2], 'createdBy' => $userServiceDepense]);
-        DepenseFactory::CreateOne(['name' => 'serviceDepense_dep'. '4', 'amount' => 17 , 'created' => new DateTimeImmutable("now"), 'category' => $catsServiceDepense[0], 'createdBy' => $admin]);
-
-        FamilyFactory::CreateOne(['name'=> 'family_admin','members' => [$admin]]);*/
-        
+        FamilyFactory::CreateOne(['name'=> 'family_to_delete', 'members' => []]);        
     }
 
     public static function getGroups(): array
