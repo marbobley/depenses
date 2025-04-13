@@ -27,6 +27,12 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <exclude>
+            <directory>src/Purger</directory>
+            <directory>src/Factory</directory>
+            <directory>src/DataFixtures</directory>
+            <directory>src/Twig</directory>
+        </exclude>
     </coverage>
 
     <listeners>

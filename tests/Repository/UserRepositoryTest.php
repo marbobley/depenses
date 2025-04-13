@@ -22,7 +22,7 @@ class UserRepositoryTest extends KernelTestCase
             ->getManager();
     }
 
-    public function testFindAllUser(): void
+    public function testUserRepositoryFindAll(): void
     {
         $users = $this->entityManager
             ->getRepository(User::class)
@@ -35,7 +35,7 @@ class UserRepositoryTest extends KernelTestCase
         }
     }
 
-    public function testUnsupportedUserException(): void
+    public function testUserRepositoryUnsupportedUserException(): void
     {
         $user = new EntityBadUser();
 
@@ -45,7 +45,7 @@ class UserRepositoryTest extends KernelTestCase
             ->upgradePassword($user, 'hashedPassword');
     }
 
-    public function testUpgradePassword(): void
+    public function testUserRepositoryUpgradePassword(): void
     {
         $user = new User();
         $user->setUsername('test');

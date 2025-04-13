@@ -23,7 +23,7 @@ class FamilyRepositoryTestRepositoryTest extends KernelTestCase
             ->getManager();
     }
 
-    public function testFindAllFamily(): void
+    public function testFamilyRepositoryFindAll(): void
     {
         $families = $this->entityManager
             ->getRepository(Family::class)

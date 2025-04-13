@@ -2,12 +2,12 @@
 
 namespace App\Tests;
 
-use App\Entity\Depense;
+use App\Entity\Category;
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class DepenseRepositoryTest extends KernelTestCase
+class CategoryRepositoryTest extends KernelTestCase
 {
     private ?EntityManager $entityManager;
 
@@ -20,21 +20,53 @@ class DepenseRepositoryTest extends KernelTestCase
             ->getManager();
     }
 
-    public function testDepenseRepositoryFindAll(): void
+    public function testCategoryRepositoryFindAll(): void
     {
-        $depenses = $this->entityManager
-            ->getRepository(Depense::class)
+        $categories = $this->entityManager
+            ->getRepository(Category::class)
             ->findAll()
         ;
 
-        if(isset($depenses)) {
+        if(isset($categories)) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
     }
 
-    public function testDepenseRepositoryFindByUser() : void
+    public function testCategoryRepositoryFindByUser()
+    {
+        $user = $this->entityManager->
+            getRepository(User::class)->
+            findOneBy(['username' => 'admin'])
+            ;
+
+        $categories = $this->entityManager
+            ->getRepository(Category::class)
+            ->findByUser($user)
+        ;
+
+        $this->AssertSame(count($categories), 3);
+
+    }
+
+    public function testCategoryRepositoryFindByFamily()
+    {
+        $user = $this->entityManager->
+            getRepository(User::class)->
+            findOneBy(['username' => 'admin'])
+            ;
+
+        $categories = $this->entityManager
+            ->getRepository(Category::class)
+            ->findByFamily($user)
+        ;
+
+        $this->AssertSame(count($categories), 3);
+
+    }
+/*
+    public function testDepenseFindByUser() : void
     {
         $user = $this->entityManager->
             getRepository(User::class)->
@@ -50,7 +82,7 @@ class DepenseRepositoryTest extends KernelTestCase
         $this->assertSame($countNumberOfDepenseForUser , 4);
     }
 
-    public function testDepenseRepositoryFindByFamily() : void {
+    public function testDepenseFindByFamily() : void {
         $user = $this->entityManager->
             getRepository(User::class)->
             findOneBy(['username' => 'admin'])
@@ -65,7 +97,7 @@ class DepenseRepositoryTest extends KernelTestCase
 
         $this->assertSame($countNumberOfDepenseForUser , 4);
 
-    }
+    }*/
 
     protected function tearDown(): void
     {
