@@ -39,13 +39,15 @@ class AppFixturesTest extends Fixture  implements FixtureGroupInterface
         return $user;
     }
 
-    private static function NewCategory(ObjectManager $manager, string $name , User $createdBy)
+    private static function NewCategory(ObjectManager $manager, string $name , User $createdBy) : Category
     {
         $category = new Category();
         $category->setName($name);
         $category->setCreatedBy($createdBy);
         $manager->persist($category);
         $manager->flush();
+
+        return $category;
     }
 
     public function load(ObjectManager $manager): void
@@ -53,21 +55,29 @@ class AppFixturesTest extends Fixture  implements FixtureGroupInterface
         $password = $this->hasher->hashPassword(new User(), 'abcd1234!');
         
         $admin = self::NewUser($manager, 'admin',$password, ['ROLE_ADMIN']);
-        self::NewCategory($manager , 'catAdmin_1', $admin);
-        self::NewCategory($manager , 'catAdmin_2', $admin);
-        self::NewCategory($manager , 'catAdmin_3', $admin);
+        self::NewUser($manager, 'usr1',$password, ['ROLE_USER']);
+        self::NewUser($manager, 'usr2',$password, ['ROLE_USER']);
+        self::NewUser($manager, 'usr3',$password, ['ROLE_USER']);
+        self::NewUser($manager, 'usr4',$password, ['ROLE_USER']);
+        self::NewUser($manager, 'usr5',$password, ['ROLE_USER']);
+        self::NewUser($manager, 'usr6',$password, ['ROLE_USER']);
+        self::NewUser($manager, 'usr7',$password, ['ROLE_USER']);
+        self::NewUser($manager, 'usr8',$password, ['ROLE_USER']);
+        self::NewUser($manager, 'usr9',$password, ['ROLE_USER']);
+        self::NewUser($manager, 'usr10',$password, ['ROLE_USER']);
+        self::NewUser($manager, 'usr11',$password, ['ROLE_USER']);
+        self::NewUser($manager, 'usr12',$password, ['ROLE_USER']);
 
-        $family = new Family();
-        $family->setName('Familyadmin');
-        $family->setPassword('Familyadmin');
+        $cat1 = self::NewCategory($manager , 'catAdmin_1', $admin);
+        $cat2 = self::NewCategory($manager , 'catAdmin_2', $admin);
+        $cat3 = self::NewCategory($manager , 'catAdmin_3', $admin);
 
-        $this->familyService->CreateFamily($family);
+        DepenseFactory::CreateOne(['name' => 'admin_dep' . '1', 'amount' => 25.5 , 'created' => new DateTimeImmutable("now"), 'category' => $cat1, 'createdBy' => $admin]);
+        DepenseFactory::CreateOne(['name' => 'admin_dep'. '2', 'amount' => 20 , 'created' => new DateTimeImmutable("now"), 'category' => $cat3, 'createdBy' => $admin]);
+        DepenseFactory::CreateOne(['name' => 'admin_dep'. '3', 'amount' => 12 , 'created' => new DateTimeImmutable("now"), 'category' => $cat2, 'createdBy' => $admin]);
+        DepenseFactory::CreateOne(['name' => 'admin_dep'. '4', 'amount' => 17 , 'created' => new DateTimeImmutable("now"), 'category' => $cat1, 'createdBy' => $admin]);
 
-
-        $userDepense = self::NewUser($manager, 'userDepense',$password, ['ROLE_USER']);
-        self::NewCategory($manager , 'catDep_1', $userDepense);
-        self::NewCategory($manager , 'catDep_2', $userDepense);
-        self::NewCategory($manager , 'catDep_3', $userDepense);
+        FamilyFactory::CreateOne(['name'=> 'family_admin','members' => [$admin]]);
 
         /*
 
@@ -97,11 +107,6 @@ class AppFixturesTest extends Fixture  implements FixtureGroupInterface
         {
             $catsServiceDepense[] = CategoryFactory::CreateOne(['name' => 'serviceDepense_cat' . $j, 'createdBy' => $userServiceDepense]);
         }
-
-        DepenseFactory::CreateOne(['name' => 'admin_dep' . '1', 'amount' => 25.5 , 'created' => new DateTimeImmutable("now"), 'category' => $cats[0], 'createdBy' => $admin]);
-        DepenseFactory::CreateOne(['name' => 'admin_dep'. '2', 'amount' => 20 , 'created' => new DateTimeImmutable("now"), 'category' => $cats[1], 'createdBy' => $admin]);
-        DepenseFactory::CreateOne(['name' => 'admin_dep'. '3', 'amount' => 12 , 'created' => new DateTimeImmutable("now"), 'category' => $cats[2], 'createdBy' => $admin]);
-        DepenseFactory::CreateOne(['name' => 'admin_dep'. '4', 'amount' => 17 , 'created' => new DateTimeImmutable("now"), 'category' => $cats[0], 'createdBy' => $admin]);
 
 
         DepenseFactory::CreateOne(['name' => 'serviceDepense_dep' . '1', 'amount' => 5.5 , 'created' => new DateTimeImmutable("now"), 'category' => $catsServiceDepense[0], 'createdBy' => $userServiceDepense]);

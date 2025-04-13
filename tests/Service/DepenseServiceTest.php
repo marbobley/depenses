@@ -25,9 +25,9 @@ class DepenseServiceTest extends KernelTestCase
         ->getManager();
     }
 
-    public function testDepenseServiceGetDepenseByCategory(): void
+    public function _testDepenseServiceGetDepenseByCategory(): void
     {
-        
+
     }
 
     protected function tearDown(): void
