@@ -78,6 +78,7 @@ class AppFixturesTest extends Fixture  implements FixtureGroupInterface
         DepenseFactory::CreateOne(['name' => 'admin_dep'. '4', 'amount' => 17 , 'created' => new DateTimeImmutable("now"), 'category' => $cat1, 'createdBy' => $admin]);
 
         FamilyFactory::CreateOne(['name'=> 'family_admin','members' => [$admin]]);
+        FamilyFactory::CreateOne(['name'=> 'family_to_delete', 'members' => []]);
 
         /*
 
