@@ -3,11 +3,13 @@
 namespace App\DataFixtures;
 
 use App\Entity\Category;
+use App\Entity\Family;
 use App\Entity\User;
 use App\Factory\CategoryFactory;
 use App\Factory\DepenseFactory;
 use App\Factory\FamilyFactory;
 use App\Factory\UserFactory;
+use App\Service\FamilyService;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
@@ -20,30 +22,69 @@ use function Zenstruck\Foundry\faker;
 
 class AppFixturesTest extends Fixture  implements FixtureGroupInterface
 {
-    public function __construct(private readonly UserPasswordHasherInterface $hasher)
+    public function __construct(private readonly UserPasswordHasherInterface $hasher, private FamilyService $familyService)
     {
         
+    }
+
+    private static function NewUser(ObjectManager $manager, string $userName, string $password , array $roles) : User
+    {
+        $user = new User();
+        $user->setUsername($userName);
+        $user->setPassword($password);
+        $user->setRoles($roles);
+        $manager->persist($user);
+        $manager->flush();
+
+        return $user;
+    }
+
+    private static function NewCategory(ObjectManager $manager, string $name , User $createdBy)
+    {
+        $category = new Category();
+        $category->setName($name);
+        $category->setCreatedBy($createdBy);
+        $manager->persist($category);
+        $manager->flush();
     }
 
     public function load(ObjectManager $manager): void
     {
         $password = $this->hasher->hashPassword(new User(), 'abcd1234!');
+        
+        $admin = self::NewUser($manager, 'admin',$password, ['ROLE_ADMIN']);
+        self::NewCategory($manager , 'catAdmin_1', $admin);
+        self::NewCategory($manager , 'catAdmin_2', $admin);
+        self::NewCategory($manager , 'catAdmin_3', $admin);
+
+        $family = new Family();
+        $family->setName('Familyadmin');
+        $family->setPassword('Familyadmin');
+
+        $this->familyService->CreateFamily($family);
+
+
+        $userDepense = self::NewUser($manager, 'userDepense',$password, ['ROLE_USER']);
+        self::NewCategory($manager , 'catDep_1', $userDepense);
+        self::NewCategory($manager , 'catDep_2', $userDepense);
+        self::NewCategory($manager , 'catDep_3', $userDepense);
+
+        /*
 
         $admin = UserFactory::createOne(['userName' => 'admin' , 'roles' => ['ROLE_ADMIN'] , 'password' => $password]);
-        $user = UserFactory::createOne(['userName' => 'user' . '1' , 'roles' => ['ROLE_USER'] , 'password' => $password]);
-        $user2 = UserFactory::createOne(['userName' => 'user' . '2' , 'roles' => ['ROLE_USER'] , 'password' => $password]);
+        //$user = UserFactory::createOne(['userName' => 'user' . '1' , 'roles' => ['ROLE_USER'] , 'password' => $password]);
+        //$user2 = UserFactory::createOne(['userName' => 'user' . '2' , 'roles' => ['ROLE_USER'] , 'password' => $password]);
         $userServiceDepense = UserFactory::createOne(['userName' => 'userServiceDepense', 'roles' => ['ROLE_USER'] , 'password' => $password]);
 
-        UserFactory::createMany(10);
-
         $cats = new ArrayCollection();
-       /* $cats[] = CategoryFactory::CreateOne(['name' => 'admin_cat' . '0', 'createdBy' => $admin]);
+       $cats[] = CategoryFactory::CreateOne(['name' => 'admin_cat' . '0', 'createdBy' => $admin]);
         $cats[] = CategoryFactory::CreateOne(['name' => 'admin_cat' . '1', 'createdBy' => $admin]);
         $cats[] = CategoryFactory::CreateOne(['name' => 'admin_cat' . '2', 'createdBy' => $admin]);
         $cats[] = CategoryFactory::CreateOne(['name' => 'admin_cat' . '3', 'createdBy' => $admin]);
-        $cats[] = CategoryFactory::CreateOne(['name' => 'admin_cat' . '4', 'createdBy' => $admin]);*/
+        $cats[] = CategoryFactory::CreateOne(['name' => 'admin_cat' . '4', 'createdBy' => $admin]);
 
-        CategoryFactory::createMany(20, ['name' => 'admin_cat' . '0', 'createdBy' => $admin]);
+        CategoryFactory::createMany(3, ['name' => 'admin_cat', 'createdBy' => $admin]);
+        CategoryFactory::createMany(3, ['name' => 'serviceDepense_cat', 'createdBy' => $userServiceDepense]);*/
         
               /*  for($i = 0 ; $i < 10 ; $i++)
         {
