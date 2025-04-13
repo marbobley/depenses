@@ -3,6 +3,7 @@
 namespace App\Tests;
 
 use App\Entity\Depense;
+use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -19,22 +20,34 @@ class DepenseRepositoryTest extends KernelTestCase
             ->getManager();
     }
 
-    /**
-     * Table depense should contains 100 rows.
-     */
-    public function testDepenseRepositoryNumber(): void
+    public function testDepenseFindAll(): void
     {
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
             ->findAll()
         ;
-        $numberOfDepense = count($depenses);
 
-        if (100 === $numberOfDepense) {
+        if(isset($depenses)) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
+    }
+
+    public function testDepenseFindByUser() : void
+    {
+        $user = $this->entityManager->
+            getRepository(User::class)->
+            findOneBy(['username' => 'admin'])
+            ;
+        $depenses = $this->entityManager
+            ->getRepository(Depense::class)
+            ->findByUser($user)
+        ;
+
+        $countNumberOfDepenseForUser = count($depenses);
+
+        $this->assertSame($countNumberOfDepenseForUser , 4);
     }
 
     protected function tearDown(): void

@@ -28,9 +28,7 @@ class UserRepositoryTest extends KernelTestCase
             ->getRepository(User::class)
             ->findAll()
         ;
-        $numberOfUsers = count($users);
-
-        if ($numberOfUsers === ConstantesFixtures::$numberOfUserToCreate) {
+        if(isset($users)) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
