@@ -50,6 +50,23 @@ class DepenseRepositoryTest extends KernelTestCase
         $this->assertSame($countNumberOfDepenseForUser , 4);
     }
 
+    public function testDepenseFindByFamily() : void {
+        $user = $this->entityManager->
+            getRepository(User::class)->
+            findOneBy(['username' => 'admin'])
+            ;
+
+        $depenses = $this->entityManager
+            ->getRepository(Depense::class)
+            ->findByFamily($user)
+        ;
+
+        $countNumberOfDepenseForUser = count($depenses);
+
+        $this->assertSame($countNumberOfDepenseForUser , 4);
+
+    }
+
     protected function tearDown(): void
     {
         parent::tearDown();
