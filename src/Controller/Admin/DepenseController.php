@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Depense;
 use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
+use App\Service\DepenseEntityService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,7 +28,7 @@ final class DepenseController extends AbstractController
 
     #[Route('/new', name: 'app_admin_depense_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_admin_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Depense $depense, Request $request, EntityManagerInterface $manager): Response
+    public function new(?Depense $depense, Request $request, DepenseEntityService $depenseEntityService): Response
     {
         $depense ??= new Depense();
         $form = $this->createForm(DepenseType::class, $depense);
@@ -35,8 +36,7 @@ final class DepenseController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // category->setCreatedBy($this->getUser());
-            $manager->persist($depense);
-            $manager->flush();
+            $depenseEntityService->CreateDepense($depense);
 
             return $this->redirectToRoute('app_admin_depense_index');
         }
@@ -55,15 +55,12 @@ final class DepenseController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_admin_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?Depense $depense, EntityManagerInterface $manager): Response
+    public function delete(?Depense $depense, DepenseEntityService $depenseEntityService): Response
     {
         if (null === $depense) {
             // managing error
         }
-
-        $manager->remove($depense);
-        $manager->flush();
-
+        $depenseEntityService->RemoveDepense($depense);
         return $this->redirectToRoute('app_admin_depense_index');
     }
 }
