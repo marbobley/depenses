@@ -4,6 +4,7 @@ namespace App\Service\Entity;
 
 use App\Entity\Family;
 use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ServiceFamilyEntity
@@ -36,6 +37,7 @@ class ServiceFamilyEntity
         $this->entityManager->persist($family);
         $this->entityManager->flush();
     }
+
 
     public function JoinFamily(Family $family, User $user)
     {

@@ -65,6 +65,11 @@ class Family
         return $this->members;
     }
 
+    public function setMembers(ArrayCollection $members)
+    {
+        $this->members = $members;
+    }
+
     public function addMember(User $member): static
     {
         if (!$this->members->contains($member)) {

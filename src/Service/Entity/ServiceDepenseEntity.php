@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Service\Entity;
+
+use App\Entity\Category;
 use App\Entity\Depense;
+use App\Entity\User;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ServiceDepenseEntity
@@ -19,6 +23,19 @@ class ServiceDepenseEntity
     public function RemoveDepense(Depense $depense)
     {
         $this->entityManager->remove($depense);
+        $this->entityManager->flush();
+    }
+
+    public function CreateNewDepense(string $name , float $amount , User $createdBy , DateTimeImmutable $date , Category $category)
+    {
+        $depense = new Depense();
+        $depense->setName($name);
+        $depense->setAmount($amount);
+        $depense->setCategory($category);
+        $depense->setCreated($date);
+        $depense->setCreatedBy($createdBy);
+
+        $this->entityManager->persist($depense);
         $this->entityManager->flush();
     }
 }
