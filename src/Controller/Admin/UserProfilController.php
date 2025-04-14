@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Form\UserProfilType;
 use App\Repository\UserRepository;
 use App\Service\Entity\ServiceUserEntity;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
