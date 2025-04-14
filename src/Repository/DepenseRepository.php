@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Depense;
 use App\Entity\User;
+use DateInterval;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -32,6 +33,47 @@ class DepenseRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return Depense[] Returns an array of depense filtered on user month and year
+     */
+    public function findByUserByYearByMonth(User $user, int $month , int $year): array
+    {
+        $dateStart = new \DateTimeImmutable();
+        $dateStart = $dateStart->setDate($year, $month, 1);
+
+        $interval = new DateInterval('P1M');
+
+        $dateEnd = $dateStart->Add($interval);
+
+        return $this->createQueryBuilder('d')
+        ->andWhere('d.created >= :start and d.created < :end and d.createdBy = :usr')
+        ->setParameter('start', $dateStart)
+        ->setParameter('end', $dateEnd)
+        ->setParameter('usr', $user)
+        ->orderBy('d.id', 'DESC')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
+    public function findByUserByYear(User $user, int $year) : array
+    {
+        $dateStart = new \DateTimeImmutable();
+        $dateStart = $dateStart->setDate($year, 1, 1);
+        $interval = new DateInterval('P1Y');
+        $dateEnd = $dateStart->Add($interval);
+
+        return $this->createQueryBuilder('d')
+        ->andWhere('d.created >= :start and d.created < :end and d.createdBy = :usr')
+        ->setParameter('start', $dateStart)
+        ->setParameter('end', $dateEnd)
+        ->setParameter('usr', $user)
+        ->orderBy('d.id', 'DESC')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
+    /**
      * @return Depense[] Returns an array of depense filtered on family's users
      */
     public function findByFamily(User $user): array
@@ -48,6 +90,7 @@ class DepenseRepository extends ServiceEntityRepository
 
         return $output;
     }
+    
 
     //    /**
     //     * @return Depense[] Returns an array of Depense objects

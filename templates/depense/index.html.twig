@@ -4,7 +4,7 @@
 
 {% block body %}
     <section class="container px-4">
-        <h1>Mes dépenses</h1>
+        <h1>Mes dépenses : Somme {{ serviceDepense.CalculateAmoutArray(depenses) }}</h1>
         <a href="{{ path('app_depense_new') }}" class="btn btn-primary">Ajouter</a>
         <ul class="list-group list-group-flush">
             {% for depense in depenses %}

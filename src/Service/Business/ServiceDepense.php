@@ -95,7 +95,17 @@ class ServiceDepense
         return $res;
     }
 
-    private function CalculateAmount(Collection $depenses): float
+    public function CalculateAmount(Collection $depenses ): float
+    {
+        $amount = 0;
+        foreach ($depenses as $depense) {
+            $amount += $depense->getAmount();
+        }
+
+        return $amount;
+    }
+
+    public function CalculateAmoutArray(array $depenses) : float 
     {
         $amount = 0;
         foreach ($depenses as $depense) {
