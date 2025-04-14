@@ -13,6 +13,8 @@ class ServiceFamilyEntity
     }
 
     /**
+     * $user leave familly 
+     * if user main member of the family, remove to main member
      * @param User $user
      * 
      */
