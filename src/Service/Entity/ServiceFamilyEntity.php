@@ -12,9 +12,29 @@ class ServiceFamilyEntity
     {
     }
 
-    public function LeaveFamily(User $user)
-    {
+    /**
+     * @param User $user
+     * 
+     */
+    public function LeaveFamily(?User $user) : void
+    {   
+        if(!isset($user))
+        {
+            /**
+             * @todo manage error missing user
+             */
+            return;
+        }
+
         $family = $user->getFamily();
+
+        if(!isset($family))
+        {
+            /**
+             * @todo manage error missing user
+             */
+            return;
+        }
         $family->removeMember($user);
 
         if ($family->getMainMember() === $user) {
@@ -25,26 +45,26 @@ class ServiceFamilyEntity
         $this->entityManager->flush();
     }
 
-    public function RemoveFamily(Family $family)
+    public function RemoveFamily(Family $family): void
     {
         $this->entityManager->remove($family);
         $this->entityManager->flush();
     }
 
-    public function CreateFamily(Family $family)
+    public function CreateFamily(Family $family): void
     {
         $this->entityManager->persist($family);
         $this->entityManager->flush();
     }
 
-    public function JoinFamily(Family $family, User $user)
+    public function JoinFamily(Family $family, User $user): void
     {
         $family->addMember($user);
         $this->entityManager->persist($family);
         $this->entityManager->flush();
     }
 
-    public function SetMainMemberFamily(Family $family, User $user)
+    public function SetMainMemberFamily(Family $family, User $user): void
     {
         $family->setMainMember($user);
         $this->entityManager->persist($family);

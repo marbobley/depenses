@@ -12,13 +12,13 @@ class ServiceCategoryEntity
     {
     }
 
-    public function CreateCategory(Category $category)
+    public function CreateCategory(Category $category): void
     {
         $this->entityManager->persist($category);
         $this->entityManager->flush();
     }
 
-    public function RemoveCategory(Category $category)
+    public function RemoveCategory(Category $category): void
     {
         $this->entityManager->remove($category);
         $this->entityManager->flush();

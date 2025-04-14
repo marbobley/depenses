@@ -13,13 +13,13 @@ class ServiceDepenseEntity
     {
     }
 
-    public function CreateDepense(Depense $depense)
+    public function CreateDepense(Depense $depense): void
     {
         $this->entityManager->persist($depense);
         $this->entityManager->flush();
     }
 
-    public function RemoveDepense(Depense $depense)
+    public function RemoveDepense(Depense $depense): void
     {
         $this->entityManager->remove($depense);
         $this->entityManager->flush();

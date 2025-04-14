@@ -23,6 +23,14 @@ class ServiceUserEntity
         $this->entityManager->flush();
     }
 
+    
+    /**
+     * Create a user in db 
+     * 
+     * @param string $userName
+     * @param string $password
+     * @param list<string> $roles
+     */
     public function CreateNewUser(string $userName, string $password, array $roles): User
     {
         $user = new User();
