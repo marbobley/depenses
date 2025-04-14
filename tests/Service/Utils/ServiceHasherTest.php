@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Tests;
+
 use App\Service\Utils\ServiceHasher;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -8,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class ServiceHasherTest extends KernelTestCase
 {
     private ?ServiceHasher $serviceHasher;
-    private ?EntityManager $entityManager;    
+    private ?EntityManager $entityManager;
 
     protected function setUp(): void
     {
@@ -22,11 +23,11 @@ class ServiceHasherTest extends KernelTestCase
         $this->serviceHasher = $container->get(ServiceHasher::class);
     }
 
-    public function testServiceHasherHash() : void{
-
+    public function testServiceHasherHash(): void
+    {
         $hash1 = $this->serviceHasher->hash('mot_de_pass');
         $hash2 = $this->serviceHasher->hash('mot_de_pass');
-        $this->assertSame($hash1 , $hash2);
+        $this->assertSame($hash1, $hash2);
     }
 
     protected function tearDown(): void

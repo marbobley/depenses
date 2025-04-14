@@ -4,9 +4,8 @@ namespace App\Entity;
 
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
-
 /**
- * Class to implement PasswordAuthenticatedUserInterface to fail to some test case
+ * Class to implement PasswordAuthenticatedUserInterface to fail to some test case.
  */
 class BadUser implements PasswordAuthenticatedUserInterface
 {

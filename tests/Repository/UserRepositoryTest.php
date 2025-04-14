@@ -2,7 +2,6 @@
 
 namespace App\Tests;
 
-use App\DataFixtures\ConstantesFixtures;
 use App\Entity\BadUser as EntityBadUser;
 use App\Entity\User;
 use Doctrine\ORM\EntityManager;
@@ -28,7 +27,7 @@ class UserRepositoryTest extends KernelTestCase
             ->getRepository(User::class)
             ->findAll()
         ;
-        if(isset($users)) {
+        if (isset($users)) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);

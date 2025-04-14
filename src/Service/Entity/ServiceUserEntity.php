@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Service\Entity;
-use App\Entity\Depense;
+
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -23,8 +23,7 @@ class ServiceUserEntity
         $this->entityManager->flush();
     }
 
-
-    public function CreateNewUser(string $userName, string $password , array $roles) : User
+    public function CreateNewUser(string $userName, string $password, array $roles): User
     {
         $user = new User();
         $user->setUsername($userName);
@@ -32,6 +31,7 @@ class ServiceUserEntity
         $user->setRoles($roles);
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+
         return $user;
     }
 }

@@ -30,7 +30,7 @@ final class CategoryController extends AbstractController
 
     #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_category_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Category $category, Request $request,  ServiceCategoryEntity $serviceCategoryEntity): Response
+    public function new(?Category $category, Request $request, ServiceCategoryEntity $serviceCategoryEntity): Response
     {
         if ($category
             && $this->getUser() != $category?->getCreatedBy()) {
@@ -54,7 +54,7 @@ final class CategoryController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_category_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?Category $category,   ServiceCategoryEntity $serviceCategoryEntity): Response
+    public function delete(?Category $category, ServiceCategoryEntity $serviceCategoryEntity): Response
     {
         if ($category
             && $this->getUser() != $category?->getCreatedBy()) {
@@ -69,6 +69,7 @@ final class CategoryController extends AbstractController
             }
 
             $serviceCategoryEntity->RemoveCategory($category);
+
             return $this->redirectToRoute('app_category_index');
         }
 

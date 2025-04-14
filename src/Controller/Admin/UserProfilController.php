@@ -28,7 +28,7 @@ final class UserProfilController extends AbstractController
 
     #[Route('/new', name: 'app_user_profil_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_user_profil_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher,ServiceUserEntity $serviceUserEntity): Response
+    public function new(?User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, ServiceUserEntity $serviceUserEntity): Response
     {
         $user ??= new User();
         $form = $this->createForm(UserProfilType::class, $user);
@@ -43,6 +43,7 @@ final class UserProfilController extends AbstractController
                 )
             );
             $serviceUserEntity->CreateUser($user);
+
             return $this->redirectToRoute('app_user_profil_index');
         }
 
@@ -64,13 +65,14 @@ final class UserProfilController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_user_profil_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?User $user,ServiceUserEntity $serviceUserEntity): Response
+    public function delete(?User $user, ServiceUserEntity $serviceUserEntity): Response
     {
         if (null === $user) {
             // managing error
         }
 
         $serviceUserEntity->RemoveUser($user);
+
         return $this->redirectToRoute('app_user_profil_index');
     }
 }

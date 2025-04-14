@@ -60,6 +60,7 @@ final class DepenseController extends AbstractController
             // managing error
         }
         $depenseEntityService->RemoveDepense($depense);
+
         return $this->redirectToRoute('app_admin_depense_index');
     }
 }

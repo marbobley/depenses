@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class ServiceCategoryEntityTest extends KernelTestCase
 {
     private ?ServiceCategoryEntity $serviceCategoryEntity;
-    private ?EntityManager $entityManager;    
+    private ?EntityManager $entityManager;
 
     protected function setUp(): void
     {
@@ -25,12 +25,11 @@ class ServiceCategoryEntityTest extends KernelTestCase
         $this->serviceCategoryEntity = $container->get(ServiceCategoryEntity::class);
     }
 
-    public function testServiceCategoryEntityCreateCategory() : void{
-
+    public function testServiceCategoryEntityCreateCategory(): void
+    {
         $user = $this->entityManager
         ->getRepository(User::class)
         ->findOneBy(['username' => 'usr1']);
-
 
         $category = new Category();
         $category->setName('cat_create');
@@ -42,11 +41,11 @@ class ServiceCategoryEntityTest extends KernelTestCase
         ->getRepository(Category::class)
         ->findOneBy(['name' => 'cat_create']);
 
-        $this->assertSame($category , $categoryNew);
+        $this->assertSame($category, $categoryNew);
     }
 
-    public function testServiceCategoryEntityRemoveCategory() : void
-    { 
+    public function testServiceCategoryEntityRemoveCategory(): void
+    {
         $category = $this->entityManager
         ->getRepository(Category::class)
         ->findOneBy(['name' => 'catToDelete']);
@@ -71,9 +70,8 @@ class ServiceCategoryEntityTest extends KernelTestCase
         ->getRepository(Category::class)
         ->findOneBy(['name' => 'cat_create_2']);
 
-        $this->assertSame($category , $categoryNew);
+        $this->assertSame($category, $categoryNew);
     }
-
 
     protected function tearDown(): void
     {

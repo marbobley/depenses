@@ -5,7 +5,6 @@ namespace App\Service\Entity;
 use App\Entity\Category;
 use App\Entity\Depense;
 use App\Entity\User;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ServiceDepenseEntity
@@ -26,7 +25,7 @@ class ServiceDepenseEntity
         $this->entityManager->flush();
     }
 
-    public function CreateNewDepense(string $name , float $amount , User $createdBy , DateTimeImmutable $date , Category $category) : Depense
+    public function CreateNewDepense(string $name, float $amount, User $createdBy, \DateTimeImmutable $date, Category $category): Depense
     {
         $depense = new Depense();
         $depense->setName($name);

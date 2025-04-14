@@ -50,8 +50,7 @@ final class UserFactory extends PersistentProxyObjectFactory
         ;
     }
 
-
-    public  function GetOneUser(string $userName, string $password, array $roles): User
+    public function GetOneUser(string $userName, string $password, array $roles): User
     {
         $user = new User();
         $user->setUsername($userName);

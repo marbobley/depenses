@@ -54,7 +54,7 @@ final class CategoryController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_admin_category_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?Category $category,  ServiceCategoryEntity $serviceCategoryEntity): Response
+    public function delete(?Category $category, ServiceCategoryEntity $serviceCategoryEntity): Response
     {
         if (null === $category) {
             // managing error

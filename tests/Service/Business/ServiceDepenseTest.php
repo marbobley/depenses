@@ -19,7 +19,6 @@ class ServiceDepenseTest extends KernelTestCase
             ->get(ServiceDepense::class)
             ->getManager();
 
-
         $this->entityManager = $kernel->getContainer()
         ->get('doctrine')
         ->getManager();
@@ -27,7 +26,6 @@ class ServiceDepenseTest extends KernelTestCase
 
     public function _testDepenseServiceGetDepenseByCategory(): void
     {
-
     }
 
     protected function tearDown(): void

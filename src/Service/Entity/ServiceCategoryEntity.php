@@ -3,7 +3,6 @@
 namespace App\Service\Entity;
 
 use App\Entity\Category;
-use App\Entity\Depense;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -25,13 +24,14 @@ class ServiceCategoryEntity
         $this->entityManager->flush();
     }
 
-    public function CreateNewCategory(string $name , User $createdBy) : Category
+    public function CreateNewCategory(string $name, User $createdBy): Category
     {
         $category = new Category();
         $category->setName($name);
         $category->setCreatedBy($createdBy);
         $this->entityManager->persist($category);
         $this->entityManager->flush();
+
         return $category;
     }
 }

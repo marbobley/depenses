@@ -27,19 +27,19 @@ class DepenseRepositoryTest extends KernelTestCase
             ->findAll()
         ;
 
-        if(isset($depenses)) {
+        if (isset($depenses)) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
     }
 
-    public function testDepenseRepositoryFindByUser() : void
+    public function testDepenseRepositoryFindByUser(): void
     {
         $user = $this->entityManager->
             getRepository(User::class)->
             findOneBy(['username' => 'admin'])
-            ;
+        ;
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
             ->findByUser($user)
@@ -47,14 +47,15 @@ class DepenseRepositoryTest extends KernelTestCase
 
         $countNumberOfDepenseForUser = count($depenses);
 
-        $this->assertSame($countNumberOfDepenseForUser , 4);
+        $this->assertSame($countNumberOfDepenseForUser, 4);
     }
 
-    public function testDepenseRepositoryFindByFamily() : void {
+    public function testDepenseRepositoryFindByFamily(): void
+    {
         $user = $this->entityManager->
             getRepository(User::class)->
             findOneBy(['username' => 'admin'])
-            ;
+        ;
 
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
@@ -63,8 +64,7 @@ class DepenseRepositoryTest extends KernelTestCase
 
         $countNumberOfDepenseForUser = count($depenses);
 
-        $this->assertSame($countNumberOfDepenseForUser , 4);
-
+        $this->assertSame($countNumberOfDepenseForUser, 4);
     }
 
     protected function tearDown(): void

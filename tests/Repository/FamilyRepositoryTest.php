@@ -2,13 +2,9 @@
 
 namespace App\Tests;
 
-use App\DataFixtures\ConstantesFixtures;
-use App\Entity\BadUser as EntityBadUser;
 use App\Entity\Family;
-use App\Entity\User;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 
 class FamilyRepositoryTestRepositoryTest extends KernelTestCase
 {
@@ -29,13 +25,13 @@ class FamilyRepositoryTestRepositoryTest extends KernelTestCase
             ->getRepository(Family::class)
             ->findAll()
         ;
-        if(isset($families)) {
+        if (isset($families)) {
             $this->assertTrue(true);
         } else {
             $this->assertTrue(false);
         }
     }
-    
+
     protected function tearDown(): void
     {
         parent::tearDown();
