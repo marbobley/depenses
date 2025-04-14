@@ -5,7 +5,7 @@ namespace App\Controller\Family;
 use App\Entity\Family;
 use App\Form\FamilyType;
 use App\Service\Entity\ServiceFamilyEntity;
-use App\Service\utils\ServiceHasher;
+use App\Service\Utils\ServiceHasher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
