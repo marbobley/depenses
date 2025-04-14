@@ -48,6 +48,7 @@ class AppFixturesTest extends Fixture  implements FixtureGroupInterface
         //2. CREATE USER 
         $admin = $this->serviceUserEntity->CreateNewUser('admin',$password , ['ROLE_ADMIN'] );
         $user = $this->serviceUserEntity->CreateNewUser('user',$password , ['ROLE_USER'] );
+        $this->serviceUserEntity->CreateNewUser('user_to_delete',$password , ['ROLE_USER'] );
         for($i = 0 ; $i < 20 ; $i++)
         {
             $this->serviceUserEntity->CreateNewUser('usr'.$i,$password , ['ROLE_USER'] );
@@ -63,7 +64,10 @@ class AppFixturesTest extends Fixture  implements FixtureGroupInterface
         $this->serviceDepenseEntity->CreateNewDepense('admin_dep' . '1', 25.5 , $admin , new DateTimeImmutable("now") , $cat1);
         $this->serviceDepenseEntity->CreateNewDepense('admin_dep' . '2', 20 , $admin , new DateTimeImmutable("now") , $cat2);
         $this->serviceDepenseEntity->CreateNewDepense('admin_dep' . '3', 12 , $admin , new DateTimeImmutable("now") , $cat3);
-        $this->serviceDepenseEntity->CreateNewDepense('admin_dep' . '4', 17 , $admin , new DateTimeImmutable("now") , $cat1);        
+        $this->serviceDepenseEntity->CreateNewDepense('admin_dep' . '4', 17 , $admin , new DateTimeImmutable("now") , $cat1);  
+        
+        
+        $this->serviceDepenseEntity->CreateNewDepense('depense_to_delete', 17 , $user , new DateTimeImmutable("now") , $cat3); 
     }
 
     public static function getGroups(): array

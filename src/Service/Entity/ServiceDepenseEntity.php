@@ -26,7 +26,7 @@ class ServiceDepenseEntity
         $this->entityManager->flush();
     }
 
-    public function CreateNewDepense(string $name , float $amount , User $createdBy , DateTimeImmutable $date , Category $category)
+    public function CreateNewDepense(string $name , float $amount , User $createdBy , DateTimeImmutable $date , Category $category) : Depense
     {
         $depense = new Depense();
         $depense->setName($name);
@@ -37,5 +37,7 @@ class ServiceDepenseEntity
 
         $this->entityManager->persist($depense);
         $this->entityManager->flush();
+
+        return $depense;
     }
 }
