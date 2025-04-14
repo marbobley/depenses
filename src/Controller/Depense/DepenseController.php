@@ -16,12 +16,13 @@ use Symfony\Component\Routing\Attribute\Route;
 final class DepenseController extends AbstractController
 {
     #[Route('/', name: 'app_depense_index', methods: ['GET'])]
-    public function index(DepenseRepository $repository , int $year, int $month): Response
+    public function index(DepenseRepository $repository, int $year, int $month): Response
     {
         $depenses = $repository->findByUser($this->getUser());
         $depensesFamily = $repository->findByFamily($this->getUser());
 
-        $depensesMonth = $repository->findByMonthAndYear($this->getUser(), $month , $year);
+        $depensesMonth = $repository->findByMonthAndYear($this->getUser(), $month, $year);
+
         return $this->render('depense/index.html.twig', [
             'controller_name' => 'DepenseController',
             'depenses' => $depenses,
@@ -30,10 +31,11 @@ final class DepenseController extends AbstractController
     }
 
     #[Route('/filter/{year}', name: 'app_depense_filter_year', methods: ['GET'])]
-    public function filterYear(DepenseRepository $repository , int $year): Response
+    public function filterYear(DepenseRepository $repository, int $year): Response
     {
         $depensesYear = $repository->findByUserByYear($this->getUser(), $year);
         $depensesFamily = $repository->findByFamily($this->getUser());
+
         return $this->render('depense/index.html.twig', [
             'controller_name' => 'DepenseController',
             'depenses' => $depensesYear,
@@ -41,12 +43,12 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-
     #[Route('/filter/{year}/{month}', name: 'app_depense_filter_year_month', methods: ['GET'])]
-    public function filter(DepenseRepository $repository , int $year, int $month): Response
+    public function filter(DepenseRepository $repository, int $year, int $month): Response
     {
-        $depensesMonth = $repository->findByUserByYearByMonth($this->getUser(), $month , $year);
+        $depensesMonth = $repository->findByUserByYearByMonth($this->getUser(), $month, $year);
         $depensesFamily = $repository->findByFamily($this->getUser());
+
         return $this->render('depense/index.html.twig', [
             'controller_name' => 'DepenseController',
             'depenses' => $depensesMonth,

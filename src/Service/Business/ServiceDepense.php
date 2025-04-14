@@ -95,7 +95,7 @@ class ServiceDepense
         return $res;
     }
 
-    public function CalculateAmount(Collection $depenses ): float
+    public function CalculateAmount(Collection $depenses): float
     {
         $amount = 0;
         foreach ($depenses as $depense) {
@@ -105,7 +105,7 @@ class ServiceDepense
         return $amount;
     }
 
-    public function CalculateAmoutArray(array $depenses) : float 
+    public function CalculateAmoutArray(array $depenses): float
     {
         $amount = 0;
         foreach ($depenses as $depense) {

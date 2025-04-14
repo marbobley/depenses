@@ -9,13 +9,12 @@ use App\Service\Entity\ServiceDepenseEntity;
 use App\Service\Entity\ServiceFamilyEntity;
 use App\Service\Entity\ServiceUserEntity;
 use App\Service\Utils\ServiceHasher;
-use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker;
 use Random\Randomizer;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Faker;
 
 class AppFixturesDev extends Fixture implements FixtureGroupInterface
 {
@@ -24,7 +23,7 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
         private readonly ServiceCategoryEntity $serviceCategoryEntity,
         private readonly ServiceDepenseEntity $serviceDepenseEntity,
         private readonly ServiceFamilyEntity $serviceFamilyEntity,
-        private readonly ServiceHasher $serviceHasher
+        private readonly ServiceHasher $serviceHasher,
     ) {
     }
 
@@ -43,7 +42,7 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
 
         // 2. CREATE USER
         $admin = $this->serviceUserEntity->CreateNewUser('admin', $password, ['ROLE_ADMIN']);
-        
+
         $cat1 = $this->serviceCategoryEntity->CreateNewCategory('Course', $admin);
         $cat2 = $this->serviceCategoryEntity->CreateNewCategory('Divers', $admin);
         $cat3 = $this->serviceCategoryEntity->CreateNewCategory('Fixes', $admin);
@@ -59,16 +58,13 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
 
         $rand = new Randomizer();
 
-
-        for($i = 0 ; $i < 100 ; $i++)
-        {
-            $this->serviceDepenseEntity->CreateNewDepense('admin_dep'.$i, 
-            $rand->getFloat(0 , 100)  , 
-            $admin, 
-            DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-20 week', '+1 week')) , 
-            $cats[$i%2]);
+        for ($i = 0; $i < 100; ++$i) {
+            $this->serviceDepenseEntity->CreateNewDepense('admin_dep'.$i,
+                $rand->getFloat(0, 100),
+                $admin,
+                \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-20 week', '+1 week')),
+                $cats[$i % 2]);
         }
-
     }
 
     public static function getGroups(): array

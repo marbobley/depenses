@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Depense;
 use App\Entity\User;
-use DateInterval;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -35,12 +34,12 @@ class DepenseRepository extends ServiceEntityRepository
     /**
      * @return Depense[] Returns an array of depense filtered on user month and year
      */
-    public function findByUserByYearByMonth(User $user, int $month , int $year): array
+    public function findByUserByYearByMonth(User $user, int $month, int $year): array
     {
         $dateStart = new \DateTimeImmutable();
         $dateStart = $dateStart->setDate($year, $month, 1);
 
-        $interval = new DateInterval('P1M');
+        $interval = new \DateInterval('P1M');
 
         $dateEnd = $dateStart->Add($interval);
 
@@ -55,11 +54,11 @@ class DepenseRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findByUserByYear(User $user, int $year) : array
+    public function findByUserByYear(User $user, int $year): array
     {
         $dateStart = new \DateTimeImmutable();
         $dateStart = $dateStart->setDate($year, 1, 1);
-        $interval = new DateInterval('P1Y');
+        $interval = new \DateInterval('P1Y');
         $dateEnd = $dateStart->Add($interval);
 
         return $this->createQueryBuilder('d')
@@ -90,7 +89,6 @@ class DepenseRepository extends ServiceEntityRepository
 
         return $output;
     }
-    
 
     //    /**
     //     * @return Depense[] Returns an array of Depense objects
