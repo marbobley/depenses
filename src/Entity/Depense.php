@@ -84,7 +84,7 @@ class Depense
         return $this->createdBy;
     }
 
-    public function setCreatedBy(?UserInterface $createdBy): static
+    public function setCreatedBy(?User $createdBy): static
     {
         $this->createdBy = $createdBy;
 
