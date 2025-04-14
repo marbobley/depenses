@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Business;
 
 use App\Entity\Category;
 use App\Entity\Depense;
@@ -8,7 +8,7 @@ use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class DepenseService
+class ServiceDepense
 {
     private function GetDepenseByCategory(Collection $depenses, Category $categoryFilter): Collection
     {

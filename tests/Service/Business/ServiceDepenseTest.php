@@ -2,13 +2,13 @@
 
 namespace App\Tests;
 
-use App\Service\DepenseService;
+use App\Service\Business\ServiceDepense;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class DepenseServiceTest extends KernelTestCase
+class ServiceDepenseTest extends KernelTestCase
 {
-    private ?DepenseService $depenseService;
+    private ?ServiceDepense $depenseService;
     private ?EntityManager $entityManager;
 
     protected function setUp(): void
@@ -16,7 +16,7 @@ class DepenseServiceTest extends KernelTestCase
         $kernel = self::bootKernel();
 
         $this->depenseService = $kernel->getContainer()
-            ->get(DepenseService::class)
+            ->get(ServiceDepense::class)
             ->getManager();
 
 

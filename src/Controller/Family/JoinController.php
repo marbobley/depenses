@@ -4,7 +4,7 @@ namespace App\Controller\Family;
 
 use App\Entity\Family;
 use App\Service\Entity\ServiceFamilyEntity;
-use App\Service\HasherService;
+use App\Service\Utils\ServiceHasher;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class JoinController extends AbstractController
 {
     #[Route('/join', name: 'app_family_join_index', methods: ['GET', 'POST'])]
-    public function index(Request $request, HasherService $hasher, ServiceFamilyEntity $familyService): Response
+    public function index(Request $request, ServiceHasher $hasher, ServiceFamilyEntity $familyService): Response
     {
         $defaultData = ['message' => 'Type your message here'];
         $form = $this->createFormBuilder($defaultData)

@@ -3,7 +3,7 @@
 namespace App\Controller\Family;
 
 use App\Entity\User;
-use App\Service\HasherService;
+use App\Service\Utils\ServiceHasher;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class PasswordController extends AbstractController
 {
     #[Route('/password', name: 'app_family_password_index', methods: ['GET', 'POST'])]
-    public function index(Request $request, HasherService $hasher, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, ServiceHasher $hasher, EntityManagerInterface $entityManager): Response
     {
         $defaultData = ['message' => 'Type your message here'];
         $form = $this->createFormBuilder($defaultData)
