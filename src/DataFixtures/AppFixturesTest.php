@@ -47,13 +47,15 @@ class AppFixturesTest extends Fixture  implements FixtureGroupInterface
 
         //2. CREATE USER 
         $admin = $this->serviceUserEntity->CreateNewUser('admin',$password , ['ROLE_ADMIN'] );
+        $user = $this->serviceUserEntity->CreateNewUser('user',$password , ['ROLE_USER'] );
         for($i = 0 ; $i < 20 ; $i++)
         {
-            $this->serviceUserEntity->CreateNewUser('usr'.$i,$password , ['ROLE_ADMIN'] );
+            $this->serviceUserEntity->CreateNewUser('usr'.$i,$password , ['ROLE_USER'] );
         }
         $cat1 = $this->serviceCategoryEntity->CreateNewCategory('catAdmin_1', $admin);
         $cat2 = $this->serviceCategoryEntity->CreateNewCategory('catAdmin_2', $admin);
         $cat3 = $this->serviceCategoryEntity->CreateNewCategory('catAdmin_3', $admin);
+        $cat4 = $this->serviceCategoryEntity->CreateNewCategory('catToDelete', $user);
 
         $this->serviceFamilyEntity->SetMainMemberFamily($family, $admin);
         $this->serviceFamilyEntity->JoinFamily($family, $admin);
