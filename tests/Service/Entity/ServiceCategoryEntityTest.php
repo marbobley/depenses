@@ -3,14 +3,10 @@
 namespace App\Tests;
 
 use App\Entity\Category;
-use App\Entity\Family;
 use App\Entity\User;
 use App\Service\Entity\ServiceCategoryEntity;
-use App\Service\Entity\ServiceFamilyEntity;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use PHPUnit\Framework\Attributes\Depends;
-use PHPUnit\Framework\TestCase;
 
 class ServiceCategoryEntityTest extends KernelTestCase
 {
