@@ -4,15 +4,15 @@ namespace App\Tests;
 
 use App\Entity\Family;
 use App\Entity\User;
-use App\Service\FamilyService;
+use App\Service\Entity\ServiceFamilyEntity;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 
-class FamilyServiceTest extends KernelTestCase
+class ServiceFamilyEntityTest extends KernelTestCase
 {
-    private ?FamilyService $familyService;
+    private ?ServiceFamilyEntity $familyService;
     private ?EntityManager $entityManager;    
 
     protected function setUp(): void
@@ -24,10 +24,10 @@ class FamilyServiceTest extends KernelTestCase
         ->getManager();
 
         $container = static::getContainer();
-        $this->familyService = $container->get(FamilyService::class);
+        $this->familyService = $container->get(ServiceFamilyEntity::class);
     }
 
-    public function testFamilyServiceCreateFamily(): Family
+    public function testServiceFamilyEntityCreateFamily(): Family
     {
         $family = new Family();
         $family->setName('newFam');
@@ -45,9 +45,9 @@ class FamilyServiceTest extends KernelTestCase
         return $newFamily;
     }
     /**
-     * @depends testFamilyServiceCreateFamily
+     * @depends testServiceFamilyEntityCreateFamily
      */
-    public function testFamilyServiceJoinFamily(Family $family) : void
+    public function testServiceFamilyEntityJoinFamily(Family $family) : void
     {
         $user = $this->entityManager
         ->getRepository(User::class)
@@ -61,7 +61,7 @@ class FamilyServiceTest extends KernelTestCase
     }
 
 
-    public function testFamilyServiceSetMainMember() : void{
+    public function testServiceFamilyEntitySetMainMember() : void{
 
         $family = $this->entityManager
             ->getRepository(Family::class)
@@ -77,7 +77,7 @@ class FamilyServiceTest extends KernelTestCase
         $this->assertSame($mainMember, $user); 
     }
 
-    public function testFamilyServiceLeaveFamily() : void{ 
+    public function testServiceFamilyEntityLeaveFamily() : void{ 
 
         $family = $this->entityManager
             ->getRepository(Family::class)

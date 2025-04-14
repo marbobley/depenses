@@ -5,8 +5,7 @@ namespace App\Controller\Depense;
 use App\Entity\Depense;
 use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
-use App\Service\DepenseEntityService;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\Entity\ServiceDepenseEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +30,7 @@ final class DepenseController extends AbstractController
 
     #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Depense $depense, Request $request, DepenseEntityService $depenseEntityService): Response
+    public function new(?Depense $depense, Request $request, ServiceDepenseEntity $depenseEntityService): Response
     {
         if ($depense
             && $this->getUser() != $depense?->getCreatedBy()) {
@@ -55,7 +54,7 @@ final class DepenseController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?Depense $depense, DepenseEntityService $depenseEntityService): Response
+    public function delete(?Depense $depense, ServiceDepenseEntity $depenseEntityService): Response
     {
         if ($depense
             && $this->getUser() != $depense?->getCreatedBy()) {

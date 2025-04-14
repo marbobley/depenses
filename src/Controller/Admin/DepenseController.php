@@ -5,8 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Depense;
 use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
-use App\Service\DepenseEntityService;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\Entity\ServiceDepenseEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +27,7 @@ final class DepenseController extends AbstractController
 
     #[Route('/new', name: 'app_admin_depense_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_admin_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Depense $depense, Request $request, DepenseEntityService $depenseEntityService): Response
+    public function new(?Depense $depense, Request $request, ServiceDepenseEntity $depenseEntityService): Response
     {
         $depense ??= new Depense();
         $form = $this->createForm(DepenseType::class, $depense);
@@ -55,7 +54,7 @@ final class DepenseController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_admin_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?Depense $depense, DepenseEntityService $depenseEntityService): Response
+    public function delete(?Depense $depense, ServiceDepenseEntity $depenseEntityService): Response
     {
         if (null === $depense) {
             // managing error

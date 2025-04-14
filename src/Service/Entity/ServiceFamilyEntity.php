@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Entity;
 
 use App\Entity\Family;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
-class FamilyService
+class ServiceFamilyEntity
 {
     public function __construct(private EntityManagerInterface $entityManager)
     {

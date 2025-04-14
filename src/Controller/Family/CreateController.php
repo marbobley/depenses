@@ -4,7 +4,7 @@ namespace App\Controller\Family;
 
 use App\Entity\Family;
 use App\Form\FamilyType;
-use App\Service\FamilyService;
+use App\Service\Entity\ServiceFamilyEntity;
 use App\Service\HasherService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +17,7 @@ final class CreateController extends AbstractController
 {
     #[Route('/new', name: 'app_family_new', methods: ['GET', 'POST'])]
     #[IsGranted('hasNoFamily')]
-    public function new(?Family $family, Request $request, HasherService $hasher, FamilyService $familyService): Response
+    public function new(?Family $family, Request $request, HasherService $hasher, ServiceFamilyEntity $familyService): Response
     {
         $family ??= new Family();
         $form = $this->createForm(FamilyType::class, $family);

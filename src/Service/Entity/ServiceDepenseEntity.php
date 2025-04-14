@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Service;
-
+namespace App\Service\Entity;
 use App\Entity\Depense;
-use App\Entity\Family;
-use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
-class DepenseEntityService
+class ServiceDepenseEntity
 {
     public function __construct(private EntityManagerInterface $entityManager)
     {

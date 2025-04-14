@@ -5,24 +5,19 @@ namespace App\DataFixtures;
 use App\Entity\Category;
 use App\Entity\Family;
 use App\Entity\User;
-use App\Factory\CategoryFactory;
 use App\Factory\DepenseFactory;
 use App\Factory\FamilyFactory;
-use App\Factory\UserFactory;
-use App\Service\FamilyService;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Translation\Util\ArrayConverter;
 
 use function Zenstruck\Foundry\faker;
 
 class AppFixturesTest extends Fixture  implements FixtureGroupInterface
 {
-    public function __construct(private readonly UserPasswordHasherInterface $hasher, private FamilyService $familyService)
+    public function __construct(private readonly UserPasswordHasherInterface $hasher)
     {
         
     }
