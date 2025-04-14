@@ -60,7 +60,7 @@ final class DepenseController extends AbstractController
     public function new(?Depense $depense, Request $request, ServiceDepenseEntity $depenseEntityService): Response
     {
         if ($depense
-            && $this->getUser() != $depense?->getCreatedBy()) {
+            && $this->getUser() != $depense->getCreatedBy()) {
             throw new AccessDeniedException();
         }
 
@@ -84,7 +84,7 @@ final class DepenseController extends AbstractController
     public function delete(?Depense $depense, ServiceDepenseEntity $depenseEntityService): Response
     {
         if ($depense
-            && $this->getUser() != $depense?->getCreatedBy()) {
+            && $this->getUser() != $depense->getCreatedBy()) {
             throw new AccessDeniedException();
         }
 

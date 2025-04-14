@@ -33,7 +33,7 @@ final class CategoryController extends AbstractController
     public function new(?Category $category, Request $request, ServiceCategoryEntity $serviceCategoryEntity): Response
     {
         if ($category
-            && $this->getUser() != $category?->getCreatedBy()) {
+            && $this->getUser() != $category->getCreatedBy()) {
             throw new AccessDeniedException();
         }
 
@@ -57,7 +57,7 @@ final class CategoryController extends AbstractController
     public function delete(?Category $category, ServiceCategoryEntity $serviceCategoryEntity): Response
     {
         if ($category
-            && $this->getUser() != $category?->getCreatedBy()) {
+            && $this->getUser() != $category->getCreatedBy()) {
             throw new AccessDeniedException();
         }
 
