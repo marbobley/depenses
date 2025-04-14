@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\DepenseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: DepenseRepository::class)]
 class Depense
@@ -83,7 +84,7 @@ class Depense
         return $this->createdBy;
     }
 
-    public function setCreatedBy(?User $createdBy): static
+    public function setCreatedBy(?UserInterface $createdBy): static
     {
         $this->createdBy = $createdBy;
 

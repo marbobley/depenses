@@ -57,7 +57,8 @@ final class CategoryController extends AbstractController
     public function delete(?Category $category, ServiceCategoryEntity $serviceCategoryEntity): Response
     {
         if (null === $category) {
-            // managing error
+            // TODO : Better redirection , message ? P
+            return $this->redirectToRoute('app_category_index');
         }
 
         $serviceCategoryEntity->RemoveCategory($category);

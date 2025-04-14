@@ -11,13 +11,13 @@ class ServiceUserEntity
     {
     }
 
-    public function CreateUser(User $user)
+    public function CreateUser(User $user) : void
     {
         $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
 
-    public function RemoveUser(User $user)
+    public function RemoveUser(User $user) : void
     {
         $this->entityManager->remove($user);
         $this->entityManager->flush();
