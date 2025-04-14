@@ -79,7 +79,17 @@ class DepenseRepository extends ServiceEntityRepository
     {
         $output = [];
         $family = $user->getFamily();
+
+        if(!isset($family))
+        {
+            /**
+             * @todo : manage error
+             */
+            return [];
+        }
+
         $members = $family->getMembers();
+
 
         foreach ($members as $member) {
             foreach ($this->findByUser($member) as $depense) {
