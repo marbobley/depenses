@@ -12,11 +12,6 @@ use Doctrine\ORM\EntityManagerInterface;
 class CustomPurger implements ORMPurgerInterface
 {
     private EntityManagerInterface $em;
-    
-    public function __construct()
-    {
-        
-    }
 
     public function setEntityManager(EntityManagerInterface $em): void
     {
