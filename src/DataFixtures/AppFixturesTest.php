@@ -2,20 +2,15 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Category;
 use App\Entity\Family;
 use App\Entity\User;
-use App\Factory\DepenseFactory;
-use App\Factory\FamilyFactory;
 use App\Service\Entity\ServiceCategoryEntity;
 use App\Service\Entity\ServiceDepenseEntity;
 use App\Service\Entity\ServiceFamilyEntity;
 use App\Service\Entity\ServiceUserEntity;
-use ContainerXvWAc8K\getServiceUserEntityService;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -28,7 +23,7 @@ class AppFixturesTest extends Fixture  implements FixtureGroupInterface
                                 private readonly ServiceCategoryEntity $serviceCategoryEntity,
                                 private readonly ServiceDepenseEntity $serviceDepenseEntity,
                                 private readonly ServiceFamilyEntity $serviceFamilyEntity
-    )
+    )   
     {
         
     }
@@ -38,12 +33,13 @@ class AppFixturesTest extends Fixture  implements FixtureGroupInterface
     {
         $password = $this->hasher->hashPassword(new User(), 'abcd1234!');     
 
-        //1. CREATE FAMILY 
+        // CREATE FAMILY ADMIN
         $family = new Family();
         $family->setName('family_admin');
         $family->setPassword('1234');
         $this->serviceFamilyEntity->CreateFamily($family);
 
+        // CREATE FAMILY TO DELETE
         $familyToDelete = new Family();
         $familyToDelete->setName('family_to_delete');
         $familyToDelete->setPassword('1234');
