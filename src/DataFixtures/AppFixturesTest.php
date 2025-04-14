@@ -7,6 +7,8 @@ use App\Entity\Family;
 use App\Entity\User;
 use App\Factory\DepenseFactory;
 use App\Factory\FamilyFactory;
+use App\Service\Entity\ServiceUserEntity;
+use ContainerXvWAc8K\getServiceUserEntityService;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
@@ -17,21 +19,9 @@ use function Zenstruck\Foundry\faker;
 
 class AppFixturesTest extends Fixture  implements FixtureGroupInterface
 {
-    public function __construct(private readonly UserPasswordHasherInterface $hasher)
+    public function __construct(private readonly UserPasswordHasherInterface $hasher , private readonly ServiceUserEntity $serviceUserEntity)
     {
         
-    }
-
-    private static function NewUser(ObjectManager $manager, string $userName, string $password , array $roles) : User
-    {
-        $user = new User();
-        $user->setUsername($userName);
-        $user->setPassword($password);
-        $user->setRoles($roles);
-        $manager->persist($user);
-        $manager->flush();
-
-        return $user;
     }
 
     private static function NewCategory(ObjectManager $manager, string $name , User $createdBy) : Category
@@ -47,21 +37,13 @@ class AppFixturesTest extends Fixture  implements FixtureGroupInterface
 
     public function load(ObjectManager $manager): void
     {
-        $password = $this->hasher->hashPassword(new User(), 'abcd1234!');
-        
-        $admin = self::NewUser($manager, 'admin',$password, ['ROLE_ADMIN']);
-        self::NewUser($manager, 'usr1',$password, ['ROLE_USER']);
-        self::NewUser($manager, 'usr2',$password, ['ROLE_USER']);
-        self::NewUser($manager, 'usr3',$password, ['ROLE_USER']);
-        self::NewUser($manager, 'usr4',$password, ['ROLE_USER']);
-        self::NewUser($manager, 'usr5',$password, ['ROLE_USER']);
-        self::NewUser($manager, 'usr6',$password, ['ROLE_USER']);
-        self::NewUser($manager, 'usr7',$password, ['ROLE_USER']);
-        self::NewUser($manager, 'usr8',$password, ['ROLE_USER']);
-        self::NewUser($manager, 'usr9',$password, ['ROLE_USER']);
-        self::NewUser($manager, 'usr10',$password, ['ROLE_USER']);
-        self::NewUser($manager, 'usr11',$password, ['ROLE_USER']);
-        self::NewUser($manager, 'usr12',$password, ['ROLE_USER']);
+        $password = $this->hasher->hashPassword(new User(), 'abcd1234!');     
+        $admin = $this->serviceUserEntity->CreateNewUser('admin',$password , ['ROLE_ADMIN'] );
+
+        for($i = 0 ; $i < 20 ; $i++)
+        {
+            $this->serviceUserEntity->CreateNewUser('usr'.$i,$password , ['ROLE_ADMIN'] );
+        }
 
         $cat1 = self::NewCategory($manager , 'catAdmin_1', $admin);
         $cat2 = self::NewCategory($manager , 'catAdmin_2', $admin);
