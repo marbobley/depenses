@@ -63,9 +63,6 @@ class ServiceDepense
         return $uniqueCategories;
     }
 
-    /**
-     * @return Collection<int, Depense>
-     */
     public function GetSumDepenseByCategory(User $user): array
     {
         $currentMonth = date('n');

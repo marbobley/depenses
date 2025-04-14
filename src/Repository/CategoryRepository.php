@@ -32,7 +32,7 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Depense[] Returns an array of depense filtered on family's users
+     * @return array Returns an array of depense filtered on family's users
      */
     public function findByFamily(User $user): array
     {
