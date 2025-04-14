@@ -4,18 +4,18 @@ namespace App\DataFixtures;
 
 use App\Entity\Family;
 use App\Entity\User;
-use App\Factory\DepenseFactory;
 use App\Service\Entity\ServiceCategoryEntity;
 use App\Service\Entity\ServiceDepenseEntity;
 use App\Service\Entity\ServiceFamilyEntity;
 use App\Service\Entity\ServiceUserEntity;
 use App\Service\Utils\ServiceHasher;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ObjectManager;
 use Random\Randomizer;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Faker;
 
 class AppFixturesDev extends Fixture implements FixtureGroupInterface
 {
@@ -30,6 +30,8 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
 
     public function load(ObjectManager $manager): void
     {
+        $faker = Faker\Factory::create();
+
         $password = $this->hasher->hashPassword(new User(), 'abcd1234!');
         $passwordFamily = $this->serviceHasher->hash('1234');
 
@@ -60,7 +62,11 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
 
         for($i = 0 ; $i < 100 ; $i++)
         {
-            $this->serviceDepenseEntity->CreateNewDepense('admin_dep'.$i, $rand->getFloat(0 , 100)  , $admin, new \DateTimeImmutable('now'), $cats[$i%2]);
+            $this->serviceDepenseEntity->CreateNewDepense('admin_dep'.$i, 
+            $rand->getFloat(0 , 100)  , 
+            $admin, 
+            DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-20 week', '+1 week')) , 
+            $cats[$i%2]);
         }
 
     }
