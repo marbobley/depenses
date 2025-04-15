@@ -2,6 +2,7 @@
 
 namespace App\Tests;
 
+use App\Entity\Category;
 use App\Entity\Depense;
 use App\Entity\User;
 use App\Service\Business\ServiceDepense;
@@ -72,6 +73,37 @@ class ServiceDepenseTest extends KernelTestCase
        $resCalculatedManually = 217.0;
 
        $this->assertSame($res, $resCalculatedManually);
+    }
+
+    public function testServiceDepenseGetSumDepenseByCategory() : void 
+    {
+        $user = $this->entityManager->
+            getRepository(User::class)->
+            findOneBy(['username' => 'user'])
+        ;  
+
+        
+        $categoriesSum = $this->depenseService->GetSumDepenseByCategory($user);
+        $amount17 = $categoriesSum[0]->getAmount();
+        $amount100_0 = $categoriesSum[1]->getAmount();
+        $amount100_1 = $categoriesSum[2]->getAmount();
+
+        $this->assertSame($amount17, 17.0);
+        $this->assertSame($amount100_0, 100.0);
+        $this->assertSame($amount100_1, 100.0);
+    }
+
+    public function testServiceDepenseGetTotalMonth()
+    {
+        $user = $this->entityManager->
+            getRepository(User::class)->
+            findOneBy(['username' => 'user'])
+        ;  
+
+        $total = $this->depenseService->GetTotalMonth($user);
+
+
+        $this->assertSame($total, 217.0);
     }
 
     protected function tearDown(): void
