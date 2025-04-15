@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Repository;
 
 use App\Entity\Family;
 use Doctrine\ORM\EntityManager;

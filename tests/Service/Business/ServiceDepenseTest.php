@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Service\Business;
 
 use App\Entity\Category;
 use App\Entity\Depense;

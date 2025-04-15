@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests;
+namespace App\Tests\Service\Utils;
 
 use App\Service\Utils\ServiceHasher;
 use Doctrine\ORM\EntityManager;
