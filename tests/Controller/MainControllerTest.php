@@ -2,15 +2,11 @@
 
 namespace App\Tests\Controller;
 
-use App\Entity\User;
 use App\Repository\UserRepository;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class MainControllerTest extends WebTestCase
 { 
-
     public function testNotConnected(): void
     {
         $client = static::createClient();
