@@ -111,4 +111,21 @@ class MainControllerTest extends WebTestCase
 
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
     }
+
+    public function testVisitingAdminCategoryWhileLoggedInAdminRole(): void
+    {
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'admin']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        // test e.g. the profile page
+        $client->request('GET', 'http://127.0.0.1:8000/admin/category');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
 }
