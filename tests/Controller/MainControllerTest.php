@@ -6,7 +6,7 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class MainControllerTest extends WebTestCase
-{ 
+{
     public function testNotConnected(): void
     {
         $client = static::createClient();
@@ -42,6 +42,7 @@ class MainControllerTest extends WebTestCase
         $client->clickLink('Inscription');
         $this->assertResponseStatusCodeSame(200);
     }
+
     public function testNotConnectedClickOnDepenseLogo(): void
     {
         $client = static::createClient();

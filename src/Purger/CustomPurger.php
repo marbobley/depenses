@@ -28,7 +28,7 @@ class CustomPurger implements ORMPurgerInterface
         $this->PurgeFamily();
     }
 
-    private function PurgeCategory() : void
+    private function PurgeCategory(): void
     {
         $repoCategory = $this->em->getRepository(Category::class);
         $categories = $repoCategory->findAll();
@@ -39,7 +39,7 @@ class CustomPurger implements ORMPurgerInterface
         }
     }
 
-    private function PurgeDepense() : void
+    private function PurgeDepense(): void
     {
         $repoDepense = $this->em->getRepository(Depense::class);
         $depenses = $repoDepense->findAll();
@@ -50,7 +50,7 @@ class CustomPurger implements ORMPurgerInterface
         }
     }
 
-    private function PurgeUser() : void
+    private function PurgeUser(): void
     {
         $repoUser = $this->em->getRepository(User::class);
         $users = $repoUser->findAll();
@@ -61,7 +61,7 @@ class CustomPurger implements ORMPurgerInterface
         }
     }
 
-    private function PurgeFamily() : void
+    private function PurgeFamily(): void
     {
         $repoFamily = $this->em->getRepository(Family::class);
         $families = $repoFamily->findAll();
@@ -72,7 +72,7 @@ class CustomPurger implements ORMPurgerInterface
         }
     }
 
-    private function UpdateUserFamillyToNull() : void
+    private function UpdateUserFamillyToNull(): void
     {
         $repoUser = $this->em->getRepository(User::class);
         $users = $repoUser->findAll();
@@ -84,7 +84,7 @@ class CustomPurger implements ORMPurgerInterface
         $this->em->flush();
     }
 
-    private function UpdateFamilyMainMemberToNull() : void
+    private function UpdateFamilyMainMemberToNull(): void
     {
         $repoFamily = $this->em->getRepository(Family::class);
         $families = $repoFamily->findAll();

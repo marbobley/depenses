@@ -50,7 +50,7 @@ class ServiceDepense
         return $this->CalculateAmount($depenseByMonthYear);
     }
 
-    private function GetUniqueCategories(Collection $depenseByMonthYear) : array
+    private function GetUniqueCategories(Collection $depenseByMonthYear): array
     {
         $uniqueCategories = [];
 

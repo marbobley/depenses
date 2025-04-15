@@ -21,7 +21,6 @@ final class DepenseController extends AbstractController
         $depenses = $repository->findByUser($this->getUser());
         $depensesFamily = $repository->findByFamily($this->getUser());
 
-
         return $this->render('depense/index.html.twig', [
             'controller_name' => 'DepenseController',
             'depenses' => $depenses,

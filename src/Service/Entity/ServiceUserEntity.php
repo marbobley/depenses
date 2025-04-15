@@ -11,24 +11,21 @@ class ServiceUserEntity
     {
     }
 
-    public function CreateUser(User $user) : void
+    public function CreateUser(User $user): void
     {
         $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
 
-    public function RemoveUser(User $user) : void
+    public function RemoveUser(User $user): void
     {
         $this->entityManager->remove($user);
         $this->entityManager->flush();
     }
 
-    
     /**
-     * Create a user in db 
-     * 
-     * @param string $userName
-     * @param string $password
+     * Create a user in db.
+     *
      * @param list<string> $roles
      */
     public function CreateNewUser(string $userName, string $password, array $roles): User

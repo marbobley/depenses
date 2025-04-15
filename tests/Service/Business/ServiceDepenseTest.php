@@ -2,14 +2,12 @@
 
 namespace App\Tests\Service\Business;
 
-use App\Entity\Category;
 use App\Entity\Depense;
 use App\Entity\User;
 use App\Service\Business\ServiceDepense;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Doctrine\Common\Collections\Collection;
 
 class ServiceDepenseTest extends KernelTestCase
 {
@@ -37,16 +35,16 @@ class ServiceDepenseTest extends KernelTestCase
 
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
-            /**
-             * @todo : change 2025 to something more flexible DatTime.now.Y 
+            /*
+             * @todo : change 2025 to something more flexible DatTime.now.Y
              */
             ->findByUserByYear($user, 2025);
 
-            //1 + 2 + 3 + 4 + ... + 100
-       $res = $this->depenseService->CalculateAmoutArray($depenses);
-       $resCalculatedManually = 217.0;
+        // 1 + 2 + 3 + 4 + ... + 100
+        $res = $this->depenseService->CalculateAmoutArray($depenses);
+        $resCalculatedManually = 217.0;
 
-       $this->assertSame($res, $resCalculatedManually);
+        $this->assertSame($res, $resCalculatedManually);
     }
 
     public function testServiceDepenseCalculateAmout(): void
@@ -54,35 +52,34 @@ class ServiceDepenseTest extends KernelTestCase
         $user = $this->entityManager->
             getRepository(User::class)->
             findOneBy(['username' => 'user'])
-        ;  
+        ;
 
         $depenses = $this->entityManager
         ->getRepository(Depense::class)
-        /**
-         * @todo : change 2025 to something more flexible DatTime.now.Y 
+        /*
+         * @todo : change 2025 to something more flexible DatTime.now.Y
          */
         ->findByUserByYear($user, 2025);
 
         $collection = new ArrayCollection();
-        
-        foreach($depenses as $item){
-                    $collection->add($item);    
-                }
 
-       $res = $this->depenseService->CalculateAmount($collection);
-       $resCalculatedManually = 217.0;
+        foreach ($depenses as $item) {
+            $collection->add($item);
+        }
 
-       $this->assertSame($res, $resCalculatedManually);
+        $res = $this->depenseService->CalculateAmount($collection);
+        $resCalculatedManually = 217.0;
+
+        $this->assertSame($res, $resCalculatedManually);
     }
 
-    public function testServiceDepenseGetSumDepenseByCategory() : void 
+    public function testServiceDepenseGetSumDepenseByCategory(): void
     {
         $user = $this->entityManager->
             getRepository(User::class)->
             findOneBy(['username' => 'user'])
-        ;  
+        ;
 
-        
         $categoriesSum = $this->depenseService->GetSumDepenseByCategory($user);
         $amount17 = $categoriesSum[0]->getAmount();
         $amount100_0 = $categoriesSum[1]->getAmount();
@@ -98,10 +95,9 @@ class ServiceDepenseTest extends KernelTestCase
         $user = $this->entityManager->
             getRepository(User::class)->
             findOneBy(['username' => 'user'])
-        ;  
+        ;
 
         $total = $this->depenseService->GetTotalMonth($user);
-
 
         $this->assertSame($total, 217.0);
     }

@@ -29,16 +29,15 @@ class CategoryTest extends TestCase
 
         $this->assertTrue($id instanceof int || null === $id);
     }
+
     public function testSetId(): void
     {
         $category = new Category();
         $category->setId(3);
         $id = $category->getId();
 
-        $this->assertSame(3 , $id);
+        $this->assertSame(3, $id);
     }
-
-
 
     public function testSetGetCreatedBy(): void
     {

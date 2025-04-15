@@ -6,7 +6,6 @@ use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -38,10 +37,11 @@ class Category
     {
         return $this->id;
     }
-    
-    public function setId(int $id) : void{
-        $this->id=$id;
-    } 
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
 
     public function getName(): ?string
     {
@@ -63,6 +63,7 @@ class Category
     public function setCreatedBy(?User $createdBy): static
     {
         $this->createdBy = $createdBy;
+
         return $this;
     }
 

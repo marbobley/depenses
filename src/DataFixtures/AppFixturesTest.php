@@ -63,10 +63,9 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
 
         $this->serviceDepenseEntity->CreateNewDepense('depense_to_delete', 17, $user, new \DateTimeImmutable('now'), $cat3);
 
-        for($i = 0; $i < 100 ; $i++)
-        {
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser' . $i, 1, $user, new \DateTimeImmutable('now'), $cat5);
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser_2_' . $i, 1, $user, new \DateTimeImmutable('now'), $cat6);
+        for ($i = 0; $i < 100; ++$i) {
+            $this->serviceDepenseEntity->CreateNewDepense('depenseUser'.$i, 1, $user, new \DateTimeImmutable('now'), $cat5);
+            $this->serviceDepenseEntity->CreateNewDepense('depenseUser_2_'.$i, 1, $user, new \DateTimeImmutable('now'), $cat6);
         }
     }
 

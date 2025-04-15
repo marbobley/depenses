@@ -82,8 +82,7 @@ class DepenseRepositoryTest extends KernelTestCase
         $this->assertEmpty($depenses);
     }
 
-
-    public function testDepenseRepositoryNoFindByUserByYear() : void 
+    public function testDepenseRepositoryNoFindByUserByYear(): void
     {
         $user = $this->entityManager->
             getRepository(User::class)->
@@ -92,18 +91,17 @@ class DepenseRepositoryTest extends KernelTestCase
 
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
-            /**
+            /*
              * @todo : change 2024 to something more flexible DatTime.now.Y  - 1
              */
             ->findByUserByYear($user, 2024);
 
         $countNumberOfDepenseForUser = count($depenses);
 
-
         $this->assertSame($countNumberOfDepenseForUser, 0);
     }
 
-    public function testDepenseRepositoryFindByUserByYear() : void 
+    public function testDepenseRepositoryFindByUserByYear(): void
     {
         $user = $this->entityManager->
             getRepository(User::class)->
@@ -112,18 +110,17 @@ class DepenseRepositoryTest extends KernelTestCase
 
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
-            /**
-             * @todo : change 2025 to something more flexible DatTime.now.Y 
+            /*
+             * @todo : change 2025 to something more flexible DatTime.now.Y
              */
             ->findByUserByYear($user, 2025);
 
         $countNumberOfDepenseForUser = count($depenses);
 
-
         $this->assertSame($countNumberOfDepenseForUser, 201);
     }
 
-    public function testDepenseRepositoryFindByUserByYearByMonth() : void 
+    public function testDepenseRepositoryFindByUserByYearByMonth(): void
     {
         $user = $this->entityManager->
             getRepository(User::class)->
@@ -132,8 +129,8 @@ class DepenseRepositoryTest extends KernelTestCase
 
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
-            /**
-             * @todo : change 2025 to something more flexible DatTime.now.Y 
+            /*
+             * @todo : change 2025 to something more flexible DatTime.now.Y
              */
             ->findByUserByYearByMonth($user, 4, 2025);
 
@@ -142,7 +139,7 @@ class DepenseRepositoryTest extends KernelTestCase
         $this->assertSame($countNumberOfDepenseForUser, 201);
     }
 
-    public function testDepenseRepositoryNoFindByUserByYearByMonth() : void 
+    public function testDepenseRepositoryNoFindByUserByYearByMonth(): void
     {
         $user = $this->entityManager->
             getRepository(User::class)->
@@ -151,8 +148,8 @@ class DepenseRepositoryTest extends KernelTestCase
 
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
-            /**
-             * @todo : change 2025 to something more flexible DatTime.now.Y 
+            /*
+             * @todo : change 2025 to something more flexible DatTime.now.Y
              */
             ->findByUserByYearByMonth($user, 3, 2025);
 

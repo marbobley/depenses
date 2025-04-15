@@ -13,16 +13,13 @@ class ServiceFamilyEntity
     }
 
     /**
-     * $user leave familly 
-     * if user main member of the family, remove to main member
-     * @param User $user
-     * 
+     * $user leave familly
+     * if user main member of the family, remove to main member.
      */
-    public function LeaveFamily(?User $user) : void
-    {   
-        if(!isset($user))
-        {
-            /**
+    public function LeaveFamily(?User $user): void
+    {
+        if (!isset($user)) {
+            /*
              * @todo manage error missing user
              */
             return;
@@ -30,9 +27,8 @@ class ServiceFamilyEntity
 
         $family = $user->getFamily();
 
-        if(!isset($family))
-        {
-            /**
+        if (!isset($family)) {
+            /*
              * @todo manage error missing user
              */
             return;
