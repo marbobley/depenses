@@ -50,6 +50,8 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
         $cat2 = $this->serviceCategoryEntity->CreateNewCategory('catAdmin_2', $admin);
         $cat3 = $this->serviceCategoryEntity->CreateNewCategory('catAdmin_3', $admin);
         $cat4 = $this->serviceCategoryEntity->CreateNewCategory('catToDelete', $user);
+        $cat5 = $this->serviceCategoryEntity->CreateNewCategory('catToTestFamillyYear_1', $user);
+        $cat6 = $this->serviceCategoryEntity->CreateNewCategory('catToTestFamillyYear_2', $user);
 
         $this->serviceFamilyEntity->SetMainMemberFamily($family, $admin);
         $this->serviceFamilyEntity->JoinFamily($family, $admin);
@@ -60,6 +62,12 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
         $this->serviceDepenseEntity->CreateNewDepense('admin_dep4', 17, $admin, new \DateTimeImmutable('now'), $cat1);
 
         $this->serviceDepenseEntity->CreateNewDepense('depense_to_delete', 17, $user, new \DateTimeImmutable('now'), $cat3);
+
+        for($i = 0; $i < 100 ; $i++)
+        {
+            $this->serviceDepenseEntity->CreateNewDepense('depenseUser' . $i, $i, $user, new \DateTimeImmutable('now'), $cat5);
+            $this->serviceDepenseEntity->CreateNewDepense('depenseUser_2_' . $i, $i, $user, new \DateTimeImmutable('now'), $cat6);
+        }
     }
 
     public static function getGroups(): array
