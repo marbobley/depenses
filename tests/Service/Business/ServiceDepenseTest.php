@@ -63,11 +63,11 @@ class ServiceDepenseTest extends KernelTestCase
         ->findByUserByYear($user, 2025);
 
         $collection = new ArrayCollection();
+        
         foreach($depenses as $item){
                     $collection->add($item);    
                 }
 
-            //1 + 2 + 3 + 4 + ... + 100
        $res = $this->depenseService->CalculateAmount($collection);
        $resCalculatedManually = 217.0;
 
