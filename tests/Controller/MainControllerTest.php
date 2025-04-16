@@ -55,7 +55,7 @@ class MainControllerTest extends WebTestCase
     public function testNotConnectedAdminDepense(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('GET', 'http://127.0.0.1:8000/admin/depense');
+        $crawler = $client->request('GET', 'http://127.0.0.1:8000/admin/depense/');
 
         $this->assertResponseRedirects('http://127.0.0.1:8000/login');
         $this->assertResponseStatusCodeSame(302);
@@ -90,7 +90,7 @@ class MainControllerTest extends WebTestCase
         $client->loginUser($testUser);
 
         // test e.g. the profile page
-        $client->request('GET', 'http://127.0.0.1:8000/admin/depense');
+        $client->request('GET', 'http://127.0.0.1:8000/admin/depense/');
 
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
     }
@@ -107,7 +107,7 @@ class MainControllerTest extends WebTestCase
         $client->loginUser($testUser);
 
         // test e.g. the profile page
-        $client->request('GET', 'http://127.0.0.1:8000/admin/category');
+        $client->request('GET', 'http://127.0.0.1:8000/admin/category/');
 
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
     }
@@ -124,7 +124,7 @@ class MainControllerTest extends WebTestCase
         $client->loginUser($testUser);
 
         // test e.g. the profile page
-        $client->request('GET', 'http://127.0.0.1:8000/admin/category');
+        $client->request('GET', 'http://127.0.0.1:8000/admin/category/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }

@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/depense')]
 final class DepenseController extends AbstractController
 {
-    #[Route('', name: 'app_admin_depense_index', methods: ['GET'])]
+    #[Route('/', name: 'app_admin_depense_index', methods: ['GET'])]
     public function index(DepenseRepository $repository): Response
     {
         $depenses = $repository->findAll();

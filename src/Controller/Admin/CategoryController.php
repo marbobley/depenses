@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/category')]
 final class CategoryController extends AbstractController
 {
-    #[Route('', name: 'app_admin_category_index', methods: ['GET'])]
+    #[Route('/', name: 'app_admin_category_index', methods: ['GET'])]
     public function index(CategoryRepository $repository): Response
     {
         $categories = $repository->findAll();

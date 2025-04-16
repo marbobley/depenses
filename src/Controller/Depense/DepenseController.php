@@ -28,7 +28,7 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-    #[Route('/{year}', name: 'app_depense_filter_year', methods: ['GET'])]
+   /* #[Route('/{year}', name: 'app_depense_filter_year', methods: ['GET'])]
     public function filterYear(DepenseRepository $repository, int $year): Response
     {
         $depensesYear = $repository->findByUserByYear($this->getUser(), $year);
@@ -52,7 +52,7 @@ final class DepenseController extends AbstractController
             'depenses' => $depensesMonth,
             'depensesFamily' => $depensesFamily,
         ]);
-    }
+    }*/
 
     #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
