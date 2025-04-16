@@ -1,66 +1,16 @@
-$red: #fc030b;
-$green: #23610a;
-$grey: #9c9494;
-
-$primary:#88c5ff;
-$secondary: #3fb66d71;
-$danger:#ff0000;
-
-$colorLogoBackground : #8d8cce;
-
-$theme-colors: (
-  "primary": $primary,
-  "secondary": $secondary,  
-  "danger": $danger,
-  "warning" : #ff000056,
-);
-
-nav {
-  border-bottom-style: solid;
-  background-color: #ffffff;
-}
-
-.coloredText{
-  color: $colorLogoBackground;
-  font-size: large;
-  font-weight: bolder;
-
-}
 
 body {
   padding-top: 80px; 
   padding-bottom: 80px;
 }
 
-.logo {
-  background-color: $colorLogoBackground;
-  border: #000000;
-  border-style: solid;
-  border-radius: 20px;
-  border-top-left-radius: 0px;
-  border-bottom-right-radius: 0px;
-  font-size: xx-large;
-  font-weight: bolder;
-  color: #ffffff;
-  padding: 2px;
+nav{
+  background-color: rgb(252, 108, 108);
 }
 
-#decoBtn{
-  font-weight: bolder;
-}
-/*
-.backcolor{
-}
-*/
-.color-logo{
-  color: $colorLogoBackground;
-  font-weight: bolder;
-  font-size: xx-large;
-}
 
-footer
-{
-  background-color: $primary;
+.navbar-nav{
+  background-color:  rgb(212, 78, 78);
 }
 
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';
