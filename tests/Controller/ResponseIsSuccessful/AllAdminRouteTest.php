@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AllAdminRouteTest extends WebTestCase
 {
+    private static string $adminUser = 'admin';
     /**
      * Connect $user with given $method (GET, POST) to $url.
      */
@@ -30,7 +31,7 @@ class AllAdminRouteTest extends WebTestCase
 
     public function testAdminConnected(): void
     {
-        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/', 'admin');
+        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/', self::$adminUser);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -38,7 +39,7 @@ class AllAdminRouteTest extends WebTestCase
 
     public function testAdminConnectedAdminFamily(): void
     {
-        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/family/', 'admin');
+        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/family/', self::$adminUser);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -46,7 +47,7 @@ class AllAdminRouteTest extends WebTestCase
 
     public function testAdminConnectedAdminFamilyAdd(): void
     {
-        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/family/new', 'admin');
+        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/family/new', self::$adminUser);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -54,7 +55,31 @@ class AllAdminRouteTest extends WebTestCase
 
     public function testAdminConnectedAdminDepense(): void
     {
-        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/depense/', 'admin');
+        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/depense/', self::$adminUser);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testAdminConnectedDepenseNew(): void
+    {
+        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/new', self::$adminUser);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testAdminConnectedDepense(): void
+    {
+        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/', self::$adminUser);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testAdminConnectedDepenseReport(): void
+    {
+        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/report', self::$adminUser);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -62,7 +87,7 @@ class AllAdminRouteTest extends WebTestCase
 
     public function testAdminConnectedAdminUser(): void
     {
-        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/user/profil/', 'admin');
+        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/user/profil/', self::$adminUser);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -70,7 +95,31 @@ class AllAdminRouteTest extends WebTestCase
 
     public function testAdminConnectedAdminCategory(): void
     {
-        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/category/', 'admin');
+        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/category/', self::$adminUser);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testAdminConnectedAdminCategoryNew(): void
+    {
+        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/category/new', self::$adminUser);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testAdminConnectedCategory(): void
+    {
+        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/category/', self::$adminUser);
+
+        $this->assertResponseIsSuccessful();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testAdminConnectedCategoryNew(): void
+    {
+        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/category/new', self::$adminUser);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
