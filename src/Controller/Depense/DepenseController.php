@@ -28,7 +28,7 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-   /* #[Route('/{year}', name: 'app_depense_filter_year', methods: ['GET'])]
+    #[Route('/filter/{year}', name: 'app_depense_filter_year', methods: ['GET'])]
     public function filterYear(DepenseRepository $repository, int $year): Response
     {
         $depensesYear = $repository->findByUserByYear($this->getUser(), $year);
@@ -41,7 +41,7 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-    #[Route('/{year}/{month}', name: 'app_depense_filter_year_month', methods: ['GET'])]
+    #[Route('/filter/{year}/{month}', name: 'app_depense_filter_year_month', methods: ['GET'])]
     public function filter(DepenseRepository $repository, int $year, int $month): Response
     {
         $depensesMonth = $repository->findByUserByYearByMonth($this->getUser(), $month, $year);
@@ -52,7 +52,7 @@ final class DepenseController extends AbstractController
             'depenses' => $depensesMonth,
             'depensesFamily' => $depensesFamily,
         ]);
-    }*/
+    }
 
     #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
