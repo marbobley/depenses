@@ -44,6 +44,14 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
+    public function testAdminConnectedAdminFamilyAdd(): void
+    {
+        $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/family/new', 'admin');
+
+        $this->assertResponseIsSuccessful();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
     public function testAdminConnectedAdminDepense(): void
     {
         $client = self::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/depense/', 'admin');
