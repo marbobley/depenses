@@ -8,6 +8,6 @@ class CategoryControllerTest extends WebTestCase
 {
     public function testSomething(): void
     {
-        $this->assertSame(1 , 1);
+        $this->assertSame(1, 1);
     }
 }
