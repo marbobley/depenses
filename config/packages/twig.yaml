@@ -3,6 +3,7 @@ twig:
     form_themes:
         - 'bootstrap_5_layout.html.twig'
     globals: 
+        nameOfApplication : 'Le bon compte'
         serviceDepense: '@App\Service\Business\ServiceDepense'
 
 when@test:

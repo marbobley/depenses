@@ -13,7 +13,7 @@ class MainControllerTest extends WebTestCase
         $crawler = $client->request('GET', 'http://127.0.0.1:8000/');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Gérez vos dépenses en quelques clics !');
+        $this->assertSelectorTextContains('h1', "Bienvenu sur Le bon compte");
     }
 
     public function testNotConnectedClickOnCommencer(): void
@@ -48,7 +48,7 @@ class MainControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('POST', 'http://127.0.0.1:8000/');
 
-        $client->clickLink('Depenses');
+        $client->clickLink('Le bon compte');
         $this->assertResponseStatusCodeSame(200);
     }
 
