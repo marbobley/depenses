@@ -96,4 +96,11 @@ final class DepenseController extends AbstractController
 
         return $this->redirectToRoute('app_depense_index');
     }
+
+
+    #[Route('/search', name: 'app_depense_search', methods: ['GET'])]
+    public function search(Request $request): Response
+    {
+        return $this->render('depense/search.html.twig', ['query' => (string) $request->query->get('q', '')]);
+    }
 }

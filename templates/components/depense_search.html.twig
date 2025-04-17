@@ -1,0 +1,16 @@
+{# See https://symfony.com/bundles/ux-live-component/current/index.html #}
+<div {{ attributes }}>
+    <div class="form-group">
+        <input type="search"
+               class="form-control search-field"
+               autocomplete="off"
+               {#
+                   Using the data-model attribute ensures that the property will be automatically updated on the component
+                   See https://symfony.com/bundles/ux-live-component/current/index.html#data-binding
+               #}
+               data-model="query"
+               autofocus
+        >
+    </div>
+    {{ dump(this.Depenses) }}
+</div>
