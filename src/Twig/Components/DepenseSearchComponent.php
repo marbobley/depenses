@@ -27,6 +27,8 @@ final class DepenseSearchComponent
      */
     #[LiveProp(writable: true)]
     public string $query = '';
+    #[LiveProp(writable: true)]
+    public string $query2 = '';
 
     public function __construct(
         private readonly DepenseRepository $depenseRepository
