@@ -2,7 +2,11 @@
 
 namespace App\Twig\Components;
 
+use App\Entity\User;
 use App\Repository\DepenseRepository;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
@@ -34,6 +38,6 @@ final class DepenseSearchComponent
      */
     public function getDepenses(): array
     {
-        return [$this->query];
+        return $this->depenseRepository->findByYear((int)$this->query);
     }
 }

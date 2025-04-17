@@ -54,6 +54,23 @@ class DepenseRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findByYear(int $year) : array
+    {
+        $dateStart = new \DateTimeImmutable();
+        $dateStart = $dateStart->setDate($year, 1, 1);
+        $interval = new \DateInterval('P1Y');
+        $dateEnd = $dateStart->Add($interval);
+
+        return $this->createQueryBuilder('d')
+        ->andWhere('d.created >= :start and d.created < :end')
+        ->setParameter('start', $dateStart)
+        ->setParameter('end', $dateEnd)
+        ->orderBy('d.id', 'DESC')
+        ->getQuery()
+        ->getResult()
+        ;
+    }
+
     public function findByUserByYear(User $user, int $year): array
     {
         $dateStart = new \DateTimeImmutable();
