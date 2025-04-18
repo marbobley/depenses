@@ -65,7 +65,7 @@ class DepenseRepository extends ServiceEntityRepository
         ->andWhere('d.created >= :start and d.created < :end')
         ->setParameter('start', $dateStart)
         ->setParameter('end', $dateEnd)
-        ->orderBy('d.id', 'DESC')
+        ->orderBy('d.created', 'DESC')
         ->getQuery()
         ->getResult()
         ;
