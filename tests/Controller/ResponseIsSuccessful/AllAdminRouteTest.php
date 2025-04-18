@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class AllAdminRouteTest extends WebTestCase
 {
     private static string $adminUser = 'admin';
+
     /**
      * Connect $user with given $method (GET, POST) to $url.
      */

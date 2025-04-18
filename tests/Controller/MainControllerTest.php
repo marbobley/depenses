@@ -13,7 +13,7 @@ class MainControllerTest extends WebTestCase
         $crawler = $client->request('GET', 'http://127.0.0.1:8000/');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', "Bienvenu sur Le bon compte");
+        $this->assertSelectorTextContains('h1', 'Bienvenu sur Le bon compte');
     }
 
     public function testNotConnectedClickOnCommencer(): void

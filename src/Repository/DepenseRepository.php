@@ -54,7 +54,7 @@ class DepenseRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findByYear(int $year) : array
+    public function findByYear(int $year): array
     {
         $dateStart = new \DateTimeImmutable();
         $dateStart = $dateStart->setDate($year, 1, 1);
