@@ -19,3 +19,5 @@ APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
   416  php bin/console sass:build
   417  php bin/console asset-map:compile
   composer2 dump-env prod
+
+  For prod component need secret app (??)
