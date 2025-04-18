@@ -12,5 +12,25 @@
                autofocus
         >
     </div>
-    {{ dump(this.Depenses) }}
+    {% for depense in this.Depenses %}
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between">
+                                <h4 class="mb-1">{{ depense.name }}</h4>
+                                <small class="text-muted">{{ depense.category.name }}</small>
+                            {% if (depense.amount >= 0) %}
+                                <small class="text-muted">Depense : {{ depense.amount }}</small>
+                            {% else %}
+                                <small class="text-muted">Crédit : {{ depense.amount }}</small>
+                            {% endif %}
+                            <small class="text-muted">Date : {{ depense.created|date('m/d/Y') }}</small>
+
+                        </div>
+                        <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-secondary">Editer</a>
+                        <a href="{{ path('app_depense_delete', {id: depense.id}) }}" class="btn btn-warning">Supprimer</a>
+                    </div>
+                </div>
+            {% else %}
+                <li>Aucun enregistrement en base de données.</li>
+            {% endfor %}
 </div>
