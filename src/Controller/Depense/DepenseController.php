@@ -101,7 +101,8 @@ final class DepenseController extends AbstractController
     #[Route('/search', name: 'app_depense_search', methods: ['GET'])]
     public function search(Request $request): Response
     {
+        /// to create variable for twig 
         return $this->render('depense/search.html.twig', 
-        ['query' => (string) $request->query->get('q', '')]);
+        ['query' => '']);
     }
 }
