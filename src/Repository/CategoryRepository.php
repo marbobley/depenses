@@ -32,13 +32,22 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Depense[] Returns an array of depense filtered on family's users
+     * @return array Returns an array of depense filtered on family's users
      */
     public function findByFamily(User $user): array
     {
         $output = [];
         $family = $user->getFamily();
+
+        if (null === $family) {
+            return $this->findByUser($user);
+        }
+
         $members = $family->getMembers();
+
+        if (null === $members) {
+            return $this->findByUser($user);
+        }
 
         foreach ($members as $member) {
             foreach ($this->findByUser($member) as $category) {

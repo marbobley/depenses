@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Form\UserProfilType;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\Entity\ServiceUserEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +28,7 @@ final class UserProfilController extends AbstractController
 
     #[Route('/new', name: 'app_user_profil_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_user_profil_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $manager): Response
+    public function new(?User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, ServiceUserEntity $serviceUserEntity): Response
     {
         $user ??= new User();
         $form = $this->createForm(UserProfilType::class, $user);
@@ -42,9 +42,7 @@ final class UserProfilController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
-            $manager->persist($user);
-            $manager->flush();
+            $serviceUserEntity->CreateUser($user);
 
             return $this->redirectToRoute('app_user_profil_index');
         }
@@ -67,14 +65,13 @@ final class UserProfilController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_user_profil_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?User $User, EntityManagerInterface $manager): Response
+    public function delete(?User $user, ServiceUserEntity $serviceUserEntity): Response
     {
-        if (null === $User) {
+        if (null === $user) {
             // managing error
         }
 
-        $manager->remove($User);
-        $manager->flush();
+        $serviceUserEntity->RemoveUser($user);
 
         return $this->redirectToRoute('app_user_profil_index');
     }

@@ -5,7 +5,7 @@ namespace App\Controller\Depense;
 use App\Entity\Depense;
 use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\Entity\ServiceDepenseEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,14 +28,39 @@ final class DepenseController extends AbstractController
         ]);
     }
 
+    #[Route('/filter/{year}', name: 'app_depense_filter_year', methods: ['GET'])]
+    public function filterYear(DepenseRepository $repository, int $year): Response
+    {
+        $depensesYear = $repository->findByUserByYear($this->getUser(), $year);
+        $depensesFamily = $repository->findByFamily($this->getUser());
+
+        return $this->render('depense/index.html.twig', [
+            'controller_name' => 'DepenseController',
+            'depenses' => $depensesYear,
+            'depensesFamily' => $depensesFamily,
+        ]);
+    }
+
+    #[Route('/filter/{year}/{month}', name: 'app_depense_filter_year_month', methods: ['GET'])]
+    public function filter(DepenseRepository $repository, int $year, int $month): Response
+    {
+        $depensesMonth = $repository->findByUserByYearByMonth($this->getUser(), $month, $year);
+        $depensesFamily = $repository->findByFamily($this->getUser());
+
+        return $this->render('depense/index.html.twig', [
+            'controller_name' => 'DepenseController',
+            'depenses' => $depensesMonth,
+            'depensesFamily' => $depensesFamily,
+        ]);
+    }
+
     #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Depense $depense, Request $request, EntityManagerInterface $manager): Response
+    public function new(?Depense $depense, Request $request, ServiceDepenseEntity $depenseEntityService): Response
     {
-        if( $depense && 
-            $this->getUser() != $depense?->getCreatedBy())
-        {
-            throw new AccessDeniedException;
+        if ($depense
+            && $this->getUser() != $depense->getCreatedBy()) {
+            throw new AccessDeniedException();
         }
 
         $depense ??= new Depense();
@@ -44,8 +69,7 @@ final class DepenseController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $depense->setCreatedBy($this->getUser());
-            $manager->persist($depense);
-            $manager->flush();
+            $depenseEntityService->CreateDepense($depense);
 
             return $this->redirectToRoute('app_depense_index');
         }
@@ -56,12 +80,11 @@ final class DepenseController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?Depense $depense, EntityManagerInterface $manager): Response
+    public function delete(?Depense $depense, ServiceDepenseEntity $depenseEntityService): Response
     {
-        if( $depense && 
-            $this->getUser() != $depense?->getCreatedBy())
-        {
-            throw new AccessDeniedException;
+        if ($depense
+            && $this->getUser() != $depense->getCreatedBy()) {
+            throw new AccessDeniedException();
         }
 
         // We can delete
@@ -69,10 +92,16 @@ final class DepenseController extends AbstractController
             // managing error
             // managing user verification
         }
-
-        $manager->remove($depense);
-        $manager->flush();
+        $depenseEntityService->RemoveDepense($depense);
 
         return $this->redirectToRoute('app_depense_index');
+    }
+
+    #[Route('/search', name: 'app_depense_search', methods: ['GET'])]
+    public function search(Request $request): Response
+    {
+        // / to create variable for twig
+        return $this->render('depense/search.html.twig',
+            ['query' => '']);
     }
 }

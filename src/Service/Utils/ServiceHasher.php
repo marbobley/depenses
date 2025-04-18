@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Utils;
 
-class HasherService
+class ServiceHasher
 {
     public function hash(string $plainString): string
     {

@@ -5,8 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\Family;
 use App\Form\FamilyType;
 use App\Repository\FamilyRepository;
-use App\Service\FamilyService;
-use App\Service\HasherService;
+use App\Service\Entity\ServiceFamilyEntity;
+use App\Service\Utils\ServiceHasher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,7 +28,7 @@ final class FamilyController extends AbstractController
 
     #[Route('/new', name: 'app_admin_family_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_admin_family_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Family $family, Request $request, HasherService $hasher, FamilyService $familyService): Response
+    public function new(?Family $family, Request $request, ServiceHasher $hasher, ServiceFamilyEntity $familyService): Response
     {
         $family ??= new Family();
         $form = $this->createForm(FamilyType::class, $family);
@@ -57,7 +57,7 @@ final class FamilyController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_admin_family_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?Family $family, FamilyService $familyService): Response
+    public function delete(?Family $family, ServiceFamilyEntity $familyService): Response
     {
         if (null === $family) {
             // managing error
@@ -69,7 +69,7 @@ final class FamilyController extends AbstractController
     }
 
     #[Route('/{id}/join', name: 'app_admin_family_join', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function join(?Family $family, FamilyService $familyService): Response
+    public function join(?Family $family, ServiceFamilyEntity $familyService): Response
     {
         if (null === $family) {
             // managing error

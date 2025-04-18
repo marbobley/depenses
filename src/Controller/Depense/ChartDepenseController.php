@@ -2,7 +2,7 @@
 
 namespace App\Controller\Depense;
 
-use App\Service\DepenseService;
+use App\Service\Business\ServiceDepense;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ChartDepenseController extends AbstractController
 {
     #[Route('/report', name: 'app_chart_depense', methods: ['GET'])]
-    public function index(DepenseService $depenseService): Response
+    public function index(ServiceDepense $depenseService): Response
     {
         $total = $depenseService->GetTotalMonth($this->getUser());
         $depensesByCategory = $depenseService->GetSumDepenseByCategory($this->getUser());

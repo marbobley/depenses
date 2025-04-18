@@ -1,0 +1,14 @@
+symfony console --env=test doctrine:database:create
+symfony console --env=test doctrine:schema:create
+
+php bin/console doctrine:fixtures:load --group=dev --purger=my_purger
+php bin/console --env=test doctrine:fixtures:load --group=test --purger=my_purger
+
+vendor/bin/phpunit --coverage-html ../../test-coverage  
+
+vendor/bin/twig-cs-fixer  fix && vendor/bin/php-cs-fixer fix
+
+symfony serve
+
+
+vendor/bin/phpstan analyse -l 2 src

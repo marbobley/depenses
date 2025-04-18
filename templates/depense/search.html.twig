@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'depense_search' %}
+
+{% block body %}
+<header class="bg-primary bg-gradient text-white">
+    <div class="container px-4 text-center">
+        <h1 class="fw-bolder">Recap' de vos dépenses </h1>
+    </div>
+</header>
+    {#
+        Render a component by passing its name as first argument
+        See https://symfony.com/bundles/ux-twig-component/current/index.html
+    #}
+    {{ component('depense_search', {
+        query: query,
+    }) }}
+{% endblock %}

@@ -61,6 +61,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
     public function getUsername(): ?string
     {
         return $this->username;
@@ -146,26 +151,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->categories;
     }
 
-    public function addCategory(Category $category): static
+    public function setCategories(Collection $categories)
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-            $category->setCreatedBy($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): static
-    {
-        if ($this->categories->removeElement($category)) {
-            // set the owning side to null (unless already changed)
-            if ($category->getCreatedBy() === $this) {
-                $category->setCreatedBy(null);
-            }
-        }
-
-        return $this;
+        $this->categories = $categories;
     }
 
     public function getFamily(): ?Family
@@ -188,25 +176,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->depenses;
     }
 
-    public function addDepense(Depense $depense): static
+    public function setDepenses(Collection $depenses)
     {
-        if (!$this->depenses->contains($depense)) {
-            $this->depenses->add($depense);
-            $depense->setCreatedBy($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDepense(Depense $depense): static
-    {
-        if ($this->depenses->removeElement($depense)) {
-            // set the owning side to null (unless already changed)
-            if ($depense->getCreatedBy() === $this) {
-                $depense->setCreatedBy(null);
-            }
-        }
-
-        return $this;
+        $this->depenses = $depenses;
     }
 }

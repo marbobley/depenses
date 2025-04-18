@@ -38,6 +38,11 @@ class Category
         return $this->id;
     }
 
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -70,25 +75,8 @@ class Category
         return $this->depenses;
     }
 
-    public function addDepense(Depense $depense): static
+    public function setDepenses(Collection $depenses)
     {
-        if (!$this->depenses->contains($depense)) {
-            $this->depenses->add($depense);
-            $depense->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDepense(Depense $depense): static
-    {
-        if ($this->depenses->removeElement($depense)) {
-            // set the owning side to null (unless already changed)
-            if ($depense->getCategory() === $this) {
-                $depense->setCategory(null);
-            }
-        }
-
-        return $this;
+        $this->depenses = $depenses;
     }
 }

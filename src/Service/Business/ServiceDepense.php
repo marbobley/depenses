@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service;
+namespace App\Service\Business;
 
 use App\Entity\Category;
 use App\Entity\Depense;
@@ -8,15 +8,14 @@ use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class DepenseService
+class ServiceDepense
 {
     private function GetDepenseByCategory(Collection $depenses, Category $categoryFilter): Collection
-    {        
+    {
         $depenseByCategory = new ArrayCollection();
 
         foreach ($depenses as $depense) {
-            if ($depense->GetCategory() === $categoryFilter) 
-            {
+            if ($depense->GetCategory() === $categoryFilter) {
                 $depenseByCategory[] = $depense;
             }
         }
@@ -51,7 +50,7 @@ class DepenseService
         return $this->CalculateAmount($depenseByMonthYear);
     }
 
-    private  function GetUniqueCategories(Collection $depenseByMonthYear) : array
+    private function GetUniqueCategories(Collection $depenseByMonthYear): array
     {
         $uniqueCategories = [];
 
@@ -60,13 +59,11 @@ class DepenseService
                 $uniqueCategories[] = $depense->getCategory();
             }
         }
+
         return $uniqueCategories;
     }
 
-    /**
-     * @return Collection<int, Depense>
-     */
-    public function GetSumDepenseByCategory(User $user)
+    public function GetSumDepenseByCategory(User $user): array
     {
         $currentMonth = date('n');
         $currentYear = date('Y');
@@ -95,7 +92,17 @@ class DepenseService
         return $res;
     }
 
-    private function CalculateAmount(Collection $depenses): float
+    public function CalculateAmount(Collection $depenses): float
+    {
+        $amount = 0;
+        foreach ($depenses as $depense) {
+            $amount += $depense->getAmount();
+        }
+
+        return $amount;
+    }
+
+    public function CalculateAmoutArray(array $depenses): float
     {
         $amount = 0;
         foreach ($depenses as $depense) {

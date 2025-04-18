@@ -5,7 +5,7 @@ namespace App\Controller\Category;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Service\Entity\ServiceCategoryEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,14 +30,12 @@ final class CategoryController extends AbstractController
 
     #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_category_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Category $category, Request $request, EntityManagerInterface $manager): Response
+    public function new(?Category $category, Request $request, ServiceCategoryEntity $serviceCategoryEntity): Response
     {
-        if( $category && 
-            $this->getUser() != $category?->getCreatedBy())
-        {
+        if ($category
+            && $this->getUser() != $category->getCreatedBy()) {
             throw new AccessDeniedException();
         }
-
 
         $category ??= new Category();
         $form = $this->createForm(CategoryType::class, $category);
@@ -45,8 +43,7 @@ final class CategoryController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $category->setCreatedBy($this->getUser());
-            $manager->persist($category);
-            $manager->flush();
+            $serviceCategoryEntity->CreateCategory($category);
 
             return $this->redirectToRoute('app_category_index');
         }
@@ -57,12 +54,11 @@ final class CategoryController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'app_category_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?Category $category, EntityManagerInterface $manager): Response
+    public function delete(?Category $category, ServiceCategoryEntity $serviceCategoryEntity): Response
     {
-        if( $category && 
-            $this->getUser() != $category?->getCreatedBy())
-        {
-            throw new AccessDeniedException;
+        if ($category
+            && $this->getUser() != $category->getCreatedBy()) {
+            throw new AccessDeniedException();
         }
 
         if ($this->getUser() === $category->getCreatedBy()) {
@@ -72,8 +68,7 @@ final class CategoryController extends AbstractController
                 // managing user verification
             }
 
-            $manager->remove($category);
-            $manager->flush();
+            $serviceCategoryEntity->RemoveCategory($category);
 
             return $this->redirectToRoute('app_category_index');
         }
