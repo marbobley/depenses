@@ -38,7 +38,14 @@ class CategoryRepository extends ServiceEntityRepository
     {
         $output = [];
         $family = $user->getFamily();
+
+        if($family === null)
+            return $this->findByUser($user);
+
         $members = $family->getMembers();
+
+        if($members === null)
+            return $this->findByUser($user);
 
         foreach ($members as $member) {
             foreach ($this->findByUser($member) as $category) {
