@@ -12,3 +12,9 @@ symfony serve
 
 
 vendor/bin/phpstan analyse -l 2 src
+
+
+composer2 install --no-dev --optimize-autoloader
+APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
+  416  php bin/console sass:build
+  417  php bin/console asset-map:compile
