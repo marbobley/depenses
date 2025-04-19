@@ -28,32 +28,6 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-    #[Route('/filter/{year}', name: 'app_depense_filter_year', methods: ['GET'])]
-    public function filterYear(DepenseRepository $repository, int $year): Response
-    {
-        $depensesYear = $repository->findByUserByYear($this->getUser(), $year);
-        $depensesFamily = $repository->findByFamily($this->getUser());
-
-        return $this->render('depense/index.html.twig', [
-            'controller_name' => 'DepenseController',
-            'depenses' => $depensesYear,
-            'depensesFamily' => $depensesFamily,
-        ]);
-    }
-
-    #[Route('/filter/{year}/{month}', name: 'app_depense_filter_year_month', methods: ['GET'])]
-    public function filter(DepenseRepository $repository, int $year, int $month): Response
-    {
-        $depensesMonth = $repository->findByUserByYearByMonth($this->getUser(), $month, $year);
-        $depensesFamily = $repository->findByFamily($this->getUser());
-
-        return $this->render('depense/index.html.twig', [
-            'controller_name' => 'DepenseController',
-            'depenses' => $depensesMonth,
-            'depensesFamily' => $depensesFamily,
-        ]);
-    }
-
     #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Depense $depense, Request $request, ServiceDepenseEntity $depenseEntityService): Response
@@ -102,6 +76,6 @@ final class DepenseController extends AbstractController
     {
         // / to create variable for twig
         return $this->render('depense/search.html.twig',
-            ['query' => '']);
+            ['startDate' => '' , 'endDate' => '']);
     }
 }
