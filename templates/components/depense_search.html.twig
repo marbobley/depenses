@@ -27,7 +27,7 @@
     </div>
         <h1>Mes dépenses : Somme {{ serviceDepense.CalculateAmoutArray(this.Depenses) }}</h1>
         {% for depense in this.Depenses %}
-            {{ include('partials/_form-amount.hmtl.twig', {depense: depense}, false) }}                
+            {{ include('partials/_form-amount.hmtl.twig', {depense: depense}, false) }}
         {% else %}
             <li>Aucun enregistrement en base de données.</li>
         {% endfor %}

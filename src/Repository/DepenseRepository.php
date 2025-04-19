@@ -54,7 +54,7 @@ class DepenseRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findByRangeYear(string $dateStart , string $dateEnd )
+    public function findByRangeYear(string $dateStart, string $dateEnd)
     {
         $formattedStartDate = \DateTimeImmutable::createFromFormat('Y-m-d', $dateStart);
         $formattedEndDate = \DateTimeImmutable::createFromFormat('Y-m-d', $dateEnd);

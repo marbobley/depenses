@@ -76,6 +76,6 @@ final class DepenseController extends AbstractController
     {
         // / to create variable for twig
         return $this->render('depense/search.html.twig',
-            ['startDate' => '' , 'endDate' => '']);
+            ['startDate' => '', 'endDate' => '']);
     }
 }
