@@ -6,10 +6,20 @@
                 <source>menu.back_to_blog</source>
                 <target>Retour au blog</target>
             </trans-unit>
-            
-            <trans-unit id="rss.title">
-                <source>rss.title</source>
-                <target>Blog de démo Symfony</target>
+
+            <trans-unit id="main.welcome_on">
+                <source>main.welcome_on</source>
+                <target>Bienvenu sur {app_name}</target>
+            </trans-unit>
+            <trans-unit id="main.sumary_app">
+                <source>main.sumary_app</source>
+                <target>L'application qui vous permet de gérér en quelques clics vos dépenses facilement</target>
+            </trans-unit>
+
+
+            <trans-unit id="button.start">
+                <source>button.start</source>
+                <target>Commenceeeer</target>
             </trans-unit>
         </body>
     </file>
