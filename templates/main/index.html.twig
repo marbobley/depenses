@@ -7,7 +7,7 @@
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
 <header class="bg-primary bg-gradient text-white">
     <div class="container px-4 text-center">
-                <h1 class="fw-bolder"> SALUT {{ app.user.username }}!!! </h1>
+                <h1 class="fw-bolder">Bonjour {{ app.user.username }}!!! </h1>
                 {% if is_granted('hasNoFamily') == false %}
                     <h1 class="fw-bolder">Tu appartiens à la famille {{ app.user.family.name }}!!! </h1>
                 {% endif %}
