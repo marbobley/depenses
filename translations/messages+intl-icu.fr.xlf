@@ -82,6 +82,27 @@
                 <source>nav.depense.search</source>
                 <target>Recherche</target>
             </trans-unit>
+
+            <trans-unit id="nav.family">
+                <source>nav.family</source>
+                <target>Famille</target>
+            </trans-unit>
+            <trans-unit id="nav.family.join">
+                <source>nav.family.join</source>
+                <target>Rejoindre</target>
+            </trans-unit>
+            <trans-unit id="nav.family.create">
+                <source>nav.family.create</source>
+                <target>Créer</target>
+            </trans-unit>
+            <trans-unit id="nav.family.password">
+                <source>nav.family.password</source>
+                <target>Chosir le mot de passe</target>
+            </trans-unit>
+            <trans-unit id="nav.family.leave">
+                <source>nav.family.leave</source>
+                <target>Quitter</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
