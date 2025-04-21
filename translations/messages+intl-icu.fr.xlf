@@ -48,6 +48,40 @@
                 <source>nav.admin.manage_user</source>
                 <target>Gérer les utilisateur.trices</target>
             </trans-unit>
+
+            <trans-unit id="nav.category">
+                <source>nav.category</source>
+                <target>Catégories</target>
+            </trans-unit>
+            <trans-unit id="nav.category.new">
+                <source>nav.category.new</source>
+                <target>Créer une catégorie</target>
+            </trans-unit>
+            <trans-unit id="nav.category.show">
+                <source>nav.category.show</source>
+                <target>Voir les catégories</target>
+            </trans-unit>
+
+            <trans-unit id="nav.depense">
+                <source>nav.depense</source>
+                <target>Dépenses</target>
+            </trans-unit>
+            <trans-unit id="nav.depense.new">
+                <source>nav.depense.new</source>
+                <target>Créer une dépense</target>
+            </trans-unit>
+            <trans-unit id="nav.depense.show">
+                <source>nav.depense.show</source>
+                <target>Voir les dépenses</target>
+            </trans-unit>
+            <trans-unit id="nav.depense.report">
+                <source>nav.depense.report</source>
+                <target>Rapport</target>
+            </trans-unit>
+            <trans-unit id="nav.depense.search">
+                <source>nav.depense.search</source>
+                <target>Recherche</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
