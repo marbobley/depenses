@@ -2,11 +2,6 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
         <body>
-            <trans-unit id="menu.back_to_blog">
-                <source>menu.back_to_blog</source>
-                <target>Retour au blog</target>
-            </trans-unit>
-
             <trans-unit id="main.welcome_on">
                 <source>main.welcome_on</source>
                 <target>Bienvenu sur {app_name}</target>
@@ -15,11 +10,43 @@
                 <source>main.sumary_app</source>
                 <target>L'application qui vous permet de gérér en quelques clics vos dépenses facilement</target>
             </trans-unit>
-
-
+            
             <trans-unit id="button.start">
                 <source>button.start</source>
-                <target>Commenceeeer</target>
+                <target>Commencer</target>
+            </trans-unit>
+            
+            <trans-unit id="nav.login">
+                <source>nav.login</source>
+                <target>Connexion</target>
+            </trans-unit>
+            <trans-unit id="nav.register">
+                <source>nav.register</source>
+                <target>Inscription</target>
+            </trans-unit>
+            <trans-unit id="nav.logout">
+                <source>nav.logout</source>
+                <target>Deconnexion</target>
+            </trans-unit>
+            <trans-unit id="nav.admin">
+                <source>nav.admin</source>
+                <target>Administration</target>
+            </trans-unit>
+            <trans-unit id="nav.admin.manage_family">
+                <source>nav.admin.manage_family</source>
+                <target>Gérer les familles</target>
+            </trans-unit>
+            <trans-unit id="nav.admin.manage_depense">
+                <source>nav.admin.manage_depense</source>
+                <target>Gérer les dépenses</target>
+            </trans-unit>
+            <trans-unit id="nav.admin.manage_category">
+                <source>nav.admin.manage_category</source>
+                <target>Gérer les catégories</target>
+            </trans-unit>
+            <trans-unit id="nav.admin.manage_user">
+                <source>nav.admin.manage_user</source>
+                <target>Gérer les utilisateur.trices</target>
             </trans-unit>
         </body>
     </file>
