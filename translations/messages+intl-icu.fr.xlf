@@ -10,10 +10,44 @@
                 <source>main.sumary_app</source>
                 <target>L'application qui vous permet de gérér en quelques clics vos dépenses facilement</target>
             </trans-unit>
+
+            <trans-unit id="login.log_as_user">
+                <source>login.log_as_user</source>
+                <target>Vous êtes connecté en tant que { user_identifier } : </target>
+            </trans-unit>
+            <trans-unit id="login.logout">
+                <source>login.logout</source>
+                <target>Se déconnecter</target>
+            </trans-unit>
+            <trans-unit id="login.please_sign_in">
+                <source>login.please_sign_in</source>
+                <target>Renseignez vos identifiants</target>
+            </trans-unit>
+            <trans-unit id="login.username">
+                <source>login.username</source>
+                <target>Identifiant</target>
+            </trans-unit>
+            <trans-unit id="login.password">
+                <source>login.password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
+
+            <trans-unit id="title.register">
+                <source>title.register</source>
+                <target>Inscription</target>
+            </trans-unit>
+            <trans-unit id="title.login">
+                <source>title.login</source>
+                <target>Connexion</target>
+            </trans-unit>
             
             <trans-unit id="button.start">
                 <source>button.start</source>
                 <target>Commencer</target>
+            </trans-unit>
+            <trans-unit id="button.login">
+                <source>button.login</source>
+                <target>Connexion</target>
             </trans-unit>
             
             <trans-unit id="nav.login">
