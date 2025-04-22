@@ -5,51 +5,9 @@
 {% block body %}
 
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-<header class="bg-primary bg-gradient text-white">
-    <div class="container px-4 text-center">
-                <h1 class="fw-bolder">Bonjour {{ app.user.username }}!!! </h1>
-                {% if is_granted('hasNoFamily') == false %}
-                    <h1 class="fw-bolder">Tu appartiens à la famille {{ app.user.family.name }}!!! </h1>
-                {% endif %}
-                {% if is_granted('IsMainMemberFamily') %}
-                    <h1 class="fw-bolder">Tu es à lea chef.fe de {{ app.user.family.name }}!!! </h1>
-                {% endif %}
-    </div>
-</header>
+    {{ include(('main/_main_connected.html.twig')) }}
 {% else %}
-<header class="bg-primary bg-gradient text-white">
-    <div class="container px-4 text-center">
-        <h1 class="fw-bolder"> 
-            {{ 'main.welcome_on'|trans({ 'app_name':  nameOfApplication  }) }}  
-        </h1>
-        <p class="lead">{{ 'main.sumary_app'|trans }}</p>
-        <a class="btn btn-lg btn-light" href="{{ path('app_login') }}">{{ 'button.start'|trans }}</a>
-    </div>
-</header>
-<header class="bg-white bg-gradient text-black">
-    <div class="container px-4 text-center">
-        <h1 class="fw-bolder"> 
-            Simple et efficace :    
-        </h1>
-        <ol class="list-group list-group-numbered">
-            <li class="list-group-item">Créer un <a href="{{ path('app_register') }}">compte</a> : pas besoin d'adresse mail !</li>
-            <li class="list-group-item"><a href="{{ path('app_login') }}">Connecter vous</a> avec vos identifiants</li>
-            <li class="list-group-item">Créer vos catégories (fixe, divers, course...)</li>
-            <li class="list-group-item">Créer ou rejoignez une famille si vous souhaitez gérer vos dépenses à plusieurs</li>
-            <li class="list-group-item">Visualiser vos dépenses</li>
-        </ol>
-    </div>
-</header>
-<header class="bg-primary bg-gradient text-white">
-    <div class="container px-4 text-center">
-        <h1 class="fw-bolder"> 
-            Application en cours de développement
-        </h1>
-        <h3 class="fw-bolder px-4 text-center"> 
-            Web application dévéloppé à l'aide du framework <a class="text-dark" href="https://symfony.com/">Symfony</a>
-        </h3>
-    </div>
-</header>
+    {{ include(('main/_main_disconnected.html.twig')) }}
 {% endif %}
 
 {% endblock %}

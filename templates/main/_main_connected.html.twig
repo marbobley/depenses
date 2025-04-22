@@ -1,0 +1,17 @@
+
+<header class="bg-primary bg-gradient text-white">
+    <div class="container px-4 text-center">
+    
+        <h1 class="fw-bolder">
+            Bonjour {{ app.user.username }}!!! 
+        </h1>
+        {% if is_granted('hasNoFamily') == false %}
+            <h1 class="fw-bolder">
+                Tu appartiens à la famille {{ app.user.family.name }}!!! 
+            </h1>
+        {% endif %}
+        {% if is_granted('IsMainMemberFamily') %}
+            <h1 class="fw-bolder">Tu es à lea chef.fe de {{ app.user.family.name }}!!! </h1>
+        {% endif %}
+    </div>
+</header>
