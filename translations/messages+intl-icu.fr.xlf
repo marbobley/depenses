@@ -23,13 +23,10 @@
                 <source>login.please_sign_in</source>
                 <target>Renseignez vos identifiants</target>
             </trans-unit>
-            <trans-unit id="login.username">
-                <source>login.username</source>
-                <target>Identifiant</target>
-            </trans-unit>
-            <trans-unit id="login.password">
-                <source>login.password</source>
-                <target>Mot de passe</target>
+
+            <trans-unit id="register.register">
+                <source>register.register</source>
+                <target>S'inscrire</target>
             </trans-unit>
 
             <trans-unit id="title.register">
@@ -48,6 +45,19 @@
             <trans-unit id="button.login">
                 <source>button.login</source>
                 <target>Connexion</target>
+            </trans-unit>
+            <trans-unit id="button.register">
+                <source>button.register</source>
+                <target>S'inscrire</target>
+            </trans-unit>
+
+            <trans-unit id="label.username">
+                <source>label.username</source>
+                <target>Identifiant</target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Mot de passe</target>
             </trans-unit>
             
             <trans-unit id="nav.login">

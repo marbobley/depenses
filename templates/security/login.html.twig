@@ -17,9 +17,9 @@
                 </div>
             {% else %}
                 <h1 class="h3 mb-3 font-weight-normal">{{ 'login.please_sign_in'|trans }} : </h1>
-                <label for="username">{{ 'login.username'|trans }}</label>
+                <label for="username">{{ 'label.username'|trans }}</label>
                 <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
-                <label for="password">{{ 'login.password'|trans }}</label>
+                <label for="password">{{ 'label.password'|trans }}</label>
                 <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
 
                 <input type="hidden" name="_csrf_token"
