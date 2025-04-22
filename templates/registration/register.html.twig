@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ 'title.register'|trans }}{% endblock %}
+{% block title %}{{ 'register'|trans }}{% endblock %}
 
 {% block body %}
 <section class="container px-4">
     <div class="w-50 m-auto">
-        <h1>{{ 'register.register'|trans }}</h1>
+        <h1>{{ 'register'|trans }}</h1>
 
         {{ form_errors(registrationForm) }}
 
@@ -17,7 +17,7 @@
 
             {#<button type="submit" class="btn">Register</button>#}
                 <button class="btn btn-lg btn-primary" type="submit">
-                    {{ 'button.register'|trans }}
+                    {{ 'register'|trans }}
                 </button>
         {{ form_end(registrationForm) }}
     </div>

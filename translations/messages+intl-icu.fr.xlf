@@ -24,31 +24,19 @@
                 <target>Renseignez vos identifiants</target>
             </trans-unit>
 
-            <trans-unit id="register.register">
-                <source>register.register</source>
-                <target>S'inscrire</target>
-            </trans-unit>
-
-            <trans-unit id="title.register">
-                <source>title.register</source>
+            <trans-unit id="register">
+                <source>register</source>
                 <target>Inscription</target>
             </trans-unit>
+
             <trans-unit id="title.login">
-                <source>title.login</source>
+                <source>login</source>
                 <target>Connexion</target>
             </trans-unit>
             
             <trans-unit id="button.start">
                 <source>button.start</source>
                 <target>Commencer</target>
-            </trans-unit>
-            <trans-unit id="button.login">
-                <source>button.login</source>
-                <target>Connexion</target>
-            </trans-unit>
-            <trans-unit id="button.register">
-                <source>button.register</source>
-                <target>S'inscrire</target>
             </trans-unit>
 
             <trans-unit id="label.username">
@@ -63,10 +51,6 @@
             <trans-unit id="nav.login">
                 <source>nav.login</source>
                 <target>Connexion</target>
-            </trans-unit>
-            <trans-unit id="nav.register">
-                <source>nav.register</source>
-                <target>Inscription</target>
             </trans-unit>
             <trans-unit id="nav.logout">
                 <source>nav.logout</source>
