@@ -25,10 +25,6 @@ services:
         tags:
             - { name: 'doctrine.fixtures.purger_factory', alias: 'my_purger' }
 
-    twig.extension.intl:
-       class: Twig_Extensions_Extension_Intl
-       tags:
-           - { name: twig.extension }
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
