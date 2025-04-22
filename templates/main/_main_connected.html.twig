@@ -9,7 +9,7 @@
         </div>
         <div class="col">
         <ul>
-            <li>Depense du mois {{ "now"|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y") }} : XXX €</il>
+            <li>Depense du mois {{ "now"|date("M")|trans }} : XXX €</il>
             <li>Depense du mois précédent NomDuMois: XXX €</il>
         </ul>
             
