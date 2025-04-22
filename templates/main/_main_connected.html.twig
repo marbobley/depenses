@@ -1,10 +1,36 @@
 
 <header class="bg-primary bg-gradient text-white">
-    <div class="container px-4 text-center">
-    
-        <h1 class="fw-bolder">
-            Bonjour {{ app.user.username }}!!! 
-        </h1>
+<div class="container ">
+    <div class="row">
+        <div class="col">
+            <h1 class="fw-bolder">
+                Bonjour {{ app.user.username }}!!! 
+            </h1>
+        </div>
+        <div class="col">
+        <ul>
+            <li>Depense du mois {{ "now"|localizeddate('none', 'none', app.request.locale, "Europe/Paris", "cccc d MMMM Y") }} : XXX €</il>
+            <li>Depense du mois précédent NomDuMois: XXX €</il>
+        </ul>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            Famille : XYZ 
+        </div>
+        <div class="col">
+            <ul>
+                <li>Depense de l'année Année : XXX €</il>
+                <li>Depense de l'année précédent Année : XXX €</il>
+            </ul>
+        </div>
+    </div>
+</div>
+   
+   
+   {#<div class="container px-4 text-center">
+
         {% if is_granted('hasNoFamily') == false %}
             <h1 class="fw-bolder">
                 Tu appartiens à la famille {{ app.user.family.name }}!!! 
@@ -13,5 +39,8 @@
         {% if is_granted('IsMainMemberFamily') %}
             <h1 class="fw-bolder">Tu es à lea chef.fe de {{ app.user.family.name }}!!! </h1>
         {% endif %}
-    </div>
+    </div>#} 
 </header>
+<section>
+    futur zone a widget
+</section>
