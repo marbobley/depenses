@@ -131,6 +131,27 @@
                 <source>nav.family.leave</source>
                 <target>Quitter</target>
             </trans-unit>
+
+            <trans-unit id="http_error.name">
+                <source>http_error.name</source>
+                <target>Erreur {status_code, number}</target>
+            </trans-unit>
+            <trans-unit id="http_error_404.description">
+                <source>http_error_404.description</source>
+                <target>Nous n'avons pas pu trouver la page demandée.</target>
+            </trans-unit>
+            <trans-unit id="http_error_404.suggestion">
+                <source>http_error_404.suggestion</source>
+                <target><![CDATA[Vérifiez si l'URL ne comporte pas d'erreurs ou <a href="{url}">retournez sur la page principale</a>.]]></target>
+            </trans-unit>
+            <trans-unit id="http_error.description">
+                <source>http_error.description</source>
+                <target>Il y a eu une erreur inconnue (HTTP {status_code, number}) qui a empêché l'aboutissement de votre requête.</target>
+            </trans-unit>
+            <trans-unit id="http_error.suggestion">
+                <source>http_error.suggestion</source>
+                <target><![CDATA[Essayez de recharger cette page dans quelques minutes ou <a href="{url}">retournez sur la page principale</a>.]]></target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

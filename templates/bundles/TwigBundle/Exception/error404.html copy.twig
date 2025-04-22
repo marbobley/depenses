@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ nameOfApplication }}{% endblock %}
+
+{% block body %}
+<section class="container px-4">
+    <h1 class="text-danger">{{ 'http_error.name'|trans({ 'status_code': 404 }) }}</h1>
+
+    <p class="lead">
+        {{ 'http_error_404.description'|trans }}
+    </p>
+    <p>
+        {{ 'http_error_404.suggestion'|trans({ 'url': path('app_main') })|raw }}
+    </p>
+</section>
+
+
+{% endblock %}
