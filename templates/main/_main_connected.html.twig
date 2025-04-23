@@ -1,15 +1,15 @@
 
 <header class="bg-primary bg-gradient text-white">
-<div class="container ">
+<div class="container container-fluid">
     <div class="row">
         <div class="col">
             <h1 class="fw-bolder">
                 Bonjour {{ app.user.username }}!!! 
             </h1>
         </div>
-        <div class="col">
+        <div class="col ">
         <ul>
-            <li>Depense du mois {{ "now"|date("M") }} : XXX €</il>
+            <li>Depense du mois {{ "now"|date("M") }} : {{ serviceDepenseUser.Depenses}} €</il>
             <li>Depense du mois précédent NomDuMois: XXX €</il>
         </ul>
             

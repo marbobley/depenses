@@ -111,4 +111,9 @@ class ServiceDepense
 
         return $amount;
     }
+
+    public function GetDepenseForUser(User $user) : Collection
+    {
+        return $user->getDepenses();
+    }
 }

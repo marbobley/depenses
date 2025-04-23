@@ -5,6 +5,7 @@ twig:
     globals: 
         nameOfApplication : 'Le bon compte'
         serviceDepense: '@App\Service\Business\ServiceDepense'
+        serviceDepenseUser: '@App\Service\Business\ServiceDepenseUser'
 
 when@test:
     twig:
