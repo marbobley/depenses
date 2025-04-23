@@ -5,41 +5,9 @@
 {% block body %}
 
 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-<header class="bg-primary bg-gradient text-white">
-    <div class="container px-4 text-center">
-                <h1 class="fw-bolder">Bonjour {{ app.user.username }}!!! </h1>
-                {% if is_granted('hasNoFamily') == false %}
-                    <h1 class="fw-bolder">Tu appartiens à la famille {{ app.user.family.name }}!!! </h1>
-                {% endif %}
-                {% if is_granted('IsMainMemberFamily') %}
-                    <h1 class="fw-bolder">Tu es à lea chef.fe de {{ app.user.family.name }}!!! </h1>
-                {% endif %}
-    </div>
-</header>
+    {{ include(('main/_main_connected.html.twig')) }}
 {% else %}
-<header class="bg-primary bg-gradient text-white">
-    <div class="container px-4 text-center">
-        <h1 class="fw-bolder">Bienvenu sur {{ nameOfApplication }} </h1>         
-        <p class="lead">L'application qui vous permet de gérér en quelques clics vos dépenses</p>
-        <a class="btn btn-lg btn-light" href="{{ path('app_login') }}">Commencer</a>
-    </div>
-</header>
+    {{ include(('main/_main_disconnected.html.twig')) }}
 {% endif %}
-
-    <div  class="container-fluid">
-        <div class="row">
-            <div class="col-xxl-8">
-                {{ include(('main/_index-grid-top-left.html.twig')) }}
-            </div>
-            <div class="col-xxl-4">col-sm-4</div>
-        </div>
-    <div class="row">
-        <div class="col-xxl">
-            {{ include(('main/_index-grid-bottom-left.html.twig')) }}
-        </div>
-        <div class="col-xxl">col-sm</div>
-        <div class="col-xxl">col-sm</div>
-    </div>
-    </div>
 
 {% endblock %}

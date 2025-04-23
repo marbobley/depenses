@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ nameOfApplication }}{% endblock %}
+
+{% block body %}
+<section class="container px-4">
+    <h1 class="text-danger">{{ 'http_error.name'|trans({ 'status_code': status_code }) }}</h1>
+
+    <p class="lead">
+        {{ 'http_error.description'|trans({ 'status_code': status_code }) }}
+    </p>
+    <p>
+        {{ 'http_error.suggestion'|trans({ 'url': path('app_main') })|raw }}
+    </p>
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="main.welcome_on">
+                <source>main.welcome_on</source>
+                <target>Bienvenu sur {app_name}</target>
+            </trans-unit>
+            <trans-unit id="main.sumary_app">
+                <source>main.sumary_app</source>
+                <target>L'application qui vous permet de gérér en quelques clics vos dépenses facilement</target>
+            </trans-unit>
+
+            <trans-unit id="login.log_as_user">
+                <source>login.log_as_user</source>
+                <target>Vous êtes connecté en tant que { user_identifier } : </target>
+            </trans-unit>
+            <trans-unit id="login.logout">
+                <source>login.logout</source>
+                <target>Se déconnecter</target>
+            </trans-unit>
+            <trans-unit id="login.please_sign_in">
+                <source>login.please_sign_in</source>
+                <target>Renseignez vos identifiants</target>
+            </trans-unit>
+
+            <trans-unit id="register">
+                <source>register</source>
+                <target>Inscription</target>
+            </trans-unit>
+
+            <trans-unit id="title.login">
+                <source>login</source>
+                <target>Connexion</target>
+            </trans-unit>
+            
+            <trans-unit id="button.start">
+                <source>button.start</source>
+                <target>Commencer</target>
+            </trans-unit>
+
+            <trans-unit id="label.username">
+                <source>label.username</source>
+                <target>Identifiant</target>
+            </trans-unit>
+            <trans-unit id="label.password">
+                <source>label.password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
+            
+            <trans-unit id="nav.login">
+                <source>nav.login</source>
+                <target>Connexion</target>
+            </trans-unit>
+            <trans-unit id="nav.logout">
+                <source>nav.logout</source>
+                <target>Deconnexion</target>
+            </trans-unit>
+            <trans-unit id="nav.admin">
+                <source>nav.admin</source>
+                <target>Administration</target>
+            </trans-unit>
+            <trans-unit id="nav.admin.manage_family">
+                <source>nav.admin.manage_family</source>
+                <target>Gérer les familles</target>
+            </trans-unit>
+            <trans-unit id="nav.admin.manage_depense">
+                <source>nav.admin.manage_depense</source>
+                <target>Gérer les dépenses</target>
+            </trans-unit>
+            <trans-unit id="nav.admin.manage_category">
+                <source>nav.admin.manage_category</source>
+                <target>Gérer les catégories</target>
+            </trans-unit>
+            <trans-unit id="nav.admin.manage_user">
+                <source>nav.admin.manage_user</source>
+                <target>Gérer les utilisateur.trices</target>
+            </trans-unit>
+
+            <trans-unit id="nav.category">
+                <source>nav.category</source>
+                <target>Catégories</target>
+            </trans-unit>
+            <trans-unit id="nav.category.new">
+                <source>nav.category.new</source>
+                <target>Créer une catégorie</target>
+            </trans-unit>
+            <trans-unit id="nav.category.show">
+                <source>nav.category.show</source>
+                <target>Voir les catégories</target>
+            </trans-unit>
+
+            <trans-unit id="nav.depense">
+                <source>nav.depense</source>
+                <target>Dépenses</target>
+            </trans-unit>
+            <trans-unit id="nav.depense.new">
+                <source>nav.depense.new</source>
+                <target>Créer une dépense</target>
+            </trans-unit>
+            <trans-unit id="nav.depense.show">
+                <source>nav.depense.show</source>
+                <target>Voir les dépenses</target>
+            </trans-unit>
+            <trans-unit id="nav.depense.report">
+                <source>nav.depense.report</source>
+                <target>Rapport</target>
+            </trans-unit>
+            <trans-unit id="nav.depense.search">
+                <source>nav.depense.search</source>
+                <target>Recherche</target>
+            </trans-unit>
+
+            <trans-unit id="nav.family">
+                <source>nav.family</source>
+                <target>Famille</target>
+            </trans-unit>
+            <trans-unit id="nav.family.join">
+                <source>nav.family.join</source>
+                <target>Rejoindre</target>
+            </trans-unit>
+            <trans-unit id="nav.family.create">
+                <source>nav.family.create</source>
+                <target>Créer</target>
+            </trans-unit>
+            <trans-unit id="nav.family.password">
+                <source>nav.family.password</source>
+                <target>Chosir le mot de passe</target>
+            </trans-unit>
+            <trans-unit id="nav.family.leave">
+                <source>nav.family.leave</source>
+                <target>Quitter</target>
+            </trans-unit>
+
+            <trans-unit id="http_error.name">
+                <source>http_error.name</source>
+                <target>Erreur {status_code, number}</target>
+            </trans-unit>
+            <trans-unit id="http_error_404.description">
+                <source>http_error_404.description</source>
+                <target>Nous n'avons pas pu trouver la page demandée.</target>
+            </trans-unit>
+            <trans-unit id="http_error_404.suggestion">
+                <source>http_error_404.suggestion</source>
+                <target><![CDATA[Vérifiez si l'URL ne comporte pas d'erreurs ou <a href="{url}">retournez sur la page principale</a>.]]></target>
+            </trans-unit>
+            <trans-unit id="http_error.description">
+                <source>http_error.description</source>
+                <target>Il y a eu une erreur inconnue (HTTP {status_code, number}) qui a empêché l'aboutissement de votre requête.</target>
+            </trans-unit>
+            <trans-unit id="http_error.suggestion">
+                <source>http_error.suggestion</source>
+                <target><![CDATA[Essayez de recharger cette page dans quelques minutes ou <a href="{url}">retournez sur la page principale</a>.]]></target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

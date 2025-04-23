@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cfde342d853c1457e802431821614688",
+    "content-hash": "a86229755e925822e6aeb61f979c4bfb",
     "packages": [
         {
             "name": "composer/semver",
@@ -1582,16 +1582,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "5.6.1",
+            "version": "5.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "e5e784149a09bd69d9a5e3b01c5cbd2e2bd653d8"
+                "reference": "92dde6a5919e34835c506ac8c523ef095a95ed62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/e5e784149a09bd69d9a5e3b01c5cbd2e2bd653d8",
-                "reference": "e5e784149a09bd69d9a5e3b01c5cbd2e2bd653d8",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/92dde6a5919e34835c506ac8c523ef095a95ed62",
+                "reference": "92dde6a5919e34835c506ac8c523ef095a95ed62",
                 "shasum": ""
             },
             "require": {
@@ -1640,9 +1640,9 @@
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.6.1"
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.6.2"
             },
-            "time": "2024-12-07T09:39:29+00:00"
+            "time": "2025-04-13T19:20:35+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -5067,6 +5067,87 @@
             ],
             "support": {
                 "source": "https://github.com/symfony/polyfill-intl-idn/tree/v1.31.0"
+            },
+            "funding": [
+                {
+                    "url": "https://symfony.com/sponsor",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-09-09T11:45:10+00:00"
+        },
+        {
+            "name": "symfony/polyfill-intl-messageformatter",
+            "version": "v1.31.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-intl-messageformatter.git",
+                "reference": "d2ed9f44f1ccb21d36e51ebb1f7b1ef26e36e0de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-intl-messageformatter/zipball/d2ed9f44f1ccb21d36e51ebb1f7b1ef26e36e0de",
+                "reference": "d2ed9f44f1ccb21d36e51ebb1f7b1ef26e36e0de",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "suggest": {
+                "ext-intl": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "thanks": {
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Intl\\MessageFormatter\\": ""
+                },
+                "classmap": [
+                    "Resources/stubs"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for intl's MessageFormatter class and related functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "intl",
+                "messageformatter",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "support": {
+                "source": "https://github.com/symfony/polyfill-intl-messageformatter/tree/v1.31.0"
             },
             "funding": [
                 {
@@ -8668,16 +8749,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.1.11",
+            "version": "2.1.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "8ca5f79a8f63c49b2359065832a654e1ec70ac30"
+                "reference": "96dde49e967c0c22812bcfa7bda4ff82c09f3b0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8ca5f79a8f63c49b2359065832a654e1ec70ac30",
-                "reference": "8ca5f79a8f63c49b2359065832a654e1ec70ac30",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/96dde49e967c0c22812bcfa7bda4ff82c09f3b0c",
+                "reference": "96dde49e967c0c22812bcfa7bda4ff82c09f3b0c",
                 "shasum": ""
             },
             "require": {
@@ -8722,7 +8803,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-24T13:45:00+00:00"
+            "time": "2025-04-16T13:19:18+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -10827,16 +10908,16 @@
         },
         {
             "name": "zenstruck/foundry",
-            "version": "v2.3.10",
+            "version": "v2.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zenstruck/foundry.git",
-                "reference": "76c2d4ac9d9c08fd80ca2cb216b42abef46ae3f3"
+                "reference": "277472cc5f938fd98c2a5cf0a317b8283d897be6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/76c2d4ac9d9c08fd80ca2cb216b42abef46ae3f3",
-                "reference": "76c2d4ac9d9c08fd80ca2cb216b42abef46ae3f3",
+                "url": "https://api.github.com/repos/zenstruck/foundry/zipball/277472cc5f938fd98c2a5cf0a317b8283d897be6",
+                "reference": "277472cc5f938fd98c2a5cf0a317b8283d897be6",
                 "shasum": ""
             },
             "require": {
@@ -10846,6 +10927,7 @@
                 "symfony/deprecation-contracts": "^2.2|^3.0",
                 "symfony/framework-bundle": "^6.4|^7.0",
                 "symfony/property-access": "^6.4|^7.0",
+                "symfony/property-info": "^6.4|^7.0",
                 "symfony/var-exporter": "^6.4.9|~7.0.9|^7.1.2",
                 "zenstruck/assert": "^1.4"
             },
@@ -10860,7 +10942,7 @@
                 "doctrine/mongodb-odm": "^2.4",
                 "doctrine/mongodb-odm-bundle": "^4.6|^5.0",
                 "doctrine/orm": "^2.16|^3.0",
-                "phpunit/phpunit": "^9.5.0 || ^10.0 || ^11.0",
+                "phpunit/phpunit": "^9.5.0 || ^10.0 || ^11.0 || ^12.0",
                 "symfony/console": "^6.4|^7.0",
                 "symfony/dotenv": "^6.4|^7.0",
                 "symfony/maker-bundle": "^1.55",
@@ -10920,7 +11002,7 @@
             ],
             "support": {
                 "issues": "https://github.com/zenstruck/foundry/issues",
-                "source": "https://github.com/zenstruck/foundry/tree/v2.3.10"
+                "source": "https://github.com/zenstruck/foundry/tree/v2.4.2"
             },
             "funding": [
                 {
@@ -10928,7 +11010,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-03-31T09:53:36+00:00"
+            "time": "2025-04-17T06:26:28+00:00"
         }
     ],
     "aliases": [],

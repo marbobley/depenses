@@ -13,3 +13,8 @@ when@test:
         test: true
         session:
             storage_factory_id: session.storage.factory.mock_file
+
+###CRASH UNIT TEST I DONT UNDERSTAND WHY
+  #  _errors:
+  #      resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+  #      prefix:   /_error
