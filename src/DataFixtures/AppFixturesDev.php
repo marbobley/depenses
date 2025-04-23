@@ -40,6 +40,12 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
         $family->setPassword($passwordFamily);
         $this->serviceFamilyEntity->CreateFamily($family);
 
+
+        $family1 = new Family();
+        $family1->setName('Famille_test');
+        $family1->setPassword($passwordFamily);
+        $this->serviceFamilyEntity->CreateFamily($family1);
+
         // 2. CREATE USER
         $admin = $this->serviceUserEntity->CreateNewUser('admin', $password, ['ROLE_ADMIN']);
 
