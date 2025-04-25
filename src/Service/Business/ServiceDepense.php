@@ -18,8 +18,8 @@ class ServiceDepense
      */
     public function GetTotalMonth(User $user , string $month , string $year ): float
     {
-
         $depenses = $user->getDepenses();
+        
         $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
 
         return $this->CalculateAmount($depenseByMonthYear);
