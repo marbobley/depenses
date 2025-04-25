@@ -6,7 +6,7 @@
 <section class="container px-4">
     <div class="container-fluid">
         <h1>Liste de mes depenses par catégorie pour le mois en cours : </h1>
-        <h2>Total : {{ total }} </h2>
+        <h2>Total : {{ total | number_format(2)}} €</h2>
         <div class="container">
         {% if (total > 0) %}
             {% for depense in depensesByCategory|sort((a, b) => a.amount < b.amount) %}
@@ -16,8 +16,7 @@
                     <div class="card-body">
                         <div class="card-title d-flex justify-content-between">
                                 <h4 class="mb-1">{{ depense.name }}</h4>
-                                <h4 class="mb-1">{{ depense.category.name }}</h4>
-                                <h4 class="mb-1">{{ depense.amount }}</h4>
+                                <h4 class="mb-1">{{ depense.amount| number_format(2) }} €</h4>
                         </div>
                     </div>
                 </div>
@@ -30,7 +29,7 @@
     </div>
     <div class="container-fluid">
         <h1>Depenses de la famille par catégorie : </h1>
-        <h2>Total : {{ total_family }} </h2>
+        <h2>Total : {{ total_family | number_format(2)}} €</h2>
         <div class="container">
         {% if (total_family > 0) %}
             {% for depense in depensesFamilyByCategory|sort((a, b) => a.amount < b.amount) %}
@@ -40,8 +39,7 @@
                     <div class="card-body">
                         <div class="card-title d-flex justify-content-between">
                                 <h4 class="mb-1">{{ depense.name }}</h4>
-                                <h4 class="mb-1">{{ depense.category.name }}</h4>
-                                <h4 class="mb-1">{{ depense.amount }}</h4>
+                                <h4 class="mb-1">{{ depense.amount| number_format(2) }} €</h4>
                         </div>
                     </div>
                 </div>

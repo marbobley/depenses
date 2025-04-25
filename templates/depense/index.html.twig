@@ -14,9 +14,9 @@
                                 <h4 class="mb-1">{{ depense.name }}</h4>
                                 <small class="text-muted">{{ depense.category.name }}</small>
                             {% if (depense.amount >= 0) %}
-                                <small class="text-muted">Depense : {{ depense.amount }}</small>
+                                <small class="text-muted">Depense : {{ depense.amount | number_format(2) }}</small>
                             {% else %}
-                                <small class="text-muted">Crédit : {{ depense.amount }}</small>
+                                <small class="text-muted">Crédit : {{ depense.amount  | number_format(2)}}</small>
                             {% endif %}
                             <small class="text-muted">Date : {{ depense.created|date('m/d/Y') }}</small>
 
@@ -40,9 +40,9 @@
                                 <h4 class="mb-1">{{ depenseFamilyByMember.name }}</h4>
                                 <small class="text-muted">{{ depenseFamilyByMember.category.name }}</small>
                             {% if (depenseFamilyByMember.amount >= 0) %}
-                                <small class="text-muted">Depense : {{ depenseFamilyByMember.amount }}</small>
+                                <small class="text-muted">Depense : {{ depenseFamilyByMember.amount | number_format(2) }}</small>
                             {% else %}
-                                <small class="text-muted">Crédit : {{ depenseFamilyByMember.amount }}</small>
+                                <small class="text-muted">Crédit : {{ depenseFamilyByMember.amount | number_format(2) }}</small>
                             {% endif %}
                             <small class="text-muted">Date : {{ depenseFamilyByMember.created|date('m/d/Y') }}</small>
                             <small class="text-muted">Edité : {{ depenseFamilyByMember.createdBy.username }}</small>
