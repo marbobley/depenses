@@ -13,6 +13,24 @@ use Doctrine\Common\Collections\Collection;
  */
 class ServiceDepense
 {
+    public function __construct(private ServiceDepenseFamily $serviceDepenseFamily)
+    {
+        
+    }
+
+    public function GetFamilyTotalMonth(User $user , string $month , string $year ): float
+    {
+        $members = $user->getFamily()->getMembers();
+        $total = 0;
+        foreach($members as $member)
+        {
+            $depenses = $member->getDepenses();
+            $total +=  $this->CalculateAmount($this->GetDepenseByMonthAndYear($depenses, $month, $year));
+
+
+        }
+        return $total;
+    }
     /**
      * Calculate total for the month for the user 
      */
@@ -99,6 +117,32 @@ class ServiceDepense
     {
 
         $depenses = $user->GetDepenses();
+        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
+        $uniqueCategories = $this->GetUniqueCategories($depenseByMonthYear);
+        $res = [];
+
+        foreach ($uniqueCategories as $uniqueCategory) {
+            $currentDepense = new Depense();
+            $currentCategory = new Category();
+            $currentCategory->setName($uniqueCategory->getName());
+
+            $currentDepense->setName('Total '.$uniqueCategory->getName());
+            $currentDepense->setCategory($currentCategory);
+
+            $depenseForCategory = $this->GetDepenseByCategory($depenseByMonthYear, $uniqueCategory);
+            $amount = $this->CalculateAmount($depenseForCategory);
+
+            $currentDepense->setAmount($amount);
+
+            $res[] = $currentDepense;
+        }
+
+        return $res;
+    }
+
+    public function GetFamilySumDepenseByCategory(User $user, string $month, string $year): array
+    {
+        $depenses = $this->serviceDepenseFamily->GetAllDepenses($user->getFamily());
         $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
         $uniqueCategories = $this->GetUniqueCategories($depenseByMonthYear);
         $res = [];

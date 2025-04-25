@@ -19,10 +19,15 @@ final class ChartDepenseController extends AbstractController
         $total = $depenseService->GetTotalMonth($this->getUser(),$currentMonth,$currentYear);
         $depensesByCategory = $depenseService->GetSumDepenseByCategory($this->getUser(),$currentMonth,$currentYear);
 
-        return $this->render('chart_depense/index.html.twig', [
+        $total_family = $depenseService->GetFamilyTotalMonth($this->getUser(),$currentMonth,$currentYear);;
+        $depensesFamilyByCategory = $depenseService->GetFamilySumDepenseByCategory($this->getUser(),$currentMonth,$currentYear);
+
+        return $this->render('depense/report.html.twig', [
             'controller_name' => 'ChartDepenseController',
             'depensesByCategory' => $depensesByCategory,
             'total' => $total,
+            'depensesFamilyByCategory' => $depensesFamilyByCategory,
+            'total_family' => $total_family,
         ]);
     }
     #[Route('/report/{month}/{year}', name: 'app_chart_depense_month_year', methods: ['GET'])]
@@ -31,10 +36,15 @@ final class ChartDepenseController extends AbstractController
         $total = $depenseService->GetTotalMonth($this->getUser(),$month,$year);
         $depensesByCategory = $depenseService->GetSumDepenseByCategory($this->getUser(),$month,$year);
 
-        return $this->render('chart_depense/index.html.twig', [
+        $total_family = $depenseService->GetFamilyTotalMonth($this->getUser(),$month,$year);;
+        $depensesFamilyByCategory = $depenseService->GetFamilySumDepenseByCategory($this->getUser(),$month,$year);
+
+        return $this->render('depense/report.html.twig', [
             'controller_name' => 'ChartDepenseController',
             'depensesByCategory' => $depensesByCategory,
             'total' => $total,
+            'depensesFamilyByCategory' => $depensesFamilyByCategory,
+            'total_family' => $total_family,
         ]);
     }
 }
