@@ -97,7 +97,10 @@ class ServiceDepenseTest extends KernelTestCase
             findOneBy(['username' => 'user'])
         ;
 
-        $total = $this->depenseService->GetTotalMonth($user);
+        $currentMonth = date('n');
+        $currentYear = date('Y');
+
+        $total = $this->depenseService->GetTotalMonth($user,$currentMonth,$currentYear);
 
         $this->assertSame($total, 217.0);
     }

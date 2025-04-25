@@ -8,8 +8,23 @@ use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
+/**
+ * Service to calculate depense, to sum , to organize by categories ...
+ */
 class ServiceDepense
 {
+    /**
+     * Calculate total for the month for the user 
+     */
+    public function GetTotalMonth(User $user , string $month , string $year ): float
+    {
+
+        $depenses = $user->getDepenses();
+        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
+
+        return $this->CalculateAmount($depenseByMonthYear);
+    }
+
     private function GetDepenseByCategory(Collection $depenses, Category $categoryFilter): Collection
     {
         $depenseByCategory = new ArrayCollection();
@@ -39,16 +54,6 @@ class ServiceDepense
         return $depenseMonthYear;
     }
 
-    public function GetTotalMonth(User $user): float
-    {
-        $currentMonth = date('n');
-        $currentYear = date('Y');
-
-        $depenses = $user->getDepenses();
-        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $currentMonth, $currentYear);
-
-        return $this->CalculateAmount($depenseByMonthYear);
-    }
 
     private function GetUniqueCategories(Collection $depenseByMonthYear): array
     {

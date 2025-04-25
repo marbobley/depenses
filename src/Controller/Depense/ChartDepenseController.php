@@ -13,7 +13,10 @@ final class ChartDepenseController extends AbstractController
     #[Route('/report', name: 'app_chart_depense', methods: ['GET'])]
     public function index(ServiceDepense $depenseService): Response
     {
-        $total = $depenseService->GetTotalMonth($this->getUser());
+        $currentMonth = date('n');
+        $currentYear = date('Y');
+
+        $total = $depenseService->GetTotalMonth($this->getUser(),$currentMonth,$currentYear);
         $depensesByCategory = $depenseService->GetSumDepenseByCategory($this->getUser());
 
         return $this->render('chart_depense/index.html.twig', [
