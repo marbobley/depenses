@@ -66,9 +66,9 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
         $this->serviceFamilyEntity->JoinFamily($family, $admin);
 
         $this->serviceFamilyEntity->SetMainMemberFamily($family_test, $mainUser);
-        $this->serviceFamilyEntity->JoinFamily($family, $mainUser);
-        $this->serviceFamilyEntity->JoinFamily($family, $user1);
-        $this->serviceFamilyEntity->JoinFamily($family, $user2);
+        $this->serviceFamilyEntity->JoinFamily($family_test, $mainUser);
+        $this->serviceFamilyEntity->JoinFamily($family_test, $user1);
+        $this->serviceFamilyEntity->JoinFamily($family_test, $user2);
 
         
         $cats_family = [];

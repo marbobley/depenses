@@ -3,6 +3,7 @@
 {% block title %}Rejoindre une famille{% endblock %}
 
 {% block body %}
+{% if is_granted('hasNoFamily') %}
     <section class="container px-4">
         <h1>Pour rejoindre la famille selectionnée, il faut saisir le mot de passe de la famille</h1>
         <h3>Demandez le mot de passe au chef.fe de famille !</3>
@@ -11,4 +12,9 @@
         {{ form_row(form.plainPassword, {label: 'Mot de passe'}) }}
         {{ form_end(form) }}
     </section>
+{% else %}
+    <section class="container px-4">
+        <h1>Vous appartenez déjà à une famille :  {{ app.user.family.name }}</h1>
+    </section>
+{% endif %}
 {% endblock %}
