@@ -3,6 +3,7 @@
 namespace App\Twig\Components;
 
 use App\Repository\DepenseRepository;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
 use Symfony\UX\LiveComponent\DefaultActionTrait;
@@ -29,6 +30,7 @@ final class DepenseSearchComponent
 
     public function __construct(
         private readonly DepenseRepository $depenseRepository,
+        private Security $security,
     ) {
     }
 
@@ -37,6 +39,8 @@ final class DepenseSearchComponent
      */
     public function getDepenses(): array
     {
-        return $this->depenseRepository->findByRangeYear($this->startDate, $this->endDate);
+        $user = $this->security->getUser();
+
+        return $this->depenseRepository->findByRangeYear($this->startDate, $this->endDate, $user);
     }
 }
