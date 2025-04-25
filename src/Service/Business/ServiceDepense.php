@@ -19,10 +19,21 @@ class ServiceDepense
     public function GetTotalMonth(User $user , string $month , string $year ): float
     {
         $depenses = $user->getDepenses();
-        
+
         $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
 
         return $this->CalculateAmount($depenseByMonthYear);
+    }
+    /**
+     * Calculate total for the year for the user 
+     */
+    public function GetTotalYear(User $user , string $year ): float
+    {
+        $depenses = $user->getDepenses();
+        
+        $depenseByYear = $this->GetDepenseByYear($depenses, $year);
+
+        return $this->CalculateAmount($depenseByYear);
     }
 
     private function GetDepenseByCategory(Collection $depenses, Category $categoryFilter): Collection
@@ -36,6 +47,22 @@ class ServiceDepense
         }
 
         return $depenseByCategory;
+    }
+
+    private function GetDepenseByYear(Collection $depenses, string $year) : Collection 
+    {
+        $depenseMonthYear = new ArrayCollection();
+
+        foreach ($depenses as $depense) {
+            $depenseYear = date('Y', $depense->getCreated()->getTimestamp());
+
+            if ($depenseYear === $year) {
+                $depenseMonthYear[] = $depense;
+            }
+        }
+
+        return $depenseMonthYear;
+
     }
 
     private function GetDepenseByMonthAndYear(Collection $depenses, string $month, string $year): Collection
