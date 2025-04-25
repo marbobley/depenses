@@ -54,15 +54,16 @@ class DepenseRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findByRangeYear(string $dateStart, string $dateEnd)
+    public function findByRangeYear(string $dateStart, string $dateEnd, User $user)
     {
         $formattedStartDate = \DateTimeImmutable::createFromFormat('Y-m-d', $dateStart);
         $formattedEndDate = \DateTimeImmutable::createFromFormat('Y-m-d', $dateEnd);
 
         return $this->createQueryBuilder('d')
-        ->andWhere('d.created >= :start and d.created < :end')
+        ->andWhere('d.created >= :start and d.created < :end and d.createdBy = :usr')
         ->setParameter('start', $formattedStartDate)
         ->setParameter('end', $formattedEndDate)
+        ->setParameter('usr', $user)
         ->orderBy('d.created', 'DESC')
         ->getQuery()
         ->getResult()

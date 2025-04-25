@@ -3,10 +3,16 @@
 {% block title %}Mise a jour du mot de passe de la famille{% endblock %}
 
 {% block body %}
+    {% if is_granted('isMainMemberFamily') %}
+        <section class="container px-4">
+            <h1>Vous êtes le.a chef.fe de la famille : {{ app.user.family.name }}</h1>
+            <h2>Vous pouvez définir un nouveau mot de passe :</h2>
+            {{ form_start(form) }}
+            {{ form_end(form) }}
+        </section>
+    {% else %}
     <section class="container px-4">
-        <h1>Vous êtes le.a chef.fe de la famille : {{ app.user.family.name }}</h1>
-        <h2>Vous pouvez définir un nouveau mot de passe :</h2>
-        {{ form_start(form) }}
-        {{ form_end(form) }}
+        <h1>Vous n'êtes pas le membre principal de la famille</h1>
     </section>
+    {% endif %}
 {% endblock %}

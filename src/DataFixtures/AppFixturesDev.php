@@ -41,17 +41,20 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
         $this->serviceFamilyEntity->CreateFamily($family);
 
 
-        $family1 = new Family();
-        $family1->setName('Famille_test');
-        $family1->setPassword($passwordFamily);
-        $this->serviceFamilyEntity->CreateFamily($family1);
+        $family_test = new Family();
+        $family_test->setName('Famille_test');
+        $family_test->setPassword($passwordFamily);
+        $this->serviceFamilyEntity->CreateFamily($family_test);
 
-        // 2. CREATE USER
+        // 2. CREATE USERS
         $admin = $this->serviceUserEntity->CreateNewUser('admin', $password, ['ROLE_ADMIN']);
+        $mainUser = $this->serviceUserEntity->CreateNewUser('mainUser', $password, ['ROLE_USER']);
+        $user1 = $this->serviceUserEntity->CreateNewUser('user1', $password, ['ROLE_USER']);
+        $user2 = $this->serviceUserEntity->CreateNewUser('user2', $password, ['ROLE_USER']);
 
         $cat1 = $this->serviceCategoryEntity->CreateNewCategory('Course', $admin);
         $cat2 = $this->serviceCategoryEntity->CreateNewCategory('Divers', $admin);
-        $cat3 = $this->serviceCategoryEntity->CreateNewCategory('Fixes', $admin);
+        $cat3 = $this->serviceCategoryEntity->CreateNewCategory('Fixes', $admin);       
 
         $cats = [];
 
@@ -62,14 +65,43 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
         $this->serviceFamilyEntity->SetMainMemberFamily($family, $admin);
         $this->serviceFamilyEntity->JoinFamily($family, $admin);
 
+        $this->serviceFamilyEntity->SetMainMemberFamily($family_test, $mainUser);
+        $this->serviceFamilyEntity->JoinFamily($family_test, $mainUser);
+        $this->serviceFamilyEntity->JoinFamily($family_test, $user1);
+        $this->serviceFamilyEntity->JoinFamily($family_test, $user2);
+
+        
+        $cats_family = [];
+        $cats_family[] = $this->serviceCategoryEntity->CreateNewCategory('Course', $mainUser);
+        $cats_family[] = $this->serviceCategoryEntity->CreateNewCategory('Divers', $user1);
+        $cats_family[] = $this->serviceCategoryEntity->CreateNewCategory('Assurances', $user2);
+        $cats_family[] = $this->serviceCategoryEntity->CreateNewCategory('Abonnement', $user1);
+        $cats_family[] = $this->serviceCategoryEntity->CreateNewCategory('Crédit', $user2);
+
         $rand = new Randomizer();
 
         for ($i = 0; $i < 100; ++$i) {
-            $this->serviceDepenseEntity->CreateNewDepense('admin_dep'.$i,
+                $this->serviceDepenseEntity->CreateNewDepense('admin_dep'.$i,
                 $rand->getFloat(0, 100),
                 $admin,
                 \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-20 week', '+1 week')),
-                $cats[$i % 2]);
+                $cats[$i % 3]);
+
+                $this->serviceDepenseEntity->CreateNewDepense('family_dep_main'.$i,
+                $rand->getFloat(0, 100),
+                $mainUser,
+                \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-20 week', '+1 week')),
+                $cats_family[$i % 5]);
+                $this->serviceDepenseEntity->CreateNewDepense('family_dep_usr1'.$i,
+                $rand->getFloat(0, 100),
+                $user1,
+                \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-20 week', '+1 week')),
+                $cats_family[$i % 5]);
+                $this->serviceDepenseEntity->CreateNewDepense('family_dep_usr2'.$i,
+                $rand->getFloat(0, 100),
+                $user2,
+                \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-20 week', '+1 week')),
+                $cats_family[$i % 5]);
         }
     }
 

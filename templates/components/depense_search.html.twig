@@ -25,7 +25,7 @@
                autofocus
         >
     </div>
-        <h1>Mes dépenses : Somme {{ serviceDepense.CalculateAmoutArray(this.Depenses) }}</h1>
+        <h1>Mes dépenses : Somme {{ serviceDepense.CalculateAmoutArray(this.Depenses) | number_format(2) }} €</h1>
         {% for depense in this.Depenses %}
             {{ include('partials/_form-amount.hmtl.twig', {depense: depense}, false) }}
         {% else %}

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ChartDepenseController!{% endblock %}
+
+{% block body %}
+<section class="container px-4">
+    <div class="container-fluid">
+        <h1>Liste de mes depenses par catégorie pour le mois en cours : </h1>
+        <h2>Total : {{ total | number_format(2)}} €</h2>
+        <div class="container">
+        {% if (total > 0.0) %}
+            {% for depense in depensesByCategory|sort((a, b) => b.amount <=> a.amount) %}
+
+                {{ component('ProgressBarDepense', {percentage: depense.amount * 100.0 / total}) }}
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between">
+                                <h4 class="mb-1">{{ depense.name }}</h4>
+                                <h4 class="mb-1">{{ depense.amount| number_format(2) }} €</h4>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <li>Aucun enregistrement en base de données.</li>
+            {% endfor %}
+        {% endif %}
+
+        </div>
+    </div>
+    <div class="container-fluid">
+        <h1>Depenses de la famille par catégorie : </h1>
+        <h2>Total : {{ total_family | number_format(2)}} €</h2>
+        <div class="container">
+        {% if (total_family > 0.0) %}
+            {% for depense in depensesFamilyByCategory|sort((a, b) => b.amount <=> a.amount) %}
+
+                {{ component('ProgressBarDepense', {percentage: depense.amount * 100.0 / total_family}) }}
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <div class="card-title d-flex justify-content-between">
+                                <h4 class="mb-1">{{ depense.name }}</h4>
+                                <h4 class="mb-1">{{ depense.amount| number_format(2) }} €</h4>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <li>Aucun enregistrement en base de données.</li>
+            {% endfor %}
+        {% endif %}
+
+        </div>
+    </div>
+</section>
+{% endblock %}
