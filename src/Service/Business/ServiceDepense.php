@@ -19,8 +19,15 @@ class ServiceDepense
     }
 
     public function GetFamilyTotalMonth(User $user , string $month , string $year ): float
-    {
-        $members = $user->getFamily()->getMembers();
+    {        
+        $family = $user->getFamily();
+        
+        if($family === null)
+            return 0;
+
+        $members = $family->getMembers();
+
+
         $total = 0;
         foreach($members as $member)
         {
@@ -142,7 +149,12 @@ class ServiceDepense
 
     public function GetFamilySumDepenseByCategory(User $user, string $month, string $year): array
     {
-        $depenses = $this->serviceDepenseFamily->GetAllDepenses($user->getFamily());
+        $family = $user->getFamily();
+
+        if($family === null)
+            return [];
+
+        $depenses = $this->serviceDepenseFamily->GetAllDepenses($family);
         $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
         $uniqueCategories = $this->GetUniqueCategories($depenseByMonthYear);
         $res = [];
