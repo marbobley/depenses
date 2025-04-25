@@ -95,13 +95,11 @@ class ServiceDepense
         return $uniqueCategories;
     }
 
-    public function GetSumDepenseByCategory(User $user): array
+    public function GetSumDepenseByCategory(User $user, string $month, string $year): array
     {
-        $currentMonth = date('n');
-        $currentYear = date('Y');
 
         $depenses = $user->GetDepenses();
-        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $currentMonth, $currentYear);
+        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
         $uniqueCategories = $this->GetUniqueCategories($depenseByMonthYear);
         $res = [];
 

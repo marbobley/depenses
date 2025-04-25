@@ -6,6 +6,7 @@
 <section class="container px-4">
     <div class="container-fluid">
         <h1>Liste des depenses par catégorie pour le mois en cours : </h1>
+        <h2>Total : {{ total }} </h2>
         <div class="container">
         {% if (total > 0) %}
             {% for depense in depensesByCategory|sort((a, b) => a.amount < b.amount) %}
