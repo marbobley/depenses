@@ -79,8 +79,10 @@ class ServiceDepenseTest extends KernelTestCase
             getRepository(User::class)->
             findOneBy(['username' => 'user'])
         ;
+        $currentMonth = date('n');
+        $currentYear = date('Y');
 
-        $categoriesSum = $this->depenseService->GetSumDepenseByCategory($user);
+        $categoriesSum = $this->depenseService->GetSumDepenseByCategory($user, $currentMonth, $currentYear );
         $amount17 = $categoriesSum[0]->getAmount();
         $amount100_0 = $categoriesSum[1]->getAmount();
         $amount100_1 = $categoriesSum[2]->getAmount();
