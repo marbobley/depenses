@@ -8,23 +8,7 @@
         <a href="{{ path('app_depense_new') }}" class="btn btn-primary">Ajouter</a>
         <ul class="list-group list-group-flush">
             {% for depense in depenses %}
-                <div class="card mb-1">
-                    <div class="card-body">
-                        <div class="card-title d-flex justify-content-between">
-                                <h4 class="mb-1">{{ depense.name }}</h4>
-                                <small class="text-muted">{{ depense.category.name }}</small>
-                            {% if (depense.amount >= 0) %}
-                                <small class="text-muted">Depense : {{ depense.amount | number_format(2) }}</small>
-                            {% else %}
-                                <small class="text-muted">Crédit : {{ depense.amount  | number_format(2)}}</small>
-                            {% endif %}
-                            <small class="text-muted">Date : {{ depense.created|date('m/d/Y') }}</small>
-
-                        </div>
-                        <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-secondary">Editer</a>
-                        <a href="{{ path('app_depense_delete', {id: depense.id}) }}" class="btn btn-warning">Supprimer</a>
-                    </div>
-                </div>
+                {{ include('partials/_form-amount.hmtl.twig', {depense: depense, edit:true}, false) }}                
             {% else %}
                 <li>Aucun enregistrement en base de données.</li>
             {% endfor %}
@@ -33,22 +17,8 @@
         <h1>Les dépenses de ma famille</h1>
         <ul class="list-group list-group-flush">
             {% for depenseFamilyByMember in depensesFamily %}
-
-                {% if (depenseFamilyByMember.CreatedBy != app.user) %}<div class="card mb-1">
-                    <div class="card-body">
-                        <div class="card-title d-flex justify-content-between">
-                                <h4 class="mb-1">{{ depenseFamilyByMember.name }}</h4>
-                                <small class="text-muted">{{ depenseFamilyByMember.category.name }}</small>
-                            {% if (depenseFamilyByMember.amount >= 0) %}
-                                <small class="text-muted">Depense : {{ depenseFamilyByMember.amount | number_format(2) }}</small>
-                            {% else %}
-                                <small class="text-muted">Crédit : {{ depenseFamilyByMember.amount | number_format(2) }}</small>
-                            {% endif %}
-                            <small class="text-muted">Date : {{ depenseFamilyByMember.created|date('m/d/Y') }}</small>
-                            <small class="text-muted">Edité : {{ depenseFamilyByMember.createdBy.username }}</small>
-                        </div>
-                    </div>
-                </div>
+                {% if (depenseFamilyByMember.CreatedBy != app.user) %}
+                    {{ include('partials/_form-amount.hmtl.twig', {depense: depenseFamilyByMember , edit:false}, false) }}  
                 {% endif %}
 
             {% else %}
