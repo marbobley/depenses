@@ -30,7 +30,7 @@
             </trans-unit>
 
             <trans-unit id="title.login">
-                <source>login</source>
+                <source>title.login</source>
                 <target>Connexion</target>
             </trans-unit>
             
