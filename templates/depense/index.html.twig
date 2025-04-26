@@ -4,26 +4,51 @@
 
 {% block body %}
     <section class="container px-4">
-        <h1>Mes dépenses : Somme {{ serviceDepense.CalculateAmoutArray(depenses) }}</h1>
-        <a href="{{ path('app_depense_new') }}" class="btn btn-primary">Ajouter</a>
-        <ul class="list-group list-group-flush">
-            {% for depense in depenses %}
-                {{ include('partials/_form-amount.hmtl.twig', {depense: depense, edit:true}, false) }}                
-            {% else %}
-                <li>Aucun enregistrement en base de données.</li>
-            {% endfor %}
-        </ul>
+        <div class="containter  mb-2">
+            <a href="{{ path('app_depense_new') }}" class="btn btn-primary">Ajouter</a>
+        </div>
 
-        <h1>Les dépenses de ma famille</h1>
-        <ul class="list-group list-group-flush">
-            {% for depenseFamilyByMember in depensesFamily %}
-                {% if (depenseFamilyByMember.CreatedBy != app.user) %}
-                    {{ include('partials/_form-amount.hmtl.twig', {depense: depenseFamilyByMember , edit:false}, false) }}  
-                {% endif %}
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Mes dépenses : Somme {{ serviceDepense.CalculateAmoutArray(depenses) | number_format(2) }} €
+                </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">      
+                    <ul class="list-group list-group-flush">
+                        {% for depense in depenses %}
+                            {{ include('partials/_form-amount.hmtl.twig', {depense: depense, edit:true}, false) }}                
+                        {% else %}
+                            <li>Aucun enregistrement en base de données.</li>
+                        {% endfor %}
+                    </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Les dépenses de ma famille
+                </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                        {% for depenseFamilyByMember in depensesFamily %}
+                            {% if (depenseFamilyByMember.CreatedBy != app.user) %}
+                                {{ include('partials/_form-amount.hmtl.twig', {depense: depenseFamilyByMember , edit:false}, false) }}  
+                            {% endif %}
 
-            {% else %}
-                <li>Aucun enregistrement en base de données.</li>
-            {% endfor %}
-        </ul>
+                        {% else %}
+                            <li>Aucun enregistrement en base de données.</li>
+                        {% endfor %}
+                    </ul>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 {% endblock %}
