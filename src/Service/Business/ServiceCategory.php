@@ -17,17 +17,32 @@ class ServiceCategory
     public function GetAllCategories(User $user) : array 
     {
         $family = $user->getFamily();
-
         $categories = [];
-        
-        foreach($family->getMembers() as $members)
+
+        if($family === null)
         {
-            foreach($members->getCategories() as $cat)
+            return $this->GetDistinctCategory($user);
+        }
+        
+        foreach($family->getMembers() as $member)
+        {
+            foreach($this->GetDistinctCategory($member) as $cat)
             {
                 $categories[] = $cat;
             }
         }
 
+        return $categories;
+    }
+
+    private function GetDistinctCategory(User $user)
+    {
+        $categories = [];
+
+        foreach($user->getCategories() as $cat)
+        {
+            $categories[] = $cat;
+        }
         return $categories;
     }
 }
