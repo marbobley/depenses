@@ -6,7 +6,9 @@
         </div>
         <div class="card-title d-flex justify-content-between">
             <h5 class="mb-1">{{ depense.created|date('d M Y') }}</h5>
-            <h5 class="mb-1">{{ depense.createdBy.username }}</h5>
+            {% if showCreated %}
+                <h5 class="mb-1">{{ depense.createdBy.username }}</h5>
+            {% endif %}
         </div>
         {% if(edit) %}
             <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-secondary">Editer</a>

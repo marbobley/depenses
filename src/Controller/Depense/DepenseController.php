@@ -5,6 +5,7 @@ namespace App\Controller\Depense;
 use App\Entity\Depense;
 use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
+use App\Service\Business\ServiceDepense;
 use App\Service\Entity\ServiceDepenseEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
@@ -77,5 +78,14 @@ final class DepenseController extends AbstractController
         // / to create variable for twig
         return $this->render('depense/search.html.twig',
             ['startDate' => '', 'endDate' => '']);
+    }
+
+    #[Route('/report', name: 'app_chart_depense', methods: ['GET'])]
+    public function report(): Response    {
+
+        return $this->render('depense/report.html.twig', [
+            'controller_name' => 'ChartDepenseController',
+            'startDate' => '',
+        ]);
     }
 }

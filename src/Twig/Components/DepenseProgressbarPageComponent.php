@@ -2,9 +2,7 @@
 
 namespace App\Twig\Components;
 
-use App\Repository\DepenseRepository;
 use App\Service\Business\ServiceDepense;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
@@ -18,6 +16,10 @@ final class DepenseProgressbarPageComponent
     #[LiveProp(writable: true)]
     public string $startDate;
 
+
+    #[LiveProp(writable: false)]
+    public string $type;
+
     public function __construct(
         private readonly ServiceDepense $serviceDepense,
         private Security $security,
@@ -29,10 +31,15 @@ final class DepenseProgressbarPageComponent
         $currentMonth = date('n', strtotime($this->startDate));
         $currentYear = date('Y', strtotime($this->startDate));
         $user = $this->security->getUser();
-        //depensesByCategory = $depenseService->GetSumDepenseByCategory($this->getUser(),$currentMonth,$currentYear);
 
-        $total = $this->serviceDepense->GetTotalMonth($user,$currentMonth,$currentYear);
-        return $total;
+        if( $this->type === 'user')
+        {
+            return $this->serviceDepense->GetTotalMonth($user,$currentMonth,$currentYear);
+        }
+        else 
+        {
+            return $this->serviceDepense->GetFamilyTotalMonth($user,$currentMonth,$currentYear);
+        }
     }
 
     /**
@@ -43,6 +50,14 @@ final class DepenseProgressbarPageComponent
         $currentMonth = date('n', strtotime($this->startDate));
         $currentYear = date('Y', strtotime($this->startDate));
         $user = $this->security->getUser();
-        return $this->serviceDepense->GetSumDepenseByCategory($user,$currentMonth,$currentYear);
+
+        if( $this->type === 'user')
+        {
+            return $this->serviceDepense->GetSumDepenseByCategory($user,$currentMonth,$currentYear);
+        }
+        else 
+        {
+            return $this->serviceDepense->GetFamilySumDepenseByCategory($user,$currentMonth,$currentYear);
+        }
     }
 }

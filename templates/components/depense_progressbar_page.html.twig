@@ -13,13 +13,21 @@
         >
     </div>
     <div class="container-fluid">
-        <h1>Liste de mes depenses par catégorie pour le mois en cours : </h1>
+    {% if  type !=  'family' %}
+        <h1>Mes depenses par catégorie pour le mois en cours : </h1>
+    {% else %}
+        <h1>Les dépenses de la famille pour le mois en cours : </h1>
+    {% endif %}
         <h2>Total : {{ this.total | number_format(2)}} €</h2>
         <div class="container">
         {% if (this.total > 0.0) %}
             {% for depense in this.depenses|sort((a, b) => b.amount <=> a.amount) %}
                 {{ component('ProgressBarDepense', {percentage: depense.amount * 100.0 / this.total}) }}
-                {{ include('partials/_form-amount.hmtl.twig', {depense: depense , edit:false}, false) }}
+                {% if  type !=  'family' %}
+                    {{ include('partials/_form-amount.hmtl.twig', {depense: depense , edit:false , showCreated:true}, false) }}
+                {% else %}
+                    {{ include('partials/_form-amount.hmtl.twig', {depense: depense , edit:false , showCreated:false}, false) }}
+                {% endif %}
             {% else %}
                 <li>Aucun enregistrement en base de données.</li>
             {% endfor %}

@@ -22,6 +22,7 @@
             {% endfor %}
         </ul>
 
+    {% if is_granted('hasNoFamily') == false %}
         <h1>Liste des catégories de la famille</h1>
         <ul class="list-group list-group-flush">
             {% for categoriesByUser in categoriesFamily %}
@@ -38,5 +39,6 @@
                 <li>Aucun enregistrement en base de données.</li>
             {% endfor %}
         </ul>
+    {% endif %}
     </section>
 {% endblock %}

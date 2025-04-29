@@ -6,11 +6,15 @@
     <section class="container px-4">
         {{ component('depense_progressbar_page', {
             startDate: startDate,
+            type: 'user',
             }) }}
     </section>
-    <section class="container px-4">
-        {{ component('depense_progressbar_page', {
-            startDate: startDate,
-            }) }}
-    </section>    
+    {% if is_granted('hasNoFamily') == false %}
+        <section class="container px-4">
+            {{ component('depense_progressbar_page', {
+                startDate: startDate,
+                type: 'family',
+                }) }}
+        </section>  
+    {% endif %}  
 {% endblock %}
