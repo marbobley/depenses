@@ -113,16 +113,35 @@ class ServiceDepense
     {   
         $res = [];
 
-        $depenses = $user->GetDepenses();
+        $family = $user->getFamily();
 
-        foreach($months as $month)
+        if($family === null)
         {
-            $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);       
-
-            $res[] = $this->GetSumCategory($depenseByMonthYear, $category);
+            $depenses = $user->GetDepenses();
+    
+            foreach($months as $month)
+            {
+                $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);       
+    
+                $res[] = $this->GetSumCategory($depenseByMonthYear, $category);
+            }
+    
+            return $res;
+        }
+        else
+        {
+            $depenses = $this->serviceDepenseFamily->GetAllDepenses($family);
+    
+            foreach($months as $month)
+            {
+                $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);       
+    
+                $res[] = $this->GetSumCategory($depenseByMonthYear, $category);
+            }
+    
+            return $res;
         }
 
-        return $res;
     }
 
     private function GetSumCategory(Collection $depenses , Category $category ) : float
