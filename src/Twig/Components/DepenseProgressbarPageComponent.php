@@ -16,7 +16,6 @@ final class DepenseProgressbarPageComponent
     #[LiveProp(writable: true)]
     public string $startDate;
 
-
     #[LiveProp(writable: false)]
     public string $type;
 
@@ -26,38 +25,32 @@ final class DepenseProgressbarPageComponent
     ) {
     }
 
-    public function GetTotal() : float{
-
+    public function GetTotal(): float
+    {
         $currentMonth = date('n', strtotime($this->startDate));
         $currentYear = date('Y', strtotime($this->startDate));
         $user = $this->security->getUser();
 
-        if( $this->type === 'user')
-        {
-            return $this->serviceDepense->GetTotalMonth($user,$currentMonth,$currentYear);
-        }
-        else 
-        {
-            return $this->serviceDepense->GetFamilyTotalMonth($user,$currentMonth,$currentYear);
+        if ('user' === $this->type) {
+            return $this->serviceDepense->GetTotalMonth($user, $currentMonth, $currentYear);
+        } else {
+            return $this->serviceDepense->GetFamilyTotalMonth($user, $currentMonth, $currentYear);
         }
     }
 
     /**
      * @return array<Depenses>
      */
-    public function GetDepenses() : array
+    public function GetDepenses(): array
     {
         $currentMonth = date('n', strtotime($this->startDate));
         $currentYear = date('Y', strtotime($this->startDate));
         $user = $this->security->getUser();
 
-        if( $this->type === 'user')
-        {
-            return $this->serviceDepense->GetSumDepenseByCategory($user,$currentMonth,$currentYear);
-        }
-        else 
-        {
-            return $this->serviceDepense->GetFamilySumDepenseByCategory($user,$currentMonth,$currentYear);
+        if ('user' === $this->type) {
+            return $this->serviceDepense->GetSumDepenseByCategory($user, $currentMonth, $currentYear);
+        } else {
+            return $this->serviceDepense->GetFamilySumDepenseByCategory($user, $currentMonth, $currentYear);
         }
     }
 }

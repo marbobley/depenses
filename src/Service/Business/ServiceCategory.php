@@ -11,23 +11,19 @@ class ServiceCategory
 {
     public function __construct()
     {
-        
     }
 
-    public function GetAllCategories(User $user) : array 
+    public function GetAllCategories(User $user): array
     {
         $family = $user->getFamily();
         $categories = [];
 
-        if($family === null)
-        {
+        if (null === $family) {
             return $this->GetDistinctCategory($user);
         }
-        
-        foreach($family->getMembers() as $member)
-        {
-            foreach($this->GetDistinctCategory($member) as $cat)
-            {
+
+        foreach ($family->getMembers() as $member) {
+            foreach ($this->GetDistinctCategory($member) as $cat) {
                 $categories[] = $cat;
             }
         }
@@ -39,10 +35,10 @@ class ServiceCategory
     {
         $categories = [];
 
-        foreach($user->getCategories() as $cat)
-        {
+        foreach ($user->getCategories() as $cat) {
             $categories[] = $cat;
         }
+
         return $categories;
     }
 }

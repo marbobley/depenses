@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Command;
 
@@ -23,17 +23,17 @@ class TestRouteAdminCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $outputInterface): int
     {
-        $output=null;
-        $retval=null;
-        exec('php bin/console debug:route ',$retval,$output);
+        $output = null;
+        $retval = null;
+        exec('php bin/console debug:route ', $retval, $output);
         $outputInterface->writeln($retval);
-        //0.  use App\Repository\UserRepository; is existing ? 
+        // 0.  use App\Repository\UserRepository; is existing ?
 
-        //1. If not exists create tests folder 
-        //2. If not exists create tests/Controller
-        //3. If not exists create tests/Controller/ResponseIsSuccessful
-        //4. If exists , delete AllAdminRouteTest.php
-       
+        // 1. If not exists create tests folder
+        // 2. If not exists create tests/Controller
+        // 3. If not exists create tests/Controller/ResponseIsSuccessful
+        // 4. If exists , delete AllAdminRouteTest.php
+
         return Command::SUCCESS;
 
         // or return this if some error happened during the execution

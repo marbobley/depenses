@@ -27,7 +27,6 @@ final class JoinController extends AbstractController
             $plainPassword = $data['plainPassword'];
             $hashPassword = $hasher->hash($plainPassword);
 
-
             if ($hashPassword === $family->getPassword()) {
                 $user = $this->getUser();
                 $familyService->JoinFamily($family, $user);

@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="card-title d-flex justify-content-between">
             <h4 class="mb-1">{{ depense.category.name }}</h4>
-            <small class="text-muted">Valeur : {{ depense.amount | number_format(2)}} €</small>
+            <small class="text-muted">Valeur : {{ depense.amount|number_format(2) }} €</small>
         </div>
         <div class="card-title d-flex justify-content-between">
             <h5 class="mb-1">{{ depense.created|date('d M Y') }}</h5>
@@ -10,7 +10,7 @@
                 <h5 class="mb-1">{{ depense.createdBy.username }}</h5>
             {% endif %}
         </div>
-        {% if(edit) %}
+        {% if (edit) %}
             <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-secondary">Editer</a>
             <a href="{{ path('app_depense_delete', {id: depense.id}) }}" class="btn btn-warning">Supprimer</a>
         {% endif %}

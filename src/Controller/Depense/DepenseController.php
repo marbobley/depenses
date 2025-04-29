@@ -2,22 +2,16 @@
 
 namespace App\Controller\Depense;
 
+use App\Entity\Depense;
 use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
 use App\Service\Entity\ServiceDepenseEntity;
+use App\Service\Utils\ServiceChartjs;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Entity\Category;
-use App\Entity\Depense;
-use App\Service\Business\ServiceCategory;
-use App\Service\Business\ServiceDepense;
-use App\Service\Utils\ServiceChartjs;
-use PhpParser\Builder\Method;
-use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
-use Symfony\UX\Chartjs\Model\Chart;
 
 #[Route('/depense')]
 final class DepenseController extends AbstractController
@@ -87,21 +81,19 @@ final class DepenseController extends AbstractController
     }
 
     #[Route('/report', name: 'app_chart_depense', methods: ['GET'])]
-    public function report(): Response    {
-
+    public function report(): Response
+    {
         return $this->render('depense/report.html.twig', [
             'controller_name' => 'ChartDepenseController',
             'startDate' => '',
         ]);
     }
 
-
-    #[Route('/chartjs/{year}', name: 'app_depense_chartjs_year', methods:['GET'])]
-    #[Route('/chartjs', name: 'app_depense_chartjs', methods:['GET'])]
-    public function __invoke(ServiceChartjs $serviceChartjs , ?string $year): Response
+    #[Route('/chartjs/{year}', name: 'app_depense_chartjs_year', methods: ['GET'])]
+    #[Route('/chartjs', name: 'app_depense_chartjs', methods: ['GET'])]
+    public function __invoke(ServiceChartjs $serviceChartjs, ?string $year): Response
     {
-        if(!$year)
-        {
+        if (!$year) {
             $year = date('Y');
         }
 

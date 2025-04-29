@@ -10,12 +10,12 @@
         {{ form_errors(registrationForm) }}
 
         {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.username, {label :  'label.username'|trans }) }}
+            {{ form_row(registrationForm.username, {label: 'label.username'|trans}) }}
             {{ form_row(registrationForm.plainPassword, {
                 label: 'label.password'|trans,
             }) }}
 
-            {#<button type="submit" class="btn">Register</button>#}
+            {# <button type="submit" class="btn">Register</button> #}
                 <button class="btn btn-lg btn-primary" type="submit">
                     {{ 'register'|trans }}
                 </button>

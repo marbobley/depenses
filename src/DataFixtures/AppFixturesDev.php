@@ -40,7 +40,6 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
         $family->setPassword($passwordFamily);
         $this->serviceFamilyEntity->CreateFamily($family);
 
-
         $family_test = new Family();
         $family_test->setName('Famille_test');
         $family_test->setPassword($passwordFamily);
@@ -54,7 +53,7 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
 
         $cat1 = $this->serviceCategoryEntity->CreateNewCategory('Course', $admin);
         $cat2 = $this->serviceCategoryEntity->CreateNewCategory('Divers', $admin);
-        $cat3 = $this->serviceCategoryEntity->CreateNewCategory('Fixes', $admin);       
+        $cat3 = $this->serviceCategoryEntity->CreateNewCategory('Fixes', $admin);
 
         $cats = [];
 
@@ -70,7 +69,6 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
         $this->serviceFamilyEntity->JoinFamily($family_test, $user1);
         $this->serviceFamilyEntity->JoinFamily($family_test, $user2);
 
-        
         $cats_family = [];
         $cats_family[] = $this->serviceCategoryEntity->CreateNewCategory('Course', $mainUser);
         $cats_family[] = $this->serviceCategoryEntity->CreateNewCategory('Divers', $user1);
@@ -81,23 +79,23 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
         $rand = new Randomizer();
 
         for ($i = 0; $i < 100; ++$i) {
-                $this->serviceDepenseEntity->CreateNewDepense('admin_dep'.$i,
+            $this->serviceDepenseEntity->CreateNewDepense('admin_dep'.$i,
                 $rand->getFloat(0, 100),
                 $admin,
                 \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-20 week', '+1 week')),
                 $cats[$i % 3]);
 
-                $this->serviceDepenseEntity->CreateNewDepense('family_dep_main'.$i,
+            $this->serviceDepenseEntity->CreateNewDepense('family_dep_main'.$i,
                 $rand->getFloat(0, 100),
                 $mainUser,
                 \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-30 week', '+1 week')),
                 $cats_family[$i % 5]);
-                $this->serviceDepenseEntity->CreateNewDepense('family_dep_usr1'.$i,
+            $this->serviceDepenseEntity->CreateNewDepense('family_dep_usr1'.$i,
                 $rand->getFloat(0, 100),
                 $user1,
                 \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-43 week', '+1 week')),
                 $cats_family[$i % 5]);
-                $this->serviceDepenseEntity->CreateNewDepense('family_dep_usr2'.$i,
+            $this->serviceDepenseEntity->CreateNewDepense('family_dep_usr2'.$i,
                 $rand->getFloat(0, 100),
                 $user2,
                 \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-50 week', '+1 week')),
