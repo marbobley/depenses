@@ -95,7 +95,7 @@ final class DepenseController extends AbstractController
     }
 
 
-    #[Route('/chartjs', name: 'app_chartjs')]
+    #[Route('/chartjs', name: 'app_depense_chartjs')]
     public function __invoke(ChartBuilderInterface $chartBuilder, 
                                 ServiceDepense $serviceDepense, 
                                 ServiceChartjs $serviceChartjs,

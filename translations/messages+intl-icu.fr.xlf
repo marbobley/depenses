@@ -106,6 +106,10 @@
                 <source>nav.depense.report</source>
                 <target>Rapport</target>
             </trans-unit>
+            <trans-unit id="nav.depense.chartjs">
+                <source>nav.depense.chartjs</source>
+                <target>Rapport N°2</target>
+            </trans-unit>
             <trans-unit id="nav.depense.search">
                 <source>nav.depense.search</source>
                 <target>Recherche</target>
