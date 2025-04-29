@@ -120,6 +120,24 @@ class ServiceDepense
         return $uniqueCategories;
     }
 
+    private  function SetDepense(Category $category , Collection $depenses , User $user ) : Depense
+    {
+        $currentDepense = new Depense();
+        $currentCategory = new Category();
+        $currentCategory->setName($category->getName());
+
+        $currentDepense->setName('Total '.$category->getName());
+        $currentDepense->setCategory($currentCategory);
+
+        $depenseForCategory = $this->GetDepenseByCategory($depenses, $category);
+        $amount = $this->CalculateAmount($depenseForCategory);
+
+        $currentDepense->setCreatedBy($user);
+        $currentDepense->setAmount($amount);
+
+        return $currentDepense;
+    }
+
     public function GetSumDepenseByCategory(User $user, string $month, string $year): array
     {
 
@@ -129,19 +147,7 @@ class ServiceDepense
         $res = [];
 
         foreach ($uniqueCategories as $uniqueCategory) {
-            $currentDepense = new Depense();
-            $currentCategory = new Category();
-            $currentCategory->setName($uniqueCategory->getName());
-
-            $currentDepense->setName('Total '.$uniqueCategory->getName());
-            $currentDepense->setCategory($currentCategory);
-
-            $depenseForCategory = $this->GetDepenseByCategory($depenseByMonthYear, $uniqueCategory);
-            $amount = $this->CalculateAmount($depenseForCategory);
-
-            $currentDepense->setAmount($amount);
-
-            $res[] = $currentDepense;
+            $res [] = $this->SetDepense($uniqueCategory, $depenseByMonthYear , $user);
         }
 
         return $res;
@@ -160,19 +166,7 @@ class ServiceDepense
         $res = [];
 
         foreach ($uniqueCategories as $uniqueCategory) {
-            $currentDepense = new Depense();
-            $currentCategory = new Category();
-            $currentCategory->setName($uniqueCategory->getName());
-
-            $currentDepense->setName('Total '.$uniqueCategory->getName());
-            $currentDepense->setCategory($currentCategory);
-
-            $depenseForCategory = $this->GetDepenseByCategory($depenseByMonthYear, $uniqueCategory);
-            $amount = $this->CalculateAmount($depenseForCategory);
-
-            $currentDepense->setAmount($amount);
-
-            $res[] = $currentDepense;
+            $res [] = $this->SetDepense($uniqueCategory, $depenseByMonthYear , $user);
         }
 
         return $res;
