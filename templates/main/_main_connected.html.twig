@@ -27,19 +27,6 @@
         </div>
     </div>
 </div>
-   
-   
-   {#<div class="container px-4 text-center">
-
-        {% if is_granted('hasNoFamily') == false %}
-            <h1 class="fw-bolder">
-                Tu appartiens à la famille {{ app.user.family.name }}!!! 
-            </h1>
-        {% endif %}
-        {% if is_granted('IsMainMemberFamily') %}
-            <h1 class="fw-bolder">Tu es à lea chef.fe de {{ app.user.family.name }}!!! </h1>
-        {% endif %}
-    </div>#} 
 </header>
 <section>
     {{ include(('main/_main_WidgetArea.html.twig')) }}
