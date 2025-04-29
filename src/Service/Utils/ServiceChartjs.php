@@ -2,32 +2,57 @@
 
 namespace App\Service\Utils;
 
+use App\Entity\Category;
 use App\Entity\Depense;
+use App\Entity\User;
+use App\Service\Business\ServiceCategory;
+use App\Service\Business\ServiceDepense;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 
 class ServiceChartjs
 {
-    /**
-     * param array<Depenses> $depensesByMonthByCategory
-     */
-    public function TransformToDataSet(array $depensesByMonthByCategory) : array 
+    public function __construct(private ServiceCategory $serviceCategory, 
+                                private ChartBuilderInterface $chartBuilder,
+                                private ServiceDepense $serviceDepense)
     {
-        $res = []; 
-        foreach($depensesByMonthByCategory as $depense)
+        
+    }
+
+    public function GetChartMonth(User $user, string $year) : Chart
+    {
+        $months = ['1','2','3','4','5','6','7','8', '9', '10', '11', '12'];
+        $categories = $this->serviceCategory->GetAllCategories($user);
+
+        $res = [];
+        foreach($categories as $category)
         {
-            if( $depense instanceof Depense)
+            if( $category instanceof Category)
             {
-                $current = [
-                    'label' => $depense->getCategory()->getName(),
-                    'backgroundColor' => 'rgb(255, 99, 132, .4)',
+
+                $color = rand(1,255);
+                $res[] = [
+                    'label' => $category->getName(),
+                    'backgroundColor' => sprintf('rgb(%s, 99, 132, .4)',$color),
                     'borderColor' => 'rgb(255, 99, 132)',
-                    'data' => [2, 10, 5, 18, 20, 30, 45],
+                    'data' => $this->serviceDepense->GetDepenseForCategoryForMonth($user, $category , $months , $year),
     
                 ];
-    
-                $res[] = $current;
             }
         }
+    
 
-        return $res;
+        $chartBar = $this->chartBuilder->createChart(Chart::TYPE_BAR);
+        $chartBar->setData([
+            'labels' => ['Janvier', 'Fevrier', 'Mars', 'Avril' , 'Mai' , 'Juin' , 'Juillet' , 'Aout', 'Septembre', 'Octobre', 'Novembre','Decembre' ],
+            'datasets' => $res
+        ]
+
+        );
+        $chartBar->setOptions([
+            'maintainAspectRatio' => false,
+        ]);
+
+        return $chartBar;
     }
 }

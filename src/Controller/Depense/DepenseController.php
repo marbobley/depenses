@@ -15,6 +15,7 @@ use App\Entity\Depense;
 use App\Service\Business\ServiceCategory;
 use App\Service\Business\ServiceDepense;
 use App\Service\Utils\ServiceChartjs;
+use PhpParser\Builder\Method;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use Symfony\UX\Chartjs\Model\Chart;
 
@@ -95,46 +96,16 @@ final class DepenseController extends AbstractController
     }
 
 
-    #[Route('/chartjs', name: 'app_depense_chartjs')]
-    public function __invoke(ChartBuilderInterface $chartBuilder, 
-                                ServiceDepense $serviceDepense, 
-                                ServiceChartjs $serviceChartjs,
-                                ServiceCategory $serviceCategory, 
-                                ): Response
+    #[Route('/chartjs/{year}', name: 'app_depense_chartjs_year', methods:['GET'])]
+    #[Route('/chartjs', name: 'app_depense_chartjs', methods:['GET'])]
+    public function __invoke(ServiceChartjs $serviceChartjs , ?string $year): Response
     {
-        $months = ['1','2','3','4','5','6','7','8', '9', '10', '11', '12'];
-
-        $categories = $serviceCategory->GetAllCategories($this->getUser());
-
-        $res = [];
-        foreach($categories as $category)
+        if(!$year)
         {
-            if( $category instanceof Category)
-            {
-
-                $color = rand(1,255);
-                $res[] = [
-                    'label' => $category->getName(),
-                    'backgroundColor' => sprintf('rgb(%s, 99, 132, .4)',$color),
-                    'borderColor' => 'rgb(255, 99, 132)',
-                    'data' => $serviceDepense->GetDepenseForCategoryForMonth($this->getUser(), $category , $months , '2025'),
-    
-                ];
-            }
+            $year = date('Y');
         }
-    
 
-        $chartBar = $chartBuilder->createChart(Chart::TYPE_BAR);
-        $chartBar->setData([
-            'labels' => ['Janvier', 'Fevrier', 'Mars', 'Avril' , 'Mai' , 'Juin' , 'Juillet' , 'Aout', 'Septembre', 'Octobre', 'Novembre','Decembre' ],
-            'datasets' => $res
-        ]
-
-        );
-        $chartBar->setOptions([
-            'maintainAspectRatio' => false,
-        ]);
-       
+        $chartBar = $serviceChartjs->GetChartMonth($this->getUser(), $year);
 
         return $this->render('main/chartjs.html.twig', [
             'controller_name' => 'MainController',
