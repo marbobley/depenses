@@ -30,7 +30,7 @@
             </trans-unit>
 
             <trans-unit id="title.login">
-                <source>login</source>
+                <source>title.login</source>
                 <target>Connexion</target>
             </trans-unit>
             
@@ -106,6 +106,10 @@
                 <source>nav.depense.report</source>
                 <target>Rapport</target>
             </trans-unit>
+            <trans-unit id="nav.depense.chartjs">
+                <source>nav.depense.chartjs</source>
+                <target>Rapport N°2</target>
+            </trans-unit>
             <trans-unit id="nav.depense.search">
                 <source>nav.depense.search</source>
                 <target>Recherche</target>
@@ -125,7 +129,7 @@
             </trans-unit>
             <trans-unit id="nav.family.password">
                 <source>nav.family.password</source>
-                <target>Chosir le mot de passe</target>
+                <target>Choisir le mot de passe</target>
             </trans-unit>
             <trans-unit id="nav.family.leave">
                 <source>nav.family.leave</source>

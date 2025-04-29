@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ nameOfApplication }}{% endblock %}
+
+{% block body %}
+<section>
+    <div style="height: 300px;">
+        {{ render_chart(chart) }}
+    </div>
+</section>
+{% endblock %}

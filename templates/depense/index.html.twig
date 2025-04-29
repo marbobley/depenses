@@ -4,56 +4,54 @@
 
 {% block body %}
     <section class="container px-4">
-        <h1>Mes dépenses : Somme {{ serviceDepense.CalculateAmoutArray(depenses) }}</h1>
-        <a href="{{ path('app_depense_new') }}" class="btn btn-primary">Ajouter</a>
-        <ul class="list-group list-group-flush">
-            {% for depense in depenses %}
-                <div class="card mb-1">
-                    <div class="card-body">
-                        <div class="card-title d-flex justify-content-between">
-                                <h4 class="mb-1">{{ depense.name }}</h4>
-                                <small class="text-muted">{{ depense.category.name }}</small>
-                            {% if (depense.amount >= 0) %}
-                                <small class="text-muted">Depense : {{ depense.amount | number_format(2) }}</small>
-                            {% else %}
-                                <small class="text-muted">Crédit : {{ depense.amount  | number_format(2)}}</small>
-                            {% endif %}
-                            <small class="text-muted">Date : {{ depense.created|date('m/d/Y') }}</small>
-
-                        </div>
-                        <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-secondary">Editer</a>
-                        <a href="{{ path('app_depense_delete', {id: depense.id}) }}" class="btn btn-warning">Supprimer</a>
+        <div class="containter  mb-2">
+            <a href="{{ path('app_depense_new') }}" class="btn btn-primary">Ajouter</a>
+        </div>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Mes dépenses : Somme {{ serviceDepense.CalculateAmoutArray(depenses)|number_format(2) }} €
+                </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                        {% for depense in depenses %}
+                            {{ include('partials/_form-amount.hmtl.twig', {depense: depense, edit: true, showCreated: true}, false) }}
+                        {% else %}
+                            <li>Aucun enregistrement en base de données.</li>
+                        {% endfor %}
+                    </ul>
                     </div>
                 </div>
-            {% else %}
-                <li>Aucun enregistrement en base de données.</li>
-            {% endfor %}
-        </ul>
+            </div>
 
-        <h1>Les dépenses de ma famille</h1>
-        <ul class="list-group list-group-flush">
-            {% for depenseFamilyByMember in depensesFamily %}
+    {% if is_granted('hasNoFamily') == false %}
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Les dépenses de ma famille : Somme {{ serviceDepense.CalculateAmoutArray(depensesFamily)|number_format(2) }} €
+                </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <ul class="list-group list-group-flush">
+                            {% for depenseFamilyByMember in depensesFamily %}
+                                {% if (depenseFamilyByMember.CreatedBy != app.user) %}
+                                    {{ include('partials/_form-amount.hmtl.twig', {depense: depenseFamilyByMember, edit: false, showCreated: true}, false) }}
+                                {% endif %}
 
-                {% if (depenseFamilyByMember.CreatedBy != app.user) %}<div class="card mb-1">
-                    <div class="card-body">
-                        <div class="card-title d-flex justify-content-between">
-                                <h4 class="mb-1">{{ depenseFamilyByMember.name }}</h4>
-                                <small class="text-muted">{{ depenseFamilyByMember.category.name }}</small>
-                            {% if (depenseFamilyByMember.amount >= 0) %}
-                                <small class="text-muted">Depense : {{ depenseFamilyByMember.amount | number_format(2) }}</small>
                             {% else %}
-                                <small class="text-muted">Crédit : {{ depenseFamilyByMember.amount | number_format(2) }}</small>
-                            {% endif %}
-                            <small class="text-muted">Date : {{ depenseFamilyByMember.created|date('m/d/Y') }}</small>
-                            <small class="text-muted">Edité : {{ depenseFamilyByMember.createdBy.username }}</small>
+                                <li>Aucun enregistrement en base de données.</li>
+                            {% endfor %}
+                        </ul>
+
                         </div>
                     </div>
                 </div>
-                {% endif %}
+            </div>
+    {% endif %}
 
-            {% else %}
-                <li>Aucun enregistrement en base de données.</li>
-            {% endfor %}
-        </ul>
     </section>
 {% endblock %}

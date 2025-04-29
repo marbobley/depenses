@@ -14,7 +14,7 @@
                     <small class="text-muted">Identifiant : {{ user.id }}</small>
                     <ul class="list-group list-group-flush">
                         {% for depense in user.depenses %}
-                            {{ include('partials/_form-amount.hmtl.twig', {depense: depense}, false) }}
+                            {{ include('partials/_form-amount.hmtl.twig', {depense: depense, edit: false, showCreated: true}, false) }}
                         {% else %}
                             <li>Aucun enregistrement en base de données.</li>
                         {% endfor %}

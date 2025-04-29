@@ -13,7 +13,7 @@
 
             {% if app.user %}
                 <div class="mb-3">
-                    {{ 'login.log_as_user'|trans({ 'user_identifier':  app.user.userIdentifier  }) }} <a href="{{ path('app_logout') }}">{{ 'login.logout'|trans }}</a>
+                    {{ 'login.log_as_user'|trans({user_identifier: app.user.userIdentifier}) }} <a href="{{ path('app_logout') }}">{{ 'login.logout'|trans }}</a>
                 </div>
             {% else %}
                 <h1 class="h3 mb-3 font-weight-normal">{{ 'login.please_sign_in'|trans }} : </h1>
@@ -39,7 +39,7 @@
                 <button class="btn btn-lg btn-primary" type="submit">
                     {{ 'login'|trans }}
                 </button>
-            {% endif %}            
+            {% endif %}
         </form>
     </div>
 </section>

@@ -6,6 +6,7 @@ use App\Entity\Depense;
 use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
 use App\Service\Entity\ServiceDepenseEntity;
+use App\Service\Utils\ServiceChartjs;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -77,5 +78,30 @@ final class DepenseController extends AbstractController
         // / to create variable for twig
         return $this->render('depense/search.html.twig',
             ['startDate' => '', 'endDate' => '']);
+    }
+
+    #[Route('/report', name: 'app_chart_depense', methods: ['GET'])]
+    public function report(): Response
+    {
+        return $this->render('depense/report.html.twig', [
+            'controller_name' => 'ChartDepenseController',
+            'startDate' => '',
+        ]);
+    }
+
+    #[Route('/chartjs/{year}', name: 'app_depense_chartjs_year', methods: ['GET'])]
+    #[Route('/chartjs', name: 'app_depense_chartjs', methods: ['GET'])]
+    public function __invoke(ServiceChartjs $serviceChartjs, ?string $year): Response
+    {
+        if (!$year) {
+            $year = date('Y');
+        }
+
+        $chartBar = $serviceChartjs->GetChartMonth($this->getUser(), $year);
+
+        return $this->render('main/chartjs.html.twig', [
+            'controller_name' => 'MainController',
+            'chart' => $chartBar,
+        ]);
     }
 }

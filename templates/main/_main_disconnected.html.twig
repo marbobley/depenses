@@ -1,8 +1,8 @@
 
 <header class="bg-primary bg-gradient text-white">
     <div class="container px-4 text-center">
-        <h1 class="fw-bolder"> 
-            {{ 'main.welcome_on'|trans({ 'app_name':  nameOfApplication  }) }}  
+        <h1 class="fw-bolder">
+            {{ 'main.welcome_on'|trans({app_name: nameOfApplication}) }}
         </h1>
         <p class="lead">{{ 'main.sumary_app'|trans }}</p>
         <a class="btn btn-lg btn-light" href="{{ path('app_login') }}">{{ 'button.start'|trans }}</a>
@@ -10,8 +10,8 @@
 </header>
 <section class="bg-white bg-gradient text-black">
     <div class="container px-4 text-center">
-        <h1 class="fw-bolder"> 
-            Simple et efficace :    
+        <h1 class="fw-bolder">
+            Simple et efficace :
         </h1>
         <ol class="list-group-numbered">
             <li class="list-group-item">Créer un <a href="{{ path('app_register') }}">compte</a> : pas besoin d'adresse mail !</li>
@@ -24,16 +24,16 @@
 </section>
 <section class="bg-primary bg-gradient text-white">
     <div class="container px-4 text-center">
-        <h1 class="fw-bolder"> 
+        <h1 class="fw-bolder">
             Application en cours de développement
         </h1>
-        <h3 class="fw-bolder px-4 text-center"> 
+        <h3 class="fw-bolder px-4 text-center">
             Web application dévéloppée à l'aide du framework <a class="text-dark" href="https://symfony.com/">Symfony</a>
         </h3>
-        <h4 class="fw-bolder px-4 text-center"> 
+        <h4 class="fw-bolder px-4 text-center">
             Utilisation des données personnelles
         </h4>
-        <div>        
+        <div>
             Vos données ne servent que dans le cadre de l'application :
             <ul>
                 <li>Elles ne sont pas revendues</li>

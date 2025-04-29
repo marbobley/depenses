@@ -4,43 +4,30 @@
     <div class="row">
         <div class="col">
             <h1 class="fw-bolder">
-                Bonjour {{ app.user.username }}!!! 
+                Bonjour {{ app.user.username }}!!!
             </h1>
         </div>
         <div class="col ">
         <ul>
-            <li>Depense du mois : {{ serviceDepenseUser.UserCurrentMonthDepenses | number_format(2)}} €</il>
-            <li>Depense du mois précédent : {{ serviceDepenseUser.UserLastMonthDepenses | number_format(2)}} €</il>
+            <li>Depense du mois : {{ serviceDepenseUser.UserCurrentMonthDepenses|number_format(2) }} €</il>
+            <li>Depense du mois précédent : {{ serviceDepenseUser.UserLastMonthDepenses|number_format(2) }} €</il>
         </ul>
-            
+
         </div>
     </div>
     <div class="row">
         <div class="col">
-            Famille : XYZ 
+            Famille : XYZ
         </div>
         <div class="col">
             <ul>
-                <li>Depense de l'année : {{ serviceDepenseUser.UserCurrentYearDepenses | number_format(2)}} €</il> 
-                <li>Depense de l'année précédent : {{ serviceDepenseUser.UserLastYearDepenses | number_format(2)}} €</il>
+                <li>Depense de l'année : {{ serviceDepenseUser.UserCurrentYearDepenses|number_format(2) }} €</il>
+                <li>Depense de l'année précédent : {{ serviceDepenseUser.UserLastYearDepenses|number_format(2) }} €</il>
             </ul>
         </div>
     </div>
 </div>
-   
-   
-   {#<div class="container px-4 text-center">
-
-        {% if is_granted('hasNoFamily') == false %}
-            <h1 class="fw-bolder">
-                Tu appartiens à la famille {{ app.user.family.name }}!!! 
-            </h1>
-        {% endif %}
-        {% if is_granted('IsMainMemberFamily') %}
-            <h1 class="fw-bolder">Tu es à lea chef.fe de {{ app.user.family.name }}!!! </h1>
-        {% endif %}
-    </div>#} 
 </header>
 <section>
-    futur zone a widget
+    {{ include(('main/_main_WidgetArea.html.twig')) }}
 </section>

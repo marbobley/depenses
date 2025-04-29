@@ -19,7 +19,7 @@ class MainControllerTest extends WebTestCase
     public function testNotConnectedClickOnCommencer(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('POST', 'http://127.0.0.1:8000/');
+        $crawler = $client->request('GET', 'http://127.0.0.1:8000/');
 
         $client->clickLink('Commencer');
         $this->assertResponseStatusCodeSame(200);
@@ -28,7 +28,7 @@ class MainControllerTest extends WebTestCase
     public function testNotConnectedClickOnConnexion(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('POST', 'http://127.0.0.1:8000/');
+        $crawler = $client->request('GET', 'http://127.0.0.1:8000/');
 
         $client->clickLink('Connexion');
         $this->assertResponseStatusCodeSame(200);
@@ -37,7 +37,7 @@ class MainControllerTest extends WebTestCase
     public function testNotConnectedClickOnInscription(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('POST', 'http://127.0.0.1:8000/');
+        $crawler = $client->request('GET', 'http://127.0.0.1:8000/');
 
         $client->clickLink('Inscription');
         $this->assertResponseStatusCodeSame(200);
@@ -46,7 +46,7 @@ class MainControllerTest extends WebTestCase
     public function testNotConnectedClickOnDepenseLogo(): void
     {
         $client = static::createClient();
-        $crawler = $client->request('POST', 'http://127.0.0.1:8000/');
+        $crawler = $client->request('GET', 'http://127.0.0.1:8000/');
 
         $client->clickLink('Le bon compte');
         $this->assertResponseStatusCodeSame(200);
