@@ -106,12 +106,47 @@ class ServiceDepense
         return $depenseMonthYear;
     }
 
+    /**
+     * return array<int> 
+     */
+    public function GetDepenseForCategoryForMonth(User $user, Category $category , array $months , string $year): array
+    {   
+        $res = [];
 
-    private function GetUniqueCategories(Collection $depenseByMonthYear): array
+        $depenses = $user->GetDepenses();
+
+        foreach($months as $month)
+        {
+            $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);       
+
+            $res[] = $this->GetSumCategory($depenseByMonthYear, $category);
+        }
+
+        return $res;
+    }
+
+    private function GetSumCategory(Collection $depenses , Category $category ) : float
+    {
+        $sum = 0; 
+        foreach($depenses as $depense)
+        {
+            if($depense instanceof Depense)
+            {
+                if($depense->getCategory()->getName() === $category->getName())
+                {
+                    $sum += $depense->getAmount();
+                }
+            }
+        }
+        return $sum;
+    }
+
+
+    public function GetUniqueCategories(Collection $depenses ): array
     {
         $uniqueCategories = [];
 
-        foreach ($depenseByMonthYear as $depense) {
+        foreach ($depenses as $depense) {
             if (!in_array($depense->getCategory(), $uniqueCategories)) {
                 $uniqueCategories[] = $depense->getCategory();
             }
@@ -138,6 +173,9 @@ class ServiceDepense
         return $currentDepense;
     }
 
+    /**
+     * @return array<Depenses>
+     */
     public function GetSumDepenseByCategory(User $user, string $month, string $year): array
     {
 
