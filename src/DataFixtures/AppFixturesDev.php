@@ -90,17 +90,17 @@ class AppFixturesDev extends Fixture implements FixtureGroupInterface
                 $this->serviceDepenseEntity->CreateNewDepense('family_dep_main'.$i,
                 $rand->getFloat(0, 100),
                 $mainUser,
-                \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-20 week', '+1 week')),
+                \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-30 week', '+1 week')),
                 $cats_family[$i % 5]);
                 $this->serviceDepenseEntity->CreateNewDepense('family_dep_usr1'.$i,
                 $rand->getFloat(0, 100),
                 $user1,
-                \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-20 week', '+1 week')),
+                \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-43 week', '+1 week')),
                 $cats_family[$i % 5]);
                 $this->serviceDepenseEntity->CreateNewDepense('family_dep_usr2'.$i,
                 $rand->getFloat(0, 100),
                 $user2,
-                \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-20 week', '+1 week')),
+                \DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-50 week', '+1 week')),
                 $cats_family[$i % 5]);
         }
     }
