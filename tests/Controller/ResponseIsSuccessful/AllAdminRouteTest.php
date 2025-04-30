@@ -128,13 +128,14 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-   /* public function testapp_family_new(): void
+    public function testapp_family_new(): void
     {
+        //$this->expectException(AccessDeniedHttpException::class);
+        
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/new', self::$adminUser);
 
-        $this->assertResponseIsSuccessful();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-    }*/
+        $this->assertEquals(403, $client->getResponse()->getStatusCode());
+    }
 
     public function testapp_family_join_index(): void
     {
@@ -144,13 +145,12 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    /*public function testapp_family_leave(): void
+    public function testapp_family_leave(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/leave', self::$adminUser);
 
-        $this->assertResponseIsSuccessful();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-    }*/
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+    }
 
     public function testapp_family_password_index(): void
     {
