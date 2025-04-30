@@ -21,7 +21,7 @@ class TestRouteAdminCommand extends Command
         ;
     }
 
-    private static function TemplateRouteTest() : string 
+    private static function TemplateClassTest() : string 
     {
         return '<?php
 
@@ -37,9 +37,9 @@ class AllAdminRouteTest extends WebTestCase
 }';
     }
 
-    private static function TemplateAllAdminRouteTest(string $name, string $path) : string
+    private static function TemplateAssertIsSuccessFul(string $name, string $path) : string
     {
-        $template = 'public function test{name}(): void
+        $template = 'public function test_{name}(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage(\'GET\', \'http://127.0.0.1:8000{path}\', self::$adminUser);
 
@@ -48,7 +48,7 @@ class AllAdminRouteTest extends WebTestCase
     }
 
     ';
-       return str_replace('{name}',$name, str_replace('{path}', $path , $template));       
+       return str_replace('{name}', $name, str_replace('{path}', $path , $template));       
     }
 
     private static function TemplateConnectToUserPage() : string 
@@ -104,11 +104,11 @@ public static function ConnectUserToPage(string $method, string $url, string $us
             if(str_contains( $cmd,'GET') && !str_contains($cmd,'{'))
             {
                 $arr = preg_split('/\s+/', $cmd);
-                $methods = $methods . self::TemplateAllAdminRouteTest($arr[1],$arr[5]);  
+                $methods = $methods . self::TemplateAssertIsSuccessFul($arr[1],$arr[5]);  
             }          
         }
 
-        $res = str_replace('{methods}' , $methods , self::TemplateRouteTest());
+        $res = str_replace('{methods}' , $methods , self::TemplateClassTest());
         fwrite($myfile2, $res);
         fclose($myfile2);
 
