@@ -4,6 +4,7 @@ namespace App\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -15,9 +16,10 @@ class TestRouteAdminCommand extends Command
     {
         $this
             // the command description shown when running "php bin/console list"
-            ->setDescription('Creates a new user.')
+            ->setDescription('Generate PhpUnit test')
             // the command help shown when running the command with the "--help" option
-            ->setHelp('This command allows you to create a user...')
+            ->setHelp('This command allows you to generate phpUnit test for all your routes...')
+            ->addArgument('show', InputArgument::OPTIONAL, 'Show all route take in account')
         ;
     }
 
@@ -86,6 +88,22 @@ public static function ConnectUserToPage(string $method, string $url, string $us
 
     protected function execute(InputInterface $input, OutputInterface $outputInterface): int
     {
+        $output = null;
+        $cmdLists = null;
+        exec('php bin/console debug:route ', $cmdLists, $output);
+
+        if($input->getArgument('show'))
+        {
+            foreach($cmdLists as $cmd)
+            {
+                if(str_contains( $cmd,'GET') && !str_contains($cmd,'{'))
+                {
+                    $outputInterface->writeln($cmd); 
+                }          
+            }
+            return Command::SUCCESS;
+        }
+
         $output = null;
         $cmdLists = null;
         exec('php bin/console debug:route ', $cmdLists, $output);
