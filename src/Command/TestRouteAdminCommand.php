@@ -2,10 +2,12 @@
 
 namespace App\Command;
 
+use App\Command\Templates\Template;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 // the name of the command is what users type after "php bin/console"
@@ -19,72 +21,35 @@ class TestRouteAdminCommand extends Command
             ->setDescription('Generate PhpUnit test')
             // the command help shown when running the command with the "--help" option
             ->setHelp('This command allows you to generate phpUnit test for all your routes...')
-            ->addArgument('show', InputArgument::OPTIONAL, 'Show all route take in account')
+            ->addArgument('user', InputArgument::REQUIRED, 'userName : use to create route associated to that user')
+            ->addOption(
+                // this is the name that users must type to pass this option (e.g. --iterations=5)
+                'show',
+                // this is the optional shortcut of the option name, which usually is just a letter
+                // (e.g. `i`, so users pass it as `-i`); use it for commonly used options
+                // or options with long names
+                null,
+                // this is the type of option (e.g. requires a value, can be passed more than once, etc.)
+                InputOption::VALUE_REQUIRED,
+                // the option description displayed when showing the command help
+                'Do you want to show route ?',
+                // the default value of the option (for those which allow to pass values)
+                0
+            )
         ;
     }
 
-    private static function TemplateClassTest() : string 
-    {
-        return '<?php
-
-namespace App\Tests\Controller;
-
-use App\Tests\Controller\ResponseIsSuccessful\ConnectUserToPage;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class AllAdminRouteTest extends WebTestCase
-{
-    private static string $adminUser = \'admin\';
-    {methods}
-}';
+    private static function Show(InputInterface $input, OutputInterface $outputInterface, array $cmdLists) : int {
+        foreach($cmdLists as $cmd)
+        {
+            if(str_contains( $cmd,'GET') && !str_contains($cmd,'{'))
+            {
+                $outputInterface->writeln($cmd); 
+            }          
+        }
+        return Command::SUCCESS;
     }
 
-    private static function TemplateAssertIsSuccessFul(string $name, string $path) : string
-    {
-        $template = 'public function test_{name}(): void
-    {
-        $client = ConnectUserToPage::ConnectUserToPage(\'GET\', \'http://127.0.0.1:8000{path}\', self::$adminUser);
-
-        $this->assertResponseIsSuccessful();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-    }
-
-    ';
-       return str_replace('{name}', $name, str_replace('{path}', $path , $template));       
-    }
-
-    private static function TemplateConnectToUserPage() : string 
-    {
-        return '<?php
-namespace App\Tests\Controller\ResponseIsSuccessful;
-
-use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-
-class ConnectUserToPage extends WebTestCase {
-
-/**
- * Connect $user with given $method (GET, POST) to $url.
- */
-public static function ConnectUserToPage(string $method, string $url, string $user): KernelBrowser
-{
-    $client = static::createClient();
-    $userRepository = static::getContainer()->get(UserRepository::class);
-
-    // retrieve the test user
-    $currentUser = $userRepository->findOneBy([\'username\' => $user]);
-
-    // simulate $testUser being logged in
-    $client->loginUser($currentUser);
-
-    // test e.g. the profile page
-    $client->request($method, $url);
-
-    return $client;
-}
-}';
-    }
 
     protected function execute(InputInterface $input, OutputInterface $outputInterface): int
     {
@@ -92,41 +57,32 @@ public static function ConnectUserToPage(string $method, string $url, string $us
         $cmdLists = null;
         exec('php bin/console debug:route ', $cmdLists, $output);
 
-        if($input->getArgument('show'))
+        if($input->getOption('show'))
         {
-            foreach($cmdLists as $cmd)
-            {
-                if(str_contains( $cmd,'GET') && !str_contains($cmd,'{'))
-                {
-                    $outputInterface->writeln($cmd); 
-                }          
-            }
-            return Command::SUCCESS;
+            return self::Show($input, $outputInterface, $cmdLists);
         }
 
-        $output = null;
-        $cmdLists = null;
-        exec('php bin/console debug:route ', $cmdLists, $output);
 
         $path = '/home/nora/Documents/Projects/depenses/tests/Controller/ResponseIsSuccessful/';
 
         $myfile = fopen($path . "ConnectUserToPage.php", "w") ;
-        fwrite($myfile, self::TemplateConnectToUserPage());
+        fwrite($myfile, Template::TemplateConnectToUserPage());
         fclose($myfile);
 
+        $userName = $input->getArgument('user');
 
-        $myfile2 = fopen($path . "AllAdminRouteTest.php", "w") ;
+        $myfile2 = fopen($path . Template::ClassTestName($userName), "w") ;
         $methods = '';
         foreach($cmdLists as $cmd)
         {
             if(str_contains( $cmd,'GET') && !str_contains($cmd,'{'))
             {
                 $arr = preg_split('/\s+/', $cmd);
-                $methods = $methods . self::TemplateAssertIsSuccessFul($arr[1],$arr[5]);  
+                $methods = $methods . Template::TemplateAssertIsSuccessFul($arr[1],$arr[5]);  
             }          
         }
 
-        $res = str_replace('{methods}' , $methods , self::TemplateClassTest());
+        $res = str_replace('{methods}' , $methods , Template::TemplateClassTest($userName));
         fwrite($myfile2, $res);
         fclose($myfile2);
 
