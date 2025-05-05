@@ -1,7 +1,10 @@
 <div class="card mb-1">
     <div class="card-body">
         <div class="card-title d-flex justify-content-between">
-            <h4 class="mb-1">{{ depense.category.name }}</h4>
+            <h4 class="mb-1">{{ depense.name }} - 
+            {% if depense.category.name is defined and depense.category.name is not null %}            
+                {{ depense.category.name }}</h4>
+            {% endif %}
             <small class="text-muted">Valeur : {{ depense.amount|number_format(2) }} €</small>
         </div>
         <div class="card-title d-flex justify-content-between">
