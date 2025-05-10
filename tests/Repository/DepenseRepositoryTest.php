@@ -127,12 +127,12 @@ class DepenseRepositoryTest extends KernelTestCase
             findOneBy(['username' => 'user'])
         ;
 
+        $month = date('n');
+        $year = date('Y');
+
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
-            /*
-             * @todo : change 2025 to something more flexible DatTime.now.Y
-             */
-            ->findByUserByYearByMonth($user, 4, 2025);
+            ->findByUserByYearByMonth($user, $month, $year);
 
         $countNumberOfDepenseForUser = count($depenses);
 
@@ -146,15 +146,13 @@ class DepenseRepositoryTest extends KernelTestCase
             findOneBy(['username' => 'user'])
         ;
 
+        $month = date('n') - 1;
+        $year = date('Y');
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
-            /*
-             * @todo : change 2025 to something more flexible DatTime.now.Y
-             */
-            ->findByUserByYearByMonth($user, 3, 2025);
+            ->findByUserByYearByMonth($user, $month, $year);
 
         $countNumberOfDepenseForUser = count($depenses);
-
         $this->assertSame($countNumberOfDepenseForUser, 0);
     }
 
