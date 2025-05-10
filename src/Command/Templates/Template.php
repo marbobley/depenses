@@ -1,15 +1,15 @@
-<?php 
+<?php
 
 namespace App\Command\Templates;
 
-class Template 
+class Template
 {
-    public static function ClassTestName (string $name) : string
+    public static function ClassTestName(string $name): string
     {
-        return str_replace( '{name}', ucfirst($name), "All{name}RouteTest.php");  
+        return str_replace('{name}', ucfirst($name), 'All{name}RouteTest.php');
     }
 
-    public static function TemplateClassTest(string $userName) : string 
+    public static function TemplateClassTest(string $userName): string
     {
         $template = '<?php
 
@@ -23,10 +23,11 @@ class All{userName}RouteTest extends WebTestCase
     private static string $user = \'{userName}\';
     {methods}
 }';
-    return str_replace('{userName}', ucfirst($userName), $template);    
+
+        return str_replace('{userName}', ucfirst($userName), $template);
     }
 
-    public static function TemplateAssertIsSuccessFul(string $name, string $path) : string
+    public static function TemplateAssertIsSuccessFul(string $name, string $path): string
     {
         $template = 'public function test_{name}(): void
     {
@@ -37,10 +38,11 @@ class All{userName}RouteTest extends WebTestCase
     }
 
     ';
-       return str_replace('{name}', $name, str_replace('{path}', $path , $template));       
+
+        return str_replace('{name}', $name, str_replace('{path}', $path, $template));
     }
 
-    public static function TemplateConnectToUserPage() : string 
+    public static function TemplateConnectToUserPage(): string
     {
         return '<?php
 namespace App\Tests\Controller\ResponseIsSuccessful;
@@ -72,5 +74,4 @@ public static function ConnectUserToPage(string $method, string $url, string $us
 }
 }';
     }
-
 }

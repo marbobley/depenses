@@ -39,17 +39,16 @@ class TestRouteAdminCommand extends Command
         ;
     }
 
-    private static function Show(InputInterface $input, OutputInterface $outputInterface, array $cmdLists) : int {
-        foreach($cmdLists as $cmd)
-        {
-            if(str_contains( $cmd,'GET') && !str_contains($cmd,'{'))
-            {
-                $outputInterface->writeln($cmd); 
-            }          
+    private static function Show(InputInterface $input, OutputInterface $outputInterface, array $cmdLists): int
+    {
+        foreach ($cmdLists as $cmd) {
+            if (str_contains($cmd, 'GET') && !str_contains($cmd, '{')) {
+                $outputInterface->writeln($cmd);
+            }
         }
+
         return Command::SUCCESS;
     }
-
 
     protected function execute(InputInterface $input, OutputInterface $outputInterface): int
     {
@@ -57,32 +56,28 @@ class TestRouteAdminCommand extends Command
         $cmdLists = null;
         exec('php bin/console debug:route ', $cmdLists, $output);
 
-        if($input->getOption('show'))
-        {
+        if ($input->getOption('show')) {
             return self::Show($input, $outputInterface, $cmdLists);
         }
 
-
         $path = '/home/nora/Documents/Projects/depenses/tests/Controller/ResponseIsSuccessful/';
 
-        $myfile = fopen($path . "ConnectUserToPage.php", "w") ;
+        $myfile = fopen($path.'ConnectUserToPage.php', 'w');
         fwrite($myfile, Template::TemplateConnectToUserPage());
         fclose($myfile);
 
         $userName = $input->getArgument('user');
 
-        $myfile2 = fopen($path . Template::ClassTestName($userName), "w") ;
+        $myfile2 = fopen($path.Template::ClassTestName($userName), 'w');
         $methods = '';
-        foreach($cmdLists as $cmd)
-        {
-            if(str_contains( $cmd,'GET') && !str_contains($cmd,'{'))
-            {
+        foreach ($cmdLists as $cmd) {
+            if (str_contains($cmd, 'GET') && !str_contains($cmd, '{')) {
                 $arr = preg_split('/\s+/', $cmd);
-                $methods = $methods . Template::TemplateAssertIsSuccessFul($arr[1],$arr[5]);  
-            }          
+                $methods = $methods.Template::TemplateAssertIsSuccessFul($arr[1], $arr[5]);
+            }
         }
 
-        $res = str_replace('{methods}' , $methods , Template::TemplateClassTest($userName));
+        $res = str_replace('{methods}', $methods, Template::TemplateClassTest($userName));
         fwrite($myfile2, $res);
         fclose($myfile2);
 
