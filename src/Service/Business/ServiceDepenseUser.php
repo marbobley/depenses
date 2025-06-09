@@ -2,6 +2,7 @@
 
 namespace App\Service\Business;
 
+use App\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
 
 /**
@@ -14,6 +15,7 @@ class ServiceDepenseUser
         private ServiceDepense $serviceDepense)
     {
     }
+
 
     public function GetUserCurrentMonthDepenses(): float
     {

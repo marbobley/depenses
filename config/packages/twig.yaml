@@ -6,6 +6,7 @@ twig:
         nameOfApplication : 'Le bon compte'
         serviceDepense: '@App\Service\Business\ServiceDepense'
         serviceDepenseUser: '@App\Service\Business\ServiceDepenseUser'
+        serviceFamily: '@App\Service\Business\ServiceFamily'
 
 when@test:
     twig:
