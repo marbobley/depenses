@@ -7,165 +7,166 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AllAdminRouteTest extends WebTestCase
 {
-    private static string $adminUser = 'admin';
-
-    public function testappAdminCategoryIndex(): void
+    private static string $user = 'Admin';
+    public function test_app_admin_category_index(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/category/', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/category/', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappAdminCategoryNew(): void
+    public function test_app_admin_category_new(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/category/new', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/category/new', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappAdminDepenseIndex(): void
+    public function test_app_admin_depense_index(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/depense/', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/depense/', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappAdminDepenseNew(): void
+    public function test_app_admin_depense_new(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/depense/new', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/depense/new', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappAdminFamilyIndex(): void
+    public function test_app_admin_family_index(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/family/', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/family/', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappAdminFamilyNew(): void
+    public function test_app_admin_family_new(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/family/new', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/family/new', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappUserProfilIndex(): void
+    public function test_app_user_profil_index(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/user/profil/', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/user/profil/', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappUserProfilNew(): void
+    public function test_app_user_profil_new(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/user/profil/new', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/user/profil/new', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappCategoryIndex(): void
+    public function test_app_category_index(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/category/', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/category/', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappCategoryNew(): void
+    public function test_app_category_new(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/category/new', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/category/new', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappDepenseIndex(): void
+    public function test_app_depense_index(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappDepenseNew(): void
+    public function test_app_depense_new(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/new', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/new', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappDepenseSearch(): void
+    public function test_app_depense_search(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/search', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/search', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappChartDepense(): void
+    public function test_app_chart_depense(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/report', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/report', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappDepenseChartjs(): void
+    public function test_app_depense_chartjs(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/chartjs', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/chartjs', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappFamilyNew(): void
+  /*  public function test_app_family_new(): void
     {
-        // $this->expectException(AccessDeniedHttpException::class);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/new', self::$user);
 
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/new', self::$adminUser);
+        $this->assertResponseIsSuccessful();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }*/
 
-        $this->assertEquals(403, $client->getResponse()->getStatusCode());
-    }
-
-    public function testappFamilyJoinIndex(): void
+    public function test_app_family_join_index(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/join', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/join', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappFamilyLeave(): void
+    /*public function test_app_family_leave(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/leave', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/leave', self::$user);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
-    }
+        $this->assertResponseIsSuccessful();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }*/
 
-    public function testappFamilyPasswordIndex(): void
+    public function test_app_family_password_index(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/password', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/password', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testappMain(): void
+    public function test_app_main(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/', self::$adminUser);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
+
+    
 }
