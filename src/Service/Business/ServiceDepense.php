@@ -13,7 +13,9 @@ use Doctrine\Common\Collections\Collection;
  */
 class ServiceDepense
 {
-    public function __construct(private ServiceDepenseFamily $serviceDepenseFamily)
+    public function __construct(private ServiceDepenseFamily $serviceDepenseFamily, 
+                                private ServiceCategory $serviceCategory                            
+    )
     {
     }
 
@@ -150,19 +152,6 @@ class ServiceDepense
         return $sum;
     }
 
-    public function GetUniqueCategories(Collection $depenses): array
-    {
-        $uniqueCategories = [];
-
-        foreach ($depenses as $depense) {
-            if (!in_array($depense->getCategory(), $uniqueCategories)) {
-                $uniqueCategories[] = $depense->getCategory();
-            }
-        }
-
-        return $uniqueCategories;
-    }
-
     private function SetDepense(Category $category, Collection $depenses, User $user): Depense
     {
         $currentDepense = new Depense();
@@ -188,7 +177,7 @@ class ServiceDepense
     {
         $depenses = $user->GetDepenses();
         $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
-        $uniqueCategories = $this->GetUniqueCategories($depenseByMonthYear);
+        $uniqueCategories = $this->serviceCategory->GetUniqueCategories($depenseByMonthYear);
         $res = [];
 
         foreach ($uniqueCategories as $uniqueCategory) {
@@ -208,7 +197,7 @@ class ServiceDepense
 
         $depenses = $this->serviceDepenseFamily->GetAllDepenses($family);
         $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
-        $uniqueCategories = $this->GetUniqueCategories($depenseByMonthYear);
+        $uniqueCategories = $this->serviceCategory->GetUniqueCategories($depenseByMonthYear);
         $res = [];
 
         foreach ($uniqueCategories as $uniqueCategory) {
