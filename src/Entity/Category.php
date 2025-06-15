@@ -28,6 +28,9 @@ class Category
     #[ORM\OneToMany(targetEntity: Depense::class, mappedBy: 'category')]
     private Collection $depenses;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $color = null;
+
     public function __construct()
     {
         $this->depenses = new ArrayCollection();
@@ -78,5 +81,17 @@ class Category
     public function setDepenses(Collection $depenses)
     {
         $this->depenses = $depenses;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(?string $color): static
+    {
+        $this->color = $color;
+
+        return $this;
     }
 }
