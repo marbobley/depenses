@@ -25,10 +25,10 @@ class ServiceChartjs
         $res = [];
         foreach ($categories as $category) {
             if ($category instanceof Category) {
-                $color = rand(1, 255);
+                $color = $category->getColor();
                 $res[] = [
                     'label' => $category->getName(),
-                    'backgroundColor' => sprintf('rgb(%s, 99, 132, .4)', $color),
+                    'backgroundColor' => $color,
                     'borderColor' => 'rgb(255, 99, 132)',
                     'data' => $this->serviceDepense->GetDepenseForCategoryForMonth($user, $category, $months, $year),
                 ];
