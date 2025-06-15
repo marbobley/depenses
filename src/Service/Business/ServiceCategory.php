@@ -3,6 +3,7 @@
 namespace App\Service\Business;
 
 use App\Entity\User;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Service to calculate depense, to sum , to organize by categories ...
@@ -40,5 +41,18 @@ class ServiceCategory
         }
 
         return $categories;
+    }
+
+    public function GetUniqueCategories(Collection $depenses): array
+    {
+        $uniqueCategories = [];
+
+        foreach ($depenses as $depense) {
+            if (!in_array($depense->getCategory(), $uniqueCategories)) {
+                $uniqueCategories[] = $depense->getCategory();
+            }
+        }
+
+        return $uniqueCategories;
     }
 }
