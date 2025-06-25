@@ -7,6 +7,7 @@ use App\Entity\Depense;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Psr\Log\LoggerInterface;
 
 /**
  * Service to calculate depense, to sum , to organize by categories ...
@@ -14,14 +15,18 @@ use Doctrine\Common\Collections\Collection;
 class ServiceDepense
 {
     public function __construct(private ServiceDepenseFamily $serviceDepenseFamily, 
-                                private ServiceCategory $serviceCategory                            
+                                private ServiceCategory $serviceCategory , 
+                                private LoggerInterface $log                           
     )
     {
     }
 
     public function GetFamilyTotalMonth(User $user, string $month, string $year): float
-    {
+    {        
         $family = $user->getFamily();
+        $this->log->info($user->getUsername());
+        $this->log->info($month);
+        $this->log->info($year);
 
         if (null === $family) {
             return 0;
