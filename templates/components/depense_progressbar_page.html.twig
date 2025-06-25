@@ -13,11 +13,6 @@
         >
     </div>
     <div class="container-fluid">
-    {% if type != 'family' %}
-        <h1>Mes depenses par catégorie pour le mois en cours : </h1>
-    {% else %}
-        <h1>Les dépenses de la famille pour le mois en cours : </h1>
-    {% endif %}
         <h2>Total : {{ this.total|number_format(2) }} €</h2>
         <div class="container">
         {% if (this.total > 0.0) %}
