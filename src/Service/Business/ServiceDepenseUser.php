@@ -16,7 +16,6 @@ class ServiceDepenseUser
     {
     }
 
-
     public function GetUserCurrentMonthDepenses(): float
     {
         $user = $this->security->getUser();

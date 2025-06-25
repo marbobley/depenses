@@ -14,15 +14,14 @@ use Psr\Log\LoggerInterface;
  */
 class ServiceDepense
 {
-    public function __construct(private ServiceDepenseFamily $serviceDepenseFamily, 
-                                private ServiceCategory $serviceCategory , 
-                                private LoggerInterface $log                           
-    )
-    {
+    public function __construct(private ServiceDepenseFamily $serviceDepenseFamily,
+        private ServiceCategory $serviceCategory,
+        private LoggerInterface $log,
+    ) {
     }
 
     public function GetFamilyTotalMonth(User $user, string $month, string $year): float
-    {        
+    {
         $family = $user->getFamily();
         $this->log->info($user->getUsername());
         $this->log->info($month);

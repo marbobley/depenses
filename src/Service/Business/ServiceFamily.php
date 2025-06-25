@@ -16,19 +16,19 @@ class ServiceFamily
     {
     }
 
-    public function GetFamily(User $user) : Family
+    public function GetFamily(User $user): Family
     {
         return $user->GetFamily();
     }
 
     public function GetUserFamily(): string
     {
-        $user = $this->security->getUser();        
-        
+        $user = $this->security->getUser();
+
         return $this->GetFamilyFromUser($user);
     }
 
-    private function GetFamilyFromUser(User $user) : string
+    private function GetFamilyFromUser(User $user): string
     {
         $family = $user->GetFamily();
 
