@@ -4,63 +4,21 @@ namespace App\Service\Business;
 
 use App\Entity\Category;
 use App\Entity\Depense;
+use App\Entity\Family;
 use App\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Psr\Log\LoggerInterface;
 
 /**
  * Service to calculate depense, to sum , to organize by categories ...
  */
 class ServiceDepense
 {
-    public function __construct(private ServiceDepenseFamily $serviceDepenseFamily, 
-                                private ServiceCategory $serviceCategory                            
-    )
-    {
-    }
-
-    public function GetFamilyTotalMonth(User $user, string $month, string $year): float
-    {
-        $family = $user->getFamily();
-
-        if (null === $family) {
-            return 0;
-        }
-
-        $members = $family->getMembers();
-
-        $total = 0;
-        foreach ($members as $member) {
-            $depenses = $member->getDepenses();
-            $total += $this->CalculateAmount($this->GetDepenseByMonthAndYear($depenses, $month, $year));
-        }
-
-        return $total;
-    }
-
-    /**
-     * Calculate total for the month for the user.
-     */
-    public function GetTotalMonth(User $user, string $month, string $year): float
-    {
-        $depenses = $user->getDepenses();
-
-        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
-
-        return $this->CalculateAmount($depenseByMonthYear);
-    }
-
-    /**
-     * Calculate total for the year for the user.
-     */
-    public function GetTotalYear(User $user, string $year): float
-    {
-        $depenses = $user->getDepenses();
-
-        $depenseByYear = $this->GetDepenseByYear($depenses, $year);
-
-        return $this->CalculateAmount($depenseByYear);
-    }
+    public function __construct(
+        private ServiceCategory $serviceCategory,
+        private LoggerInterface $log,
+    ) {}
 
     private function GetDepenseByCategory(Collection $depenses, Category $categoryFilter): Collection
     {
@@ -75,7 +33,7 @@ class ServiceDepense
         return $depenseByCategory;
     }
 
-    private function GetDepenseByYear(Collection $depenses, string $year): Collection
+    public function GetDepenseByYear(Collection $depenses, string $year): Collection
     {
         $depenseMonthYear = new ArrayCollection();
 
@@ -90,7 +48,7 @@ class ServiceDepense
         return $depenseMonthYear;
     }
 
-    private function GetDepenseByMonthAndYear(Collection $depenses, string $month, string $year): Collection
+    public function GetDepenseByMonthAndYear(Collection $depenses, string $month, string $year): Collection
     {
         $depenseMonthYear = new ArrayCollection();
 
@@ -126,7 +84,7 @@ class ServiceDepense
 
             return $res;
         } else {
-            $depenses = $this->serviceDepenseFamily->GetAllDepenses($family);
+            $depenses = $this->GetAllDepenses($family);
 
             foreach ($months as $month) {
                 $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
@@ -152,13 +110,16 @@ class ServiceDepense
         return $sum;
     }
 
+    /**
+     * Create a new depense object with category and user
+     */
     private function SetDepense(Category $category, Collection $depenses, User $user): Depense
     {
         $currentDepense = new Depense();
         $currentCategory = new Category();
         $currentCategory->setName($category->getName());
 
-        $currentDepense->setName('Total '.$category->getName());
+        $currentDepense->setName('Total ' . $category->getName());
         $currentDepense->setCategory($currentCategory);
 
         $depenseForCategory = $this->GetDepenseByCategory($depenses, $category);
@@ -195,7 +156,7 @@ class ServiceDepense
             return [];
         }
 
-        $depenses = $this->serviceDepenseFamily->GetAllDepenses($family);
+        $depenses = $this->GetAllDepenses($family);
         $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
         $uniqueCategories = $this->serviceCategory->GetUniqueCategories($depenseByMonthYear);
         $res = [];
@@ -217,6 +178,9 @@ class ServiceDepense
         return $amount;
     }
 
+    /**
+     * Sum the array 
+     */
     public function CalculateAmoutArray(array $depenses): float
     {
         $amount = 0;
@@ -227,8 +191,18 @@ class ServiceDepense
         return $amount;
     }
 
-    public function GetDepenseForUser(User $user): Collection
+    private function GetAllDepenses(Family $family): ArrayCollection
     {
-        return $user->getDepenses();
+        $members = $family->getMembers();
+
+        $depenses = new ArrayCollection();
+
+        foreach ($members as $member) {
+            foreach ($member->getDepenses() as $depense) {
+                $depenses[] = $depense;
+            }
+        }
+
+        return $depenses;
     }
 }

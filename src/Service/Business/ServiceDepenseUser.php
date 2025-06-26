@@ -3,52 +3,53 @@
 namespace App\Service\Business;
 
 use App\Entity\User;
+use App\Interfaces\IDepenseMonth;
+use App\Interfaces\IDepenseYear;
 use Symfony\Bundle\SecurityBundle\Security;
 
 /**
  * Service to get user depense.
  */
-class ServiceDepenseUser
+class ServiceDepenseUser implements IDepenseMonth, IDepenseYear
 {
     public function __construct(
         private Security $security,
-        private ServiceDepense $serviceDepense)
-    {
-    }
+        private ServiceDepense $serviceDepense
+    ) {}
 
-
-    public function GetUserCurrentMonthDepenses(): float
+    public function GetDepenseMonth($currentMonth, $currentYear): float
     {
         $user = $this->security->getUser();
-
-        $currentMonth = date('n');
-        $currentYear = date('Y');
-
-        return $this->serviceDepense->GetTotalMonth($user, $currentMonth, $currentYear);
+        return $this->GetTotalMonth($user, $currentMonth, $currentYear);
     }
 
-    public function GetUserLastMonthDepenses(): float
+    public function GetDepenseYear($currentYear): float 
     {
         $user = $this->security->getUser();
-        $lastmonth = date('n') - 1;
-        $currentYear = date('Y');
-
-        return $this->serviceDepense->GetTotalMonth($user, $lastmonth, $currentYear);
+        return $this->GetTotalYear($user, $currentYear);
     }
 
-    public function GetUserCurrentYearDepenses(): float
+    /**
+     * Calculate total for the month for the user.
+     */
+    private function GetTotalMonth(User $user, string $month, string $year): float
     {
-        $user = $this->security->getUser();
-        $currentYear = date('Y');
+        $depenses = $user->getDepenses();
 
-        return $this->serviceDepense->GetTotalYear($user, $currentYear);
+        $depenseByMonthYear = $this->serviceDepense->GetDepenseByMonthAndYear($depenses, $month, $year);
+
+        return $this->serviceDepense->CalculateAmount($depenseByMonthYear);
     }
 
-    public function GetUserLastYearDepenses(): float
+    /**
+     * Calculate total for the year for the user.
+     */
+    public function GetTotalYear(User $user, string $year): float
     {
-        $user = $this->security->getUser();
-        $currentYear = date('Y') - 1;
+        $depenses = $user->getDepenses();
 
-        return $this->serviceDepense->GetTotalYear($user, $currentYear);
+        $depenseByYear = $this->serviceDepense->GetDepenseByYear($depenses, $year);
+
+        return $this->serviceDepense->CalculateAmount($depenseByYear);
     }
 }

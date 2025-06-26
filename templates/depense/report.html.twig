@@ -3,18 +3,47 @@
 {% block title %}Hello ChartDepenseController!{% endblock %}
 
 {% block body %}
-    <section class="container px-4">
-        {{ component('depense_progressbar_page', {
+ <section class="container px-4">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Mes dépenses :
+                </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    {{ component('depense_progressbar_page', {
             startDate: startDate,
             type: 'user',
             }) }}
-    </section>
+                    </div>
+                </div>
+            </div>
+
     {% if is_granted('hasNoFamily') == false %}
-        <section class="container px-4">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Les dépenses de ma famille : 
+                </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        
             {{ component('depense_progressbar_page', {
                 startDate: startDate,
                 type: 'family',
                 }) }}
-        </section>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
     {% endif %}
+
+    </section>
+
+
+
 {% endblock %}

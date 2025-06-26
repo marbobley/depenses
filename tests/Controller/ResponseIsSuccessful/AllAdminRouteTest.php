@@ -8,7 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class AllAdminRouteTest extends WebTestCase
 {
     private static string $user = 'Admin';
-    public function test_app_admin_category_index(): void
+
+    public function testAppAdminCategoryIndex(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/category/', self::$user);
 
@@ -16,7 +17,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_admin_category_new(): void
+    public function testAppAdminCategoryNew(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/category/new', self::$user);
 
@@ -24,7 +25,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_admin_depense_index(): void
+    public function testAppAdminDepenseIndex(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/depense/', self::$user);
 
@@ -32,7 +33,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_admin_depense_new(): void
+    public function testAppAdminDepenseNew(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/depense/new', self::$user);
 
@@ -40,7 +41,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_admin_family_index(): void
+    public function testAppAdminFamilyIndex(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/family/', self::$user);
 
@@ -48,7 +49,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_admin_family_new(): void
+    public function testAppAdminFamilyNew(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/family/new', self::$user);
 
@@ -56,7 +57,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_user_profil_index(): void
+    public function testAppUserProfilIndex(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/user/profil/', self::$user);
 
@@ -64,7 +65,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_user_profil_new(): void
+    public function testAppUserProfilNew(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/admin/user/profil/new', self::$user);
 
@@ -72,7 +73,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_category_index(): void
+    public function testAppCategoryIndex(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/category/', self::$user);
 
@@ -80,7 +81,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_category_new(): void
+    public function testAppCategoryNew(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/category/new', self::$user);
 
@@ -88,7 +89,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_depense_index(): void
+    public function testAppDepenseIndex(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/', self::$user);
 
@@ -96,7 +97,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_depense_new(): void
+    public function testAppDepenseNew(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/new', self::$user);
 
@@ -104,7 +105,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_depense_search(): void
+    public function testAppDepenseSearch(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/search', self::$user);
 
@@ -112,7 +113,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_chart_depense(): void
+    public function testAppChartDepense(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/report', self::$user);
 
@@ -120,7 +121,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_depense_chartjs(): void
+    public function testAppDepenseChartjs(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/chartjs', self::$user);
 
@@ -128,15 +129,15 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-  /*  public function test_app_family_new(): void
-    {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/new', self::$user);
+    /*  public function test_app_family_new(): void
+      {
+          $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/new', self::$user);
 
-        $this->assertResponseIsSuccessful();
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-    }*/
+          $this->assertResponseIsSuccessful();
+          $this->assertEquals(200, $client->getResponse()->getStatusCode());
+      }*/
 
-    public function test_app_family_join_index(): void
+    public function testAppFamilyJoinIndex(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/join', self::$user);
 
@@ -152,7 +153,7 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }*/
 
-    public function test_app_family_password_index(): void
+    public function testAppFamilyPasswordIndex(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/family/password', self::$user);
 
@@ -160,13 +161,11 @@ class AllAdminRouteTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function test_app_main(): void
+    public function testAppMain(): void
     {
         $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
-
-    
 }

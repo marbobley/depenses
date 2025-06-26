@@ -2,6 +2,7 @@
 
 namespace App\Service\Business;
 
+use App\Entity\Family;
 use App\Entity\User;
 use Symfony\Bundle\SecurityBundle\Security;
 
@@ -11,18 +12,22 @@ use Symfony\Bundle\SecurityBundle\Security;
 class ServiceFamily
 {
     public function __construct(
-        private Security $security)
+        private Security $security
+    ) {}
+
+    public function GetFamily(User $user): Family
     {
+        return $user->GetFamily();
     }
 
     public function GetUserFamily(): string
     {
-        $user = $this->security->getUser();        
-        
-        return $this->GetFamily($user);
+        $user = $this->security->getUser();
+
+        return $this->GetFamilyFromUser($user);
     }
 
-    private function GetFamily(User $user) : string
+    private function GetFamilyFromUser(User $user): string
     {
         $family = $user->GetFamily();
 
