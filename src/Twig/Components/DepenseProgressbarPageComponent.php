@@ -36,7 +36,7 @@ final class DepenseProgressbarPageComponent
         if ('user' === $this->type) {
             return $this->serviceDepense->GetTotalMonth($user, $currentMonth, $currentYear);
         } else {
-            return $this->serviceDepenseFamily->GetFamilyTotalMonth($currentMonth, $currentYear);
+            return $this->serviceDepenseFamily->GetDepenseMonth($currentMonth, $currentYear);
         }
     }
 

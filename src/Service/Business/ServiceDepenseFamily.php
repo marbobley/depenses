@@ -2,14 +2,13 @@
 
 namespace App\Service\Business;
 
-use App\Entity\Family;
-use Doctrine\Common\Collections\ArrayCollection;
+use IDepenseMonth;
 use Symfony\Bundle\SecurityBundle\Security;
 
 /**
  * Service to get user depense.
  */
-class ServiceDepenseFamily
+class ServiceDepenseFamily implements IDepenseMonth
 {
     public function __construct(
         private Security $security, 
@@ -18,7 +17,7 @@ class ServiceDepenseFamily
     {
     }
 
-     public function GetFamilyTotalMonth(string $month, string $year): float
+     public function GetDepenseMonth($month, $year): float
     {
         $user = $this->security->getUser();
         $family = $this->serviceFamily->GetFamily($user);
