@@ -4,6 +4,7 @@ namespace App\Twig\Components;
 
 use App\Service\Business\ServiceDepense;
 use App\Service\Business\ServiceDepenseFamily;
+use App\Service\Business\ServiceDepenseUser;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\UX\LiveComponent\Attribute\AsLiveComponent;
 use Symfony\UX\LiveComponent\Attribute\LiveProp;
@@ -22,6 +23,7 @@ final class DepenseProgressbarPageComponent
 
     public function __construct(
         private readonly ServiceDepense $serviceDepense,
+        private readonly ServiceDepenseUser $serviceDepenseUser,
         private readonly ServiceDepenseFamily $serviceDepenseFamily,
         private Security $security,
     ) {
@@ -31,10 +33,9 @@ final class DepenseProgressbarPageComponent
     {
         $currentMonth = date('n', strtotime($this->startDate));
         $currentYear = date('Y', strtotime($this->startDate));
-        $user = $this->security->getUser();
 
         if ('user' === $this->type) {
-            return $this->serviceDepense->GetTotalMonth($user, $currentMonth, $currentYear);
+            return $this->serviceDepenseUser->GetDepenseMonth($currentMonth, $currentYear);
         } else {
             return $this->serviceDepenseFamily->GetDepenseMonth($currentMonth, $currentYear);
         }

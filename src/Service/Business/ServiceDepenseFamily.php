@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Service\Business;
-
-use IDepenseMonth;
+use App\Interfaces\IDepenseMonth;
 use Symfony\Bundle\SecurityBundle\Security;
 
 /**

@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Interfaces;
+
 interface IDepenseMonth{
     /**
      * to sum on month
