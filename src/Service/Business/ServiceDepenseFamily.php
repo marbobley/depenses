@@ -12,22 +12,29 @@ use Symfony\Bundle\SecurityBundle\Security;
 class ServiceDepenseFamily
 {
     public function __construct(
-        private Security $security)
+        private Security $security, 
+        private ServiceFamily $serviceFamily,
+        private ServiceDepense $serviceDepense)
     {
     }
 
-    public function GetAllDepenses(Family $family): ArrayCollection
+     public function GetFamilyTotalMonth(string $month, string $year): float
     {
-        $members = $family->getMembers();
+        $user = $this->security->getUser();
+        $family = $this->serviceFamily->GetFamily($user);
 
-        $depenses = new ArrayCollection();
-
-        foreach ($members as $member) {
-            foreach ($member->getDepenses() as $depense) {
-                $depenses[] = $depense;
-            }
+        if (null === $family) {
+            return 0;
         }
 
-        return $depenses;
+        $members = $family->getMembers();
+
+        $total = 0;
+        foreach ($members as $member) {
+            $depenses = $member->getDepenses();
+            $total += $this->serviceDepense->CalculateAmount($this->serviceDepense->GetDepenseByMonthAndYear($depenses, $month, $year));
+        }
+
+        return $total;
     }
 }

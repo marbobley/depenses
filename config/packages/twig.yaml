@@ -7,6 +7,7 @@ twig:
         serviceDepense: '@App\Service\Business\ServiceDepense'
         serviceDepenseUser: '@App\Service\Business\ServiceDepenseUser'
         serviceFamily: '@App\Service\Business\ServiceFamily'
+        serviceDepenseFamily: '@App\Service\Business\ServiceDepenseFamily'
 
 when@test:
     twig:

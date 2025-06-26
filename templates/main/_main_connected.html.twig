@@ -23,8 +23,8 @@
                 {% if serviceFamily.GetUserFamily %}
                     Famille : {{ serviceFamily.GetUserFamily }}
                     <ul>
-                        <li>Depense du mois : {{ serviceDepense.FamilyTotalMonth(app.user, 'now'|date('n'), 'now'|date('Y'))|number_format(2) }} €</il>
-                        <li>Depense du mois précédent : {{ serviceDepense.FamilyTotalMonth(app.user, 'now'|date('n') - 1, 'now'|date('Y'))|number_format(2) }} €</il>
+                        <li>Depense du mois : {{ serviceDepenseFamily.FamilyTotalMonth('now'|date('n'), 'now'|date('Y'))|number_format(2) }} €</il>
+                        <li>Depense du mois précédent : {{ serviceDepenseFamily.FamilyTotalMonth('now'|date('n') - 1, 'now'|date('Y'))|number_format(2) }} €</il>
                     </ul>
                 {% endif %}
             </div>
