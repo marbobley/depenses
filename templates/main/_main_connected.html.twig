@@ -9,10 +9,10 @@
         </div>
         <div class="col ">
         <ul>
-            <li>Depense du mois : {{ serviceDepenseUser.UserCurrentMonthDepenses|number_format(2) }} €</il>
-            <li>Depense du mois précédent : {{ serviceDepenseUser.UserLastMonthDepenses|number_format(2) }} €</il>
-            <li>Depense de l'année : {{ serviceDepenseUser.UserCurrentYearDepenses|number_format(2) }} €</il>
-            <li>Depense de l'année précédent : {{ serviceDepenseUser.UserLastYearDepenses|number_format(2) }} €</il>
+            <li>Depense du mois : {{ serviceDepenseUser.GetConnectedUserDepenseMonth('now'|date('n'), 'now'|date('Y'))|number_format(2) }} €</il>
+            <li>Depense du mois précédent : {{ serviceDepenseUser.GetConnectedUserDepenseMonth('now'|date('n')-1, 'now'|date('Y'))|number_format(2) }} €</il>
+            <li>Depense de l'année : {{ serviceDepenseUser.GetConnectedUserDepenseYear('now'|date('Y'))|number_format(2) }} €</il>
+            <li>Depense de l'année précédent : {{ serviceDepenseUser.GetConnectedUserDepenseYear('now'|date('Y')-1)|number_format(2) }} €</il>
         </ul>
 
         </div>
