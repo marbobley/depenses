@@ -20,19 +20,6 @@ class ServiceDepense
         private LoggerInterface $log,
     ) {}
 
-
-    /**
-     * Calculate total for the year for the user.
-     */
-    public function GetTotalYear(User $user, string $year): float
-    {
-        $depenses = $user->getDepenses();
-
-        $depenseByYear = $this->GetDepenseByYear($depenses, $year);
-
-        return $this->CalculateAmount($depenseByYear);
-    }
-
     private function GetDepenseByCategory(Collection $depenses, Category $categoryFilter): Collection
     {
         $depenseByCategory = new ArrayCollection();
@@ -46,7 +33,7 @@ class ServiceDepense
         return $depenseByCategory;
     }
 
-    private function GetDepenseByYear(Collection $depenses, string $year): Collection
+    public function GetDepenseByYear(Collection $depenses, string $year): Collection
     {
         $depenseMonthYear = new ArrayCollection();
 
@@ -123,6 +110,9 @@ class ServiceDepense
         return $sum;
     }
 
+    /**
+     * Create a new depense object with category and user
+     */
     private function SetDepense(Category $category, Collection $depenses, User $user): Depense
     {
         $currentDepense = new Depense();
@@ -188,6 +178,9 @@ class ServiceDepense
         return $amount;
     }
 
+    /**
+     * Sum the array 
+     */
     public function CalculateAmoutArray(array $depenses): float
     {
         $amount = 0;
@@ -198,13 +191,7 @@ class ServiceDepense
         return $amount;
     }
 
-    public function GetDepenseForUser(User $user): Collection
-    {
-        return $user->getDepenses();
-    }
-
-
-    public function GetAllDepenses(Family $family): ArrayCollection
+    private function GetAllDepenses(Family $family): ArrayCollection
     {
         $members = $family->getMembers();
 

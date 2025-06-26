@@ -26,7 +26,7 @@ class ServiceDepenseUser implements IDepenseMonth, IDepenseYear
     public function GetDepenseYear($currentYear): float 
     {
         $user = $this->security->getUser();
-        return $this->serviceDepense->GetTotalYear($user, $currentYear);
+        return $this->GetTotalYear($user, $currentYear);
     }
 
     /**
@@ -39,5 +39,17 @@ class ServiceDepenseUser implements IDepenseMonth, IDepenseYear
         $depenseByMonthYear = $this->serviceDepense->GetDepenseByMonthAndYear($depenses, $month, $year);
 
         return $this->serviceDepense->CalculateAmount($depenseByMonthYear);
+    }
+
+    /**
+     * Calculate total for the year for the user.
+     */
+    public function GetTotalYear(User $user, string $year): float
+    {
+        $depenses = $user->getDepenses();
+
+        $depenseByYear = $this->serviceDepense->GetDepenseByYear($depenses, $year);
+
+        return $this->serviceDepense->CalculateAmount($depenseByYear);
     }
 }
