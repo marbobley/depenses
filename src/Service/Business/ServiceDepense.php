@@ -20,28 +20,6 @@ class ServiceDepense
         private LoggerInterface $log,
     ) {}
 
-    public function GetFamilyTotalMonth(User $user, string $month, string $year): float
-    {
-        $family = $user->getFamily();
-        $this->log->info($user->getUsername());
-        $this->log->info($month);
-        $this->log->info($year);
-
-        if (null === $family) {
-            return 0;
-        }
-
-        $members = $family->getMembers();
-
-        $total = 0;
-        foreach ($members as $member) {
-            $depenses = $member->getDepenses();
-            $total += $this->CalculateAmount($this->GetDepenseByMonthAndYear($depenses, $month, $year));
-        }
-
-        return $total;
-    }
-
     /**
      * Calculate total for the month for the user.
      */

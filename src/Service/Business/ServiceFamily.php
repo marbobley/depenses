@@ -12,9 +12,8 @@ use Symfony\Bundle\SecurityBundle\Security;
 class ServiceFamily
 {
     public function __construct(
-        private Security $security)
-    {
-    }
+        private Security $security
+    ) {}
 
     public function GetFamily(User $user): Family
     {
