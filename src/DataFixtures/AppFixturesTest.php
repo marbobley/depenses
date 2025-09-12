@@ -54,12 +54,45 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
         $this->serviceFamilyEntity->CreateFamily($familyToDelete);
     }
 
+    private function createFamilyWith3Members(string $password): void { 
+        $family = new Family();
+        $family->setName('family_3members');
+        $family->setPassword('1234');
+        $this->serviceFamilyEntity->CreateFamily($family);
+
+        $user1 = $this->serviceUserEntity->CreateNewUser('fam3_usr1', $password, ['ROLE_USER']);
+        $user2 = $this->serviceUserEntity->CreateNewUser('fam3_usr2', $password, ['ROLE_USER']);
+        $user3 = $this->serviceUserEntity->CreateNewUser('fam3_usr3', $password, ['ROLE_USER']);
+
+        $catUser1 = $this->serviceCategoryEntity->CreateNewCategory('catUser1', $user1);
+        $catUser2 = $this->serviceCategoryEntity->CreateNewCategory('catUser2', $user2);
+        $catUser3 = $this->serviceCategoryEntity->CreateNewCategory('catUser3', $user3);
+        $catUser1_1 = $this->serviceCategoryEntity->CreateNewCategory('catUser1_1', $user1);
+        $catUser2_2 = $this->serviceCategoryEntity->CreateNewCategory('catUser2_2', $user2);
+        $catUser3_3 = $this->serviceCategoryEntity->CreateNewCategory('catUser3_3', $user3);
+
+
+        $this->serviceFamilyEntity->SetMainMemberFamily($family, $user1);
+        $this->serviceFamilyEntity->JoinFamily($family, $user1);
+        $this->serviceFamilyEntity->JoinFamily($family, $user2);
+        $this->serviceFamilyEntity->JoinFamily($family, $user3);
+
+        $this->serviceDepenseEntity->CreateNewDepense('usr1_dep1', 10, $user1, new \DateTimeImmutable('now'), $catUser1);
+        $this->serviceDepenseEntity->CreateNewDepense('usr1_dep11', 15, $user1, new \DateTimeImmutable('now'), $catUser1_1);
+        $this->serviceDepenseEntity->CreateNewDepense('usr2_dep1', 20, $user2, new \DateTimeImmutable('now'), $catUser2);
+        $this->serviceDepenseEntity->CreateNewDepense('usr2_dep22', 25, $user2, new \DateTimeImmutable('now'), $catUser2_2);
+        $this->serviceDepenseEntity->CreateNewDepense('usr3_dep3', 30, $user3, new \DateTimeImmutable('now'), $catUser3);
+        $this->serviceDepenseEntity->CreateNewDepense('usr3_dep33',  35, $user3, new \DateTimeImmutable('now'), $catUser3_3);
+
+    }
+
     public function load(ObjectManager $manager): void
     {
         $password = $this->hasher->hashPassword(new User(), 'abcd1234!');
 
         $this->createAdmin($password);
         $this->createFamilyToDelete();
+        $this->createFamilyWith3Members($password);
 
         // 2. CREATE USER
         $user = $this->serviceUserEntity->CreateNewUser('user', $password, ['ROLE_USER']);
