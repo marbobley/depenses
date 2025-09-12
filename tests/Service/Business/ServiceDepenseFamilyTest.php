@@ -38,8 +38,22 @@ class ServiceDepenseFamilyTest extends KernelTestCase
             findOneBy(['username' => 'user'])
         ;
 
-
         $this->assertSame(0.0, $this->serviceDepenseFamily->GetDepenseMonth($user , 1, 2024));
+    }
+
+    public function testWhenGetDepenseMonthWithFamilly_thenReturnSum(): void
+    {
+        $user = $this->entityManager->
+            getRepository(User::class)->
+            findOneBy(['username' => 'admin'])
+        ;
+
+        $currentMonth = date('n');
+        $currentYear = date('Y');
+
+        $sum = 25.5 + 20 + 12 + 17; // Sum of admin family depense for current month
+
+        $this->assertSame(74.5, $this->serviceDepenseFamily->GetDepenseMonth($user , $currentMonth, $currentYear));
     }
 
     protected function tearDown(): void
