@@ -23,15 +23,34 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
     ) {
     }
 
-    public function load(ObjectManager $manager): void
-    {
-        $password = $this->hasher->hashPassword(new User(), 'abcd1234!');
-
+    private function createAdmin(string $password): void {
         // CREATE FAMILY ADMIN
         $family = new Family();
         $family->setName('family_admin');
         $family->setPassword('1234');
         $this->serviceFamilyEntity->CreateFamily($family);
+
+        $admin = $this->serviceUserEntity->CreateNewUser('admin', $password, ['ROLE_ADMIN']);
+
+        $cat1 = $this->serviceCategoryEntity->CreateNewCategory('catAdmin_1', $admin);
+        $cat2 = $this->serviceCategoryEntity->CreateNewCategory('catAdmin_2', $admin);
+        $cat3 = $this->serviceCategoryEntity->CreateNewCategory('catAdmin_3', $admin);
+
+
+        $this->serviceFamilyEntity->SetMainMemberFamily($family, $admin);
+        $this->serviceFamilyEntity->JoinFamily($family, $admin);
+
+        $this->serviceDepenseEntity->CreateNewDepense('admin_dep1', 25.5, $admin, new \DateTimeImmutable('now'), $cat1);
+        $this->serviceDepenseEntity->CreateNewDepense('admin_dep2', 20, $admin, new \DateTimeImmutable('now'), $cat2);
+        $this->serviceDepenseEntity->CreateNewDepense('admin_dep3', 12, $admin, new \DateTimeImmutable('now'), $cat3);
+        $this->serviceDepenseEntity->CreateNewDepense('admin_dep4', 17, $admin, new \DateTimeImmutable('now'), $cat1);
+    }
+
+    public function load(ObjectManager $manager): void
+    {
+        $password = $this->hasher->hashPassword(new User(), 'abcd1234!');
+
+        $this->createAdmin($password);
 
         // CREATE FAMILY TO DELETE
         $familyToDelete = new Family();
@@ -40,19 +59,17 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
         $this->serviceFamilyEntity->CreateFamily($familyToDelete);
 
         // 2. CREATE USER
-        $admin = $this->serviceUserEntity->CreateNewUser('admin', $password, ['ROLE_ADMIN']);
         $user = $this->serviceUserEntity->CreateNewUser('user', $password, ['ROLE_USER']);
         $userNoFamily = $this->serviceUserEntity->CreateNewUser('user_no_family', $password, ['ROLE_USER']);
         $this->serviceUserEntity->CreateNewUser('user_to_delete', $password, ['ROLE_USER']);
         for ($i = 0; $i < 20; ++$i) {
             $this->serviceUserEntity->CreateNewUser('usr'.$i, $password, ['ROLE_USER']);
         }
-        $cat1 = $this->serviceCategoryEntity->CreateNewCategory('catAdmin_1', $admin);
-        $cat2 = $this->serviceCategoryEntity->CreateNewCategory('catAdmin_2', $admin);
-        $cat3 = $this->serviceCategoryEntity->CreateNewCategory('catAdmin_3', $admin);
-        $cat4 = $this->serviceCategoryEntity->CreateNewCategory('catToDelete', $user);
+
+        $cat4 = $this->serviceCategoryEntity->CreateNewCategory('catToDelete', $user); // Not used here, just to test the delete action
         $cat5 = $this->serviceCategoryEntity->CreateNewCategory('catToTestFamillyYear_1', $user);
         $cat6 = $this->serviceCategoryEntity->CreateNewCategory('catToTestFamillyYear_2', $user);
+        $cat7 = $this->serviceCategoryEntity->CreateNewCategory('catForDepenseToDelete', $user);
 
         $cat1UserNoFamily = $this->serviceCategoryEntity->CreateNewCategory('catUserNoFamily_1', $userNoFamily);
         $cat2UserNoFamily = $this->serviceCategoryEntity->CreateNewCategory('catUserNoFamily_2', $userNoFamily);
@@ -64,15 +81,7 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
         $this->serviceDepenseEntity->CreateNewDepense('dep_user_no_family_4', 33.6, $userNoFamily, new \DateTimeImmutable('now'), $cat3UserNoFamily);
         $this->serviceDepenseEntity->CreateNewDepense('dep_user_no_family_5', 22, $userNoFamily, new \DateTimeImmutable('now'), $cat3UserNoFamily);
 
-        $this->serviceFamilyEntity->SetMainMemberFamily($family, $admin);
-        $this->serviceFamilyEntity->JoinFamily($family, $admin);
-
-        $this->serviceDepenseEntity->CreateNewDepense('admin_dep1', 25.5, $admin, new \DateTimeImmutable('now'), $cat1);
-        $this->serviceDepenseEntity->CreateNewDepense('admin_dep2', 20, $admin, new \DateTimeImmutable('now'), $cat2);
-        $this->serviceDepenseEntity->CreateNewDepense('admin_dep3', 12, $admin, new \DateTimeImmutable('now'), $cat3);
-        $this->serviceDepenseEntity->CreateNewDepense('admin_dep4', 17, $admin, new \DateTimeImmutable('now'), $cat1);
-
-        $this->serviceDepenseEntity->CreateNewDepense('depense_to_delete', 17, $user, new \DateTimeImmutable('now'), $cat3);
+        $this->serviceDepenseEntity->CreateNewDepense('depense_to_delete', 17, $user, new \DateTimeImmutable('now'), $cat7);
 
         for ($i = 0; $i < 100; ++$i) {
             $this->serviceDepenseEntity->CreateNewDepense('depenseUser'.$i, 1, $user, new \DateTimeImmutable('now'), $cat5);
