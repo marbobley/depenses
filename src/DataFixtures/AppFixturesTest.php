@@ -42,6 +42,7 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
         // 2. CREATE USER
         $admin = $this->serviceUserEntity->CreateNewUser('admin', $password, ['ROLE_ADMIN']);
         $user = $this->serviceUserEntity->CreateNewUser('user', $password, ['ROLE_USER']);
+        $userNoFamily = $this->serviceUserEntity->CreateNewUser('user_no_family', $password, ['ROLE_USER']);
         $this->serviceUserEntity->CreateNewUser('user_to_delete', $password, ['ROLE_USER']);
         for ($i = 0; $i < 20; ++$i) {
             $this->serviceUserEntity->CreateNewUser('usr'.$i, $password, ['ROLE_USER']);
@@ -52,6 +53,16 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
         $cat4 = $this->serviceCategoryEntity->CreateNewCategory('catToDelete', $user);
         $cat5 = $this->serviceCategoryEntity->CreateNewCategory('catToTestFamillyYear_1', $user);
         $cat6 = $this->serviceCategoryEntity->CreateNewCategory('catToTestFamillyYear_2', $user);
+
+        $cat1UserNoFamily = $this->serviceCategoryEntity->CreateNewCategory('catUserNoFamily_1', $userNoFamily);
+        $cat2UserNoFamily = $this->serviceCategoryEntity->CreateNewCategory('catUserNoFamily_2', $userNoFamily);
+        $cat3UserNoFamily = $this->serviceCategoryEntity->CreateNewCategory('catUserNoFamily_3', $userNoFamily);
+
+        $this->serviceDepenseEntity->CreateNewDepense('dep_user_no_family_1', 10, $userNoFamily, new \DateTimeImmutable('now'), $cat1UserNoFamily);
+        $this->serviceDepenseEntity->CreateNewDepense('dep_user_no_family_2', 10.99, $userNoFamily, new \DateTimeImmutable('now'), $cat2UserNoFamily);
+        $this->serviceDepenseEntity->CreateNewDepense('dep_user_no_family_3', 4, $userNoFamily, new \DateTimeImmutable('now'), $cat1UserNoFamily);
+        $this->serviceDepenseEntity->CreateNewDepense('dep_user_no_family_4', 33.6, $userNoFamily, new \DateTimeImmutable('now'), $cat3UserNoFamily);
+        $this->serviceDepenseEntity->CreateNewDepense('dep_user_no_family_5', 22, $userNoFamily, new \DateTimeImmutable('now'), $cat3UserNoFamily);
 
         $this->serviceFamilyEntity->SetMainMemberFamily($family, $admin);
         $this->serviceFamilyEntity->JoinFamily($family, $admin);
