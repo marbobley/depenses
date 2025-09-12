@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Service\Business;
+
 use App\Interfaces\IDepenseMonth;
 use Symfony\Bundle\SecurityBundle\Security;
 
@@ -10,18 +11,20 @@ use Symfony\Bundle\SecurityBundle\Security;
 class ServiceDepenseFamily implements IDepenseMonth
 {
     public function __construct(
-        private Security $security, 
+        private Security $security,
         private ServiceFamily $serviceFamily,
-        private ServiceDepense $serviceDepense)
-    {
-    }
+        private ServiceDepense $serviceDepense
+    ) {}
 
-     public function GetDepenseMonth($month, $year): float
+    public function GetDepenseMonth($user, $month, $year): float
     {
-        $user = $this->security->getUser();
+        if ($user === null) {
+            return 0;
+        }
+
         $family = $this->serviceFamily->GetFamily($user);
 
-        if (null === $family) {
+        if ($family === null) {
             return 0;
         }
 

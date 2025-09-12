@@ -15,7 +15,7 @@ class ServiceFamily
         private Security $security
     ) {}
 
-    public function GetFamily(User $user): Family
+    public function GetFamily(User $user): ?Family
     {
         return $user->GetFamily();
     }

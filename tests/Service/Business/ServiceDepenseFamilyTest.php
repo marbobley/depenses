@@ -13,7 +13,6 @@ class ServiceDepenseFamilyTest extends KernelTestCase
 
     private ?ServiceDepenseFamily $serviceDepenseFamily;
     private ?EntityManager $entityManager;
-    private ?Security $security;
 
     protected function setUp(): void
     {
@@ -22,29 +21,25 @@ class ServiceDepenseFamilyTest extends KernelTestCase
         $this->serviceDepenseFamily = static::getContainer()
         ->get(ServiceDepenseFamily::class);
 
-        $this->security = static::getContainer()->get(Security::class);
-
         $this->entityManager = $kernel->getContainer()
         ->get('doctrine')
         ->getManager();
-
     }
 
-    
+    public function testWhenGetDepenseMonthWithNullUser_ThenReturn0(): void
+    {
+        $this->assertSame(0.0, $this->serviceDepenseFamily->GetDepenseMonth(null, 1, 2024));
+    }
 
     public function testWhenGetDepenseMonth_WithNoFamily_ThenReturn0(): void
     {
-
         $user = $this->entityManager->
             getRepository(User::class)->
             findOneBy(['username' => 'user'])
         ;
 
-        $this->security->login($user, 'form_login');
 
-        $this->serviceDepenseFamily->GetDepenseMonth(1, 2024);
-
-        $this->assertSame(0, $this->serviceDepenseFamily->GetDepenseMonth(1, 2024));
+        $this->assertSame(0.0, $this->serviceDepenseFamily->GetDepenseMonth($user , 1, 2024));
     }
 
     protected function tearDown(): void

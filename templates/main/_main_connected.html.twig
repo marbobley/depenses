@@ -5,8 +5,8 @@
             Bonjour {{ app.user.username }}!!!
         </h1>
         <ul>
-            <li>Depense du mois : {{ serviceDepenseUser.DepenseMonth('now'|date('n'), 'now'|date('Y'))|number_format(2) }} €</il>
-            <li>Depense du mois précédent : {{ serviceDepenseUser.DepenseMonth('now'|date('n')-1, 'now'|date('Y'))|number_format(2) }} €</il>
+            <li>Depense du mois : {{ serviceDepenseUser.DepenseMonth(app.user,'now'|date('n'), 'now'|date('Y'))|number_format(2) }} €</il>
+            <li>Depense du mois précédent : {{ serviceDepenseUser.DepenseMonth(app.user,'now'|date('n')-1, 'now'|date('Y'))|number_format(2) }} €</il>
             <li>Depense de l'année : {{ serviceDepenseUser.DepenseYear('now'|date('Y'))|number_format(2) }} €</il>
             <li>Depense de l'année précédent : {{ serviceDepenseUser.DepenseYear('now'|date('Y')-1)|number_format(2) }} €</il>
         </ul>
@@ -14,8 +14,8 @@
         {% if serviceFamily.GetUserFamily %}
             Famille : {{ serviceFamily.GetUserFamily }}
             <ul>
-                <li>Depense du mois : {{ serviceDepenseFamily.DepenseMonth('now'|date('n'), 'now'|date('Y'))|number_format(2) }} €</il>
-                <li>Depense du mois précédent : {{ serviceDepenseFamily.DepenseMonth('now'|date('n') - 1, 'now'|date('Y'))|number_format(2) }} €</il>
+                <li>Depense du mois : {{ serviceDepenseFamily.DepenseMonth(app.user, 'now'|date('n'), 'now'|date('Y'))|number_format(2) }} €</il>
+                <li>Depense du mois précédent : {{ serviceDepenseFamily.DepenseMonth(app.user,'now'|date('n') - 1, 'now'|date('Y'))|number_format(2) }} €</il>
             </ul>
         {% endif %}
     </div>
