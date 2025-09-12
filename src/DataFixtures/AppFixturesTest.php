@@ -46,21 +46,23 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
         $this->serviceDepenseEntity->CreateNewDepense('admin_dep4', 17, $admin, new \DateTimeImmutable('now'), $cat1);
     }
 
-    public function load(ObjectManager $manager): void
-    {
-        $password = $this->hasher->hashPassword(new User(), 'abcd1234!');
-
-        $this->createAdmin($password);
-
+    private function createFamilyToDelete(): void {
         // CREATE FAMILY TO DELETE
         $familyToDelete = new Family();
         $familyToDelete->setName('family_to_delete');
         $familyToDelete->setPassword('1234');
         $this->serviceFamilyEntity->CreateFamily($familyToDelete);
+    }
+
+    public function load(ObjectManager $manager): void
+    {
+        $password = $this->hasher->hashPassword(new User(), 'abcd1234!');
+
+        $this->createAdmin($password);
+        $this->createFamilyToDelete();
 
         // 2. CREATE USER
         $user = $this->serviceUserEntity->CreateNewUser('user', $password, ['ROLE_USER']);
-        $userNoFamily = $this->serviceUserEntity->CreateNewUser('user_no_family', $password, ['ROLE_USER']);
         $this->serviceUserEntity->CreateNewUser('user_to_delete', $password, ['ROLE_USER']);
         for ($i = 0; $i < 20; ++$i) {
             $this->serviceUserEntity->CreateNewUser('usr'.$i, $password, ['ROLE_USER']);
@@ -70,17 +72,7 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
         $cat5 = $this->serviceCategoryEntity->CreateNewCategory('catToTestFamillyYear_1', $user);
         $cat6 = $this->serviceCategoryEntity->CreateNewCategory('catToTestFamillyYear_2', $user);
         $cat7 = $this->serviceCategoryEntity->CreateNewCategory('catForDepenseToDelete', $user);
-
-        $cat1UserNoFamily = $this->serviceCategoryEntity->CreateNewCategory('catUserNoFamily_1', $userNoFamily);
-        $cat2UserNoFamily = $this->serviceCategoryEntity->CreateNewCategory('catUserNoFamily_2', $userNoFamily);
-        $cat3UserNoFamily = $this->serviceCategoryEntity->CreateNewCategory('catUserNoFamily_3', $userNoFamily);
-
-        $this->serviceDepenseEntity->CreateNewDepense('dep_user_no_family_1', 10, $userNoFamily, new \DateTimeImmutable('now'), $cat1UserNoFamily);
-        $this->serviceDepenseEntity->CreateNewDepense('dep_user_no_family_2', 10.99, $userNoFamily, new \DateTimeImmutable('now'), $cat2UserNoFamily);
-        $this->serviceDepenseEntity->CreateNewDepense('dep_user_no_family_3', 4, $userNoFamily, new \DateTimeImmutable('now'), $cat1UserNoFamily);
-        $this->serviceDepenseEntity->CreateNewDepense('dep_user_no_family_4', 33.6, $userNoFamily, new \DateTimeImmutable('now'), $cat3UserNoFamily);
-        $this->serviceDepenseEntity->CreateNewDepense('dep_user_no_family_5', 22, $userNoFamily, new \DateTimeImmutable('now'), $cat3UserNoFamily);
-
+ 
         $this->serviceDepenseEntity->CreateNewDepense('depense_to_delete', 17, $user, new \DateTimeImmutable('now'), $cat7);
 
         for ($i = 0; $i < 100; ++$i) {
