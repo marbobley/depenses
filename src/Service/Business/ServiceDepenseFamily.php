@@ -38,4 +38,26 @@ class ServiceDepenseFamily implements IDepenseMonth
 
         return $total;
     }
+
+    public function GetDepenseYear($user , $year) : float {
+        if ($user === null) {
+            return 0;
+        }
+
+        $family = $this->serviceFamily->GetFamily($user);
+
+        if ($family === null) {
+            return 0;
+        }
+
+        $members = $family->getMembers();
+
+        $total = 0;
+        foreach ($members as $member) {
+            $depenses = $member->getDepenses();
+            $total += $this->serviceDepense->CalculateAmount($this->serviceDepense->GetDepenseByYear($depenses, $year));
+        }
+
+        return $total;
+    }
 }

@@ -77,12 +77,18 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
         $this->serviceFamilyEntity->JoinFamily($family, $user2);
         $this->serviceFamilyEntity->JoinFamily($family, $user3);
 
+        //Current month
         $this->serviceDepenseEntity->CreateNewDepense('usr1_dep1', 10, $user1, new \DateTimeImmutable('now'), $catUser1);
         $this->serviceDepenseEntity->CreateNewDepense('usr1_dep11', 15, $user1, new \DateTimeImmutable('now'), $catUser1_1);
         $this->serviceDepenseEntity->CreateNewDepense('usr2_dep1', 20, $user2, new \DateTimeImmutable('now'), $catUser2);
         $this->serviceDepenseEntity->CreateNewDepense('usr2_dep22', 25, $user2, new \DateTimeImmutable('now'), $catUser2_2);
         $this->serviceDepenseEntity->CreateNewDepense('usr3_dep3', 30, $user3, new \DateTimeImmutable('now'), $catUser3);
         $this->serviceDepenseEntity->CreateNewDepense('usr3_dep33',  35, $user3, new \DateTimeImmutable('now'), $catUser3_3);
+
+        //previous month
+        $this->serviceDepenseEntity->CreateNewDepense('usr1_dep2', 100, $user1, (new \DateTimeImmutable('now'))->modify('-1 month'), $catUser1);
+        $this->serviceDepenseEntity->CreateNewDepense('usr2_dep2',  150, $user2, (new \DateTimeImmutable('now'))->modify('-1 month'), $catUser2);
+        $this->serviceDepenseEntity->CreateNewDepense('usr3_dep2',  200, $user3, (new \DateTimeImmutable('now'))->modify('-1 month'), $catUser3);    
 
     }
 
