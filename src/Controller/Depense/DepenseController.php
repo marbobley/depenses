@@ -23,7 +23,6 @@ final class DepenseController extends AbstractController
         $depensesFamily = $repository->findByFamily($this->getUser());
 
         return $this->render('depense/index.html.twig', [
-            'controller_name' => 'DepenseController',
             'depenses' => $depenses,
             'depensesFamily' => $depensesFamily,
         ]);
@@ -84,7 +83,14 @@ final class DepenseController extends AbstractController
     public function report(): Response
     {
         return $this->render('depense/report.html.twig', [
-            'controller_name' => 'ChartDepenseController',
+            'startDate' => '',
+        ]);
+    }
+
+    #[Route('/report/category/{idCategory}/{year}', name: 'app_category_month_depense', methods: ['GET'])]
+    public function reportCategoryByMonth(): Response
+    {
+        return $this->render('depense/report.html.twig', [
             'startDate' => '',
         ]);
     }
