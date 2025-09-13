@@ -34,4 +34,13 @@ class ServiceCategoryEntity
 
         return $category;
     }
+
+    public function IsExistingCategory(int $idCategory): bool
+    {
+        $category = $this->entityManager
+            ->getRepository(Category::class)
+            ->find($idCategory);
+
+        return null !== $category;
+    }
 }
