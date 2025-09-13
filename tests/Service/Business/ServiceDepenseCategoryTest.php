@@ -7,6 +7,7 @@ use App\Service\Business\ServiceDepenseCategory;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use App\Entity\User;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class ServiceDepenseCategoryTest extends KernelTestCase
 {
@@ -32,7 +33,7 @@ class ServiceDepenseCategoryTest extends KernelTestCase
 
         $result = $this->serviceDepenseCategory->getDepenseByCategoryByYear($user, 999, '2023');
 
-        $this->assertIsArray($result);
+        $this->assertInstanceOf(ArrayCollection::class,$result);
         $this->assertEmpty($result);
     }
 
@@ -42,8 +43,8 @@ class ServiceDepenseCategoryTest extends KernelTestCase
         $category = $this->entityManager->getRepository(Category::class)->findOneBy(['name' => 'catToTestFamillyYear_1']);
 
         $result = $this->serviceDepenseCategory->getDepenseByCategoryByYear($user, $category->getId(), '2023');
-        $this->assertIsArray($result);
-        //$this->assertNotEmpty($result);
+        $this->assertInstanceOf(ArrayCollection::class,$result);
+        $this->assertNotEmpty($result);
     }
 
 

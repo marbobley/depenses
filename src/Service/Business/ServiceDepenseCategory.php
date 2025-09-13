@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Interfaces\IDepenseMonth;
 use App\Interfaces\IDepenseYear;
 use App\Service\Entity\ServiceCategoryEntity;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\SecurityBundle\Security;
 
 /**
@@ -19,14 +20,15 @@ class ServiceDepenseCategory
         private ServiceCategoryEntity $serviceCategoryEntity
     ) {}
 
-    public function getDepenseByCategoryByYear(User $user, int $idCategory, string $year): ?array
+    public function getDepenseByCategoryByYear(User $user, int $idCategory, string $year): ?ArrayCollection
     {
         if (!$this->serviceCategoryEntity->IsExistingCategory($idCategory)) {
-            return [];
+            return new ArrayCollection();
         }
 
-        
+        $category = $this->serviceCategoryEntity->GetCategoryById($idCategory);
+        $allDepenseCategory = $category->getDepenses();
 
-        return [];
+        return $allDepenseCategory;
     }
 }
