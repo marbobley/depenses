@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Service\Business\ServiceDepenseFamily;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Bundle\SecurityBundle\Security;
 
 class ServiceDepenseFamilyTest extends KernelTestCase
 {
