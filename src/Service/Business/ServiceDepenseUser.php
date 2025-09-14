@@ -17,9 +17,9 @@ class ServiceDepenseUser implements IDepenseMonth, IDepenseYear
         private ServiceDepense $serviceDepense
     ) {}
 
-    public function GetDepenseMonth($currentMonth, $currentYear): float
+    public function GetDepenseMonth($user , $currentMonth, $currentYear): float
     {
-        $user = $this->security->getUser();
+        //$user = $this->security->getUser();
         return $this->GetTotalMonth($user, $currentMonth, $currentYear);
     }
 

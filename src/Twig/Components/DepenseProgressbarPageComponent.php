@@ -33,11 +33,12 @@ final class DepenseProgressbarPageComponent
     {
         $currentMonth = date('n', strtotime($this->startDate));
         $currentYear = date('Y', strtotime($this->startDate));
+        $user = $this->security->getUser();
 
         if ('user' === $this->type) {
-            return $this->serviceDepenseUser->GetDepenseMonth($currentMonth, $currentYear);
+            return $this->serviceDepenseUser->GetDepenseMonth( $user , $currentMonth, $currentYear);
         } else {
-            return $this->serviceDepenseFamily->GetDepenseMonth($currentMonth, $currentYear);
+            return $this->serviceDepenseFamily->GetDepenseMonth($user , $currentMonth, $currentYear);
         }
     }
 

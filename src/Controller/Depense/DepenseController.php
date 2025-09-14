@@ -7,6 +7,7 @@ use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
 use App\Service\Entity\ServiceDepenseEntity;
 use App\Service\Utils\ServiceChartjs;
+use App\Service\Business\ServiceDepenseCategory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +24,6 @@ final class DepenseController extends AbstractController
         $depensesFamily = $repository->findByFamily($this->getUser());
 
         return $this->render('depense/index.html.twig', [
-            'controller_name' => 'DepenseController',
             'depenses' => $depenses,
             'depensesFamily' => $depensesFamily,
         ]);
@@ -84,8 +84,18 @@ final class DepenseController extends AbstractController
     public function report(): Response
     {
         return $this->render('depense/report.html.twig', [
-            'controller_name' => 'ChartDepenseController',
             'startDate' => '',
+        ]);
+    }
+
+    #[Route('/report/category/{idCategory}', name: 'app_category_depense', methods: ['GET'])]
+    public function reportCategoryByYear(ServiceDepenseCategory $serviceDepenseCategory, int $idCategory ): Response
+    {
+        $depenses = $serviceDepenseCategory->getDepenseByCategory($this->getUser(), $idCategory);
+
+        return $this->render('depense/depense_category.html.twig', [
+            'depenses' => $depenses,
+            'idCategory' => $idCategory
         ]);
     }
 
