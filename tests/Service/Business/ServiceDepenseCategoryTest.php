@@ -31,9 +31,9 @@ class ServiceDepenseCategoryTest extends KernelTestCase
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'user']);
 
-        $result = $this->serviceDepenseCategory->getDepenseByCategoryByYear($user, 999, '2023');
+        $result = $this->serviceDepenseCategory->getDepenseByCategory(999);
 
-        $this->assertInstanceOf(ArrayCollection::class,$result);
+        $this->assertIsArray($result);
         $this->assertEmpty($result);
     }
 
@@ -42,9 +42,10 @@ class ServiceDepenseCategoryTest extends KernelTestCase
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'user']);
         $category = $this->entityManager->getRepository(Category::class)->findOneBy(['name' => 'catToTestFamillyYear_1']);
 
-        $result = $this->serviceDepenseCategory->getDepenseByCategoryByYear($user, $category->getId(), '2023');
-        $this->assertInstanceOf(ArrayCollection::class,$result);
+        $result = $this->serviceDepenseCategory->getDepenseByCategory($category->getId());
+        $this->assertIsArray($result);
         $this->assertNotEmpty($result);
+        $this->assertEquals(100, sizeof($result));
     }
 
 

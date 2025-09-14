@@ -20,15 +20,15 @@ class ServiceDepenseCategory
         private ServiceCategoryEntity $serviceCategoryEntity
     ) {}
 
-    public function getDepenseByCategoryByYear(User $user, int $idCategory, string $year): ?ArrayCollection
+    public function getDepenseByCategory(int $idCategory): ?array
     {
         if (!$this->serviceCategoryEntity->IsExistingCategory($idCategory)) {
-            return new ArrayCollection();
+            return [];
         }
 
         $category = $this->serviceCategoryEntity->GetCategoryById($idCategory);
         $allDepenseCategory = $category->getDepenses();
 
-        return $allDepenseCategory;
+        return $allDepenseCategory->toArray();
     }
 }

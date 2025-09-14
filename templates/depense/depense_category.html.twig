@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste de toutes les dépenses pour la catégorie {% endblock %}
+
+{% block body %}<section class="container px-4">
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Mes dépenses : Somme {{ serviceDepense.CalculateAmoutArray(depenses)|number_format(2) }} €
+                </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                        {% for depense in depenses %}
+                            {{ include('partials/_form-amount.hmtl.twig', {depense: depense, edit: true, showCreated: true}, false) }}
+                        {% else %}
+                            <li>Aucun enregistrement en base de données.</li>
+                        {% endfor %}
+                    </ul>
+                    </div>
+                </div>
+            </div>
+    </section>
+{% endblock %}
