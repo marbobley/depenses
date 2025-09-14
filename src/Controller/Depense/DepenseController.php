@@ -91,7 +91,7 @@ final class DepenseController extends AbstractController
     #[Route('/report/category/{idCategory}', name: 'app_category_depense', methods: ['GET'])]
     public function reportCategoryByYear(ServiceDepenseCategory $serviceDepenseCategory, int $idCategory ): Response
     {
-        $depenses = $serviceDepenseCategory->getDepenseByCategory($idCategory);
+        $depenses = $serviceDepenseCategory->getDepenseByCategory($this->getUser(), $idCategory);
 
         return $this->render('depense/depense_category.html.twig', [
             'depenses' => $depenses,

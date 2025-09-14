@@ -20,13 +20,20 @@ class ServiceDepenseCategory
         private ServiceCategoryEntity $serviceCategoryEntity
     ) {}
 
-    public function getDepenseByCategory(int $idCategory): ?array
+    public function getDepenseByCategory(User $user, int $idCategory): ?array
     {
         if (!$this->serviceCategoryEntity->IsExistingCategory($idCategory)) {
             return [];
         }
 
         $category = $this->serviceCategoryEntity->GetCategoryById($idCategory);
+        $userCategory = $category->getCreatedBy();
+        $userCategoryFamily = $userCategory->getFamily();
+        $userFamily = $user->getFamily();
+        if ($userCategoryFamily !== $userFamily) {
+            return [];
+        }       
+
         $allDepenseCategory = $category->getDepenses();
 
         return $allDepenseCategory->toArray();
