@@ -118,6 +118,7 @@ class ServiceDepense
         $currentDepense = new Depense();
         $currentCategory = new Category();
         $currentCategory->setName($category->getName());
+        $currentCategory->setId($category->getId());
 
         $currentDepense->setName('Total ' . $category->getName());
         $currentDepense->setCategory($currentCategory);
