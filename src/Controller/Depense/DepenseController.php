@@ -29,6 +29,18 @@ final class DepenseController extends AbstractController
         ]);
     }
 
+    #[Route('/mydepense', name: 'app_my_depense_pagination', methods: ['GET'])]
+    public function myDepensePagination(DepenseRepository $repository): Response
+    {
+        $depenses = $repository->findByUser($this->getUser());
+
+        return $this->render('depense/my_depense_pagination.html.twig', [
+            'depenses' => $depenses
+        ]);
+    }
+
+
+
     #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
     #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Depense $depense, Request $request, ServiceDepenseEntity $depenseEntityService): Response
