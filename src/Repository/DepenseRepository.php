@@ -6,6 +6,8 @@ use App\Entity\Depense;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 
 /**
  * @extends ServiceEntityRepository<Depense>
@@ -29,6 +31,18 @@ class DepenseRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult()
         ;
+    }
+
+    public function findByUserWithPagination(User $user): Pagerfanta
+    {
+        $query = $this->createQueryBuilder('d')
+        ->andWhere('d.createdBy = :val')
+        ->setParameter('val', $user->getId())
+        ->orderBy('d.id', 'DESC')
+        ->setMaxResults(10)
+        ->getQuery();
+
+        return new Pagerfanta(new QueryAdapter($query));
     }
 
     /**

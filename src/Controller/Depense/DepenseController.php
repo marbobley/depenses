@@ -30,9 +30,13 @@ final class DepenseController extends AbstractController
     }
 
     #[Route('/mydepense', name: 'app_my_depense_pagination', methods: ['GET'])]
-    public function myDepensePagination(DepenseRepository $repository): Response
-    {
-        $depenses = $repository->findByUser($this->getUser());
+    public function myDepensePagination(
+        DepenseRepository $repository,
+        Request $request,
+    ): Response {
+        $depenses = $repository->findByUserWithPagination($this->getUser());
+        $depenses->setMaxPerPage(5);
+        $depenses->setCurrentPage($request->query->get('page', 1));
 
         return $this->render('depense/my_depense_pagination.html.twig', [
             'depenses' => $depenses
@@ -45,8 +49,10 @@ final class DepenseController extends AbstractController
     #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Depense $depense, Request $request, ServiceDepenseEntity $depenseEntityService): Response
     {
-        if ($depense
-            && $this->getUser() != $depense->getCreatedBy()) {
+        if (
+            $depense
+            && $this->getUser() != $depense->getCreatedBy()
+        ) {
             throw new AccessDeniedException();
         }
 
@@ -69,8 +75,10 @@ final class DepenseController extends AbstractController
     #[Route('/{id}/delete', name: 'app_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function delete(?Depense $depense, ServiceDepenseEntity $depenseEntityService): Response
     {
-        if ($depense
-            && $this->getUser() != $depense->getCreatedBy()) {
+        if (
+            $depense
+            && $this->getUser() != $depense->getCreatedBy()
+        ) {
             throw new AccessDeniedException();
         }
 
@@ -88,8 +96,10 @@ final class DepenseController extends AbstractController
     public function search(Request $request): Response
     {
         // / to create variable for twig
-        return $this->render('depense/search.html.twig',
-            ['startDate' => '', 'endDate' => '']);
+        return $this->render(
+            'depense/search.html.twig',
+            ['startDate' => '', 'endDate' => '']
+        );
     }
 
     #[Route('/report', name: 'app_chart_depense', methods: ['GET'])]
@@ -101,7 +111,7 @@ final class DepenseController extends AbstractController
     }
 
     #[Route('/report/category/{idCategory}', name: 'app_category_depense', methods: ['GET'])]
-    public function reportCategoryByYear(ServiceDepenseCategory $serviceDepenseCategory, int $idCategory ): Response
+    public function reportCategoryByYear(ServiceDepenseCategory $serviceDepenseCategory, int $idCategory): Response
     {
         $depenses = $serviceDepenseCategory->getDepenseByCategory($this->getUser(), $idCategory);
 
