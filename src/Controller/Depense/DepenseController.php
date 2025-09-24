@@ -49,7 +49,7 @@ final class DepenseController extends AbstractController
 
 
     #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
-    #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/edit/{id}', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function new(?Depense $depense, Request $request, ServiceDepenseEntity $depenseEntityService): Response
     {
         if (
@@ -75,7 +75,7 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/delete/{id}', name: 'app_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     public function delete(?Depense $depense, ServiceDepenseEntity $depenseEntityService): Response
     {
         if (
