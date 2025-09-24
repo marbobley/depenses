@@ -34,8 +34,9 @@ final class DepenseController extends AbstractController
         DepenseRepository $repository,
         Request $request,
     ): Response {
+
         $depenses = $repository->findByUserWithPagination($this->getUser());
-        $depenses->setMaxPerPage(5);
+        $depenses->setMaxPerPage(4);
         $depenses->setCurrentPage($request->query->get('page', 1));
 
         return $this->render('depense/my_depense_pagination.html.twig', [

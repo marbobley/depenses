@@ -5,9 +5,6 @@
 
 {% block body %}
 	<section class="container px-4">
-		<div class="containter  mb-2">
-			<a href="{{ path('app_depense_new') }}" class="btn btn-primary">Ajouter</a>
-		</div>
         <div class="text-slate-400 mb-4">
             {{ depenses.nbResults }} depenses (Page {{ depenses.currentPage }} of {{ depenses.nbPages }})
         </div>
