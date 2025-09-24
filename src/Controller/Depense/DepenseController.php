@@ -35,11 +35,13 @@ final class DepenseController extends AbstractController
         Request $request,
     ): Response {
 
+        $somme = $repository->sumAmountOfUserDepense($this->getUser());
         $depenses = $repository->findByUserWithPagination($this->getUser());
         $depenses->setMaxPerPage(4);
         $depenses->setCurrentPage($request->query->get('page', 1));
 
         return $this->render('depense/my_depense_pagination.html.twig', [
+            'somme' => $somme,
             'depenses' => $depenses
         ]);
     }

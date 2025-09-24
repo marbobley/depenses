@@ -4,12 +4,15 @@
 {% endblock %}
 
 {% block body %}
-	<section class="container px-4">
-        <div class="text-slate-400 mb-4">
+	<section class="container px-4 py-5">
+        <div>
+            <h1>Total des dépenses : {{ somme |number_format(2)  }} €</h1>
+        </div>
+        <div>
             {{ depenses.nbResults }} depenses (Page {{ depenses.currentPage }} of {{ depenses.nbPages }})
         </div>
         {% if depenses.haveToPaginate %}
-                <div class="flex justify-around mt-3 underline font-semibold">
+                <div>
                     {% if depenses.hasPreviousPage %}
                         <a href="{{ path('app_my_depense_pagination', {page: depenses.getPreviousPage}) }}">&lt; Previous</a>
                     {% endif %}
@@ -18,7 +21,7 @@
                     {% endif %}
                 </div>
         {% endif %}
-		<div class="accordion-body">
+		<div>
 			<ul class="list-group list-group-flush">
 				{% for depense in depenses %}
 					{{ include('partials/_form-amount.hmtl.twig', {depense: depense, edit: true, showCreated: true}, false) }}
