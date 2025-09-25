@@ -146,4 +146,20 @@ final class DepenseController extends AbstractController
             'chart' => $chartBar,
         ]);
     }
+
+    #[Route('/chartjs2/{year}', name: 'app_depense_chartjs_year2', methods: ['GET'])]
+    #[Route('/chartjs2', name: 'app_depense_chartjs2', methods: ['GET'])]
+    public function depenseChartBy12MonthFilterByYear2(ServiceChartjs $serviceChartjs, ?string $year): Response
+    {
+        if (!$year) {
+            $year = date('Y');
+        }
+
+        $chartBar = $serviceChartjs->GetChartMonth($this->getUser(), $year , '');
+
+        return $this->render('depense/chartjs.html.twig', [
+            'controller_name' => 'MainController',
+            'chart' => $chartBar,
+        ]);
+    }
 }
