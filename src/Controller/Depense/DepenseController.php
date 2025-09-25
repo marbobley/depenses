@@ -8,6 +8,7 @@ use App\Repository\DepenseRepository;
 use App\Service\Entity\ServiceDepenseEntity;
 use App\Service\Utils\ServiceChartjs;
 use App\Service\Business\ServiceDepenseCategory;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,9 +50,13 @@ final class DepenseController extends AbstractController
 
 
     #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
-    #[Route('/edit/{id}', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Depense $depense, Request $request, ServiceDepenseEntity $depenseEntityService): Response
-    {
+    #[Route('/edit/{slug}', name: 'app_depense_edit', methods: ['GET', 'POST'])]
+    public function new(
+        #[MapEntity(mapping: ['slug' => 'slug'])]
+        ?Depense $depense,
+        Request $request,
+        ServiceDepenseEntity $depenseEntityService
+    ): Response {
         if (
             $depense
             && $this->getUser() != $depense->getCreatedBy()
@@ -75,9 +80,11 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-    #[Route('/delete/{id}', name: 'app_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?Depense $depense, ServiceDepenseEntity $depenseEntityService): Response
-    {
+    #[Route('/delete/{slug}', name: 'app_depense_delete', methods: ['GET', 'POST'])]
+    public function delete(
+        #[MapEntity(mapping: ['slug' => 'slug'])] ?Depense $depense,
+        ServiceDepenseEntity $depenseEntityService
+    ): Response {
         if (
             $depense
             && $this->getUser() != $depense->getCreatedBy()

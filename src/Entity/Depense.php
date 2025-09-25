@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\DepenseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Slug;
 
 #[ORM\Entity(repositoryClass: DepenseRepository::class)]
 class Depense
@@ -33,6 +34,7 @@ class Depense
     private ?Category $category = null;
 
     #[ORM\Column(unique: true)]
+    #[Slug(fields: ['name'])]
     private ?string $slug = null;
 
     public function getId(): ?int
