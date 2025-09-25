@@ -17,7 +17,7 @@ class ServiceChartjs
     {
     }
 
-    public function GetChartMonth(User $user, string $year): Chart
+    public function GetChartMonths(User $user, string $year): Chart
     {
         $months = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
         $categories = $this->serviceCategory->GetAllCategories($user);

@@ -64,6 +64,25 @@ class ServiceDepense
         return $depenseMonthYear;
     }
 
+    private function SumByCategoryByMonth(string $month, string $year, Collection $depenses, Category $category): float
+    {
+        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
+        return $this->GetSumCategory($depenseByMonthYear, $category);
+    }
+
+    /**
+     * Sum the depense by category for each month of the year
+     * return array<int>.
+     */
+    private function SumByCategoryByMonthByYear(array $months, string $year, Collection $depenses, Category $category): array
+    {
+
+        foreach ($months as $month) {
+            $res[] = $this->SumByCategoryByMonth($month, $year, $depenses, $category);
+        }
+
+        return $res;
+    }
     /**
      * return array<int>.
      */
@@ -75,23 +94,11 @@ class ServiceDepense
 
         if (null === $family) {
             $depenses = $user->GetDepenses();
-
-            foreach ($months as $month) {
-                $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
-
-                $res[] = $this->GetSumCategory($depenseByMonthYear, $category);
-            }
-
+            $res = $this->SumByCategoryByMonthByYear($months, $year, $depenses, $category);
             return $res;
         } else {
             $depenses = $this->GetAllDepenses($family);
-
-            foreach ($months as $month) {
-                $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
-
-                $res[] = $this->GetSumCategory($depenseByMonthYear, $category);
-            }
-
+            $res = $this->SumByCategoryByMonthByYear($months, $year, $depenses, $category);
             return $res;
         }
     }

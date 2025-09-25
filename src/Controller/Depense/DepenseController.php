@@ -133,13 +133,13 @@ final class DepenseController extends AbstractController
 
     #[Route('/chartjs/{year}', name: 'app_depense_chartjs_year', methods: ['GET'])]
     #[Route('/chartjs', name: 'app_depense_chartjs', methods: ['GET'])]
-    public function __invoke(ServiceChartjs $serviceChartjs, ?string $year): Response
+    public function depenseChartBy12MonthFilterByYear(ServiceChartjs $serviceChartjs, ?string $year): Response
     {
         if (!$year) {
             $year = date('Y');
         }
 
-        $chartBar = $serviceChartjs->GetChartMonth($this->getUser(), $year);
+        $chartBar = $serviceChartjs->GetChartMonths($this->getUser(), $year);
 
         return $this->render('depense/chartjs.html.twig', [
             'controller_name' => 'MainController',
