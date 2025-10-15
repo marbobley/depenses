@@ -13,12 +13,15 @@ class ServiceChartjs
 {
     public function __construct(private ServiceCategory $serviceCategory,
         private ChartBuilderInterface $chartBuilder,
-        private ServiceDepense $serviceDepense)
+        private ServiceDepense $serviceDepense,
+        private ServiceMonth $serviceMonth
+    )
     {
     }
 
-    public function GetChartMonth(User $user, string $year, string $month) : Chart {
-        $months = ['2'];
+    public function GetChartMonth(User $user, string $year, string $month): Chart
+    {
+        $months = [$month];
         $categories = $this->serviceCategory->GetAllCategories($user);
 
         $res = [];
@@ -36,7 +39,7 @@ class ServiceChartjs
 
         $chartBar = $this->chartBuilder->createChart(Chart::TYPE_BAR);
         $chartBar->setData([
-            'labels' => ['Janvier'],
+            'labels' => [$this->serviceMonth->GetMonthName($month)],
             'datasets' => $res,
         ]
         );
@@ -45,7 +48,6 @@ class ServiceChartjs
         ]);
 
         return $chartBar;
-
     }
 
     public function GetChartMonths(User $user, string $year): Chart

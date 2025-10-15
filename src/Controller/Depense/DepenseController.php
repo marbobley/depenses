@@ -5,9 +5,9 @@ namespace App\Controller\Depense;
 use App\Entity\Depense;
 use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
+use App\Service\Business\ServiceDepenseCategory;
 use App\Service\Entity\ServiceDepenseEntity;
 use App\Service\Utils\ServiceChartjs;
-use App\Service\Business\ServiceDepenseCategory;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
@@ -35,7 +35,6 @@ final class DepenseController extends AbstractController
         DepenseRepository $repository,
         Request $request,
     ): Response {
-
         $somme = $repository->sumAmountOfUserDepense($this->getUser());
         $depenses = $repository->findByUserWithPagination($this->getUser());
         $depenses->setMaxPerPage(4);
@@ -43,11 +42,9 @@ final class DepenseController extends AbstractController
 
         return $this->render('depense/my_depense_pagination.html.twig', [
             'somme' => $somme,
-            'depenses' => $depenses
+            'depenses' => $depenses,
         ]);
     }
-
-
 
     #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
     #[Route('/edit/{slug}', name: 'app_depense_edit', methods: ['GET', 'POST'])]
@@ -55,7 +52,7 @@ final class DepenseController extends AbstractController
         #[MapEntity(mapping: ['slug' => 'slug'])]
         ?Depense $depense,
         Request $request,
-        ServiceDepenseEntity $depenseEntityService
+        ServiceDepenseEntity $depenseEntityService,
     ): Response {
         if (
             $depense
@@ -83,7 +80,7 @@ final class DepenseController extends AbstractController
     #[Route('/delete/{slug}', name: 'app_depense_delete', methods: ['GET', 'POST'])]
     public function delete(
         #[MapEntity(mapping: ['slug' => 'slug'])] ?Depense $depense,
-        ServiceDepenseEntity $depenseEntityService
+        ServiceDepenseEntity $depenseEntityService,
     ): Response {
         if (
             $depense
@@ -127,7 +124,7 @@ final class DepenseController extends AbstractController
 
         return $this->render('depense/depense_category.html.twig', [
             'depenses' => $depenses,
-            'idCategory' => $idCategory
+            'idCategory' => $idCategory,
         ]);
     }
 
@@ -149,13 +146,13 @@ final class DepenseController extends AbstractController
 
     #[Route('/chartjs2/{year}', name: 'app_depense_chartjs_year2', methods: ['GET'])]
     #[Route('/chartjs2', name: 'app_depense_chartjs2', methods: ['GET'])]
-    public function depenseChartBy12MonthFilterByYear2(ServiceChartjs $serviceChartjs, ?string $year): Response
+    public function depenseChartBy12MonthFilterByYear2(ServiceChartjs $serviceChartjs, ?string $year, ): Response
     {
         if (!$year) {
             $year = date('Y');
         }
 
-        $chartBar = $serviceChartjs->GetChartMonth($this->getUser(), $year , '');
+        $chartBar = $serviceChartjs->GetChartMonth($this->getUser(), $year, '10');
 
         return $this->render('depense/chartjs.html.twig', [
             'controller_name' => 'MainController',
