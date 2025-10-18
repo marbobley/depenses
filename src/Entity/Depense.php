@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\DepenseRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Slug;
 
 #[ORM\Entity(repositoryClass: DepenseRepository::class)]
 class Depense
@@ -31,6 +32,10 @@ class Depense
 
     #[ORM\ManyToOne(inversedBy: 'depenses')]
     private ?Category $category = null;
+
+    #[ORM\Column(unique: true)]
+    #[Slug(fields: ['name'])]
+    private ?string $slug = null;
 
     public function getId(): ?int
     {
@@ -98,6 +103,18 @@ class Depense
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des dépenses
+{% endblock %}
+
+{% block body %}
+	<section class="container px-4 py-5">
+        <div>
+            <h1>Total des dépenses : {{ somme |number_format(2)  }} €</h1>
+        </div>
+        <div>
+            {{ depenses.nbResults }} depenses (Page {{ depenses.currentPage }} of {{ depenses.nbPages }})
+        </div>
+        {% if depenses.haveToPaginate %}
+                <div>
+                    {% if depenses.hasPreviousPage %}
+                        <a href="{{ path('app_my_depense_pagination', {page: depenses.getPreviousPage}) }}">&lt; Previous</a>
+                    {% endif %}
+                    {% if depenses.hasNextPage %}
+                        <a href="{{ path('app_my_depense_pagination', {page: depenses.getNextPage}) }}">Next &gt;</a>
+                    {% endif %}
+                </div>
+        {% endif %}
+		<div>
+			<ul class="list-group list-group-flush">
+				{% for depense in depenses %}
+					{{ include('partials/_form-amount.hmtl.twig', {depense: depense, edit: true, showCreated: true}, false) }}
+				{% else %}
+					<li>Aucun enregistrement en base de données.</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</section>{% endblock %}

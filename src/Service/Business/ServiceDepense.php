@@ -18,7 +18,8 @@ class ServiceDepense
     public function __construct(
         private ServiceCategory $serviceCategory,
         private LoggerInterface $log,
-    ) {}
+    ) {
+    }
 
     private function GetDepenseByCategory(Collection $depenses, Category $categoryFilter): Collection
     {
@@ -64,6 +65,26 @@ class ServiceDepense
         return $depenseMonthYear;
     }
 
+    private function SumByCategoryByMonth(string $month, string $year, Collection $depenses, Category $category): float
+    {
+        $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
+
+        return $this->GetSumCategory($depenseByMonthYear, $category);
+    }
+
+    /**
+     * Sum the depense by category for each month of the year
+     * return array<int>.
+     */
+    private function SumByCategoryByMonthByYear(array $months, string $year, Collection $depenses, Category $category): array
+    {
+        foreach ($months as $month) {
+            $res[] = $this->SumByCategoryByMonth($month, $year, $depenses, $category);
+        }
+
+        return $res;
+    }
+
     /**
      * return array<int>.
      */
@@ -75,22 +96,12 @@ class ServiceDepense
 
         if (null === $family) {
             $depenses = $user->GetDepenses();
-
-            foreach ($months as $month) {
-                $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
-
-                $res[] = $this->GetSumCategory($depenseByMonthYear, $category);
-            }
+            $res = $this->SumByCategoryByMonthByYear($months, $year, $depenses, $category);
 
             return $res;
         } else {
             $depenses = $this->GetAllDepenses($family);
-
-            foreach ($months as $month) {
-                $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
-
-                $res[] = $this->GetSumCategory($depenseByMonthYear, $category);
-            }
+            $res = $this->SumByCategoryByMonthByYear($months, $year, $depenses, $category);
 
             return $res;
         }
@@ -111,7 +122,7 @@ class ServiceDepense
     }
 
     /**
-     * Create a new depense object with category and user
+     * Create a new depense object with category and user.
      */
     private function SetDepense(Category $category, Collection $depenses, User $user): Depense
     {
@@ -120,7 +131,7 @@ class ServiceDepense
         $currentCategory->setName($category->getName());
         $currentCategory->setId($category->getId());
 
-        $currentDepense->setName('Total ' . $category->getName());
+        $currentDepense->setName('Total '.$category->getName());
         $currentDepense->setCategory($currentCategory);
 
         $depenseForCategory = $this->GetDepenseByCategory($depenses, $category);
@@ -180,7 +191,7 @@ class ServiceDepense
     }
 
     /**
-     * Sum the array 
+     * Sum the array.
      */
     public function CalculateAmoutArray(array $depenses): float
     {

@@ -5,9 +5,10 @@ namespace App\Controller\Depense;
 use App\Entity\Depense;
 use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
+use App\Service\Business\ServiceDepenseCategory;
 use App\Service\Entity\ServiceDepenseEntity;
 use App\Service\Utils\ServiceChartjs;
-use App\Service\Business\ServiceDepenseCategory;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,12 +30,34 @@ final class DepenseController extends AbstractController
         ]);
     }
 
+    #[Route('/mydepense', name: 'app_my_depense_pagination', methods: ['GET'])]
+    public function myDepensePagination(
+        DepenseRepository $repository,
+        Request $request,
+    ): Response {
+        $somme = $repository->sumAmountOfUserDepense($this->getUser());
+        $depenses = $repository->findByUserWithPagination($this->getUser());
+        $depenses->setMaxPerPage(4);
+        $depenses->setCurrentPage($request->query->get('page', 1));
+
+        return $this->render('depense/my_depense_pagination.html.twig', [
+            'somme' => $somme,
+            'depenses' => $depenses,
+        ]);
+    }
+
     #[Route('/new', name: 'app_depense_new', methods: ['GET', 'POST'])]
-    #[Route('/{id}/edit', name: 'app_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Depense $depense, Request $request, ServiceDepenseEntity $depenseEntityService): Response
-    {
-        if ($depense
-            && $this->getUser() != $depense->getCreatedBy()) {
+    #[Route('/edit/{slug}', name: 'app_depense_edit', methods: ['GET', 'POST'])]
+    public function new(
+        #[MapEntity(mapping: ['slug' => 'slug'])]
+        ?Depense $depense,
+        Request $request,
+        ServiceDepenseEntity $depenseEntityService,
+    ): Response {
+        if (
+            $depense
+            && $this->getUser() != $depense->getCreatedBy()
+        ) {
             throw new AccessDeniedException();
         }
 
@@ -54,11 +77,15 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?Depense $depense, ServiceDepenseEntity $depenseEntityService): Response
-    {
-        if ($depense
-            && $this->getUser() != $depense->getCreatedBy()) {
+    #[Route('/delete/{slug}', name: 'app_depense_delete', methods: ['GET', 'POST'])]
+    public function delete(
+        #[MapEntity(mapping: ['slug' => 'slug'])] ?Depense $depense,
+        ServiceDepenseEntity $depenseEntityService,
+    ): Response {
+        if (
+            $depense
+            && $this->getUser() != $depense->getCreatedBy()
+        ) {
             throw new AccessDeniedException();
         }
 
@@ -76,8 +103,10 @@ final class DepenseController extends AbstractController
     public function search(Request $request): Response
     {
         // / to create variable for twig
-        return $this->render('depense/search.html.twig',
-            ['startDate' => '', 'endDate' => '']);
+        return $this->render(
+            'depense/search.html.twig',
+            ['startDate' => '', 'endDate' => '']
+        );
     }
 
     #[Route('/report', name: 'app_chart_depense', methods: ['GET'])]
@@ -89,25 +118,43 @@ final class DepenseController extends AbstractController
     }
 
     #[Route('/report/category/{idCategory}', name: 'app_category_depense', methods: ['GET'])]
-    public function reportCategoryByYear(ServiceDepenseCategory $serviceDepenseCategory, int $idCategory ): Response
+    public function reportCategoryByYear(ServiceDepenseCategory $serviceDepenseCategory, int $idCategory): Response
     {
         $depenses = $serviceDepenseCategory->getDepenseByCategory($this->getUser(), $idCategory);
 
         return $this->render('depense/depense_category.html.twig', [
             'depenses' => $depenses,
-            'idCategory' => $idCategory
+            'idCategory' => $idCategory,
         ]);
     }
 
     #[Route('/chartjs/{year}', name: 'app_depense_chartjs_year', methods: ['GET'])]
     #[Route('/chartjs', name: 'app_depense_chartjs', methods: ['GET'])]
-    public function __invoke(ServiceChartjs $serviceChartjs, ?string $year): Response
+    public function depenseChartBy12MonthFilterByYear(ServiceChartjs $serviceChartjs, ?string $year): Response
     {
         if (!$year) {
             $year = date('Y');
         }
 
-        $chartBar = $serviceChartjs->GetChartMonth($this->getUser(), $year);
+        $chartBar = $serviceChartjs->GetChartMonths($this->getUser(), $year);
+
+        return $this->render('depense/chartjs.html.twig', [
+            'controller_name' => 'MainController',
+            'chart' => $chartBar,
+        ]);
+    }
+
+    #[Route('/chartjs2/{year}/{month}', name: 'app_depense_chartForOneMonth', methods: ['GET'])]
+    public function depenseChartForOneMonth(ServiceChartjs $serviceChartjs, ?string $year, ?string $month): Response
+    {
+        if (!$year) {
+            $year = date('Y');
+        }
+        if (!$month) {
+            $month = date('n');
+        }
+
+        $chartBar = $serviceChartjs->GetChartMonth($this->getUser(), $year, $month);
 
         return $this->render('depense/chartjs.html.twig', [
             'controller_name' => 'MainController',

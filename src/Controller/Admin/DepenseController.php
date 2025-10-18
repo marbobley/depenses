@@ -6,6 +6,7 @@ use App\Entity\Depense;
 use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
 use App\Service\Entity\ServiceDepenseEntity;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,8 +27,9 @@ final class DepenseController extends AbstractController
     }
 
     #[Route('/new', name: 'app_admin_depense_new', methods: ['GET', 'POST'])]
-    #[Route('/{id}/edit', name: 'app_admin_depense_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function new(?Depense $depense, Request $request, ServiceDepenseEntity $depenseEntityService): Response
+    #[Route('/edit/{slug}', name: 'app_admin_depense_edit', methods: ['GET', 'POST'])]
+    public function new(
+        #[MapEntity(mapping: ['slug' => 'slug'])]?Depense $depense, Request $request, ServiceDepenseEntity $depenseEntityService): Response
     {
         $depense ??= new Depense();
         $form = $this->createForm(DepenseType::class, $depense);
@@ -45,16 +47,18 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_admin_depense_show', requirements: ['id' => '\d+'], methods: ['GET'])]
-    public function show(?Depense $depense): Response
+    #[Route('/show/{slug}', name: 'app_admin_depense_show', methods: ['GET', 'POST'])]
+    public function show(
+        #[MapEntity(mapping: ['slug' => 'slug'])]?Depense $depense): Response
     {
         return $this->render('admin/depense/show.html.twig', [
             'depense' => $depense,
         ]);
     }
 
-    #[Route('/{id}/delete', name: 'app_admin_depense_delete', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function delete(?Depense $depense, ServiceDepenseEntity $depenseEntityService): Response
+    #[Route('/delete/{slug}', name: 'app_admin_depense_delete', methods: ['GET', 'POST'])]
+    public function delete(
+        #[MapEntity(mapping: ['slug' => 'slug'])]?Depense $depense, ServiceDepenseEntity $depenseEntityService): Response
     {
         if (null === $depense) {
             // managing error

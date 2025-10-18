@@ -13,11 +13,44 @@ class ServiceChartjs
 {
     public function __construct(private ServiceCategory $serviceCategory,
         private ChartBuilderInterface $chartBuilder,
-        private ServiceDepense $serviceDepense)
+        private ServiceDepense $serviceDepense,
+        private ServiceMonth $serviceMonth
+    )
     {
     }
 
-    public function GetChartMonth(User $user, string $year): Chart
+    public function GetChartMonth(User $user, string $year, string $month): Chart
+    {
+        $months = [$month];
+        $categories = $this->serviceCategory->GetAllCategories($user);
+
+        $res = [];
+        foreach ($categories as $category) {
+            if ($category instanceof Category) {
+                $color = $category->getColor();
+                $res[] = [
+                    'label' => $category->getName(),
+                    'backgroundColor' => $color,
+                    'borderColor' => 'rgb(255, 99, 132)',
+                    'data' => $this->serviceDepense->GetDepenseForCategoryForMonth($user, $category, $months, $year),
+                ];
+            }
+        }
+
+        $chartBar = $this->chartBuilder->createChart(Chart::TYPE_BAR);
+        $chartBar->setData([
+            'labels' => [$this->serviceMonth->GetMonthName($month)],
+            'datasets' => $res,
+        ]
+        );
+        $chartBar->setOptions([
+            'maintainAspectRatio' => false,
+        ]);
+
+        return $chartBar;
+    }
+
+    public function GetChartMonths(User $user, string $year): Chart
     {
         $months = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
         $categories = $this->serviceCategory->GetAllCategories($user);

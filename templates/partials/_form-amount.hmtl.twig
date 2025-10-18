@@ -14,8 +14,8 @@
             {% endif %}
         </div>
         {% if (edit) %}
-            <a href="{{ path('app_depense_edit', {id: depense.id}) }}" class="btn btn-secondary">Editer</a>
-            <a href="{{ path('app_depense_delete', {id: depense.id}) }}" class="btn btn-warning">Supprimer</a>
+            <a href="{{ path('app_depense_edit', {slug: depense.slug}) }}" class="btn btn-secondary">Editer</a>
+            <a href="{{ path('app_depense_delete', {slug: depense.slug}) }}" class="btn btn-warning">Supprimer</a>
         {% endif %}
             <a href="{{ path('app_category_depense', {idCategory: depense.category.id}) }}" class="btn btn-secondary">Rapport</a>        
     </div>
