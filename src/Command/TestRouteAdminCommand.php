@@ -73,7 +73,7 @@ class TestRouteAdminCommand extends Command
         foreach ($cmdLists as $cmd) {
             if (str_contains($cmd, 'GET') && !str_contains($cmd, '{')) {
                 $arr = preg_split('/\s+/', $cmd);
-                $methods = $methods.Template::TemplateAssertIsSuccessFul($arr[1], $arr[5]);
+                $methods .= Template::TemplateAssertIsSuccessFul($arr[1], $arr[5]);
             }
         }
 
