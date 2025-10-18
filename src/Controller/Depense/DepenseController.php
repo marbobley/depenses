@@ -155,7 +155,7 @@ final class DepenseController extends AbstractController
 
         $chartBar = $serviceChartjs->GetChartMonth($this->getUser(), $year, $month);
 
-        return $this->render('depense/chartjs.html.twig', [
+        return $this->render('depense/chartjs_month.html.twig', [
             'chart' => $chartBar,
         ]);
     }
