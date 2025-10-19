@@ -120,8 +120,6 @@ final class DepenseController extends AbstractController
     #[Route('/report/category/{idCategory}', name: 'app_category_depense', methods: ['GET'])]
     public function reportCategoryByYear(ServiceDepenseCategory $serviceDepenseCategory, int $idCategory): Response
     {
-        $year = date('Y');
-        dd($serviceDepenseCategory->getSumDepenseByCategoryByYear($this->getUser(), $idCategory,$year));
         
         $depenses = $serviceDepenseCategory->getDepenseByCategory($this->getUser(), $idCategory);
 
