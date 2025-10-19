@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ nameOfApplication }}{% endblock %}
+
+{% block body %}
+<section class="container px-4">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year')-1 , month: app.request.get('month')}) }}">Année précedente</a></li>
+            <li class="page-item"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year')+1 , month: app.request.get('month')}) }}">Année suivante</a></li>
+        </ul>
+    </nav>
+    <nav aria-label="Page navigation" class="container">
+        <ul class="pagination row">
+            <li class="page-item col-sm"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year') , month: 1}) }}">Janvier</a></li>
+            <li class="page-item col-sm"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year') , month: 2}) }}">Fevrier</a></li>
+            <li class="page-item col-sm"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year') , month: 3}) }}">Mars</a></li>
+            <li class="page-item col-sm"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year') , month: 4}) }}">Avril</a></li>
+            <li class="page-item col-sm"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year') , month: 5}) }}">Mai</a></li>
+            <li class="page-item col-sm"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year') , month: 6}) }}">Juin</a></li>
+            <li class="page-item col-sm"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year') , month: 7}) }}">Juillet</a></li>
+            <li class="page-item col-sm"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year') , month: 8}) }}">Aout</a></li>
+            <li class="page-item col-sm"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year') , month: 9}) }}">Septembre</a></li>
+            <li class="page-item col-sm"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year') , month: 10}) }}">Octobre</a></li>
+            <li class="page-item col-sm"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year') , month: 11}) }}">Novembre</a></li>
+            <li class="page-item col-sm"><a class="page-link" href="{{ path('app_depense_chartForOneMonth', {year: app.request.get('year') , month: 12}) }}">Decembre</a></li>
+        </ul>
+    </nav>
+</section>
+<section class="container px-4">
+    <div style="height: 300px;">
+        {{ render_chart(chart) }}
+    </div>
+</section>
+{% endblock %}

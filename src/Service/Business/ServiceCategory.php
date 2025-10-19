@@ -32,7 +32,10 @@ class ServiceCategory
         return $categories;
     }
 
-    private function GetDistinctCategory(User $user)
+    /**
+     * @return list<mixed>
+     */
+    private function GetDistinctCategory(User $user): array
     {
         $categories = [];
 

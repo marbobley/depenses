@@ -106,9 +106,13 @@
                 <source>nav.depense.report</source>
                 <target>Rapport</target>
             </trans-unit>
-            <trans-unit id="nav.depense.chartjs">
-                <source>nav.depense.chartjs</source>
-                <target>Rapport N°2</target>
+            <trans-unit id="nav.depense.graphYearly">
+                <source>nav.depense.graphYearly</source>
+                <target>Graph. Annuel</target>
+            </trans-unit>
+            <trans-unit id="nav.depense.graphMonthly">
+                <source>nav.depense.graphMonthly</source>
+                <target>Graph. Mensuel</target>
             </trans-unit>
             <trans-unit id="nav.depense.search">
                 <source>nav.depense.search</source>
