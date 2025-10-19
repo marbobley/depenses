@@ -8,6 +8,8 @@ twig:
         serviceDepenseUser: '@App\Service\Business\ServiceDepenseUser'
         serviceFamily: '@App\Service\Business\ServiceFamily'
         serviceDepenseFamily: '@App\Service\Business\ServiceDepenseFamily'
+        serviceDepenseCategory: '@App\Service\Business\ServiceDepenseCategory'
+        serviceCategory: '@App\Service\Business\ServiceCategory'
         serviceMoyenne: '@App\Service\Utils\ServiceMoyenne'
 
 when@test:
