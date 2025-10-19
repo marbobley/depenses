@@ -27,8 +27,8 @@
             Moyenne pour la famille
         </h1>
         <ul>
-            <li>Moyenne de l'année : {{ serviceMoyenne.CalculMoyenneMonth(serviceDepenseFamily.DepenseYear(app.user,'now'|date('Y')))|number_format(2) }} €</li>
-            <li>Moyenne de l'année précédente : {{ serviceMoyenne.CalculMoyenneMonth(serviceDepenseFamily.DepenseYear(app.user,'now'|date('Y') - 1))|number_format(2) }} €</li>
+            <li>Moyenne de l'année : {{ serviceMoyenne.CalculMoyenneMonth(serviceDepenseFamily.DepenseYear(app.user,'now'|date('Y')), 'now'|date('n'))|number_format(2) }} €</li>
+            <li>Moyenne de l'année précédente : {{ serviceMoyenne.CalculMoyenneMonth(serviceDepenseFamily.DepenseYear(app.user,'now'|date('Y') - 1), 12)|number_format(2) }} €</li>
         </ul>
     </div>
     {% endif %}

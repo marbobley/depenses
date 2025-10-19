@@ -4,9 +4,9 @@ namespace App\Service\Utils;
 
 class ServiceMoyenne
 {
-    public function CalculMoyenneMonth(float $sumToAverage) : float{
+    public function CalculMoyenneMonth(float $sumToAverage, int $numberOfMonthOfCurrentYear) : float{
 
-        return $sumToAverage/12;
+        return $sumToAverage/$numberOfMonthOfCurrentYear;
     }
 
 }
