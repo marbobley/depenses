@@ -38,4 +38,23 @@ class ServiceDepenseCategory
 
         return $allDepenseCategory->toArray();
     }
+
+    public function getSumDepenseByCategoryByYear(User $user, int $idCategory, int $year): float{
+
+        if (!$this->serviceCategoryEntity->IsExistingCategory($idCategory)) {
+            return 0;
+        }
+
+        $category = $this->serviceCategoryEntity->GetCategoryById($idCategory);
+        $userCategory = $category->getCreatedBy();
+        $userCategoryFamily = $userCategory->getFamily();
+        $userFamily = $user->getFamily();
+        if ($userCategoryFamily !== $userFamily) {
+            return 0;
+        }
+
+        $allDepenseCategory = $this->serviceDepense->GetDepenseByYear($category->getDepenses(), $year);
+
+        return $this->serviceDepense->CalculateAmount($allDepenseCategory);
+    }
 }
