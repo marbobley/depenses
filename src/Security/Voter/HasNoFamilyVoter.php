@@ -4,29 +4,23 @@ namespace App\Security\Voter;
 
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Authorization\Voter\Vote;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 final class HasNoFamilyVoter extends Voter
 {
-    public const HASNOFAMILY = 'hasNoFamily';
+    public const HAS_NO_FAMILY = 'hasNoFamily';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
         // if the attribute isn't one we support, return false
-        if (!in_array($attribute, [self::HASNOFAMILY])) {
+        if (self::HAS_NO_FAMILY != $attribute) {
             return false;
         }
-
-        // replace with your own logic
-        // https://symfony.com/doc/current/security/voters.html
         return true;
     }
 
-    /**
-     * @param Vote|null $vote
-     */
-    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token, Vote $vote = null): bool
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token, ?Vote $vote = null): bool
     {
         $user = $token->getUser();
         // if the user is anonymous, do not grant access
