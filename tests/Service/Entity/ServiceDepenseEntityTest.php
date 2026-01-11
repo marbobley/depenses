@@ -39,11 +39,11 @@ class ServiceDepenseEntityTest extends KernelTestCase
         $depense = new Depense();
         $depense->setName('depense_1');
         $depense->setCategory($categoryNew);
-        $depense->setCreated(new \DateTimeImmutable('now'));
+        $depense->setCreated(created: new \DateTimeImmutable('now'));
         $depense->setCreatedBy($user);
         $depense->setAmount(45);
 
-        $this->serviceDepenseEntity->CreateDepense($depense);
+        $this->serviceDepenseEntity->createDepense($depense);
 
         $depenseNew = $this->entityManager
         ->getRepository(Depense::class)
@@ -58,7 +58,7 @@ class ServiceDepenseEntityTest extends KernelTestCase
         ->getRepository(Depense::class)
         ->findOneBy(['name' => 'depense_to_delete']);
 
-        $this->serviceDepenseEntity->RemoveDepense($depenseToDelete);
+        $this->serviceDepenseEntity->removeDepense($depenseToDelete);
 
         $depenseToDelete = $this->entityManager
         ->getRepository(Depense::class)
@@ -77,7 +77,7 @@ class ServiceDepenseEntityTest extends KernelTestCase
         ->getRepository(User::class)
         ->findOneBy(['username' => 'admin']);
 
-        $depense = $this->serviceDepenseEntity->CreateNewDepense('depense_new', 20, $user, new \DateTimeImmutable('now'), $categoryNew);
+        $depense = $this->serviceDepenseEntity->createNewDepense('depense_new', 20, $user, new \DateTimeImmutable('now'), $categoryNew);
 
         $depenseToFind = $this->entityManager
         ->getRepository(Depense::class)

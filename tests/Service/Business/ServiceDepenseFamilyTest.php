@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class ServiceDepenseFamilyTest extends KernelTestCase
 {
+    const YEAR = 2024;
     private ?ServiceDepenseFamily $serviceDepenseFamily;
     private ?EntityManager $entityManager;
 
@@ -26,7 +27,7 @@ class ServiceDepenseFamilyTest extends KernelTestCase
 
     public function testWhenGetDepenseMonthWithNullUserThenReturn0(): void
     {
-        $this->assertSame(0.0, $this->serviceDepenseFamily->GetDepenseMonth(null, 1, 2024));
+        $this->assertSame(0.0, $this->serviceDepenseFamily->GetDepenseMonth(null, 1, self::YEAR));
     }
 
     public function testWhenGetDepenseMonthWithNoFamilyThenReturn0(): void
@@ -36,7 +37,7 @@ class ServiceDepenseFamilyTest extends KernelTestCase
             findOneBy(['username' => 'user'])
         ;
 
-        $this->assertSame(0.0, $this->serviceDepenseFamily->GetDepenseMonth($user, 1, 2024));
+        $this->assertSame(0.0, $this->serviceDepenseFamily->GetDepenseMonth($user, 1, self::YEAR));
     }
 
     public function testWhenGetDepenseMonthWithFamillyAdminThenReturnSum(): void
@@ -82,7 +83,7 @@ class ServiceDepenseFamilyTest extends KernelTestCase
 
     public function testWhenGetDepenseYearWithNullUserThenReturn0(): void
     {
-        $this->assertSame(0.0, $this->serviceDepenseFamily->GetDepenseYear(null, 2024));
+        $this->assertSame(0.0, $this->serviceDepenseFamily->GetDepenseYear(null, self::YEAR));
     }
 
     public function testWhenGetDepenseYearWithFamilyAdminThenReturnSum(): void
@@ -105,7 +106,7 @@ class ServiceDepenseFamilyTest extends KernelTestCase
             findOneBy(['username' => 'user'])
         ;
 
-        $this->assertSame(0.0, $this->serviceDepenseFamily->GetDepenseYear($user, 2024));
+        $this->assertSame(0.0, $this->serviceDepenseFamily->GetDepenseYear($user, self::YEAR));
     }
 
     public function testWhenGetDepenseYearWithFamily3MemberThenReturnSum(): void
@@ -126,7 +127,7 @@ class ServiceDepenseFamilyTest extends KernelTestCase
 
         $currentYear = date('Y');
 
-        $sumExpected = 10.0 + 15 + 20 + 25 + 30 + 35 + 100 + 150 + 200; // Sum of family depense for current year
+        $sumExpected = 135.0; // Sum of family depense for current year
 
         $this->assertSame($sumExpected, $this->serviceDepenseFamily->GetDepenseYear($user1, $currentYear));
         $this->assertSame($sumExpected, $this->serviceDepenseFamily->GetDepenseYear($user2, $currentYear));

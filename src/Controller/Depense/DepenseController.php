@@ -67,7 +67,7 @@ final class DepenseController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $depense->setCreatedBy($this->getUser());
-            $depenseEntityService->CreateDepense($depense);
+            $depenseEntityService->createDepense($depense);
 
             return $this->redirectToRoute('app_depense_index');
         }
@@ -94,7 +94,7 @@ final class DepenseController extends AbstractController
             // managing error
             // managing user verification
         }
-        $depenseEntityService->RemoveDepense($depense);
+        $depenseEntityService->removeDepense($depense);
 
         return $this->redirectToRoute('app_depense_index');
     }

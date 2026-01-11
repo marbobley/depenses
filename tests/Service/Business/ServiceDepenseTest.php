@@ -26,7 +26,7 @@ class ServiceDepenseTest extends KernelTestCase
         ->getManager();
     }
 
-    public function testServiceDepenseCalculateAmoutArray(): void
+    public function testServiceDepenseCalculateAmountArray(): void
     {
         $user = $this->entityManager->
             getRepository(User::class)->
@@ -35,10 +35,7 @@ class ServiceDepenseTest extends KernelTestCase
 
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
-            /*
-             * @todo : change 2025 to something more flexible DatTime.now.Y
-             */
-            ->findByUserByYear($user, 2025);
+            ->findByUserByYear($user, 2026);
 
         // 1 + 2 + 3 + 4 + ... + 100
         $res = $this->depenseService->CalculateAmoutArray($depenses);
@@ -47,7 +44,7 @@ class ServiceDepenseTest extends KernelTestCase
         $this->assertSame($res, $resCalculatedManually);
     }
 
-    public function testServiceDepenseCalculateAmout(): void
+    public function testServiceDepenseCalculateAmount(): void
     {
         $user = $this->entityManager->
             getRepository(User::class)->
@@ -59,7 +56,7 @@ class ServiceDepenseTest extends KernelTestCase
         /*
          * @todo : change 2025 to something more flexible DatTime.now.Y
          */
-        ->findByUserByYear($user, 2025);
+        ->findByUserByYear($user, 2026);
 
         $collection = new ArrayCollection();
 
@@ -87,25 +84,10 @@ class ServiceDepenseTest extends KernelTestCase
         $amount100_0 = $categoriesSum[1]->getAmount();
         $amount100_1 = $categoriesSum[2]->getAmount();
 
-        $this->assertSame($amount17, 17.0);
-        $this->assertSame($amount100_0, 100.0);
-        $this->assertSame($amount100_1, 100.0);
+        $this->assertSame(17.0, $amount17);
+        $this->assertSame(100.0, $amount100_0);
+        $this->assertSame(100.0, $amount100_1);
     }
-
- /*   public function testServiceDepenseGetTotalMonth()
-    {
-        $user = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'user'])
-        ;
-
-        $currentMonth = date('n');
-        $currentYear = date('Y');
-
-        $total = $this->depenseService->GetTotalMonth($user, $currentMonth, $currentYear);
-
-        $this->assertSame($total, 217.0);
-    }*/
 
     protected function tearDown(): void
     {
