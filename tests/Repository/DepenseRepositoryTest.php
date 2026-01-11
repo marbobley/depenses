@@ -94,11 +94,11 @@ class DepenseRepositoryTest extends KernelTestCase
             /*
              * @todo : change 2024 to something more flexible DatTime.now.Y  - 1
              */
-            ->findByUserByYear($user, 2024);
+            ->findByUserByYear($user, 2025);
 
         $countNumberOfDepenseForUser = count($depenses);
 
-        $this->assertSame($countNumberOfDepenseForUser, 0);
+        $this->assertSame(0, $countNumberOfDepenseForUser);
     }
 
     public function testDepenseRepositoryFindByUserByYear(): void
@@ -113,11 +113,11 @@ class DepenseRepositoryTest extends KernelTestCase
             /*
              * @todo : change 2025 to something more flexible DatTime.now.Y
              */
-            ->findByUserByYear($user, 2025);
+            ->findByUserByYear($user, 2026);
 
         $countNumberOfDepenseForUser = count($depenses);
 
-        $this->assertSame($countNumberOfDepenseForUser, 201);
+        $this->assertSame(201, $countNumberOfDepenseForUser);
     }
 
     public function testDepenseRepositoryFindByUserByYearByMonth(): void
@@ -136,7 +136,7 @@ class DepenseRepositoryTest extends KernelTestCase
 
         $countNumberOfDepenseForUser = count($depenses);
 
-        $this->assertSame($countNumberOfDepenseForUser, 201);
+        $this->assertSame(201, $countNumberOfDepenseForUser);
     }
 
     public function testDepenseRepositoryNoFindByUserByYearByMonth(): void
