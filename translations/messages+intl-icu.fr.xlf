@@ -54,7 +54,7 @@
             </trans-unit>
             <trans-unit id="nav.logout">
                 <source>nav.logout</source>
-                <target>Deconnexion</target>
+                <target>Déconnexion</target>
             </trans-unit>
             <trans-unit id="nav.admin">
                 <source>nav.admin</source>
