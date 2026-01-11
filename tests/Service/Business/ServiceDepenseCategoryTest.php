@@ -3,15 +3,13 @@
 namespace App\Tests\Service\Business;
 
 use App\Entity\Category;
+use App\Entity\User;
 use App\Service\Business\ServiceDepenseCategory;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use App\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
 
 class ServiceDepenseCategoryTest extends KernelTestCase
 {
-
     private ?ServiceDepenseCategory $serviceDepenseCategory;
     private ?EntityManager $entityManager;
 
@@ -27,7 +25,7 @@ class ServiceDepenseCategoryTest extends KernelTestCase
             ->getManager();
     }
 
-    public function testWhenGetDepenseCategory_WithCategoryNotExisting_ThenReturnEmptyArray(): void
+    public function testWhenGetDepenseCategoryWithCategoryNotExistingThenReturnEmptyArray(): void
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'user']);
 
@@ -37,7 +35,7 @@ class ServiceDepenseCategoryTest extends KernelTestCase
         $this->assertEmpty($result);
     }
 
-    public function testWhenGetDepenseCategory_WithCategoryExist_thenReturnArray(): void
+    public function testWhenGetDepenseCategoryWithCategoryExistThenReturnArray(): void
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'user']);
         $category = $this->entityManager->getRepository(Category::class)->findOneBy(['name' => 'catToTestFamillyYear_1']);
@@ -48,7 +46,7 @@ class ServiceDepenseCategoryTest extends KernelTestCase
         $this->assertEquals(100, sizeof($result));
     }
 
-    public function testWhenGetDepenseCategory_WithUserNotBelongToCategoryFamily_thenReturnEmptyArray(): void
+    public function testWhenGetDepenseCategoryWithUserNotBelongToCategoryFamilyThenReturnEmptyArray(): void
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'fam3_usr2']);
         $category = $this->entityManager->getRepository(Category::class)->findOneBy(['name' => 'catToTestFamillyYear_1']);
@@ -58,7 +56,7 @@ class ServiceDepenseCategoryTest extends KernelTestCase
         $this->assertEmpty($result);
     }
 
-    public function testWhenGetDepenseCategory_WithFamily4_thenReturnArrayOfDepense_UserNoOwnerOfDepense(): void
+    public function testWhenGetDepenseCategoryWithFamily4ThenReturnArrayOfDepenseUserNoOwnerOfDepense(): void
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'fam4_usr4']);
         $category = $this->entityManager->getRepository(Category::class)->findOneBy(['name' => 'catUser43']); // belong to fam4_usr3 but depense are shared
@@ -69,7 +67,7 @@ class ServiceDepenseCategoryTest extends KernelTestCase
         $this->assertEquals(100, sizeof($result));
     }
 
-    public function testWhenGetDepenseCategory_WithFamily4_thenReturnArrayOfDepense(): void
+    public function testWhenGetDepenseCategoryWithFamily4ThenReturnArrayOfDepense(): void
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'fam4_usr4']);
         $category = $this->entityManager->getRepository(Category::class)->findOneBy(['name' => 'catUser43_4']); // belong to fam4_usr3 but depense are shared

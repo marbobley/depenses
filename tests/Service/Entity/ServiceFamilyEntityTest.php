@@ -56,7 +56,7 @@ class ServiceFamilyEntityTest extends KernelTestCase
 
         $members = $family->getMembers();
 
-        $this->assertSame($members[0]->getUsername(), 'usr1');
+        $this->assertSame('usr1', $members[0]->getUsername());
     }
 
     public function testServiceFamilyEntitySetMainMember(): void
@@ -90,7 +90,7 @@ class ServiceFamilyEntityTest extends KernelTestCase
         $members = $family->getMembers();
         $countMember0 = count($members);
 
-        $this->assertSame($countMember0, 0);
+        $this->assertSame(0, $countMember0);
     }
 
     public function testFamilyRemove(): void

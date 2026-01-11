@@ -48,7 +48,7 @@
         "symfony/ux-live-component": "^2.32",
         "symfony/ux-turbo": "^2.32",
         "symfony/ux-twig-component": "^2.32",
-        "symfony/validator": "7.2.*",
+        "symfony/validator": "7.4.*",
         "symfony/web-link": "7.2.*",
         "symfony/yaml": "7.2.*",
         "symfonycasts/sass-bundle": "^0.8.3",
@@ -104,7 +104,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.2.*"
+            "require": "7.4.*"
         }
     },
     "require-dev": {
