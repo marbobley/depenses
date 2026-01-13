@@ -11,7 +11,6 @@ use Symfony\Bundle\SecurityBundle\Security;
 class ServiceDepenseFamily implements IDepenseMonth
 {
     public function __construct(
-        private Security $security,
         private ServiceFamily $serviceFamily,
         private ServiceDepense $serviceDepense
     ) {}

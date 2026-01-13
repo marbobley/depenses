@@ -10,10 +10,6 @@ use Doctrine\Common\Collections\Collection;
  */
 class ServiceCategory
 {
-    public function __construct()
-    {
-    }
-
     public function GetAllCategories(User $user): array
     {
         $family = $user->getFamily();

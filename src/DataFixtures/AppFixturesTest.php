@@ -152,7 +152,7 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
             $this->serviceUserEntity->CreateNewUser('usr'.$i, $password, ['ROLE_USER']);
         }
 
-        $cat4 = $this->serviceCategoryEntity->CreateNewCategory('catToDelete', $user); // Not used here, just to test the delete action
+        $this->serviceCategoryEntity->CreateNewCategory('catToDelete', $user); // Not used here, just to test the delete action
         $cat5 = $this->serviceCategoryEntity->CreateNewCategory('catToTestFamillyYear_1', $user);
         $cat6 = $this->serviceCategoryEntity->CreateNewCategory('catToTestFamillyYear_2', $user);
         $cat7 = $this->serviceCategoryEntity->CreateNewCategory('catForDepenseToDelete', $user);

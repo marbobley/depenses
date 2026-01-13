@@ -4,10 +4,6 @@ namespace App\Service\Utils;
 
 class ServiceMonth
 {
-    public function __construct()
-    {
-    }
-
     public function GetMonthName(string $monthNumber): string
     {
         switch ($monthNumber) {

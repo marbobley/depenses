@@ -17,7 +17,6 @@ class ServiceDepense
 {
     public function __construct(
         private ServiceCategory $serviceCategory,
-        private LoggerInterface $log,
     ) {
     }
 
@@ -90,20 +89,16 @@ class ServiceDepense
      */
     public function GetDepenseForCategoryForMonth(User $user, Category $category, array $months, string $year): array
     {
-        $res = [];
-
         $family = $user->getFamily();
 
         if (null === $family) {
             $depenses = $user->GetDepenses();
-            $res = $this->SumByCategoryByMonthByYear($months, $year, $depenses, $category);
 
-            return $res;
+            return $this->SumByCategoryByMonthByYear($months, $year, $depenses, $category);
         } else {
             $depenses = $this->GetAllDepenses($family);
-            $res = $this->SumByCategoryByMonthByYear($months, $year, $depenses, $category);
 
-            return $res;
+            return $this->SumByCategoryByMonthByYear($months, $year, $depenses, $category);
         }
     }
 

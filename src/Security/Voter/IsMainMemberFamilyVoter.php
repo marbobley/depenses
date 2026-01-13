@@ -9,12 +9,12 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 final class IsMainMemberFamilyVoter extends Voter
 {
-    public const ISMAINMEMBERFAMILY = 'IsMainMemberFamily';
+    public const IS_MAIN_MEMBER_FAMILY = 'IsMainMemberFamily';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
         // if the attribute isn't one we support, return false
-        if (!in_array($attribute, [self::ISMAINMEMBERFAMILY])) {
+        if (self::IS_MAIN_MEMBER_FAMILY != $attribute) {
             return false;
         }
 
@@ -31,10 +31,10 @@ final class IsMainMemberFamilyVoter extends Voter
             return false;
         }
 
-        return $this->IsMainMemberFamily($user);
+        return $this->isMainMemberFamily($user);
     }
 
-    private function IsMainMemberFamily(User $user): bool
+    private function isMainMemberFamily(User $user): bool
     {
         $family = $user->getFamily();
 

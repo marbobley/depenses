@@ -15,7 +15,6 @@ use Symfony\Bundle\SecurityBundle\Security;
 class ServiceDepenseCategory 
 {
     public function __construct(
-        private Security $security,
         private ServiceDepense $serviceDepense,
         private ServiceCategoryEntity $serviceCategoryEntity
     ) {}
