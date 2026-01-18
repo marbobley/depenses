@@ -10,17 +10,17 @@ use Doctrine\Common\Collections\Collection;
  */
 class ServiceCategory
 {
-    public function GetAllCategories(User $user): array
+    public function getAllCategories(User $user): array
     {
         $family = $user->getFamily();
         $categories = [];
 
         if (null === $family) {
-            return $this->GetDistinctCategory($user);
+            return $this->getDistinctCategory($user);
         }
 
         foreach ($family->getMembers() as $member) {
-            foreach ($this->GetDistinctCategory($member) as $cat) {
+            foreach ($this->getDistinctCategory($member) as $cat) {
                 $categories[] = $cat;
             }
         }
@@ -31,7 +31,7 @@ class ServiceCategory
     /**
      * @return list<mixed>
      */
-    private function GetDistinctCategory(User $user): array
+    private function getDistinctCategory(User $user): array
     {
         $categories = [];
 
@@ -42,7 +42,7 @@ class ServiceCategory
         return $categories;
     }
 
-    public function GetUniqueCategories(Collection $depenses): array
+    public function getUniqueCategories(Collection $depenses): array
     {
         $uniqueCategories = [];
 

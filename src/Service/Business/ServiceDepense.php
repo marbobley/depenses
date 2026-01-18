@@ -145,7 +145,7 @@ class ServiceDepense
     {
         $depenses = $user->GetDepenses();
         $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
-        $uniqueCategories = $this->serviceCategory->GetUniqueCategories($depenseByMonthYear);
+        $uniqueCategories = $this->serviceCategory->getUniqueCategories($depenseByMonthYear);
         $res = [];
 
         foreach ($uniqueCategories as $uniqueCategory) {
@@ -165,7 +165,7 @@ class ServiceDepense
 
         $depenses = $this->GetAllDepenses($family);
         $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
-        $uniqueCategories = $this->serviceCategory->GetUniqueCategories($depenseByMonthYear);
+        $uniqueCategories = $this->serviceCategory->getUniqueCategories($depenseByMonthYear);
         $res = [];
 
         foreach ($uniqueCategories as $uniqueCategory) {

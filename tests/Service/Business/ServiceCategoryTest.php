@@ -30,7 +30,7 @@ class ServiceCategoryTest extends TestCase
 
         $user->method('getCategories')->willReturn(new ArrayCollection([$cat1, $cat2]));
 
-        $categories = $this->serviceCategory->GetAllCategories($user);
+        $categories = $this->serviceCategory->getAllCategories($user);
 
         $this->assertCount(2, $categories);
         $this->assertContains($cat1, $categories);
@@ -54,7 +54,7 @@ class ServiceCategoryTest extends TestCase
         $cat2->setName('Cat 2');
         $user2->method('getCategories')->willReturn(new ArrayCollection([$cat2]));
 
-        $categories = $this->serviceCategory->GetAllCategories($user1);
+        $categories = $this->serviceCategory->getAllCategories($user1);
 
         $this->assertCount(2, $categories);
         $this->assertContains($cat1, $categories);
@@ -79,7 +79,7 @@ class ServiceCategoryTest extends TestCase
 
         $depenses = new ArrayCollection([$depense1, $depense2, $depense3]);
 
-        $uniqueCategories = $this->serviceCategory->GetUniqueCategories($depenses);
+        $uniqueCategories = $this->serviceCategory->getUniqueCategories($depenses);
 
         $this->assertCount(2, $uniqueCategories);
         $this->assertContains($cat1, $uniqueCategories);
