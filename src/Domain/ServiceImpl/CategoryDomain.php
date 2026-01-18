@@ -8,12 +8,10 @@ use App\Domain\Model\UserModel;
 use App\Domain\Provider\CategoryProvider;
 use App\Domain\ServiceInterface\CategoryDomainInterface;
 
-class CategoryDomain implements CategoryDomainInterface
+readonly class CategoryDomain implements CategoryDomainInterface
 {
-    public const MSG_ERROR_USER_IDENTIFIER_MANDATORY_GET_CATEGORIES = "L'identifiant de l'utilisateur est obligatoire pour récupérer les catégories.";
-
     public function __construct(
-        private readonly CategoryProvider $categoryProvider,
+        private CategoryProvider $categoryProvider,
     ) {
     }
 
