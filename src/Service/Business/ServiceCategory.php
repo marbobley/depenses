@@ -2,6 +2,7 @@
 
 namespace App\Service\Business;
 
+use App\Entity\Category;
 use App\Entity\User;
 use Doctrine\Common\Collections\Collection;
 
@@ -10,6 +11,11 @@ use Doctrine\Common\Collections\Collection;
  */
 class ServiceCategory
 {
+    /**
+     * @param User $user
+     * @return Category[]
+     *
+     */
     public function getAllCategories(User $user): array
     {
         $family = $user->getFamily();
