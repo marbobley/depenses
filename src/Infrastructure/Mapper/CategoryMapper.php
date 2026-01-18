@@ -12,6 +12,16 @@ class CategoryMapper implements CategoryMapperInterface
      */
     public function mapToModels(Collection $categories): array
     {
-        return [];
+        $categoriesArray = [];
+
+        foreach ($categories as $category) {
+            $categoryModel = new CategoryModel(
+                $category->getId(),
+                $category->getName(),
+            );
+            $categoriesArray[] = $categoryModel;
+        }
+
+        return $categoriesArray;
     }
 }

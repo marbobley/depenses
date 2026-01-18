@@ -6,7 +6,7 @@ namespace App\Domain\Provider;
 
 use App\Domain\Model\CategoryModel;
 
-interface CategoryProvider
+interface CategoryProviderInterface
 {
     /**
      * @param int $idUser

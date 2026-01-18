@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace App\Infrastructure\Adapter;
 
 use App\Domain\Model\CategoryModel;
-use App\Domain\Provider\CategoryProvider;
+use App\Domain\Provider\CategoryProviderInterface;
 use App\Infrastructure\Mapper\CategoryMapperInterface;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
-class CategoryAdapter implements CategoryProvider
+class CategoryAdapter implements CategoryProviderInterface
 {
     public function __construct(
-        private readonly UserRepository $userRepository,
+        private readonly UserRepository          $userRepository,
         private readonly CategoryMapperInterface $categoryMapper,
-    ) {
+    )
+    {
     }
 
     /**
