@@ -10,13 +10,12 @@ use App\Infrastructure\Mapper\CategoryMapperInterface;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
-class CategoryAdapter implements CategoryProviderInterface
+readonly class CategoryAdapter implements CategoryProviderInterface
 {
     public function __construct(
-        private readonly UserRepository          $userRepository,
-        private readonly CategoryMapperInterface $categoryMapper,
-    )
-    {
+        private UserRepository $userRepository,
+        private CategoryMapperInterface $categoryMapper,
+    ) {
     }
 
     /**
