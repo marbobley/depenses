@@ -32,7 +32,7 @@ class CategoryDomainTest extends TestCase
 
         $this->categoryProvider->method('findAllByIdUser')->willReturn($categories);
 
-        $result = $this->categoryDomain->getCategories($user);
+        $result = $this->categoryDomain->getCategories($user->getId());
         $this->assertSame($categories, $result);
     }
 }

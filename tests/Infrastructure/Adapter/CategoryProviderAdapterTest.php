@@ -5,9 +5,11 @@ namespace App\Tests\Infrastructure\Adapter;
 use App\Domain\Provider\CategoryProviderInterface;
 use App\Entity\Category;
 use App\Entity\User;
+use App\Exception\FamilyNotFoundException;
 use App\Infrastructure\Adapter\CategoryAdapter;
 use App\Infrastructure\Mapper\CategoryMapper;
 use App\Infrastructure\Mapper\CategoryMapperInterface;
+use App\Repository\FamilyRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -21,6 +23,7 @@ class CategoryProviderAdapterTest extends TestCase
     private CategoryProviderInterface $categoryProvider;
     private CategoryMapperInterface $categoryMapperMock;
     private MockObject $userRepositoryMock;
+    private MockObject $familyRepositoryMock;
 
     public function createCategory(): Category
     {
@@ -34,9 +37,14 @@ class CategoryProviderAdapterTest extends TestCase
     protected function setUp(): void
     {
         $this->userRepositoryMock = $this->createMock(UserRepository::class);
+        $this->familyRepositoryMock = $this->createMock(FamilyRepository::class);
         $this->categoryMapperMock = new CategoryMapper();
 
-        $this->categoryProvider = new CategoryAdapter($this->userRepositoryMock, $this->categoryMapperMock);
+
+        $this->categoryProvider = new CategoryAdapter(
+            $this->userRepositoryMock,
+            $this->familyRepositoryMock,
+            $this->categoryMapperMock);
     }
 
     public function testGetCategoriesWithUserNotFoundThenThrowUserNotFoundException()
@@ -78,5 +86,15 @@ class CategoryProviderAdapterTest extends TestCase
 
         $result = $this->categoryProvider->findAllByIdUser(self::USER_ID);
         $this->assertEmpty($result, self::MSG_TEST_CATEGORY_LIST_NOT_EMPTY);
+    }
+
+
+    public function testGetCategoriesWithFamilyNotFoundThenThrowFamilyNotFoundException()
+    {
+        $this->familyRepositoryMock->method('findOneBy')->willReturn(null);
+
+        $this->expectException(FamilyNotFoundException::class);
+
+        $this->categoryProvider->findAllByIdFamily(2);
     }
 }
