@@ -33,8 +33,9 @@ final class DepenseController extends AbstractController
     #[Route('/mydepense', name: 'app_my_depense_pagination', methods: ['GET'])]
     public function myDepensePagination(
         DepenseRepository $repository,
-        Request $request,
-    ): Response {
+        Request           $request,
+    ): Response
+    {
         $somme = $repository->sumAmountOfUserDepense($this->getUser());
         $depenses = $repository->findByUserWithPagination($this->getUser());
         $depenses->setMaxPerPage(4);
@@ -50,10 +51,11 @@ final class DepenseController extends AbstractController
     #[Route('/edit/{slug}', name: 'app_depense_edit', methods: ['GET', 'POST'])]
     public function new(
         #[MapEntity(mapping: ['slug' => 'slug'])]
-        ?Depense $depense,
-        Request $request,
+        ?Depense             $depense,
+        Request              $request,
         ServiceDepenseEntity $depenseEntityService,
-    ): Response {
+    ): Response
+    {
         if (
             $depense
             && $this->getUser() != $depense->getCreatedBy()
@@ -80,8 +82,9 @@ final class DepenseController extends AbstractController
     #[Route('/delete/{slug}', name: 'app_depense_delete', methods: ['GET', 'POST'])]
     public function delete(
         #[MapEntity(mapping: ['slug' => 'slug'])] ?Depense $depense,
-        ServiceDepenseEntity $depenseEntityService,
-    ): Response {
+        ServiceDepenseEntity                               $depenseEntityService,
+    ): Response
+    {
         if (
             $depense
             && $this->getUser() != $depense->getCreatedBy()
@@ -120,7 +123,7 @@ final class DepenseController extends AbstractController
     #[Route('/report/category/{idCategory}', name: 'app_category_depense', methods: ['GET'])]
     public function reportCategoryByYear(ServiceDepenseCategory $serviceDepenseCategory, int $idCategory): Response
     {
-        
+
         $depenses = $serviceDepenseCategory->getDepenseByCategory($this->getUser(), $idCategory);
 
         return $this->render('depense/depense_category.html.twig', [
@@ -154,7 +157,7 @@ final class DepenseController extends AbstractController
             $month = date('n');
         }
 
-        $chartBar = $serviceChartjs->GetChartMonth($this->getUser(), $year, $month);
+        $chartBar = $serviceChartjs->getChartMonth($this->getUser(), $year, $month);
 
         return $this->render('depense/chartjs_month.html.twig', [
             'chart' => $chartBar,

@@ -4,6 +4,7 @@ namespace App\Tests\Infrastructure\Adapter;
 
 use App\Domain\Provider\CategoryProviderInterface;
 use App\Entity\Category;
+use App\Entity\Family;
 use App\Entity\User;
 use App\Exception\FamilyNotFoundException;
 use App\Infrastructure\Adapter\CategoryAdapter;
@@ -20,6 +21,8 @@ class CategoryProviderAdapterTest extends TestCase
 {
     public const USER_ID = 1;
     public const MSG_TEST_CATEGORY_LIST_NOT_EMPTY = "La liste de categorie n'est pas vide";
+    public const ID_USER = 2;
+    public const ID_FAMILY = 2;
     private CategoryProviderInterface $categoryProvider;
     private CategoryMapperInterface $categoryMapperMock;
     private MockObject $userRepositoryMock;
@@ -34,12 +37,31 @@ class CategoryProviderAdapterTest extends TestCase
         return $category;
     }
 
+    public function createEmptyCategoryUser(): User
+    {
+        $user = new User();
+        $categories = new ArrayCollection();
+        $user->setCategories($categories);
+
+        return $user;
+    }
+
+    public function createUser(): User
+    {
+        $user = new User();
+        $categories = new ArrayCollection();
+        $category = $this->createCategory();
+        $categories[] = $category;
+        $user->setCategories($categories);
+
+        return $user;
+    }
+
     protected function setUp(): void
     {
         $this->userRepositoryMock = $this->createMock(UserRepository::class);
         $this->familyRepositoryMock = $this->createMock(FamilyRepository::class);
         $this->categoryMapperMock = new CategoryMapper();
-
 
         $this->categoryProvider = new CategoryAdapter(
             $this->userRepositoryMock,
@@ -53,41 +75,29 @@ class CategoryProviderAdapterTest extends TestCase
 
         $this->expectException(UserNotFoundException::class);
 
-        $this->categoryProvider->findAllByIdUser(2);
+        $this->categoryProvider->findAllByIdUser(self::ID_USER);
     }
 
     public function testGetCategoriesWithUserFoundThenReturnCategories()
     {
-        $user = new User();
-
-        $category = $this->createCategory();
-
-        $categories = new ArrayCollection();
-        $categories->add($category);
-
-        $user->setCategories($categories);
+        $user = $this->createUser();
 
         $this->userRepositoryMock->method('findOneBy')->willReturn($user);
 
-        $result = $this->categoryProvider->findAllByIdUser(self::USER_ID);
-        $this->assertEquals($categories[0]->getName(), $result[0]->getName());
-        $this->assertEquals($categories[0]->getId(), $result[0]->getId());
+        $categoriesResult = $this->categoryProvider->findAllByIdUser(self::USER_ID);
+        $this->assertEquals($user->getCategories()[0]->getName(), $categoriesResult[0]->getName());
+        $this->assertEquals($user->getCategories()[0]->getId(), $categoriesResult[0]->getId());
     }
 
     public function testGetCategoriesWithUserFoundButNoCategoryThenReturnEmpty()
     {
-        $user = new User();
-
-        $categories = new ArrayCollection();
-
-        $user->setCategories($categories);
+        $user = $this->createEmptyCategoryUser();
 
         $this->userRepositoryMock->method('findOneBy')->willReturn($user);
 
-        $result = $this->categoryProvider->findAllByIdUser(self::USER_ID);
-        $this->assertEmpty($result, self::MSG_TEST_CATEGORY_LIST_NOT_EMPTY);
+        $categoriesResult = $this->categoryProvider->findAllByIdUser(self::USER_ID);
+        $this->assertEmpty($categoriesResult, self::MSG_TEST_CATEGORY_LIST_NOT_EMPTY);
     }
-
 
     public function testGetCategoriesWithFamilyNotFoundThenThrowFamilyNotFoundException()
     {
@@ -95,6 +105,38 @@ class CategoryProviderAdapterTest extends TestCase
 
         $this->expectException(FamilyNotFoundException::class);
 
-        $this->categoryProvider->findAllByIdFamily(2);
+        $this->categoryProvider->findAllByIdFamily(self::ID_FAMILY);
+    }
+
+    /**
+     * @throws FamilyNotFoundException
+     */
+    public function testGetCategoriesWithFamilyFoundAndNoMemberThenReturnEmpty()
+    {
+        $family = new Family();
+        $family->setId(self::ID_FAMILY);
+
+        $this->familyRepositoryMock->method('findOneBy')->willReturn($family);
+
+        $categories = $this->categoryProvider->findAllByIdFamily($family->getId());
+        $this->assertEmpty($categories, self::MSG_TEST_CATEGORY_LIST_NOT_EMPTY);
+    }
+
+    /**
+     * @throws FamilyNotFoundException
+     */
+    public function testGetCategoriesWithFamilyFoundAndMemberThenReturnCategory()
+    {
+        $family = new Family();
+        $family->setId(self::ID_FAMILY);
+        $user = $this->createUser();
+
+        $family->addMember($user);
+
+        $this->familyRepositoryMock->method('findOneBy')->willReturn($family);
+
+        $categoriesResult = $this->categoryProvider->findAllByIdFamily($family->getId());
+        $this->assertEquals($user->getCategories()[0]->getName(), $categoriesResult[0]->getName());
+        $this->assertEquals($user->getCategories()[0]->getId(), $categoriesResult[0]->getId());
     }
 }

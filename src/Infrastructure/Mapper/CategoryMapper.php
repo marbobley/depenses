@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Infrastructure\Mapper;
 
@@ -18,6 +19,7 @@ class CategoryMapper implements CategoryMapperInterface
             $categoryModel = new CategoryModel(
                 $category->getId(),
                 $category->getName(),
+                $category->getColor()
             );
             $categoriesArray[] = $categoryModel;
         }

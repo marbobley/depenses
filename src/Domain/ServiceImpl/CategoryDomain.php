@@ -7,6 +7,7 @@ namespace App\Domain\ServiceImpl;
 use App\Domain\Model\CategoryModel;
 use App\Domain\Provider\CategoryProviderInterface;
 use App\Domain\ServiceInterface\CategoryDomainInterface;
+use App\Exception\FamilyNotFoundException;
 
 readonly class CategoryDomain implements CategoryDomainInterface
 {
@@ -25,6 +26,9 @@ readonly class CategoryDomain implements CategoryDomainInterface
         return $this->categoryProvider->findAllByIdUser($idUser);
     }
 
+    /**
+     * @throws FamilyNotFoundException
+     */
     public function getCategoriesFamily(int $idFamily): array
     {
         return $this->categoryProvider->findAllByIdFamily($idFamily);

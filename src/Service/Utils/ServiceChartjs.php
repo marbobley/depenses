@@ -1,7 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service\Utils;
 
+use App\Domain\Model\CategoryModel;
+use App\Domain\ServiceInterface\CategoryDomainInterface;
+use App\Domain\ServiceInterface\DepenseDomainInterface;
 use App\Entity\Category;
 use App\Entity\User;
 use App\Service\Business\ServiceCategory;
@@ -14,25 +19,32 @@ class ServiceChartjs
     public function __construct(private ServiceCategory $serviceCategory,
         private ChartBuilderInterface $chartBuilder,
         private ServiceDepense $serviceDepense,
-        private ServiceMonth $serviceMonth
-    )
-    {
+        private ServiceMonth $serviceMonth,
+        private CategoryDomainInterface $categoryDomain,
+        private DepenseDomainInterface $depenseDomain,
+    ) {
     }
 
-    public function GetChartMonth(User $user, string $year, string $month): Chart
+    public function getChartMonth(User $user, string $year, string $month): Chart
     {
         $months = [$month];
-        $categories = $this->serviceCategory->getAllCategories($user);
+
+        $family = $user->getFamily();
+        if ($family) {
+            $categories = $this->categoryDomain->getCategoriesFamily($user->getFamily()->getId());
+        } else {
+            $categories = $this->categoryDomain->getCategories($user->getId());
+        }
 
         $res = [];
         foreach ($categories as $category) {
-            if ($category instanceof Category) {
+            if ($category instanceof CategoryModel) {
                 $color = $category->getColor();
                 $res[] = [
                     'label' => $category->getName(),
                     'backgroundColor' => $color,
                     'borderColor' => 'rgb(255, 99, 132)',
-                    'data' => $this->serviceDepense->GetDepenseForCategoryForMonth($user, $category, $months, $year),
+                    'data' => $this->depenseDomain->GetDepenseForCategoryForMonth($user->getId(), $category->getId(), $months, $year),
                 ];
             }
         }
