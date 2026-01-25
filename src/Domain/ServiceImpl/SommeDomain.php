@@ -16,8 +16,7 @@ readonly class SommeDomain implements SommeDomainInterface
     {
         $sum = 0;
         foreach ($depenses as $depense) {
-            if ($depense instanceof DepenseModel
-                && $depense->getIdCategory() === $idCategory) {
+            if ($depense->getIdCategory() === $idCategory) {
                 $sum += $depense->getAmount();
             }
         }
