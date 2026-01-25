@@ -18,7 +18,6 @@ readonly class CategoryDomain implements CategoryDomainInterface
     }
 
     /**
-     * @param int $idUser
      * @return CategoryModel[]
      */
     public function getCategories(int $idUser): array
@@ -27,6 +26,7 @@ readonly class CategoryDomain implements CategoryDomainInterface
     }
 
     /**
+     * @return CategoryModel[]
      * @throws FamilyNotFoundException
      */
     public function getCategoriesFamily(int $idFamily): array

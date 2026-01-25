@@ -4,30 +4,32 @@ declare(strict_types=1);
 
 namespace App\Domain\ServiceImpl;
 
-use App\Domain\Model\CategoryModel;
-use App\Domain\Model\DepenseModel;
 use App\Domain\ServiceInterface\DepenseDomainInterface;
+use App\Domain\ServiceInterface\FamilyDomainInterface;
+use App\Domain\ServiceInterface\SommeDomainInterface;
+use App\Domain\ServiceInterface\UserDomainInterface;
+use App\Exception\FamilyNotFoundException;
 
 readonly class DepenseDomain implements DepenseDomainInterface
 {
-    public function __construct()
-    {
+    public function __construct(
+        private SommeDomainInterface $sommeDomain,
+        private FamilyDomainInterface $familyDomain,
+        private UserDomainInterface $userDomain,
+    ) {
     }
 
     public function getDepenseForCategoryForMonth(int $idUser, int $idCategory, array $months, string $year): array
     {
+        try {
+            $family = $this->familyDomain->getFamily($idUser);
+            $depenses = $this->familyDomain->getDepenses($family->getId());
 
+            return $this->sumByCategoryByMonthByYear($depenses, $idCategory, $months, $year);
+        } catch (FamilyNotFoundException $familyException) {
+            $depenses = $this->userDomain->getDepenses($idUser);
 
-        $family = $user->getFamily();
-
-        if (null === $family) {
-            $depenses = $user->GetDepenses();
-
-            return $this->sumByCategoryByMonthByYear($months, $year, $depenses, $category);
-        } else {
-            $depenses = $this->GetAllDepenses($family);
-
-            return $this->sumByCategoryByMonthByYear($months, $year, $depenses, $category);
+            return $this->sumByCategoryByMonthByYear($depenses, $idCategory, $months, $year);
         }
     }
 
@@ -35,23 +37,25 @@ readonly class DepenseDomain implements DepenseDomainInterface
      * Sum the depense by category for each month of the year
      * return array<int>.
      */
-    private function sumByCategoryByMonthByYear(array $months, string $year, array $depenses, CategoryModel $category): array
+    private function sumByCategoryByMonthByYear(array $depenses, int $idCategory, array $months, string $year): array
     {
+        $res = [];
+
         foreach ($months as $month) {
-            $res[] = $this->sumByCategoryByMonth($month, $year, $depenses, $category);
+            $res[] = $this->sumByCategoryByMonth($depenses, $idCategory, $month, $year);
         }
 
         return $res;
     }
 
-    private function sumByCategoryByMonth(string $month, string $year, array $depenses, CategoryModel $category): float
+    private function sumByCategoryByMonth(array $depenses, int $idCategory, string $month, string $year): float
     {
         $depenseByMonthYear = $this->getDepenseByMonthAndYear($depenses, $month, $year);
 
-        return $this->GetSumCategory($depenseByMonthYear, $category);
+        return $this->sommeDomain->filteredOnCategoryAndSumDepense($depenseByMonthYear, $idCategory);
     }
 
-    public function getDepenseByMonthAndYear(array $depenses, string $month, string $year): array
+    private function getDepenseByMonthAndYear(array $depenses, string $month, string $year): array
     {
         $depenseMonthYear = [];
 
@@ -65,19 +69,5 @@ readonly class DepenseDomain implements DepenseDomainInterface
         }
 
         return $depenseMonthYear;
-    }
-
-    private function GetSumCategory(array $depenses, CategoryModel $category): float
-    {
-        $sum = 0;
-        foreach ($depenses as $depense) {
-            if ($depense instanceof DepenseModel) {
-                if ($depense->getCategory()->getName() === $category->getName()) {
-                    $sum += $depense->getAmount();
-                }
-            }
-        }
-
-        return $sum;
     }
 }

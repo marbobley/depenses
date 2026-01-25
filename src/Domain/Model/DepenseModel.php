@@ -2,15 +2,17 @@
 
 namespace App\Domain\Model;
 
-class DepenseModel
+use DateTimeImmutable;
+
+readonly class DepenseModel
 {
     public function __construct(
-        private int   $id,
-        private float $amount,
-        private int   $idCategory
+        private int               $id,
+        private float             $amount,
+        private int               $idCategory,
+        private DateTimeImmutable $created,
     )
     {
-
     }
 
     public function getId(): int
@@ -26,5 +28,10 @@ class DepenseModel
     public function getIdCategory(): int
     {
         return $this->idCategory;
+    }
+
+    public function getCreated(): DateTimeImmutable
+    {
+        return $this->created;
     }
 }
