@@ -5,9 +5,9 @@ namespace App\Domain\Model;
 readonly class CategoryModel
 {
     public function __construct(
-        private int    $id,
-        private string $name,
-        private string $color,
+        private int     $id,
+        private string  $name,
+        private ?string $color,
     )
     {
     }
@@ -22,7 +22,7 @@ readonly class CategoryModel
         return $this->id;
     }
 
-    public function getColor(): string
+    public function getColor(): ?string
     {
         return $this->color;
     }
