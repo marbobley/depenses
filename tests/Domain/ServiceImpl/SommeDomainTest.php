@@ -38,8 +38,8 @@ class SommeDomainTest extends TestCase
 
     public function depensesProvider(): array
     {
-        $depense1 = new DepenseModel(self::ID_DEPENSE, self::AMOUNT, self::ID_CATEGORY);
-        $depenseOther = new DepenseModel(self::ID_DEPENSE, self::AMOUNT, self::ID_CATEGORY_OTHER);
+        $depense1 = new DepenseModel(self::ID_DEPENSE, self::AMOUNT, self::ID_CATEGORY, new \DateTimeImmutable('now'));
+        $depenseOther = new DepenseModel(self::ID_DEPENSE, self::AMOUNT, self::ID_CATEGORY_OTHER, new \DateTimeImmutable('now'));
 
         return [
             [[], self::RESULT_EMPTY_DEPENSES],
