@@ -20,5 +20,5 @@ interface FamilyDomainInterface
      * @throws FamilyNotFoundException
      * @throws UserNotFoundException
      */
-    public function getFamily(int $idUser): FamilyModel;
+    public function getFamilyByIdUser(int $idUser): FamilyModel;
 }

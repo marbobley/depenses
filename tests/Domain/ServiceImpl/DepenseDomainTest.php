@@ -56,7 +56,7 @@ class DepenseDomainTest extends TestCase
 
         $depenses = $this->depenseModelFactory->createList(['created' => $datetime]);
 
-        $this->familyDomainMock->method('getFamily')->willReturn($family);
+        $this->familyDomainMock->method('getFamilyByIdUser')->willReturn($family);
         $this->familyDomainMock->method('getDepenses')->willReturn($depenses);
         $this->sommeDomainMock->method('filteredOnCategoryAndSumDepense')->willReturn(22.0);
 
@@ -75,7 +75,7 @@ class DepenseDomainTest extends TestCase
 
         $depenses = $this->depenseModelFactory->createList(['created' => $datetime]);
 
-        $this->familyDomainMock->method('getFamily')->willThrowException(new FamilyNotFoundException());
+        $this->familyDomainMock->method('getFamilyByIdUser')->willThrowException(new FamilyNotFoundException());
         $this->familyDomainMock->method('getDepenses')->willReturn($depenses);
         $this->sommeDomainMock->method('filteredOnCategoryAndSumDepense')->willReturn(22.0);
         $this->userDomainMock->method('getDepenses')->willReturn($depenses);

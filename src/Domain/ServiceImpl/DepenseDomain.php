@@ -13,16 +13,17 @@ use App\Exception\FamilyNotFoundException;
 readonly class DepenseDomain implements DepenseDomainInterface
 {
     public function __construct(
-        private SommeDomainInterface $sommeDomain,
+        private SommeDomainInterface  $sommeDomain,
         private FamilyDomainInterface $familyDomain,
-        private UserDomainInterface $userDomain,
-    ) {
+        private UserDomainInterface   $userDomain,
+    )
+    {
     }
 
     public function getDepenseForCategoryForMonth(int $idUser, int $idCategory, array $months, string $year): array
     {
         try {
-            $family = $this->familyDomain->getFamily($idUser);
+            $family = $this->familyDomain->getFamilyByIdUser($idUser);
             $depenses = $this->familyDomain->getDepenses($family->getId());
 
             return $this->sumByCategoryByMonthByYear($depenses, $idCategory, $months, $year);
