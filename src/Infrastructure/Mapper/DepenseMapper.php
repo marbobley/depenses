@@ -4,17 +4,22 @@ declare(strict_types=1);
 namespace App\Infrastructure\Mapper;
 
 use App\Domain\Model\DepenseModel;
-use App\Entity\Depense;
+use Doctrine\Common\Collections\Collection;
 
-class DepenseMapper implements DepenseMapperInterface
+class DepenseMapper implements MapperToModelInterface
 {
-    public function mapToModel(Depense $depenseEntity): DepenseModel
+    public function mapToModel($entity): DepenseModel
     {
         return new DepenseModel(
-            $depenseEntity->getId(),
-            $depenseEntity->getAmount(),
-            $depenseEntity->getCategory()->getId(),
-            $depenseEntity->getCreated()
+            $entity->getId(),
+            $entity->getAmount(),
+            $entity->getCategory()->getId(),
+            $entity->getCreated()
         );
+    }
+
+    public function mapToModels(Collection $categories): array
+    {
+        return [];
     }
 }

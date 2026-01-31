@@ -7,7 +7,7 @@ namespace App\Infrastructure\Adapter;
 use App\Domain\Model\CategoryModel;
 use App\Domain\Provider\CategoryProviderInterface;
 use App\Exception\FamilyNotFoundException;
-use App\Infrastructure\Mapper\CategoryMapperInterface;
+use App\Infrastructure\Mapper\MapperToModelInterface;
 use App\Repository\FamilyRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
@@ -15,10 +15,11 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 readonly class CategoryAdapter implements CategoryProviderInterface
 {
     public function __construct(
-        private UserRepository $userRepository,
-        private FamilyRepository $familyRepository,
-        private CategoryMapperInterface $categoryMapper,
-    ) {
+        private UserRepository         $userRepository,
+        private FamilyRepository       $familyRepository,
+        private MapperToModelInterface $categoryMapper,
+    )
+    {
     }
 
     /**

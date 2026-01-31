@@ -8,8 +8,9 @@ use App\Entity\Family;
 use App\Entity\User;
 use App\Exception\FamilyNotFoundException;
 use App\Infrastructure\Adapter\CategoryAdapter;
-use App\Infrastructure\Mapper\CategoryMapper;
 use App\Infrastructure\Mapper\CategoryMapperInterface;
+use App\Infrastructure\Mapper\CategoryMapperToModel;
+use App\Infrastructure\Mapper\MapperToModelInterface;
 use App\Repository\FamilyRepository;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -24,7 +25,7 @@ class CategoryProviderAdapterTest extends TestCase
     public const ID_USER = 2;
     public const ID_FAMILY = 2;
     private CategoryProviderInterface $categoryProvider;
-    private CategoryMapperInterface $categoryMapperMock;
+    private MapperToModelInterface $categoryMapperMock;
     private MockObject $userRepositoryMock;
     private MockObject $familyRepositoryMock;
 
@@ -61,7 +62,7 @@ class CategoryProviderAdapterTest extends TestCase
     {
         $this->userRepositoryMock = $this->createMock(UserRepository::class);
         $this->familyRepositoryMock = $this->createMock(FamilyRepository::class);
-        $this->categoryMapperMock = new CategoryMapper();
+        $this->categoryMapperMock = new CategoryMapperToModel();
 
         $this->categoryProvider = new CategoryAdapter(
             $this->userRepositoryMock,

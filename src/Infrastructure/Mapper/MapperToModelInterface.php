@@ -1,14 +1,17 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Infrastructure\Mapper;
 
-use App\Domain\Model\CategoryModel;
 use Doctrine\Common\Collections\Collection;
 
-interface CategoryMapperInterface
+interface MapperToModelInterface
 {
     /**
-     * @return CategoryModel[]
+     * @return object[]
      */
     public function mapToModels(Collection $categories): array;
+
+    public function mapToModel(object $entity);
+
 }

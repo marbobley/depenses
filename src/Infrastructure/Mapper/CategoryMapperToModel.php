@@ -6,7 +6,7 @@ namespace App\Infrastructure\Mapper;
 use App\Domain\Model\CategoryModel;
 use Doctrine\Common\Collections\Collection;
 
-class CategoryMapper implements CategoryMapperInterface
+class CategoryMapperToModel implements MapperToModelInterface
 {
     /**
      * @return CategoryModel[]
@@ -16,14 +16,19 @@ class CategoryMapper implements CategoryMapperInterface
         $categoriesArray = [];
 
         foreach ($categories as $category) {
-            $categoryModel = new CategoryModel(
-                $category->getId(),
-                $category->getName(),
-                $category->getColor()
-            );
+            $categoryModel = $this->mapToModel($category);
             $categoriesArray[] = $categoryModel;
         }
 
         return $categoriesArray;
+    }
+
+    public function mapToModel($entity): CategoryModel
+    {
+        return new CategoryModel(
+            $entity->getId(),
+            $entity->getName(),
+            $entity->getColor()
+        );
     }
 }

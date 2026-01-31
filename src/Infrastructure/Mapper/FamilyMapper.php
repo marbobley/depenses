@@ -4,14 +4,20 @@ declare(strict_types=1);
 namespace App\Infrastructure\Mapper;
 
 use App\Domain\Model\FamilyModel;
-use App\Entity\Family;
+use Doctrine\Common\Collections\Collection;
 
-class FamilyMapper implements FamilyMapperInterface
+class FamilyMapper implements MapperToModelInterface
 {
-    public function mapToModel(Family $familyEntity): FamilyModel
+    public function mapToModel($entity): FamilyModel
     {
         return new FamilyModel(
-            $familyEntity->getId(),
+            $entity->getId(),
         );
+    }
+
+    public function mapToModels(Collection $categories): array
+    {
+        return [];
+        // TODO: Implement mapToModels() method.
     }
 }
