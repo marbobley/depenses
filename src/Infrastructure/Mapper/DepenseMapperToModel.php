@@ -12,6 +12,7 @@ use Doctrine\Common\Collections\Collection;
 class DepenseMapperToModel implements MapperToModelInterface
 {
     public const ENTITY_IS_NOT_A_DEPENSE = 'entity is not a depense';
+    public const CATEGORY_NOT_NULL = 'La catégorie de la dépense est null';
 
     /**
      * @throws MapperToModelException
@@ -20,6 +21,9 @@ class DepenseMapperToModel implements MapperToModelInterface
     {
         if (!($entity instanceof Depense)) {
             throw new MapperToModelException(self::ENTITY_IS_NOT_A_DEPENSE);
+        }
+        if (null === $entity->getCategory()) {
+            throw new MapperToModelException(self::CATEGORY_NOT_NULL);
         }
 
         return new DepenseModel(

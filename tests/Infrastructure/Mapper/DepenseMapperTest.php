@@ -27,6 +27,17 @@ class DepenseMapperTest extends TestCase
         $this->mapper->mapToModel($someDate);
     }
 
+    public function testMapperCategoryNotSet()
+    {
+        $model = new Depense();
+        $model->setCategory(null);
+
+        $this->expectException(MapperToModelException::class);
+
+        $this->mapper->mapToModel($model);
+
+    }
+
     public function testMapToModel(): void
     {
         $id = 1;
