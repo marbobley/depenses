@@ -8,9 +8,6 @@ use App\Domain\Provider\UserProviderInterface;
 
 readonly class UserAdapter implements UserProviderInterface
 {
-    public function __construct()
-    {
-    }
 
     public function findAllDepenses(int $idUser): array
     {

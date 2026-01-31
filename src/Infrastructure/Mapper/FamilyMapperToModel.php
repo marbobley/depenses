@@ -6,7 +6,7 @@ namespace App\Infrastructure\Mapper;
 use App\Domain\Model\FamilyModel;
 use Doctrine\Common\Collections\Collection;
 
-class FamilyMapper implements MapperToModelInterface
+class FamilyMapperToModel implements MapperToModelInterface
 {
     public function mapToModel($entity): FamilyModel
     {
@@ -15,9 +15,14 @@ class FamilyMapper implements MapperToModelInterface
         );
     }
 
-    public function mapToModels(Collection $categories): array
+    public function mapToModels(Collection $entities): array
     {
-        return [];
-        // TODO: Implement mapToModels() method.
+        $familiesArray = [];
+
+        foreach ($entities as $family) {
+            $familiesArray[] = $this->mapToModel($family);
+        }
+
+        return $familiesArray;
     }
 }

@@ -6,7 +6,7 @@ namespace App\Infrastructure\Mapper;
 use App\Domain\Model\DepenseModel;
 use Doctrine\Common\Collections\Collection;
 
-class DepenseMapper implements MapperToModelInterface
+class DepenseMapperToModel implements MapperToModelInterface
 {
     public function mapToModel($entity): DepenseModel
     {
@@ -18,8 +18,14 @@ class DepenseMapper implements MapperToModelInterface
         );
     }
 
-    public function mapToModels(Collection $categories): array
+    public function mapToModels(Collection $entities): array
     {
-        return [];
+        $depensesArray = [];
+
+        foreach ($entities as $depense) {
+            $depensesArray[] = $this->mapToModel($depense);
+        }
+
+        return $depensesArray;
     }
 }

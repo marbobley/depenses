@@ -8,8 +8,6 @@ use App\Domain\Model\DepenseModel;
 use App\Domain\Model\FamilyModel;
 use App\Domain\Provider\FamilyProviderInterface;
 use App\Exception\FamilyNotFoundException;
-use App\Infrastructure\Mapper\DepenseMapperInterface;
-use App\Infrastructure\Mapper\FamilyMapperInterface;
 use App\Infrastructure\Mapper\MapperToModelInterface;
 use App\Repository\FamilyRepository;
 use App\Repository\UserRepository;

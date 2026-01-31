@@ -11,11 +11,11 @@ class CategoryMapperToModel implements MapperToModelInterface
     /**
      * @return CategoryModel[]
      */
-    public function mapToModels(Collection $categories): array
+    public function mapToModels(Collection $entities): array
     {
         $categoriesArray = [];
 
-        foreach ($categories as $category) {
+        foreach ($entities as $category) {
             $categoryModel = $this->mapToModel($category);
             $categoriesArray[] = $categoryModel;
         }

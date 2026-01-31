@@ -34,5 +34,5 @@ services:
 
   App\Infrastructure\Adapter\FamilyAdapter:
     arguments:
-      $familyMapper: '@App\Infrastructure\Mapper\FamilyMapper'
-      $depenseMapper: '@App\Infrastructure\Mapper\DepenseMapper'
+      $familyMapper: '@App\Infrastructure\Mapper\FamilyMapperToModel'
+      $depenseMapper: '@App\Infrastructure\Mapper\DepenseMapperToModel'

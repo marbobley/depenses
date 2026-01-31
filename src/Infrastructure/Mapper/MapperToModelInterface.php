@@ -10,7 +10,7 @@ interface MapperToModelInterface
     /**
      * @return object[]
      */
-    public function mapToModels(Collection $categories): array;
+    public function mapToModels(Collection $entities): array;
 
     public function mapToModel(object $entity);
 
