@@ -2,6 +2,7 @@
 
 namespace App\Controller\Depense;
 
+use App\Domain\ServiceInterface\ChartDomainInterface;
 use App\Entity\Depense;
 use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
@@ -14,6 +15,7 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/depense')]
 final class DepenseController extends AbstractController
@@ -148,7 +150,7 @@ final class DepenseController extends AbstractController
     }
 
     #[Route('/chartjs2/{year}/{month}', name: 'app_depense_chartForOneMonth', methods: ['GET'])]
-    public function depenseChartForOneMonth(ServiceChartjs $serviceChartjs, ?string $year, ?string $month): Response
+    public function depenseChartForOneMonth(ServiceChartjs $serviceChartjs, ChartDomainInterface $chartDomain, ?string $year, ?string $month): Response
     {
         if (!$year) {
             $year = date('Y');
@@ -158,6 +160,24 @@ final class DepenseController extends AbstractController
         }
 
         $chartBar = $serviceChartjs->getChartMonth($this->getUser(), $year, $month);
+
+        return $this->render('depense/chartjs_month.html.twig', [
+            'chart' => $chartBar,
+        ]);
+    }
+
+    #[IsGranted('hasFamily')]
+    #[Route('/chartjs3/{year}/{month}', name: 'app_depense_chartForOneMonth', methods: ['GET'])]
+    public function depenseChartForOneMonthBis(ChartDomainInterface $chartDomain, ?string $year, ?string $month): Response
+    {
+        if (!$year) {
+            $year = date('Y');
+        }
+        if (!$month) {
+            $month = date('n');
+        }
+
+        $chartBar = $chartDomain->getChartMonthFamily($this->getUser()->getId(), $year, $month);
 
         return $this->render('depense/chartjs_month.html.twig', [
             'chart' => $chartBar,

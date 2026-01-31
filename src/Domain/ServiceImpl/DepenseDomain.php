@@ -26,6 +26,7 @@ readonly class DepenseDomain implements DepenseDomainInterface
             $family = $this->familyDomain->getFamilyByIdUser($idUser);
             $depenses = $this->familyDomain->getDepenses($family->getId());
 
+
             return $this->sumByCategoryByMonthByYear($depenses, $idCategory, $months, $year);
         } catch (FamilyNotFoundException $familyException) {
             $depenses = $this->userDomain->getDepenses($idUser);

@@ -7,7 +7,6 @@ namespace App\Service\Utils;
 use App\Domain\Model\CategoryModel;
 use App\Domain\ServiceInterface\CategoryDomainInterface;
 use App\Domain\ServiceInterface\DepenseDomainInterface;
-use App\Entity\Category;
 use App\Entity\User;
 use App\Service\Business\ServiceCategory;
 use App\Service\Business\ServiceDepense;
@@ -66,17 +65,17 @@ class ServiceChartjs
     public function getChartMonths(User $user, string $year): Chart
     {
         $months = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-        $categories = $this->serviceCategory->getAllCategories($user);
+        $categories = $this->categoryDomain->getCategoriesFamily($user->getFamily()->getId());
 
         $res = [];
         foreach ($categories as $category) {
-            if ($category instanceof Category) {
+            if ($category instanceof CategoryModel) {
                 $color = $category->getColor();
                 $res[] = [
                     'label' => $category->getName(),
                     'backgroundColor' => $color,
                     'borderColor' => 'rgb(255, 99, 132)',
-                    'data' => $this->serviceDepense->GetDepenseForCategoryForMonth($user, $category, $months, $year),
+                    'data' => $this->depenseDomain->GetDepenseForCategoryForMonth($user->getId(), $category->getId(), $months, $year),
                 ];
             }
         }
