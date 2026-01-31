@@ -15,19 +15,19 @@ use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 readonly class FamilyAdapter implements FamilyProviderInterface
 {
-    const FAMILY_NOT_FOUND = "Family %s not found";
+    public const FAMILY_NOT_FOUND = 'Family %s not found';
 
     public function __construct(
-        private FamilyRepository       $familyRepository,
-        private UserRepository         $userRepository,
+        private FamilyRepository $familyRepository,
+        private UserRepository $userRepository,
         private MapperToModelInterface $familyMapper,
-        private MapperToModelInterface $depenseMapper
-    )
-    {
+        private MapperToModelInterface $depenseMapper,
+    ) {
     }
 
     /**
      * @return DepenseModel[]
+     *
      * @throws FamilyNotFoundException
      */
     public function findAllDepenses(int $idFamily): array
