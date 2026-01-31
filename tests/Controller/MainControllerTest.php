@@ -75,7 +75,7 @@ class MainControllerTest extends WebTestCase
         // test e.g. the profile page
         $client->request('GET', 'http://127.0.0.1:8000/');
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Bonjour user!!!');
+        $this->assertSelectorTextContains('h1', 'Bonjour user !');
     }
 
     public function testVisitingAdminDepenseWhileLoggedInUserRole(): void

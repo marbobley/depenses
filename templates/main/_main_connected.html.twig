@@ -1,45 +1,167 @@
-
-<header class="bg-primary bg-gradient text-white">
+<header class="bg-primary bg-gradient text-white py-5 mb-4">
     {% set year = 'now'|date('Y') %}
     {% set month = 'now'|date('n') %}
     {% set user = app.user %}
-    <div class="container container-fluid">
-        <h1 class="fw-bolder">
-            Bonjour {{ app.user.username }}!!!
-        </h1>
-        <ul>
-            <li>Depense du mois : {{ serviceDepenseUser.DepenseMonth(user,month, year)|number_format(2) }} €</li>
-            <li>Depense du mois précédent : {{ serviceDepenseUser.DepenseMonth(user,month-1, year)|number_format(2) }} €</li>
-            <li>Depense de l'année : {{ serviceDepenseUser.DepenseYear(year)|number_format(2) }} €</li>
-            <li>Depense de l'année précédent : {{ serviceDepenseUser.DepenseYear(year-1)|number_format(2) }} €</li>
-        </ul>
-
-        {% if serviceFamily.GetUserFamily %}
-            Famille : {{ serviceFamily.GetUserFamily }}
-            <ul>
-                <li>Depense du mois : {{ serviceDepenseFamily.DepenseMonth(user, month, year)|number_format(2) }} €</li>
-                <li>Depense du mois précédent : {{ serviceDepenseFamily.DepenseMonth(user,month - 1, year)|number_format(2) }} €</li>
-                <li>Depense de l'année : {{ serviceDepenseFamily.DepenseYear(user,year)|number_format(2) }} €</li>
-                <li>Depense de l'année précédente : {{ serviceDepenseFamily.DepenseYear(user,year - 1)|number_format(2) }} €</li>
-            </ul>
-        {% endif %}
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="fw-bolder display-4">Bonjour {{ app.user.username }} !</h1>
+                <p class="lead mb-0">Voici l'aperçu de vos dépenses pour {{ "now"|date('F Y')|trans }}</p>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <span class="badge bg-light text-primary fs-5 px-3 py-2">
+                    {{ year }}
+                </span>
+            </div>
+        </div>
     </div>
-    {% if serviceFamily.GetUserFamily %}
-    <div class="container container-fluid">
-        <h1 class="fw-bolder">
-            Moyenne pour la famille ({{ year }})
-        </h1>
-        <ul>
-            <li>Moyenne de l'année : {{ serviceMoyenne.CalculMoyenneMonth(serviceDepenseFamily.DepenseYear(user,year), month)|number_format(2) }} €</li>
-            {% for category in serviceCategory.GetAllCategories(user) %}
-                <li>Montant par catégorie {{ category.name }} : {{ serviceDepenseCategory.sumDepenseByCategoryByYear(user,category.id, year)|number_format(2) }}</li>
-                <li>Moyenne par catégorie {{ category.name }} : {{ serviceMoyenne.CalculMoyenneMonth(serviceDepenseCategory.sumDepenseByCategoryByYear(user,category.id, year) , month)|number_format(2) }} €</li>
-            {% endfor %}
-        </ul>
-    </div>
-        <li>Moyenne de l'année précédente : {{ serviceMoyenne.CalculMoyenneMonth(serviceDepenseFamily.DepenseYear(user,year - 1), 12)|number_format(2) }} €</li>
-    {% endif %}
 </header>
+
+<div class="container mb-5">
+    {# Section Dépenses Personnelles #}
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="h4 mb-3 border-bottom pb-2">Mes Dépenses</h2>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h6 class="card-subtitle mb-2 text-muted">Ce mois</h6>
+                    <p class="card-text h3 fw-bold text-primary">{{ serviceDepenseUser.DepenseMonth(user, month, year)|number_format(2) }}
+                        €</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h6 class="card-subtitle mb-2 text-muted">Mois précédent</h6>
+                    <p class="card-text h3 fw-bold">{{ serviceDepenseUser.DepenseMonth(user, month-1, year)|number_format(2) }}
+                        €</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h6 class="card-subtitle mb-2 text-muted">Cette année</h6>
+                    <p class="card-text h3 fw-bold text-success">{{ serviceDepenseUser.DepenseYear(year)|number_format(2) }}
+                        €</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h6 class="card-subtitle mb-2 text-muted">Année précédente</h6>
+                    <p class="card-text h3 fw-bold">{{ serviceDepenseUser.DepenseYear(year-1)|number_format(2) }} €</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if serviceFamily.GetUserFamily %}
+        {# Section Famille #}
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+                    <h2 class="h4 mb-0">Famille : {{ serviceFamily.GetUserFamily }}</h2>
+                    <span class="badge bg-info text-dark">Groupe familial</span>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card border-primary shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h6 class="card-subtitle mb-2 text-muted">Mois (Famille)</h6>
+                        <p class="card-text h3 fw-bold text-primary">{{ serviceDepenseFamily.DepenseMonth(user, month, year)|number_format(2) }}
+                            €</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h6 class="card-subtitle mb-2 text-muted">Mois précédent</h6>
+                        <p class="card-text h3 fw-bold">{{ serviceDepenseFamily.DepenseMonth(user, month-1, year)|number_format(2) }}
+                            €</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h6 class="card-subtitle mb-2 text-muted">Année (Famille)</h6>
+                        <p class="card-text h3 fw-bold text-success">{{ serviceDepenseFamily.DepenseYear(user, year)|number_format(2) }}
+                            €</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center">
+                        <h6 class="card-subtitle mb-2 text-muted">Année précédente</h6>
+                        <p class="card-text h3 fw-bold">{{ serviceDepenseFamily.DepenseYear(user, year-1)|number_format(2) }}
+                            €</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {# Section Moyennes et Catégories #}
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Moyennes Familiales ({{ year }})</h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Moyenne mensuelle {{ year }}
+                                <span class="fw-bold">{{ serviceMoyenne.CalculMoyenneMonth(serviceDepenseFamily.DepenseYear(user, year), month)|number_format(2) }} €</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Moyenne mensuelle {{ year - 1 }}
+                                <span class="text-muted small">{{ serviceMoyenne.CalculMoyenneMonth(serviceDepenseFamily.DepenseYear(user, year-1), 12)|number_format(2) }} €</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm h-100">
+                    <div class="card-header bg-white">
+                        <h5 class="card-title mb-0">Par Catégorie ({{ year }})</h5>
+                    </div>
+                    <div class="card-body" style="max-height: 300px; overflow-y: auto;">
+                        <table class="table table-sm table-hover mb-0">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Catégorie</th>
+                                <th class="text-end">Total</th>
+                                <th class="text-end">Moy.</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for category in serviceCategory.GetAllCategories(user) %}
+                                {% set totalCat = serviceDepenseCategory.sumDepenseByCategoryByYear(user, category.id, year) %}
+                                <tr>
+                                    <td>{{ category.name }}</td>
+                                    <td class="text-end fw-bold">{{ totalCat|number_format(2) }} €</td>
+                                    <td class="text-end text-muted small">{{ serviceMoyenne.CalculMoyenneMonth(totalCat, month)|number_format(2) }}
+                                        €
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
 <section>
-    {{ include(('main/_main_WidgetArea.html.twig')) }}
+    {{ include('main/_main_WidgetArea.html.twig') }}
 </section>
