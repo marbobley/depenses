@@ -8,7 +8,6 @@ use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
 use App\Service\Business\ServiceDepenseCategory;
 use App\Service\Entity\ServiceDepenseEntity;
-use App\Service\Utils\ServiceChartjs;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
@@ -136,13 +135,13 @@ final class DepenseController extends AbstractController
 
     #[Route('/chartjs/{year}', name: 'app_depense_chartjs_year', methods: ['GET'])]
     #[Route('/chartjs', name: 'app_depense_chartjs', methods: ['GET'])]
-    public function depenseChartBy12MonthFilterByYear(ServiceChartjs $serviceChartjs, ?string $year): Response
+    public function depenseChartBy12MonthFilterByYear(ChartDomainInterface $chartDomain, ?string $year): Response
     {
         if (!$year) {
             $year = date('Y');
         }
 
-        $chartBar = $serviceChartjs->getChartMonths($this->getUser(), $year);
+        $chartBar = $chartDomain->getChartMonthsUser($this->getUser()->getId(), $year);
 
         return $this->render('depense/chartjs.html.twig', [
             'chart' => $chartBar,
@@ -150,7 +149,7 @@ final class DepenseController extends AbstractController
     }
 
     #[Route('/chartjs2/{year}/{month}', name: 'app_depense_chartForOneMonth', methods: ['GET'])]
-    public function depenseChartForOneMonth(ServiceChartjs $serviceChartjs, ChartDomainInterface $chartDomain, ?string $year, ?string $month): Response
+    public function depenseChartForOneMonth(ChartDomainInterface $chartDomain, ?string $year, ?string $month): Response
     {
         if (!$year) {
             $year = date('Y');
@@ -159,7 +158,7 @@ final class DepenseController extends AbstractController
             $month = date('n');
         }
 
-        $chartBar = $serviceChartjs->getChartMonth($this->getUser(), $year, $month);
+        $chartBar = $chartDomain->getChartMonthsUser($this->getUser()->getId(), $year, $month);
 
         return $this->render('depense/chartjs_month.html.twig', [
             'chart' => $chartBar,
