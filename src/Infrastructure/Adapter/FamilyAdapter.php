@@ -10,6 +10,7 @@ use App\Domain\Provider\FamilyProviderInterface;
 use App\Exception\FamilyNotFoundException;
 use App\Infrastructure\Mapper\DepenseMapperInterface;
 use App\Infrastructure\Mapper\FamilyMapperInterface;
+use App\Infrastructure\Mapper\MapperToModelInterface;
 use App\Repository\FamilyRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
@@ -21,8 +22,8 @@ readonly class FamilyAdapter implements FamilyProviderInterface
     public function __construct(
         private FamilyRepository       $familyRepository,
         private UserRepository         $userRepository,
-        private FamilyMapperInterface  $familyMapper,
-        private DepenseMapperInterface $depenseMapper
+        private MapperToModelInterface $familyMapper,
+        private MapperToModelInterface $depenseMapper
     )
     {
     }
