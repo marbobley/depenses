@@ -2,6 +2,6 @@
 
 namespace App\Exception;
 
-class CategoryException extends \Exception
+class CategoryException extends ApplicationDepenseException
 {
 }

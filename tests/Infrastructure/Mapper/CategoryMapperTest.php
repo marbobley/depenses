@@ -4,6 +4,7 @@ namespace App\Tests\Infrastructure\Mapper;
 
 use App\Domain\Model\CategoryModel;
 use App\Entity\Category;
+use App\Exception\MapperToModelException;
 use App\Infrastructure\Mapper\CategoryMapperToModel;
 use App\Infrastructure\Mapper\MapperToModelInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -19,11 +20,6 @@ class CategoryMapperTest extends TestCase
     public const COLOR2 = 'Color2';
     private MapperToModelInterface $mapper;
 
-    /**
-     * @param CategoryModel $first
-     * @param Category $category1
-     * @return void
-     */
     public function assertModelEqualEntity(CategoryModel $first, Category $category1): void
     {
         $this->assertEquals($first->getId(), $category1->getId());
@@ -36,6 +32,17 @@ class CategoryMapperTest extends TestCase
         $this->mapper = new CategoryMapperToModel();
     }
 
+    public function testMapperIsNotCategory()
+    {
+        $this->expectException(MapperToModelException::class);
+
+        $someDate = new \DateTimeImmutable();
+        $this->mapper->mapToModel($someDate);
+    }
+
+    /**
+     * @throws MapperToModelException
+     */
     public function testMapperToModel(): void
     {
         $category = new Category();
@@ -49,6 +56,9 @@ class CategoryMapperTest extends TestCase
         $this->assertModelEqualEntity($result, $category);
     }
 
+    /**
+     * @throws MapperToModelException
+     */
     public function testMapperToModels(): void
     {
         $category1 = new Category();

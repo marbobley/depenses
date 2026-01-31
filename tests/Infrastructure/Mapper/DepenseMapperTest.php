@@ -5,6 +5,7 @@ namespace App\Tests\Infrastructure\Mapper;
 use App\Domain\Model\DepenseModel;
 use App\Entity\Category;
 use App\Entity\Depense;
+use App\Exception\MapperToModelException;
 use App\Infrastructure\Mapper\DepenseMapperToModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
@@ -16,6 +17,14 @@ class DepenseMapperTest extends TestCase
     protected function setUp(): void
     {
         $this->mapper = new DepenseMapperToModel();
+    }
+
+    public function testMapperIsNotDepense()
+    {
+        $this->expectException(MapperToModelException::class);
+
+        $someDate = new \DateTimeImmutable();
+        $this->mapper->mapToModel($someDate);
     }
 
     public function testMapToModel(): void

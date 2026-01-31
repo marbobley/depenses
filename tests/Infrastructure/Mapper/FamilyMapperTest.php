@@ -4,6 +4,7 @@ namespace App\Tests\Infrastructure\Mapper;
 
 use App\Domain\Model\FamilyModel;
 use App\Entity\Family;
+use App\Exception\MapperToModelException;
 use App\Infrastructure\Mapper\FamilyMapperToModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
@@ -15,6 +16,14 @@ class FamilyMapperTest extends TestCase
     protected function setUp(): void
     {
         $this->mapper = new FamilyMapperToModel();
+    }
+
+    public function testMapperIsNotFamily()
+    {
+        $this->expectException(MapperToModelException::class);
+
+        $someDate = new \DateTimeImmutable();
+        $this->mapper->mapToModel($someDate);
     }
 
     public function testMapToModel(): void

@@ -2,7 +2,7 @@
 
 namespace App\Exception;
 
-class FamilyNotFoundException extends \Exception
+class FamilyNotFoundException extends ApplicationDepenseException
 {
-    
+
 }

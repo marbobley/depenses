@@ -16,13 +16,14 @@ use Symfony\UX\Chartjs\Model\Chart;
 
 class ServiceChartjs
 {
-    public function __construct(private ServiceCategory $serviceCategory,
-        private ChartBuilderInterface $chartBuilder,
-        private ServiceDepense $serviceDepense,
-        private ServiceMonth $serviceMonth,
-        private CategoryDomainInterface $categoryDomain,
-        private DepenseDomainInterface $depenseDomain,
-    ) {
+    public function __construct(private ServiceCategory         $serviceCategory,
+                                private ChartBuilderInterface   $chartBuilder,
+                                private ServiceDepense          $serviceDepense,
+                                private ServiceMonth            $serviceMonth,
+                                private CategoryDomainInterface $categoryDomain,
+                                private DepenseDomainInterface  $depenseDomain,
+    )
+    {
     }
 
     public function getChartMonth(User $user, string $year, string $month): Chart
@@ -51,9 +52,9 @@ class ServiceChartjs
 
         $chartBar = $this->chartBuilder->createChart(Chart::TYPE_BAR);
         $chartBar->setData([
-            'labels' => [$this->serviceMonth->GetMonthName($month)],
-            'datasets' => $res,
-        ]
+                'labels' => [$this->serviceMonth->GetMonthName($month)],
+                'datasets' => $res,
+            ]
         );
         $chartBar->setOptions([
             'maintainAspectRatio' => false,
@@ -62,7 +63,7 @@ class ServiceChartjs
         return $chartBar;
     }
 
-    public function GetChartMonths(User $user, string $year): Chart
+    public function getChartMonths(User $user, string $year): Chart
     {
         $months = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
         $categories = $this->serviceCategory->getAllCategories($user);
@@ -82,9 +83,9 @@ class ServiceChartjs
 
         $chartBar = $this->chartBuilder->createChart(Chart::TYPE_BAR);
         $chartBar->setData([
-            'labels' => ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
-            'datasets' => $res,
-        ]
+                'labels' => ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
+                'datasets' => $res,
+            ]
         );
         $chartBar->setOptions([
             'maintainAspectRatio' => false,
