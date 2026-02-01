@@ -106,17 +106,23 @@
                 <source>nav.depense.report</source>
                 <target>Rapport</target>
             </trans-unit>
-            <trans-unit id="nav.depense.graphYearly">
-                <source>nav.depense.graphYearly</source>
-                <target>Graph. Annuel</target>
-            </trans-unit>
-            <trans-unit id="nav.depense.graphMonthly">
-                <source>nav.depense.graphMonthly</source>
-                <target>Graph. Mensuel</target>
-            </trans-unit>
             <trans-unit id="nav.depense.search">
                 <source>nav.depense.search</source>
                 <target>Recherche</target>
+            </trans-unit>
+
+
+            <trans-unit id="nav.chart">
+                <source>nav.chart</source>
+                <target>Graphiques</target>
+            </trans-unit>
+            <trans-unit id="nav.chart.graphYearly">
+                <source>nav.chart.graphYearly</source>
+                <target>Graph. Annuel</target>
+            </trans-unit>
+            <trans-unit id="nav.chart.graphMonthly">
+                <source>nav.chart.graphMonthly</source>
+                <target>Graph. Mensuel</target>
             </trans-unit>
 
             <trans-unit id="nav.family">

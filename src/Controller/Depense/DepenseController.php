@@ -2,7 +2,6 @@
 
 namespace App\Controller\Depense;
 
-use App\Domain\ServiceInterface\ChartDomainInterface;
 use App\Entity\Depense;
 use App\Form\DepenseType;
 use App\Repository\DepenseRepository;
@@ -14,7 +13,6 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/depense')]
 final class DepenseController extends AbstractController
@@ -113,14 +111,6 @@ final class DepenseController extends AbstractController
         );
     }
 
-    #[Route('/report', name: 'app_chart_depense', methods: ['GET'])]
-    public function report(): Response
-    {
-        return $this->render('depense/report.html.twig', [
-            'startDate' => '',
-        ]);
-    }
-
     #[Route('/report/category/{idCategory}', name: 'app_category_depense', methods: ['GET'])]
     public function reportCategoryByYear(ServiceDepenseCategory $serviceDepenseCategory, int $idCategory): Response
     {
@@ -133,53 +123,11 @@ final class DepenseController extends AbstractController
         ]);
     }
 
-    #[Route('/chartjs/{year}', name: 'app_depense_chartjs_year', methods: ['GET'])]
-    #[Route('/chartjs', name: 'app_depense_chartjs', methods: ['GET'])]
-    public function depenseChartBy12MonthFilterByYear(ChartDomainInterface $chartDomain, ?string $year): Response
+    #[Route('/report', name: 'app_chart_depense', methods: ['GET'])]
+    public function report(): Response
     {
-        if (!$year) {
-            $year = date('Y');
-        }
-
-        $chartBar = $chartDomain->getChartMonthsUser($this->getUser()->getId(), $year);
-
-        return $this->render('depense/chartjs.html.twig', [
-            'chart' => $chartBar,
-        ]);
-    }
-
-    #[Route('/chartjs2/{year}/{month}', name: 'app_depense_chartForOneMonth', methods: ['GET'])]
-    public function depenseChartForOneMonth(ChartDomainInterface $chartDomain, ?string $year, ?string $month): Response
-    {
-        if (!$year) {
-            $year = date('Y');
-        }
-        if (!$month) {
-            $month = date('n');
-        }
-
-        $chartBar = $chartDomain->getChartMonthsUser($this->getUser()->getId(), $year, $month);
-
-        return $this->render('depense/chartjs_month.html.twig', [
-            'chart' => $chartBar,
-        ]);
-    }
-
-    #[IsGranted('hasFamily')]
-    #[Route('/chartjs3/{year}/{month}', name: 'app_depense_chartForOneMonth', methods: ['GET'])]
-    public function depenseChartForOneMonthBis(ChartDomainInterface $chartDomain, ?string $year, ?string $month): Response
-    {
-        if (!$year) {
-            $year = date('Y');
-        }
-        if (!$month) {
-            $month = date('n');
-        }
-
-        $chartBar = $chartDomain->getChartMonthFamily($this->getUser()->getId(), $year, $month);
-
-        return $this->render('depense/chartjs_month.html.twig', [
-            'chart' => $chartBar,
+        return $this->render('depense/report.html.twig', [
+            'startDate' => '',
         ]);
     }
 }

@@ -1,0 +1,16 @@
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+       aria-haspopup="true" aria-expanded="false">
+        {{ 'nav.chart'|trans }}
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+        {% if is_granted('hasFamily') == true %}
+            <a class="dropdown-item"
+               href="{{ path('app_chart_family_depense_months', {year: 'now'|date('Y')}) }}">{{ 'nav.chart.graphYearly'|trans }}</a>
+            <a class="dropdown-item"
+               href="{{ path('app_chart_family_depense_month_chart', {year: 'now'|date('Y') , month: 'now'|date('n')}) }}">{{ 'nav.chart.graphMonthly'|trans }}</a>
+        {% endif %}
+
+    </div>
+</li>
