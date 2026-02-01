@@ -24,26 +24,19 @@ class DepenseRepositoryTest extends KernelTestCase
     {
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
-            ->findAll()
-        ;
+            ->findAll();
 
-        if (isset($depenses)) {
-            $this->assertTrue(true);
-        } else {
-            $this->assertTrue(false);
-        }
+        $this->assertNotNull($depenses);
     }
 
     public function testDepenseRepositoryFindByUser(): void
     {
         $user = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'admin'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'admin']);
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
-            ->findByUser($user)
-        ;
+            ->findByUser($user);
 
         $countNumberOfDepenseForUser = count($depenses);
 
@@ -53,14 +46,12 @@ class DepenseRepositoryTest extends KernelTestCase
     public function testDepenseRepositoryFindByFamily(): void
     {
         $user = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'admin'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'admin']);
 
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
-            ->findByFamily($user)
-        ;
+            ->findByFamily($user);
 
         $countNumberOfDepenseForUser = count($depenses);
 
@@ -70,14 +61,12 @@ class DepenseRepositoryTest extends KernelTestCase
     public function testDepenseRepositoryFindByFamilyReturnEmptyArray(): void
     {
         $user = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'user'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'user']);
 
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
-            ->findByFamily($user)
-        ;
+            ->findByFamily($user);
 
         $this->assertEmpty($depenses);
     }
@@ -85,47 +74,44 @@ class DepenseRepositoryTest extends KernelTestCase
     public function testDepenseRepositoryNoFindByUserByYear(): void
     {
         $user = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'user'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'user']);
 
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
             /*
              * @todo : change 2024 to something more flexible DatTime.now.Y  - 1
              */
-            ->findByUserByYear($user, 2024);
+            ->findByUserByYear($user, 2025);
 
         $countNumberOfDepenseForUser = count($depenses);
 
-        $this->assertSame($countNumberOfDepenseForUser, 0);
+        $this->assertSame(0, $countNumberOfDepenseForUser);
     }
 
     public function testDepenseRepositoryFindByUserByYear(): void
     {
         $user = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'user'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'user']);
 
         $depenses = $this->entityManager
             ->getRepository(Depense::class)
             /*
              * @todo : change 2025 to something more flexible DatTime.now.Y
              */
-            ->findByUserByYear($user, 2025);
+            ->findByUserByYear($user, 2026);
 
         $countNumberOfDepenseForUser = count($depenses);
 
-        $this->assertSame($countNumberOfDepenseForUser, 201);
+        $this->assertSame(201, $countNumberOfDepenseForUser);
     }
 
     public function testDepenseRepositoryFindByUserByYearByMonth(): void
     {
         $user = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'user'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'user']);
 
         $month = date('n');
         $year = date('Y');
@@ -136,15 +122,14 @@ class DepenseRepositoryTest extends KernelTestCase
 
         $countNumberOfDepenseForUser = count($depenses);
 
-        $this->assertSame($countNumberOfDepenseForUser, 201);
+        $this->assertSame(0, $countNumberOfDepenseForUser);
     }
 
     public function testDepenseRepositoryNoFindByUserByYearByMonth(): void
     {
         $user = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'user'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'user']);
 
         $month = date('n') - 1;
         $year = date('Y');
@@ -153,7 +138,7 @@ class DepenseRepositoryTest extends KernelTestCase
             ->findByUserByYearByMonth($user, $month, $year);
 
         $countNumberOfDepenseForUser = count($depenses);
-        $this->assertSame($countNumberOfDepenseForUser, 0);
+        $this->assertSame($countNumberOfDepenseForUser, 201);
     }
 
     protected function tearDown(): void

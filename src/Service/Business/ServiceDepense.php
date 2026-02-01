@@ -17,7 +17,6 @@ class ServiceDepense
 {
     public function __construct(
         private ServiceCategory $serviceCategory,
-        private LoggerInterface $log,
     ) {
     }
 
@@ -90,20 +89,16 @@ class ServiceDepense
      */
     public function GetDepenseForCategoryForMonth(User $user, Category $category, array $months, string $year): array
     {
-        $res = [];
-
         $family = $user->getFamily();
 
         if (null === $family) {
             $depenses = $user->GetDepenses();
-            $res = $this->SumByCategoryByMonthByYear($months, $year, $depenses, $category);
 
-            return $res;
+            return $this->SumByCategoryByMonthByYear($months, $year, $depenses, $category);
         } else {
             $depenses = $this->GetAllDepenses($family);
-            $res = $this->SumByCategoryByMonthByYear($months, $year, $depenses, $category);
 
-            return $res;
+            return $this->SumByCategoryByMonthByYear($months, $year, $depenses, $category);
         }
     }
 
@@ -150,7 +145,7 @@ class ServiceDepense
     {
         $depenses = $user->GetDepenses();
         $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
-        $uniqueCategories = $this->serviceCategory->GetUniqueCategories($depenseByMonthYear);
+        $uniqueCategories = $this->serviceCategory->getUniqueCategories($depenseByMonthYear);
         $res = [];
 
         foreach ($uniqueCategories as $uniqueCategory) {
@@ -170,7 +165,7 @@ class ServiceDepense
 
         $depenses = $this->GetAllDepenses($family);
         $depenseByMonthYear = $this->GetDepenseByMonthAndYear($depenses, $month, $year);
-        $uniqueCategories = $this->serviceCategory->GetUniqueCategories($depenseByMonthYear);
+        $uniqueCategories = $this->serviceCategory->getUniqueCategories($depenseByMonthYear);
         $res = [];
 
         foreach ($uniqueCategories as $uniqueCategory) {

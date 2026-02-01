@@ -30,7 +30,7 @@ final class FamilyFactory extends PersistentProxyObjectFactory
      *
      * @todo add your default values here
      */
-    protected function defaults(): array|callable
+    protected function defaults(): array
     {
         $hasher = new ServiceHasher();
         $hashPassword = $hasher->hash('123456');

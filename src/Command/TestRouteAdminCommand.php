@@ -39,7 +39,7 @@ class TestRouteAdminCommand extends Command
         ;
     }
 
-    private static function Show(InputInterface $input, OutputInterface $outputInterface, array $cmdLists): int
+    private static function Show(OutputInterface $outputInterface, array $cmdLists): int
     {
         foreach ($cmdLists as $cmd) {
             if (str_contains($cmd, 'GET') && !str_contains($cmd, '{')) {
@@ -57,7 +57,7 @@ class TestRouteAdminCommand extends Command
         exec('php bin/console debug:route ', $cmdLists, $output);
 
         if ($input->getOption('show')) {
-            return self::Show($input, $outputInterface, $cmdLists);
+            return self::Show($outputInterface, $cmdLists);
         }
 
         $path = '/home/nora/Documents/Projects/depenses/tests/Controller/ResponseIsSuccessful/';

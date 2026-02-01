@@ -30,13 +30,12 @@ class DepenseRepository extends ServiceEntityRepository
 
     public function sumAmountOfUserDepense(User $user): float
     {
-        $result = $this->createQueryBuilder('dep')
+        return $this->createQueryBuilder('dep')
             ->select('SUM(dep.amount) AS depense_amount')
             ->andWhere('dep.createdBy = :val')
             ->setParameter('val', $user->getId())
             ->getQuery()
             ->getSingleScalarResult();
-        return $result;
     }
 
     /**

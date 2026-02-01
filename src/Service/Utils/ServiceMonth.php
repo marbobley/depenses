@@ -2,12 +2,8 @@
 
 namespace App\Service\Utils;
 
-class ServiceMonth
+class ServiceMonth implements ServiceMonthInterface
 {
-    public function __construct()
-    {
-    }
-
     public function GetMonthName(string $monthNumber): string
     {
         switch ($monthNumber) {

@@ -29,7 +29,7 @@ final class DepenseFactory extends PersistentProxyObjectFactory
      *
      * @todo add your default values here
      */
-    protected function defaults(): array|callable
+    protected function defaults(): array
     {
         return [
             'amount' => self::faker()->randomFloat(2, 0, 150),

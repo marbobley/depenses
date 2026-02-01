@@ -40,10 +40,10 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
         $this->serviceFamilyEntity->SetMainMemberFamily($family, $admin);
         $this->serviceFamilyEntity->JoinFamily($family, $admin);
 
-        $this->serviceDepenseEntity->CreateNewDepense('admin_dep1', 25.5, $admin, new \DateTimeImmutable('now'), $cat1);
-        $this->serviceDepenseEntity->CreateNewDepense('admin_dep2', 20, $admin, new \DateTimeImmutable('now'), $cat2);
-        $this->serviceDepenseEntity->CreateNewDepense('admin_dep3', 12, $admin, new \DateTimeImmutable('now'), $cat3);
-        $this->serviceDepenseEntity->CreateNewDepense('admin_dep4', 17, $admin, new \DateTimeImmutable('now'), $cat1);
+        $this->serviceDepenseEntity->createNewDepense('admin_dep1', 25.5, $admin, new \DateTimeImmutable('now'), $cat1);
+        $this->serviceDepenseEntity->createNewDepense('admin_dep2', 20, $admin, new \DateTimeImmutable('now'), $cat2);
+        $this->serviceDepenseEntity->createNewDepense('admin_dep3', 12, $admin, new \DateTimeImmutable('now'), $cat3);
+        $this->serviceDepenseEntity->createNewDepense('admin_dep4', 17, $admin, new \DateTimeImmutable('now'), $cat1);
     }
 
     private function createFamilyToDelete(): void {
@@ -78,17 +78,17 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
         $this->serviceFamilyEntity->JoinFamily($family, $user3);
 
         //Current month
-        $this->serviceDepenseEntity->CreateNewDepense('usr1_dep1', 10, $user1, new \DateTimeImmutable('now'), $catUser1);
-        $this->serviceDepenseEntity->CreateNewDepense('usr1_dep11', 15, $user1, new \DateTimeImmutable('now'), $catUser1_1);
-        $this->serviceDepenseEntity->CreateNewDepense('usr2_dep1', 20, $user2, new \DateTimeImmutable('now'), $catUser2);
-        $this->serviceDepenseEntity->CreateNewDepense('usr2_dep22', 25, $user2, new \DateTimeImmutable('now'), $catUser2_2);
-        $this->serviceDepenseEntity->CreateNewDepense('usr3_dep3', 30, $user3, new \DateTimeImmutable('now'), $catUser3);
-        $this->serviceDepenseEntity->CreateNewDepense('usr3_dep33',  35, $user3, new \DateTimeImmutable('now'), $catUser3_3);
+        $this->serviceDepenseEntity->createNewDepense('usr1_dep1', 10, $user1, new \DateTimeImmutable('now'), $catUser1);
+        $this->serviceDepenseEntity->createNewDepense('usr1_dep11', 15, $user1, new \DateTimeImmutable('now'), $catUser1_1);
+        $this->serviceDepenseEntity->createNewDepense('usr2_dep1', 20, $user2, new \DateTimeImmutable('now'), $catUser2);
+        $this->serviceDepenseEntity->createNewDepense('usr2_dep22', 25, $user2, new \DateTimeImmutable('now'), $catUser2_2);
+        $this->serviceDepenseEntity->createNewDepense('usr3_dep3', 30, $user3, new \DateTimeImmutable('now'), $catUser3);
+        $this->serviceDepenseEntity->createNewDepense('usr3_dep33',  35, $user3, new \DateTimeImmutable('now'), $catUser3_3);
 
         //previous month
-        $this->serviceDepenseEntity->CreateNewDepense('usr1_dep2', 100, $user1, (new \DateTimeImmutable('now'))->modify('-1 month'), $catUser1);
-        $this->serviceDepenseEntity->CreateNewDepense('usr2_dep2',  150, $user2, (new \DateTimeImmutable('now'))->modify('-1 month'), $catUser2);
-        $this->serviceDepenseEntity->CreateNewDepense('usr3_dep2',  200, $user3, (new \DateTimeImmutable('now'))->modify('-1 month'), $catUser3);    
+        $this->serviceDepenseEntity->createNewDepense('usr1_dep2', 100, $user1, (new \DateTimeImmutable('now'))->modify('-1 month'), $catUser1);
+        $this->serviceDepenseEntity->createNewDepense('usr2_dep2',  150, $user2, (new \DateTimeImmutable('now'))->modify('-1 month'), $catUser2);
+        $this->serviceDepenseEntity->createNewDepense('usr3_dep2',  200, $user3, (new \DateTimeImmutable('now'))->modify('-1 month'), $catUser3);
 
     }
 
@@ -123,16 +123,16 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
 
         //Current month  
         for ($i = 0; $i < 100; ++$i) {
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser'.$i, 1, $user1, new \DateTimeImmutable('now'), $catUser1);
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser_2_'.$i, 1, $user2, new \DateTimeImmutable('now'), $catUser2);
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser_3_'.$i, 1, $user3, new \DateTimeImmutable('now'), $catUser31);
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser_4_'.$i, 1, $user3, new \DateTimeImmutable('now'), $catUser32);
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser_5_'.$i, 1, $user4, new \DateTimeImmutable('now'), $catUser33);
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser_5_'.$i, 1, $user4, new \DateTimeImmutable('now'), $catUser1_1);
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser_6_'.$i, 1, $user2, new \DateTimeImmutable('now'), $catUser2_2);
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser_7_'.$i, 1, $user1, new \DateTimeImmutable('now'), $catUser3_3);
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser_8_'.$i, 1, $user2, new \DateTimeImmutable('now'), $catUser3_4);
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser_8_'.$i, 1, $user1, new \DateTimeImmutable('now'), $catUser3_4);
+            $this->serviceDepenseEntity->createNewDepense('depenseUser'.$i, 1, $user1, new \DateTimeImmutable('now'), $catUser1);
+            $this->serviceDepenseEntity->createNewDepense('depenseUser_2_'.$i, 1, $user2, new \DateTimeImmutable('now'), $catUser2);
+            $this->serviceDepenseEntity->createNewDepense('depenseUser_3_'.$i, 1, $user3, new \DateTimeImmutable('now'), $catUser31);
+            $this->serviceDepenseEntity->createNewDepense('depenseUser_4_'.$i, 1, $user3, new \DateTimeImmutable('now'), $catUser32);
+            $this->serviceDepenseEntity->createNewDepense('depenseUser_5_'.$i, 1, $user4, new \DateTimeImmutable('now'), $catUser33);
+            $this->serviceDepenseEntity->createNewDepense('depenseUser_5_'.$i, 1, $user4, new \DateTimeImmutable('now'), $catUser1_1);
+            $this->serviceDepenseEntity->createNewDepense('depenseUser_6_'.$i, 1, $user2, new \DateTimeImmutable('now'), $catUser2_2);
+            $this->serviceDepenseEntity->createNewDepense('depenseUser_7_'.$i, 1, $user1, new \DateTimeImmutable('now'), $catUser3_3);
+            $this->serviceDepenseEntity->createNewDepense('depenseUser_8_'.$i, 1, $user2, new \DateTimeImmutable('now'), $catUser3_4);
+            $this->serviceDepenseEntity->createNewDepense('depenseUser_8_'.$i, 1, $user1, new \DateTimeImmutable('now'), $catUser3_4);
         }
     }
 
@@ -152,16 +152,16 @@ class AppFixturesTest extends Fixture implements FixtureGroupInterface
             $this->serviceUserEntity->CreateNewUser('usr'.$i, $password, ['ROLE_USER']);
         }
 
-        $cat4 = $this->serviceCategoryEntity->CreateNewCategory('catToDelete', $user); // Not used here, just to test the delete action
+        $this->serviceCategoryEntity->CreateNewCategory('catToDelete', $user); // Not used here, just to test the delete action
         $cat5 = $this->serviceCategoryEntity->CreateNewCategory('catToTestFamillyYear_1', $user);
         $cat6 = $this->serviceCategoryEntity->CreateNewCategory('catToTestFamillyYear_2', $user);
         $cat7 = $this->serviceCategoryEntity->CreateNewCategory('catForDepenseToDelete', $user);
  
-        $this->serviceDepenseEntity->CreateNewDepense('depense_to_delete', 17, $user, new \DateTimeImmutable('now'), $cat7);
+        $this->serviceDepenseEntity->createNewDepense('depense_to_delete', 17, $user, new \DateTimeImmutable('now'), $cat7);
 
         for ($i = 0; $i < 100; ++$i) {
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser'.$i, 1, $user, new \DateTimeImmutable('now'), $cat5);
-            $this->serviceDepenseEntity->CreateNewDepense('depenseUser_2_'.$i, 1, $user, new \DateTimeImmutable('now'), $cat6);
+            $this->serviceDepenseEntity->createNewDepense('depenseUser'.$i, 1, $user, new \DateTimeImmutable('now'), $cat5);
+            $this->serviceDepenseEntity->createNewDepense('depenseUser_2_'.$i, 1, $user, new \DateTimeImmutable('now'), $cat6);
         }
     }
 

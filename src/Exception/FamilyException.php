@@ -2,6 +2,6 @@
 
 namespace App\Exception;
 
-class FamilyException extends \Exception
+class FamilyException extends ApplicationDepenseException
 {
 }
