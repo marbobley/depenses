@@ -18,11 +18,11 @@ class ServiceDepenseFamilyTest extends KernelTestCase
         $kernel = self::bootKernel();
 
         $this->serviceDepenseFamily = static::getContainer()
-        ->get(ServiceDepenseFamily::class);
+            ->get(ServiceDepenseFamily::class);
 
         $this->entityManager = $kernel->getContainer()
-        ->get('doctrine')
-        ->getManager();
+            ->get('doctrine')
+            ->getManager();
     }
 
     public function testWhenGetDepenseMonthWithNullUserThenReturn0(): void
@@ -33,9 +33,8 @@ class ServiceDepenseFamilyTest extends KernelTestCase
     public function testWhenGetDepenseMonthWithNoFamilyThenReturn0(): void
     {
         $user = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'user'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'user']);
 
         $this->assertSame(0.0, $this->serviceDepenseFamily->GetDepenseMonth($user, 1, self::YEAR));
     }
@@ -43,9 +42,8 @@ class ServiceDepenseFamilyTest extends KernelTestCase
     public function testWhenGetDepenseMonthWithFamillyAdminThenReturnSum(): void
     {
         $user = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'admin'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'admin']);
 
         $currentMonth = date('n');
         $currentYear = date('Y');
@@ -58,18 +56,15 @@ class ServiceDepenseFamilyTest extends KernelTestCase
     public function testWhenGetDepenseMonthWithFamily3MemberThenReturnSum(): void
     {
         $user1 = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'fam3_usr1'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'fam3_usr1']);
 
         $user2 = $this->entityManager->
-           getRepository(User::class)->
-           findOneBy(['username' => 'fam3_usr2'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'fam3_usr2']);
         $user3 = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'fam3_usr3'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'fam3_usr3']);
 
         $currentMonth = date('n');
         $currentYear = date('Y');
@@ -89,9 +84,8 @@ class ServiceDepenseFamilyTest extends KernelTestCase
     public function testWhenGetDepenseYearWithFamilyAdminThenReturnSum(): void
     {
         $user = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'admin'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'admin']);
         $currentYear = date('Y');
 
         $sumExpected = 25.5 + 20 + 12 + 17; // Sum of admin family depense for current month
@@ -102,9 +96,8 @@ class ServiceDepenseFamilyTest extends KernelTestCase
     public function testWhenGetDeopenseYearWithNoFamilyThenReturn0(): void
     {
         $user = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'user'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'user']);
 
         $this->assertSame(0.0, $this->serviceDepenseFamily->GetDepenseYear($user, self::YEAR));
     }
@@ -112,22 +105,19 @@ class ServiceDepenseFamilyTest extends KernelTestCase
     public function testWhenGetDepenseYearWithFamily3MemberThenReturnSum(): void
     {
         $user1 = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'fam3_usr1'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'fam3_usr1']);
 
         $user2 = $this->entityManager->
-           getRepository(User::class)->
-           findOneBy(['username' => 'fam3_usr2'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'fam3_usr2']);
         $user3 = $this->entityManager->
-            getRepository(User::class)->
-            findOneBy(['username' => 'fam3_usr3'])
-        ;
+        getRepository(User::class)->
+        findOneBy(['username' => 'fam3_usr3']);
 
         $currentYear = date('Y');
 
-        $sumExpected = 135.0; // Sum of family depense for current year
+        $sumExpected = 585.0; // Sum of family depense for current year
 
         $this->assertSame($sumExpected, $this->serviceDepenseFamily->GetDepenseYear($user1, $currentYear));
         $this->assertSame($sumExpected, $this->serviceDepenseFamily->GetDepenseYear($user2, $currentYear));

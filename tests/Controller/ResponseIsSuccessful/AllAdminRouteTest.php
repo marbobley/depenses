@@ -123,7 +123,7 @@ class AllAdminRouteTest extends WebTestCase
 
     public function testAppDepenseChartjs(): void
     {
-        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/depense/chartjs', self::$user);
+        $client = ConnectUserToPage::ConnectUserToPage('GET', 'http://127.0.0.1:8000/chart/family/2026', self::$user);
 
         $this->assertResponseIsSuccessful();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
