@@ -5,6 +5,9 @@ namespace App\Infrastructure\Mapper;
 
 use Doctrine\Common\Collections\Collection;
 
+/**
+ * @template
+ */
 interface MapperToModelInterface
 {
     /**
@@ -12,6 +15,6 @@ interface MapperToModelInterface
      */
     public function mapToModels(Collection $entities): array;
 
-    public function mapToModel(object $entity);
+    public function mapToModel(object $entity): object;
 
 }
