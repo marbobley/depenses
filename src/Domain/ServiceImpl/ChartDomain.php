@@ -17,23 +17,12 @@ use Symfony\UX\Chartjs\Model\Chart;
 readonly class ChartDomain implements ChartDomainInterface
 {
     public function __construct(
-        private ChartBuilderInterface   $chartBuilder,
-        private ServiceMonthInterface   $serviceMonth,
+        private ChartBuilderInterface $chartBuilder,
+        private ServiceMonthInterface $serviceMonth,
         private CategoryDomainInterface $categoryDomain,
-        private DepenseDomainInterface  $depenseDomain,
-        private FamilyDomainInterface   $familyDomain,
-    )
-    {
-    }
-
-    public function getChartMonthUser(int $idUser, string $year, string $month): Chart
-    {
-        $months = [$month];
-
-        $categories = $this->categoryDomain->getCategories($idUser);
-        $res = $this->buildChartBar($categories, $idUser, $months, $year);
-
-        return $this->buildChart([$month], $res);
+        private DepenseDomainInterface $depenseDomain,
+        private FamilyDomainInterface $familyDomain,
+    ) {
     }
 
     /**
@@ -76,25 +65,15 @@ readonly class ChartDomain implements ChartDomainInterface
         $chartBar = $this->chartBuilder->createChart(Chart::TYPE_BAR);
 
         $chartBar->setData([
-                'labels' => $months,
-                'datasets' => $res,
-            ]
+            'labels' => $months,
+            'datasets' => $res,
+        ]
         );
         $chartBar->setOptions([
             'maintainAspectRatio' => false,
         ]);
 
         return $chartBar;
-    }
-
-    public function getChartMonthsUser(int $idUser, string $year): Chart
-    {
-        $months = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
-        $categories = $this->categoryDomain->getCategories($idUser);
-
-        $res = $this->buildChartBar($categories, $idUser, $months, $year);
-
-        return $this->buildChart(['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'], $res);
     }
 
     /**
@@ -110,6 +89,5 @@ readonly class ChartDomain implements ChartDomainInterface
         $res = $this->buildChartBar($categories, $idUser, $months, $year);
 
         return $this->buildChart(['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'], $res);
-
     }
 }
