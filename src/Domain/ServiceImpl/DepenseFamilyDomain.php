@@ -8,9 +8,8 @@ use App\Domain\ServiceInterface\DepenseDomainInterface;
 use App\Domain\ServiceInterface\FamilyDomainInterface;
 use App\Domain\ServiceInterface\SommeDomainInterface;
 use App\Domain\ServiceInterface\UserDomainInterface;
-use App\Exception\FamilyNotFoundException;
 
-readonly class DepenseDomain implements DepenseDomainInterface
+readonly class DepenseFamilyDomain implements DepenseDomainInterface
 {
     public function __construct(
         private SommeDomainInterface  $sommeDomain,
@@ -20,35 +19,15 @@ readonly class DepenseDomain implements DepenseDomainInterface
     {
     }
 
-    public function getDepenseForCategoryForMonths(int $idUser, int $idCategory, array $months, string $year): array
+    public function getDepenseForCategoryForMonth(int $idUser, int $idCategory, string $month, string $year): float
     {
-        try {
-            $family = $this->familyDomain->getFamilyByIdUser($idUser);
-            $depenses = $this->familyDomain->getDepenses($family->getId());
+        $family = $this->familyDomain->getFamilyByIdUser($idUser);
 
+        $depenses = $this->familyDomain->getDepenses($family->getId());
 
-            return $this->sumByCategoryByMonthByYear($depenses, $idCategory, $months, $year);
-        } catch (FamilyNotFoundException $familyException) {
-            $depenses = $this->userDomain->getDepenses($idUser);
-
-            return $this->sumByCategoryByMonthByYear($depenses, $idCategory, $months, $year);
-        }
+        return $this->sumByCategoryByMonth($depenses, $idCategory, $month, $year);
     }
 
-    /**
-     * Sum the depense by category for each month of the year
-     * return array<int>.
-     */
-    private function sumByCategoryByMonthByYear(array $depenses, int $idCategory, array $months, string $year): array
-    {
-        $res = [];
-
-        foreach ($months as $month) {
-            $res[] = $this->sumByCategoryByMonth($depenses, $idCategory, $month, $year);
-        }
-
-        return $res;
-    }
 
     private function sumByCategoryByMonth(array $depenses, int $idCategory, string $month, string $year): float
     {
@@ -73,8 +52,8 @@ readonly class DepenseDomain implements DepenseDomainInterface
         return $depenseMonthYear;
     }
 
-    public function getDepenseForCategoryForMonth(int $idUser, int $idCategory, string $month, string $year): float
+    public function getDepenseForCategoryForMonths(int $idUser, int $idCategory, array $months, string $year): array
     {
-        return 0.0;
+        return [0];
     }
 }

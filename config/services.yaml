@@ -36,3 +36,7 @@ services:
     arguments:
       $familyMapper: '@App\Infrastructure\Mapper\FamilyMapperToModel'
       $depenseMapper: '@App\Infrastructure\Mapper\DepenseMapperToModel'
+
+  App\Domain\ServiceImpl\ChartDomain:
+    arguments:
+      $depenseDomain: '@App\Domain\ServiceImpl\DepenseDomain'

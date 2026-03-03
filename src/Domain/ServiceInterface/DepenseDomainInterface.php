@@ -9,5 +9,7 @@ interface DepenseDomainInterface
     /**
      * return array<int>.
      */
-    public function getDepenseForCategoryForMonth(int $idUser, int $idCategory, array $months, string $year): array;
+    public function getDepenseForCategoryForMonths(int $idUser, int $idCategory, array $months, string $year): array;
+
+    public function getDepenseForCategoryForMonth(int $idUser, int $idCategory, string $month, string $year): float;
 }
