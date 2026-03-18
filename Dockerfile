@@ -16,15 +16,25 @@ RUN curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases
     opcache \
     && apk add --no-cache \
     bash \
-    git
+    git \
+    netcat-openbsd
+
 # Définition du répertoire de travail
 WORKDIR /app
 
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Copie des fichiers du projet
 COPY . /app
+
+# Custom entrypoint
+COPY docker/entrypoint.sh /usr/local/bin/docker-entrypoint
+RUN chmod +x /usr/local/bin/docker-entrypoint
 
 # On s'assure que le dossier public est bien utilisé comme racine du serveur
 ENV SERVER_NAME=:80
 ENV DOCUMENT_ROOT=/app/public
 
-# FrankenPHP utilise par défaut le serveur Caddy intégré
+ENTRYPOINT ["docker-entrypoint"]
+CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]

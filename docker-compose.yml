@@ -2,7 +2,7 @@ services:
   php:
     build: .
     environment:
-      - DATABASE_URL=mysql://root:password@db:3306/depenses?serverVersion=8.0.32&charset=utf8mb4
+      - DATABASE_URL=mysql://root:${MYSQL_ROOT_PASSWORD:-password}@db:3306/depenses?serverVersion=8.0.32&charset=utf8mb4
       - APP_ENV=dev
       - APP_SECRET=${APP_SECRET:-!ChangeMe!}
     ports:
@@ -14,10 +14,10 @@ services:
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
-      database:
+      db:
         condition: service_healthy
 
-  database:
+  db:
     image: mysql:8.0
     environment:
       MYSQL_DATABASE: depenses
