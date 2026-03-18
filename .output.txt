@@ -1,0 +1,368 @@
+PHPUnit 9.6.34 by Sebastian Bergmann and contributors.
+Testing App\Tests\Repository\CategoryRepositoryTest
+EEE                                                                 3 / 3 (100%)
+Time: 00:24.489, Memory: 28.00 MB
+There were 3 errors:
+1) App\Tests\Repository\CategoryRepositoryTest::testCategoryRepositoryFindAll
+Doctrine\DBAL\Exception\ConnectionException: An exception occurred in the driver: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for db failed: Name or service not known
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/API/MySQL/ExceptionConverter.php:112
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:1976
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:1924
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:385
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:458
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:416
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:323
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:740
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:550
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:178
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Mapping/ClassMetadataFactory.php:20
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:318
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:187
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:224
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/ContainerRepositoryFactory.php:49
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/RepositoryFactoryCompatibility.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:499
+/var/home/nora/PhpstormProjects/depenses/tests/Repository/CategoryRepositoryTest.php:26
+/var/home/nora/PhpstormProjects/depenses/vendor/phpunit/phpunit/phpunit:107
+Caused by
+Doctrine\DBAL\Driver\PDO\Exception: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for db failed: Name or service not known
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/Exception.php:24
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/MySQL/Driver.php:43
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/dama/doctrine-test-bundle/src/DAMA/DoctrineTestBundle/Doctrine/DBAL/StaticDriver.php:32
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Logging/Driver.php:34
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/Debug/Driver.php:37
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/IdleConnection/Driver.php:35
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:383
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:458
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:416
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:323
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:740
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:550
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:178
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Mapping/ClassMetadataFactory.php:20
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:318
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:187
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:224
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/ContainerRepositoryFactory.php:49
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/RepositoryFactoryCompatibility.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:499
+/var/home/nora/PhpstormProjects/depenses/tests/Repository/CategoryRepositoryTest.php:26
+/var/home/nora/PhpstormProjects/depenses/vendor/phpunit/phpunit/phpunit:107
+Caused by
+PDOException: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for db failed: Name or service not known
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/PDOConnect.php:28
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/MySQL/Driver.php:36
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/dama/doctrine-test-bundle/src/DAMA/DoctrineTestBundle/Doctrine/DBAL/StaticDriver.php:32
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Logging/Driver.php:34
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/Debug/Driver.php:37
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/IdleConnection/Driver.php:35
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:383
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:458
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:416
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:323
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:740
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:550
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:178
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Mapping/ClassMetadataFactory.php:20
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:318
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:187
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:224
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/ContainerRepositoryFactory.php:49
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/RepositoryFactoryCompatibility.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:499
+/var/home/nora/PhpstormProjects/depenses/tests/Repository/CategoryRepositoryTest.php:26
+/var/home/nora/PhpstormProjects/depenses/vendor/phpunit/phpunit/phpunit:107
+Caused by
+PDOException: PDO::connect(): php_network_getaddresses: getaddrinfo for db failed: Name or service not known
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/PDOConnect.php:28
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/MySQL/Driver.php:36
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/dama/doctrine-test-bundle/src/DAMA/DoctrineTestBundle/Doctrine/DBAL/StaticDriver.php:32
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Logging/Driver.php:34
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/Debug/Driver.php:37
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/IdleConnection/Driver.php:35
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:383
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:458
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:416
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:323
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:740
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:550
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:178
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Mapping/ClassMetadataFactory.php:20
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:318
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:187
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:224
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/ContainerRepositoryFactory.php:49
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/RepositoryFactoryCompatibility.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:499
+/var/home/nora/PhpstormProjects/depenses/tests/Repository/CategoryRepositoryTest.php:26
+/var/home/nora/PhpstormProjects/depenses/vendor/phpunit/phpunit/phpunit:107
+2) App\Tests\Repository\CategoryRepositoryTest::testCategoryRepositoryFindByUser
+Doctrine\DBAL\Exception\ConnectionException: An exception occurred in the driver: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for db failed: Name or service not known
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/API/MySQL/ExceptionConverter.php:112
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:1976
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:1924
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:385
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:458
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:416
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:323
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:740
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:550
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:178
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Mapping/ClassMetadataFactory.php:20
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:318
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:187
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:224
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/ContainerRepositoryFactory.php:49
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/RepositoryFactoryCompatibility.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:499
+/var/home/nora/PhpstormProjects/depenses/tests/Repository/CategoryRepositoryTest.php:40
+/var/home/nora/PhpstormProjects/depenses/vendor/phpunit/phpunit/phpunit:107
+Caused by
+Doctrine\DBAL\Driver\PDO\Exception: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for db failed: Name or service not known
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/Exception.php:24
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/MySQL/Driver.php:43
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/dama/doctrine-test-bundle/src/DAMA/DoctrineTestBundle/Doctrine/DBAL/StaticDriver.php:32
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Logging/Driver.php:34
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/Debug/Driver.php:37
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/IdleConnection/Driver.php:35
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:383
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:458
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:416
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:323
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:740
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:550
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:178
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Mapping/ClassMetadataFactory.php:20
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:318
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:187
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:224
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/ContainerRepositoryFactory.php:49
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/RepositoryFactoryCompatibility.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:499
+/var/home/nora/PhpstormProjects/depenses/tests/Repository/CategoryRepositoryTest.php:40
+/var/home/nora/PhpstormProjects/depenses/vendor/phpunit/phpunit/phpunit:107
+Caused by
+PDOException: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for db failed: Name or service not known
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/PDOConnect.php:28
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/MySQL/Driver.php:36
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/dama/doctrine-test-bundle/src/DAMA/DoctrineTestBundle/Doctrine/DBAL/StaticDriver.php:32
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Logging/Driver.php:34
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/Debug/Driver.php:37
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/IdleConnection/Driver.php:35
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:383
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:458
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:416
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:323
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:740
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:550
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:178
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Mapping/ClassMetadataFactory.php:20
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:318
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:187
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:224
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/ContainerRepositoryFactory.php:49
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/RepositoryFactoryCompatibility.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:499
+/var/home/nora/PhpstormProjects/depenses/tests/Repository/CategoryRepositoryTest.php:40
+/var/home/nora/PhpstormProjects/depenses/vendor/phpunit/phpunit/phpunit:107
+Caused by
+PDOException: PDO::connect(): php_network_getaddresses: getaddrinfo for db failed: Name or service not known
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/PDOConnect.php:28
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/MySQL/Driver.php:36
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/dama/doctrine-test-bundle/src/DAMA/DoctrineTestBundle/Doctrine/DBAL/StaticDriver.php:32
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Logging/Driver.php:34
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/Debug/Driver.php:37
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/IdleConnection/Driver.php:35
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:383
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:458
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:416
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:323
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:740
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:550
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:178
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Mapping/ClassMetadataFactory.php:20
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:318
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:187
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:224
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/ContainerRepositoryFactory.php:49
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/RepositoryFactoryCompatibility.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:499
+/var/home/nora/PhpstormProjects/depenses/tests/Repository/CategoryRepositoryTest.php:40
+/var/home/nora/PhpstormProjects/depenses/vendor/phpunit/phpunit/phpunit:107
+3) App\Tests\Repository\CategoryRepositoryTest::testCategoryRepositoryFindByFamily
+Doctrine\DBAL\Exception\ConnectionException: An exception occurred in the driver: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for db failed: Name or service not known
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/API/MySQL/ExceptionConverter.php:112
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:1976
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:1924
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:385
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:458
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:416
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:323
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:740
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:550
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:178
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Mapping/ClassMetadataFactory.php:20
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:318
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:187
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:224
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/ContainerRepositoryFactory.php:49
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/RepositoryFactoryCompatibility.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:499
+/var/home/nora/PhpstormProjects/depenses/tests/Repository/CategoryRepositoryTest.php:55
+/var/home/nora/PhpstormProjects/depenses/vendor/phpunit/phpunit/phpunit:107
+Caused by
+Doctrine\DBAL\Driver\PDO\Exception: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for db failed: Name or service not known
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/Exception.php:24
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/MySQL/Driver.php:43
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/dama/doctrine-test-bundle/src/DAMA/DoctrineTestBundle/Doctrine/DBAL/StaticDriver.php:32
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Logging/Driver.php:34
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/Debug/Driver.php:37
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/IdleConnection/Driver.php:35
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:383
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:458
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:416
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:323
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:740
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:550
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:178
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Mapping/ClassMetadataFactory.php:20
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:318
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:187
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:224
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/ContainerRepositoryFactory.php:49
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/RepositoryFactoryCompatibility.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:499
+/var/home/nora/PhpstormProjects/depenses/tests/Repository/CategoryRepositoryTest.php:55
+/var/home/nora/PhpstormProjects/depenses/vendor/phpunit/phpunit/phpunit:107
+Caused by
+PDOException: SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for db failed: Name or service not known
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/PDOConnect.php:28
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/MySQL/Driver.php:36
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/dama/doctrine-test-bundle/src/DAMA/DoctrineTestBundle/Doctrine/DBAL/StaticDriver.php:32
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Logging/Driver.php:34
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/Debug/Driver.php:37
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/IdleConnection/Driver.php:35
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:383
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:458
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:416
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:323
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:740
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:550
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:178
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Mapping/ClassMetadataFactory.php:20
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:318
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:187
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:224
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/ContainerRepositoryFactory.php:49
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/RepositoryFactoryCompatibility.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:499
+/var/home/nora/PhpstormProjects/depenses/tests/Repository/CategoryRepositoryTest.php:55
+/var/home/nora/PhpstormProjects/depenses/vendor/phpunit/phpunit/phpunit:107
+Caused by
+PDOException: PDO::connect(): php_network_getaddresses: getaddrinfo for db failed: Name or service not known
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/PDOConnect.php:28
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/PDO/MySQL/Driver.php:36
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/dama/doctrine-test-bundle/src/DAMA/DoctrineTestBundle/Doctrine/DBAL/StaticDriver.php:32
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Logging/Driver.php:34
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/Debug/Driver.php:37
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Driver/Middleware/AbstractDriverMiddleware.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/symfony/doctrine-bridge/Middleware/IdleConnection/Driver.php:35
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:383
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:458
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:416
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/dbal/src/Connection.php:323
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:740
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:550
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/Mapping/ClassMetadataFactory.php:178
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Mapping/ClassMetadataFactory.php:20
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:318
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/persistence/src/Persistence/Mapping/AbstractClassMetadataFactory.php:187
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:224
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/ContainerRepositoryFactory.php:49
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/doctrine-bundle/src/Repository/RepositoryFactoryCompatibility.php:29
+/var/home/nora/PhpstormProjects/depenses/vendor/doctrine/orm/src/EntityManager.php:499
+/var/home/nora/PhpstormProjects/depenses/tests/Repository/CategoryRepositoryTest.php:55
+/var/home/nora/PhpstormProjects/depenses/vendor/phpunit/phpunit/phpunit:107
+ERRORS!
+Tests: 3, Assertions: 0, Errors: 3.
+Remaining indirect deprecation notices (10)
+  3x: Class "Doctrine\ORM\Proxy\Autoloader" is deprecated. Use native lazy objects instead. (Autoloader.php:74 called by DoctrineBundle.php:136, https://github.com/doctrine/orm/pull/12005, package doctrine/orm)
+    3x in CategoryRepositoryTest::setUp from App\Tests\Repository
+  3x: Class "Doctrine\ORM\Proxy\DefaultProxyClassNameResolver" is deprecated. Use native lazy objects instead. (DefaultProxyClassNameResolver.php:25 called by AbstractClassMetadataFactory.php:433, https://github.com/doctrine/orm/pull/12005, package doctrine/orm)
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindAll from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByUser from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByFamily from App\Tests\Repository
+  3x: Relying on a fallback connection used to determine the database platform while connecting to a non-existing database is deprecated. Either use an existing database name in connection parameters or omit the database name if the platform and the server configuration allow that. (Connection.php:464 called by Connection.php:416, https://github.com/doctrine/dbal/pull/5707, package doctrine/dbal)
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindAll from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByUser from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByFamily from App\Tests\Repository
+  1x: The "Symfony\Bundle\SecurityBundle\Security::isGranted()" method will require a new "AccessDecision|null $accessDecision" argument in the next major version of its interface "Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface", not defining it is deprecated.
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindAll from App\Tests\Repository
+Other deprecation notices (24)
+  3x: Calling Doctrine\ORM\Configuration::setProxyDir is deprecated and will not be possible in Doctrine ORM 4.0. (Configuration.php:68 called by App_KernelTestDebugContainer.php:2535, https://github.com/doctrine/orm/pull/12005, package doctrine/orm)
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindAll from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByUser from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByFamily from App\Tests\Repository
+  3x: Calling Doctrine\ORM\Configuration::setProxyNamespace is deprecated and will not be possible in Doctrine ORM 4.0. (Configuration.php:157 called by App_KernelTestDebugContainer.php:2536, https://github.com/doctrine/orm/pull/12005, package doctrine/orm)
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindAll from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByUser from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByFamily from App\Tests\Repository
+  3x: Calling Doctrine\ORM\Configuration::setAutoGenerateProxyClasses is deprecated and will not be possible in Doctrine ORM 4.0. (Configuration.php:123 called by App_KernelTestDebugContainer.php:2537, https://github.com/doctrine/orm/pull/12005, package doctrine/orm)
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindAll from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByUser from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByFamily from App\Tests\Repository
+  3x: Disabling native lazy objects is deprecated and will be impossible in Doctrine ORM 4.0. (Configuration.php:661 called by App_KernelTestDebugContainer.php:2547, https://github.com/doctrine/orm/pull/12005, package doctrine/orm)
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindAll from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByUser from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByFamily from App\Tests\Repository
+  3x: Calling Doctrine\ORM\Configuration::getProxyDir is deprecated and will not be possible in Doctrine ORM 4.0. (Configuration.php:85 called by EntityManager.php:142, https://github.com/doctrine/orm/pull/12005, package doctrine/orm)
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindAll from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByUser from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByFamily from App\Tests\Repository
+  3x: Calling Doctrine\ORM\Configuration::getProxyNamespace is deprecated and will not be possible in Doctrine ORM 4.0. (Configuration.php:140 called by EntityManager.php:143, https://github.com/doctrine/orm/pull/12005, package doctrine/orm)
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindAll from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByUser from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByFamily from App\Tests\Repository
+  3x: Calling Doctrine\ORM\Configuration::getAutoGenerateProxyClasses is deprecated and will not be possible in Doctrine ORM 4.0. (Configuration.php:104 called by EntityManager.php:144, https://github.com/doctrine/orm/pull/12005, package doctrine/orm)
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindAll from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByUser from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByFamily from App\Tests\Repository
+  3x: Not enabling native lazy objects is deprecated and will be impossible in Doctrine ORM 4.0. (ProxyFactory.php:158 called by EntityManager.php:140, https://github.com/doctrine/orm/pull/12005, package doctrine/orm)
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindAll from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByUser from App\Tests\Repository
+    1x in CategoryRepositoryTest::testCategoryRepositoryFindByFamily from App\Tests\Repository

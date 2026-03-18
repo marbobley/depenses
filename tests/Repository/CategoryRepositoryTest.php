@@ -63,39 +63,6 @@ class CategoryRepositoryTest extends KernelTestCase
 
         $this->AssertSame(count($categories), 3);
     }
-    /*
-        public function testDepenseFindByUser() : void
-        {
-            $user = $this->entityManager->
-                getRepository(User::class)->
-                findOneBy(['username' => 'admin'])
-                ;
-            $depenses = $this->entityManager
-                ->getRepository(Depense::class)
-                ->findByUser($user)
-            ;
-
-            $countNumberOfDepenseForUser = count($depenses);
-
-            $this->assertSame($countNumberOfDepenseForUser , 4);
-        }
-
-        public function testDepenseFindByFamily() : void {
-            $user = $this->entityManager->
-                getRepository(User::class)->
-                findOneBy(['username' => 'admin'])
-                ;
-
-            $depenses = $this->entityManager
-                ->getRepository(Depense::class)
-                ->findByFamily($user)
-            ;
-
-            $countNumberOfDepenseForUser = count($depenses);
-
-            $this->assertSame($countNumberOfDepenseForUser , 4);
-
-        }*/
 
     protected function tearDown(): void
     {

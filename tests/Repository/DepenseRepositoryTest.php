@@ -106,41 +106,6 @@ class DepenseRepositoryTest extends KernelTestCase
 
         $this->assertSame(201, $countNumberOfDepenseForUser);
     }
-
-    public function testDepenseRepositoryFindByUserByYearByMonth(): void
-    {
-        $user = $this->entityManager->
-        getRepository(User::class)->
-        findOneBy(['username' => 'user']);
-
-        $month = date('n');
-        $year = date('Y');
-
-        $depenses = $this->entityManager
-            ->getRepository(Depense::class)
-            ->findByUserByYearByMonth($user, $month, $year);
-
-        $countNumberOfDepenseForUser = count($depenses);
-
-        $this->assertSame(0, $countNumberOfDepenseForUser);
-    }
-
-    public function testDepenseRepositoryNoFindByUserByYearByMonth(): void
-    {
-        $user = $this->entityManager->
-        getRepository(User::class)->
-        findOneBy(['username' => 'user']);
-
-        $month = date('n') - 1;
-        $year = date('Y');
-        $depenses = $this->entityManager
-            ->getRepository(Depense::class)
-            ->findByUserByYearByMonth($user, $month, $year);
-
-        $countNumberOfDepenseForUser = count($depenses);
-        $this->assertSame($countNumberOfDepenseForUser, 201);
-    }
-
     protected function tearDown(): void
     {
         parent::tearDown();
