@@ -34,3 +34,5 @@ phpstan.neon
 ###< phpstan/phpstan ###
 
 .env.test
+/.idea
+/.idea
