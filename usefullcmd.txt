@@ -1,3 +1,8 @@
+# When using Docker, run commands inside the php container:
+# docker exec -it depenses-php-1 php bin/console --env=test doctrine:database:create
+# OR if your container is named differently:
+# docker-compose exec php php bin/console --env=test doctrine:database:create
+
 symfony console --env=test doctrine:database:create
 symfony console --env=test doctrine:schema:create
 
