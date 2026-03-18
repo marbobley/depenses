@@ -1,0 +1,37 @@
+services:
+  php:
+    build: .
+    environment:
+      - DATABASE_URL=mysql://root:${MYSQL_ROOT_PASSWORD}@db:3306/depenses?serverVersion=8.0.32&charset=utf8mb4
+      - APP_ENV=dev
+      - APP_SECRET=${APP_SECRET:-!ChangeMe!}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - .:/app
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=depenses
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+volumes:
+  db_data:
+  caddy_data:
+  caddy_config:
